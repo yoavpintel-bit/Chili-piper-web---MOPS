@@ -1,0 +1,1072 @@
+{
+  "generatedAt": "2026-05-28T11:52:07.478Z",
+  "dateRange": {
+    "min": "2026-01-19T13:15:18.378579Z",
+    "max": "2026-05-27T08:01:14.657190Z"
+  },
+  "totals": {
+    "catchAll": 3680,
+    "allRecords": 3680
+  },
+  "kpi": {
+    "today": 0,
+    "yesterday": 14,
+    "thisWeek": 219,
+    "prevWeek": 322,
+    "wowChangePct": -32,
+    "avgDaily30": 39.9,
+    "avgWeekly30": 278.6
+  },
+  "daily": [
+    {
+      "date": "2026-01-19",
+      "count": 41
+    },
+    {
+      "date": "2026-01-20",
+      "count": 27
+    },
+    {
+      "date": "2026-02-26",
+      "count": 14
+    },
+    {
+      "date": "2026-02-27",
+      "count": 42
+    },
+    {
+      "date": "2026-02-28",
+      "count": 15
+    },
+    {
+      "date": "2026-03-01",
+      "count": 9
+    },
+    {
+      "date": "2026-03-02",
+      "count": 51
+    },
+    {
+      "date": "2026-03-03",
+      "count": 70
+    },
+    {
+      "date": "2026-03-04",
+      "count": 54
+    },
+    {
+      "date": "2026-03-05",
+      "count": 40
+    },
+    {
+      "date": "2026-03-06",
+      "count": 38
+    },
+    {
+      "date": "2026-03-07",
+      "count": 14
+    },
+    {
+      "date": "2026-03-08",
+      "count": 12
+    },
+    {
+      "date": "2026-03-09",
+      "count": 47
+    },
+    {
+      "date": "2026-03-10",
+      "count": 47
+    },
+    {
+      "date": "2026-03-11",
+      "count": 49
+    },
+    {
+      "date": "2026-03-12",
+      "count": 51
+    },
+    {
+      "date": "2026-03-13",
+      "count": 34
+    },
+    {
+      "date": "2026-03-14",
+      "count": 12
+    },
+    {
+      "date": "2026-03-15",
+      "count": 26
+    },
+    {
+      "date": "2026-03-16",
+      "count": 38
+    },
+    {
+      "date": "2026-03-17",
+      "count": 39
+    },
+    {
+      "date": "2026-03-18",
+      "count": 45
+    },
+    {
+      "date": "2026-03-19",
+      "count": 40
+    },
+    {
+      "date": "2026-03-20",
+      "count": 37
+    },
+    {
+      "date": "2026-03-21",
+      "count": 7
+    },
+    {
+      "date": "2026-03-22",
+      "count": 12
+    },
+    {
+      "date": "2026-03-23",
+      "count": 46
+    },
+    {
+      "date": "2026-03-24",
+      "count": 54
+    },
+    {
+      "date": "2026-03-25",
+      "count": 58
+    },
+    {
+      "date": "2026-03-26",
+      "count": 38
+    },
+    {
+      "date": "2026-03-27",
+      "count": 36
+    },
+    {
+      "date": "2026-03-28",
+      "count": 16
+    },
+    {
+      "date": "2026-03-29",
+      "count": 14
+    },
+    {
+      "date": "2026-03-30",
+      "count": 50
+    },
+    {
+      "date": "2026-03-31",
+      "count": 38
+    },
+    {
+      "date": "2026-04-01",
+      "count": 53
+    },
+    {
+      "date": "2026-04-02",
+      "count": 37
+    },
+    {
+      "date": "2026-04-03",
+      "count": 23
+    },
+    {
+      "date": "2026-04-04",
+      "count": 23
+    },
+    {
+      "date": "2026-04-05",
+      "count": 12
+    },
+    {
+      "date": "2026-04-06",
+      "count": 28
+    },
+    {
+      "date": "2026-04-07",
+      "count": 45
+    },
+    {
+      "date": "2026-04-08",
+      "count": 47
+    },
+    {
+      "date": "2026-04-09",
+      "count": 40
+    },
+    {
+      "date": "2026-04-10",
+      "count": 47
+    },
+    {
+      "date": "2026-04-11",
+      "count": 19
+    },
+    {
+      "date": "2026-04-12",
+      "count": 17
+    },
+    {
+      "date": "2026-04-13",
+      "count": 56
+    },
+    {
+      "date": "2026-04-14",
+      "count": 81
+    },
+    {
+      "date": "2026-04-15",
+      "count": 56
+    },
+    {
+      "date": "2026-04-16",
+      "count": 93
+    },
+    {
+      "date": "2026-04-17",
+      "count": 51
+    },
+    {
+      "date": "2026-04-18",
+      "count": 28
+    },
+    {
+      "date": "2026-04-19",
+      "count": 33
+    },
+    {
+      "date": "2026-04-20",
+      "count": 55
+    },
+    {
+      "date": "2026-04-21",
+      "count": 67
+    },
+    {
+      "date": "2026-04-22",
+      "count": 72
+    },
+    {
+      "date": "2026-04-23",
+      "count": 42
+    },
+    {
+      "date": "2026-04-24",
+      "count": 61
+    },
+    {
+      "date": "2026-04-25",
+      "count": 20
+    },
+    {
+      "date": "2026-04-26",
+      "count": 18
+    },
+    {
+      "date": "2026-04-27",
+      "count": 62
+    },
+    {
+      "date": "2026-04-28",
+      "count": 65
+    },
+    {
+      "date": "2026-04-29",
+      "count": 52
+    },
+    {
+      "date": "2026-04-30",
+      "count": 40
+    },
+    {
+      "date": "2026-05-01",
+      "count": 29
+    },
+    {
+      "date": "2026-05-02",
+      "count": 12
+    },
+    {
+      "date": "2026-05-03",
+      "count": 13
+    },
+    {
+      "date": "2026-05-04",
+      "count": 34
+    },
+    {
+      "date": "2026-05-05",
+      "count": 77
+    },
+    {
+      "date": "2026-05-06",
+      "count": 40
+    },
+    {
+      "date": "2026-05-07",
+      "count": 62
+    },
+    {
+      "date": "2026-05-08",
+      "count": 43
+    },
+    {
+      "date": "2026-05-09",
+      "count": 5
+    },
+    {
+      "date": "2026-05-10",
+      "count": 16
+    },
+    {
+      "date": "2026-05-11",
+      "count": 65
+    },
+    {
+      "date": "2026-05-12",
+      "count": 56
+    },
+    {
+      "date": "2026-05-13",
+      "count": 52
+    },
+    {
+      "date": "2026-05-14",
+      "count": 62
+    },
+    {
+      "date": "2026-05-15",
+      "count": 36
+    },
+    {
+      "date": "2026-05-16",
+      "count": 18
+    },
+    {
+      "date": "2026-05-17",
+      "count": 35
+    },
+    {
+      "date": "2026-05-18",
+      "count": 70
+    },
+    {
+      "date": "2026-05-19",
+      "count": 59
+    },
+    {
+      "date": "2026-05-20",
+      "count": 44
+    },
+    {
+      "date": "2026-05-21",
+      "count": 59
+    },
+    {
+      "date": "2026-05-22",
+      "count": 43
+    },
+    {
+      "date": "2026-05-23",
+      "count": 19
+    },
+    {
+      "date": "2026-05-24",
+      "count": 21
+    },
+    {
+      "date": "2026-05-25",
+      "count": 28
+    },
+    {
+      "date": "2026-05-26",
+      "count": 64
+    },
+    {
+      "date": "2026-05-27",
+      "count": 14
+    }
+  ],
+  "weekly": [
+    {
+      "weekStart": "2026-01-19",
+      "weekLabel": "Jan 19 – Jan 25",
+      "count": 68
+    },
+    {
+      "weekStart": "2026-02-23",
+      "weekLabel": "Feb 23 – Mar 1",
+      "count": 80
+    },
+    {
+      "weekStart": "2026-03-02",
+      "weekLabel": "Mar 2 – Mar 8",
+      "count": 279
+    },
+    {
+      "weekStart": "2026-03-09",
+      "weekLabel": "Mar 9 – Mar 15",
+      "count": 266
+    },
+    {
+      "weekStart": "2026-03-16",
+      "weekLabel": "Mar 16 – Mar 22",
+      "count": 218
+    },
+    {
+      "weekStart": "2026-03-23",
+      "weekLabel": "Mar 23 – Mar 29",
+      "count": 262
+    },
+    {
+      "weekStart": "2026-03-30",
+      "weekLabel": "Mar 30 – Apr 5",
+      "count": 236
+    },
+    {
+      "weekStart": "2026-04-06",
+      "weekLabel": "Apr 6 – Apr 12",
+      "count": 243
+    },
+    {
+      "weekStart": "2026-04-13",
+      "weekLabel": "Apr 13 – Apr 19",
+      "count": 398
+    },
+    {
+      "weekStart": "2026-04-20",
+      "weekLabel": "Apr 20 – Apr 26",
+      "count": 335
+    },
+    {
+      "weekStart": "2026-04-27",
+      "weekLabel": "Apr 27 – May 3",
+      "count": 273
+    },
+    {
+      "weekStart": "2026-05-04",
+      "weekLabel": "May 4 – May 10",
+      "count": 277
+    },
+    {
+      "weekStart": "2026-05-11",
+      "weekLabel": "May 11 – May 17",
+      "count": 324
+    },
+    {
+      "weekStart": "2026-05-18",
+      "weekLabel": "May 18 – May 24",
+      "count": 315
+    },
+    {
+      "weekStart": "2026-05-25",
+      "weekLabel": "May 25 – May 31",
+      "count": 106
+    }
+  ],
+  "weeklyLeaders": [
+    {
+      "weekStart": "2026-01-19",
+      "weekLabel": "Jan 19 – Jan 25",
+      "total": 68,
+      "topCountry": {
+        "name": "United Kingdom",
+        "count": 22
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 40
+      },
+      "topUsState": {
+        "name": "Illinois",
+        "count": 4
+      },
+      "usCatchAll": 16,
+      "usUnder50": 14,
+      "usUnder50Pct": 87.5
+    },
+    {
+      "weekStart": "2026-02-23",
+      "weekLabel": "Feb 23 – Mar 1",
+      "total": 80,
+      "topCountry": {
+        "name": "United States",
+        "count": 31
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 55
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 10
+      },
+      "usCatchAll": 31,
+      "usUnder50": 26,
+      "usUnder50Pct": 83.9
+    },
+    {
+      "weekStart": "2026-03-02",
+      "weekLabel": "Mar 2 – Mar 8",
+      "total": 279,
+      "topCountry": {
+        "name": "United States",
+        "count": 83
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 192
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 26
+      },
+      "usCatchAll": 83,
+      "usUnder50": 75,
+      "usUnder50Pct": 90.4
+    },
+    {
+      "weekStart": "2026-03-09",
+      "weekLabel": "Mar 9 – Mar 15",
+      "total": 266,
+      "topCountry": {
+        "name": "United States",
+        "count": 76
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 196
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 19
+      },
+      "usCatchAll": 76,
+      "usUnder50": 67,
+      "usUnder50Pct": 88.2
+    },
+    {
+      "weekStart": "2026-03-16",
+      "weekLabel": "Mar 16 – Mar 22",
+      "total": 218,
+      "topCountry": {
+        "name": "United States",
+        "count": 72
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 155
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 25
+      },
+      "usCatchAll": 72,
+      "usUnder50": 72,
+      "usUnder50Pct": 100
+    },
+    {
+      "weekStart": "2026-03-23",
+      "weekLabel": "Mar 23 – Mar 29",
+      "total": 262,
+      "topCountry": {
+        "name": "United States",
+        "count": 96
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 178
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 52
+      },
+      "usCatchAll": 96,
+      "usUnder50": 94,
+      "usUnder50Pct": 97.9
+    },
+    {
+      "weekStart": "2026-03-30",
+      "weekLabel": "Mar 30 – Apr 5",
+      "total": 236,
+      "topCountry": {
+        "name": "United States",
+        "count": 113
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 152
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 55
+      },
+      "usCatchAll": 113,
+      "usUnder50": 78,
+      "usUnder50Pct": 69
+    },
+    {
+      "weekStart": "2026-04-06",
+      "weekLabel": "Apr 6 – Apr 12",
+      "total": 243,
+      "topCountry": {
+        "name": "United States",
+        "count": 98
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 170
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 53
+      },
+      "usCatchAll": 98,
+      "usUnder50": 78,
+      "usUnder50Pct": 79.6
+    },
+    {
+      "weekStart": "2026-04-13",
+      "weekLabel": "Apr 13 – Apr 19",
+      "total": 398,
+      "topCountry": {
+        "name": "United States",
+        "count": 180
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 275
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 89
+      },
+      "usCatchAll": 180,
+      "usUnder50": 143,
+      "usUnder50Pct": 79.4
+    },
+    {
+      "weekStart": "2026-04-20",
+      "weekLabel": "Apr 20 – Apr 26",
+      "total": 335,
+      "topCountry": {
+        "name": "United States",
+        "count": 186
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 171
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 63
+      },
+      "usCatchAll": 186,
+      "usUnder50": 132,
+      "usUnder50Pct": 71
+    },
+    {
+      "weekStart": "2026-04-27",
+      "weekLabel": "Apr 27 – May 3",
+      "total": 273,
+      "topCountry": {
+        "name": "United States",
+        "count": 109
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 201
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 50
+      },
+      "usCatchAll": 109,
+      "usUnder50": 98,
+      "usUnder50Pct": 89.9
+    },
+    {
+      "weekStart": "2026-05-04",
+      "weekLabel": "May 4 – May 10",
+      "total": 277,
+      "topCountry": {
+        "name": "United States",
+        "count": 116
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 168
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 44
+      },
+      "usCatchAll": 116,
+      "usUnder50": 115,
+      "usUnder50Pct": 99.1
+    },
+    {
+      "weekStart": "2026-05-11",
+      "weekLabel": "May 11 – May 17",
+      "total": 324,
+      "topCountry": {
+        "name": "United States",
+        "count": 115
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 241
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 62
+      },
+      "usCatchAll": 115,
+      "usUnder50": 112,
+      "usUnder50Pct": 97.4
+    },
+    {
+      "weekStart": "2026-05-18",
+      "weekLabel": "May 18 – May 24",
+      "total": 315,
+      "topCountry": {
+        "name": "United States",
+        "count": 132
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 211
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 56
+      },
+      "usCatchAll": 132,
+      "usUnder50": 122,
+      "usUnder50Pct": 92.4
+    },
+    {
+      "weekStart": "2026-05-25",
+      "weekLabel": "May 25 – May 31",
+      "total": 106,
+      "topCountry": {
+        "name": "United States",
+        "count": 30
+      },
+      "topSegment": {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 61
+      },
+      "topUsState": {
+        "name": "California",
+        "count": 20
+      },
+      "usCatchAll": 30,
+      "usUnder50": 30,
+      "usUnder50Pct": 100
+    }
+  ],
+  "breakdowns": {
+    "countries": [
+      {
+        "name": "United States",
+        "count": 1453
+      },
+      {
+        "name": "United Kingdom",
+        "count": 528
+      },
+      {
+        "name": "Israel",
+        "count": 300
+      },
+      {
+        "name": "Australia",
+        "count": 192
+      },
+      {
+        "name": "India",
+        "count": 184
+      },
+      {
+        "name": "Canada",
+        "count": 116
+      },
+      {
+        "name": "Germany",
+        "count": 106
+      },
+      {
+        "name": "Pakistan",
+        "count": 57
+      },
+      {
+        "name": "Netherlands",
+        "count": 47
+      },
+      {
+        "name": "New Zealand",
+        "count": 45
+      },
+      {
+        "name": "Denmark",
+        "count": 33
+      },
+      {
+        "name": "Sweden",
+        "count": 30
+      },
+      {
+        "name": "Ukraine",
+        "count": 30
+      },
+      {
+        "name": "Poland",
+        "count": 27
+      },
+      {
+        "name": "Ireland",
+        "count": 26
+      }
+    ],
+    "employeeBands": [
+      {
+        "name": "under_20",
+        "count": 2466
+      },
+      {
+        "name": "in_range",
+        "count": 1119
+      },
+      {
+        "name": "over_8000",
+        "count": 92
+      },
+      {
+        "name": "missing",
+        "count": 3
+      }
+    ],
+    "employeeMicroSegments": [
+      {
+        "name": "Under 20",
+        "key": "under_20",
+        "count": 2466
+      },
+      {
+        "name": "20 – 49",
+        "key": "20_49",
+        "count": 715
+      },
+      {
+        "name": "50 – 99",
+        "key": "50_99",
+        "count": 141
+      },
+      {
+        "name": "100 – 199",
+        "key": "100_199",
+        "count": 138
+      },
+      {
+        "name": "Over 8,000",
+        "key": "over_8000",
+        "count": 92
+      },
+      {
+        "name": "200 – 499",
+        "key": "200_499",
+        "count": 81
+      },
+      {
+        "name": "500 – 8,000",
+        "key": "500_8000",
+        "count": 44
+      },
+      {
+        "name": "Missing",
+        "key": "missing",
+        "count": 3
+      }
+    ],
+    "usStates": [
+      {
+        "name": "California",
+        "count": 624
+      },
+      {
+        "name": "New York",
+        "count": 82
+      },
+      {
+        "name": "Florida",
+        "count": 78
+      },
+      {
+        "name": "Texas",
+        "count": 75
+      },
+      {
+        "name": "null",
+        "count": 49
+      },
+      {
+        "name": "Ohio",
+        "count": 42
+      },
+      {
+        "name": "Virginia",
+        "count": 38
+      },
+      {
+        "name": "Pennsylvania",
+        "count": 36
+      },
+      {
+        "name": "Illinois",
+        "count": 31
+      },
+      {
+        "name": "Georgia",
+        "count": 30
+      },
+      {
+        "name": "Washington",
+        "count": 27
+      },
+      {
+        "name": "North Carolina",
+        "count": 26
+      },
+      {
+        "name": "Massachusetts",
+        "count": 25
+      },
+      {
+        "name": "Colorado",
+        "count": 22
+      },
+      {
+        "name": "Indiana",
+        "count": 22
+      }
+    ],
+    "formPages": [
+      {
+        "name": "(empty)",
+        "count": 3021
+      },
+      {
+        "name": "rad",
+        "count": 271
+      },
+      {
+        "name": "wad",
+        "count": 169
+      },
+      {
+        "name": "pricing",
+        "count": 127
+      },
+      {
+        "name": "product_tour",
+        "count": 60
+      },
+      {
+        "name": "trial",
+        "count": 29
+      },
+      {
+        "name": "gated",
+        "count": 3
+      }
+    ],
+    "statuses": [
+      {
+        "name": "Disqualified",
+        "count": 3680
+      }
+    ]
+  },
+  "insights": [
+    {
+      "type": "wow_volume",
+      "category": "trend",
+      "severity": "high",
+      "text": "Catch-All volume is down 32% vs prior week (219 vs 322)."
+    },
+    {
+      "type": "top_countries",
+      "category": "geography",
+      "severity": "normal",
+      "text": "Countries that recur most in Catch-All: United States (1453), United Kingdom (528), Israel (300), Australia (192), India (184) — +93 more."
+    },
+    {
+      "type": "us_under_50",
+      "category": "geography",
+      "severity": "high",
+      "text": "United States: 86.4% of US Catch-All have under 50 employees (1256 of 1453). Top US state: California (624)."
+    },
+    {
+      "type": "recommendation",
+      "category": "recommendation",
+      "severity": "high",
+      "text": "Recommendation: Review Concierge micro/SMB segment coverage for United States — 86.4% of US Catch-All are under 50 employees."
+    },
+    {
+      "type": "weekly_trend",
+      "category": "trend",
+      "severity": "high",
+      "text": "Latest week (May 25 – May 31): 106 Catch-All, -66.3% vs previous week. Top driver: United States (30)."
+    },
+    {
+      "type": "employee_band",
+      "category": "segment",
+      "severity": "high",
+      "text": "67% of Catch-All have <20 employees — aligns with Scenario C (enrichment out of bookable range)."
+    },
+    {
+      "type": "top_segment",
+      "category": "segment",
+      "severity": "normal",
+      "text": "Most common employee-size segment in Catch-All: Under 20 (2466 leads, 67%)."
+    },
+    {
+      "type": "repeat_visitors",
+      "category": "quality",
+      "severity": "low",
+      "text": "889 guest email(s) submitted Catch-All more than once — worth checking duplicate routing or re-submits."
+    },
+    {
+      "type": "recommendation",
+      "category": "recommendation",
+      "severity": "normal",
+      "text": "Recommendation: Prioritize MOPS review of United States Catch-All rules (1453 in dataset) — highest country volume."
+    },
+    {
+      "type": "doc_alignment",
+      "category": "reference",
+      "severity": "normal",
+      "text": "Scenario F: no Concierge segment match — lead continues in Marketo for Catch-All list review."
+    }
+  ]
+}

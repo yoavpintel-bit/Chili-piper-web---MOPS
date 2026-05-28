@@ -1,0 +1,54 @@
+name: Daily Catch-All Sync
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+    inputs:
+      full_backfill:
+        description: 'Run 180-day backfill (SYNC_FULL_BACKFILL=1)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Sync from Chili Piper API
+        env:
+          CHILI_PIPER_API_KEY: ${{ secrets.CHILI_PIPER_API_KEY }}
+          CHILI_PIPER_TOKEN: ${{ secrets.CHILI_PIPER_TOKEN }}
+          SYNC_FULL_BACKFILL: ${{ github.event.inputs.full_backfill == 'true' && '1' || '0' }}
+          SYNC_INCREMENTAL_DAYS: '3'
+        run: |
+          if [ -z "$CHILI_PIPER_API_KEY" ] && [ -z "$CHILI_PIPER_TOKEN" ]; then
+            echo "No API key — falling back to CSV paths if present"
+            npm run sync:csv || true
+          else
+            npm run sync:api || npm run sync:csv
+          fi
+          npm run merge:workato || true
+          npm run build:aggregates
+          node scripts/publish-data.mjs
+
+      - name: Commit and push data updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/catch_all public/data/catch_all
+          if git diff --staged --quiet; then
+            echo "No data changes"
+            exit 0
+          fi
+          git commit -m "chore: daily Catch-All sync $(date -u +%Y-%m-%d)"
+          git push

@@ -1,0 +1,13 @@
+{
+  "lastSyncAt": "2026-05-28T11:52:07.402Z",
+  "source": "csv",
+  "files": [
+    "/Users/yoav.pintel/Downloads/routing_log_export_1779801577558.csv",
+    "/Users/yoav.pintel/Downloads/Concierge Logs Export.csv",
+    "/Users/yoav.pintel/Downloads/routing_log_export_1779869041851.csv"
+  ],
+  "recordCount": 3680,
+  "totalRowsMerged": 25537,
+  "aggregatesBuiltAt": "2026-05-28T11:52:07.478Z",
+  "catchAllCount": 3680
+}

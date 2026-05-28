@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HiBob RevOps Chili Piper Lead Routing Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- React & ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel CDN for JSX rendering -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    /* Custom premium scrollbar styling to match HiBob aesthetic */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #FFFDF9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #EBE5D9;
+      border-radius: 10px;
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    .animate-scaleUp {
+      animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleUp {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes journeyPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(226, 0, 79, 0.25); }
+      50% { box-shadow: 0 0 0 6px rgba(226, 0, 79, 0); }
+    }
+    @keyframes journeyFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    @keyframes journeyStaggerIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .journey-pulse {
+      animation: journeyPulse 2s ease-in-out infinite;
+    }
+    .journey-flow-line {
+      background: linear-gradient(90deg, #a5f3fc, #E2004F, #34d399, #a5f3fc);
+      background-size: 200% 100%;
+      animation: journeyFlow 2.5s linear infinite;
+    }
+    .journey-stagger {
+      animation: journeyStaggerIn 0.35s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-[#FFFDF9] text-[#222121] font-sans antialiased p-2">
+
+  <!-- React root element -->
+  <div id="root"></div>
+
+  <script type="text/babel" src="js/home-panel.jsx"></script>
+  <script type="text/babel" src="js/operations-panel.jsx"></script>
+  <script type="text/babel" src="js/teams-countries-panel.jsx"></script>
+  <script type="text/babel" src="js/journey-visuals.jsx"></script>
+  <script type="text/babel" src="js/blueprint-panel.jsx"></script>
+  <!-- app.jsx loaded explicitly by boot script (large file; Babel src tag is unreliable) -->
+  <script>
+    (function bootPortal() {
+      var rootEl = document.getElementById('root');
+      function showError(msg) {
+        if (!rootEl) return;
+        rootEl.innerHTML =
+          '<div style="padding:2.5rem;font-family:system-ui;max-width:32rem;margin:0 auto">' +
+          '<h2 style="color:#E2004F;font-weight:800">Portal did not load</h2>' +
+          '<p style="color:#5A5755;margin-top:0.5rem">' + msg + '</p></div>';
+      }
+      function mount() {
+        if (!window.React || !window.ReactDOM || !window.App) return false;
+        ReactDOM.createRoot(rootEl).render(React.createElement(window.App));
+        return true;
+      }
+      function loadAppJsx() {
+        if (window.App) return Promise.resolve();
+        if (typeof Babel === 'undefined') {
+          return Promise.reject(new Error('Babel failed to load. Check your network.'));
+        }
+        return fetch('js/app.jsx')
+          .then(function (r) {
+            if (!r.ok) throw new Error('Could not load js/app.jsx (' + r.status + ')');
+            return r.text();
+          })
+          .then(function (src) {
+            var code = Babel.transform(src, { presets: ['react', 'env'] }).code;
+            eval(code);
+          });
+      }
+      function waitForPanels(attempt) {
+        if (mount()) return;
+        if (attempt > 150) {
+          showError('Timed out waiting for app scripts. Hard-refresh (Cmd+Shift+R).');
+          return;
+        }
+        if (!window.App && attempt % 10 === 0) {
+          loadAppJsx().catch(function (e) {
+            console.error(e);
+            showError(e.message || String(e));
+          });
+        }
+        setTimeout(function () { waitForPanels(attempt + 1); }, 50);
+      }
+      if (typeof Babel !== 'undefined') {
+        try { Babel.transformScriptTags(); } catch (e) { console.warn(e); }
+      }
+      loadAppJsx()
+        .catch(function (e) { console.error(e); })
+        .finally(function () { waitForPanels(0); });
+    })();
+  </script>
+</body>
+</html>

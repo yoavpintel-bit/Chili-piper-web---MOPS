@@ -1,0 +1,3774 @@
+{
+  "meta": {
+    "builtAt": "2026-05-28T11:59:02.025Z",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "routerId": "7e9c794d-b6db-40ec-ae07-f363d77b5f36",
+    "routerName": "MQL Inbound flow - Main router - Live",
+    "routerSlug": "rad-flow",
+    "ruleCount": 58,
+    "teamCount": 288,
+    "sources": {
+      "teams": "960715c3-14c0-4d23-b5f8-5641f7dd5544.txt",
+      "rules": "485e3e86-3ab9-4afb-9719-d33454314f70.txt",
+      "router": "aeda74bf-bb4e-4a7e-963e-05857a485191.txt"
+    }
+  },
+  "filters": {
+    "countries": [
+      "Albania",
+      "Algeria",
+      "Angola",
+      "Anguilla",
+      "Antigua and Barbuda",
+      "Argentina",
+      "armenia",
+      "Ascension and Tristan da Cunha",
+      "Australia",
+      "Austria",
+      "Bahrain",
+      "Bangladesh",
+      "Barbados",
+      "Belarus",
+      "Belgium",
+      "Belize",
+      "Bermuda",
+      "Bosnia and Herzegovina",
+      "Brazil",
+      "British Indian",
+      "British Virgin Islands",
+      "Bulgaria",
+      "Cameroon",
+      "Canada",
+      "Cayman Islands",
+      "Chad",
+      "Chile",
+      "china",
+      "Colombia",
+      "Comoros",
+      "Cook Islands",
+      "Costa Rica",
+      "Croatia",
+      "Cuba",
+      "Cyprus",
+      "Czech Republic",
+      "Denmark",
+      "Dominica",
+      "Dominican Republic",
+      "Ecuador",
+      "Egypt",
+      "El Salvador",
+      "Equatorial Guinea",
+      "Eritrea",
+      "Estonia",
+      "Eswatini",
+      "Ethiopia",
+      "Falkland Islands",
+      "Faroe Islands",
+      "Fiji",
+      "Finland",
+      "France",
+      "French Guiana",
+      "French Polynesia",
+      "French Southern Territories",
+      "Gabon",
+      "Gambia",
+      "Georgia",
+      "Germany",
+      "Ghana",
+      "Gibraltar",
+      "Greece",
+      "Greenland",
+      "Grenada",
+      "Guadeloupe",
+      "Guatemala",
+      "Guernsey",
+      "Guinea",
+      "Guinea-Bissau",
+      "Guyana",
+      "Heard Island and McDonald Islands",
+      "Holy See",
+      "Honduras",
+      "Hong Kong",
+      "Hungary",
+      "Iceland",
+      "Indonesia",
+      "Ireland",
+      "Isle of Man",
+      "Israel",
+      "Italy",
+      "Jamaica",
+      "Japan",
+      "Jersey",
+      "Kenya",
+      "Kiribati",
+      "Korea",
+      "Latvia",
+      "Lesotho",
+      "Liberia",
+      "Libya",
+      "Lithuania",
+      "Luxembourg",
+      "Macao",
+      "macedonia",
+      "Madagascar",
+      "Malawi",
+      "Malaysia",
+      "Maldives",
+      "Mali",
+      "Malta",
+      "Martinique",
+      "Mauritania",
+      "Mauritius",
+      "Mayotte",
+      "Mexico",
+      "Moldova",
+      "Monaco",
+      "Mongolia",
+      "Montenegro",
+      "Montserrat",
+      "Morocco",
+      "Mozambique",
+      "Myanmar",
+      "Namibia",
+      "Nauru",
+      "Nepal",
+      "Netherland",
+      "Netherlands",
+      "New Caledonia",
+      "New Zealand",
+      "Nicaragua",
+      "Niger",
+      "Nigeria",
+      "Niue",
+      "Norfolk Island",
+      "Norway",
+      "Ocean Territory",
+      "Oman",
+      "Panama",
+      "Papua New Guinea",
+      "Paraguay",
+      "Peru",
+      "Philippines",
+      "Pitcairn",
+      "Poland",
+      "Portugal",
+      "Réunion",
+      "Romania",
+      "Russia",
+      "Rwanda",
+      "Saint Helena",
+      "Saint Kitts and Nevis",
+      "Saint Lucia",
+      "Saint Maarten (Dutch part)",
+      "Saint Martin (French part)",
+      "Saint Pierre and Miquelon",
+      "Saint Vincent and the Grenadines",
+      "Samoa",
+      "San Marino",
+      "Sao Tome and Principe",
+      "Saudi Arabia",
+      "Scotland",
+      "Senegal",
+      "Serbia",
+      "Seychelles",
+      "Sierra Leone",
+      "Singapore",
+      "Slovakia",
+      "Slovenia",
+      "Solomon Islands",
+      "Somalia",
+      "South Africa",
+      "South Georgia and the South Sandwich Islands",
+      "South Korea",
+      "Spain",
+      "Sri Lanka",
+      "Suriname",
+      "Svalbard and Jan Mayen",
+      "Sweden",
+      "Switzerland",
+      "Taiwan",
+      "Tanzania",
+      "Thailand",
+      "The Bahamas",
+      "Timor-Leste",
+      "Togo",
+      "Tokelau",
+      "Tonga",
+      "Trinidad and Tobago",
+      "Tunisia",
+      "Turkey",
+      "Turkmenistan",
+      "Turks and Caicos Islands",
+      "Tuvalu",
+      "Uganda",
+      "Ukraine",
+      "United Arab Emirates",
+      "United Kingdom",
+      "Uruguay",
+      "Uzbekistan",
+      "Vanuatu",
+      "Venezuela",
+      "Viet Nam",
+      "Virgin Islands (British)",
+      "Wallis and Futuna",
+      "Western Sahara",
+      "Yemen",
+      "Zambia",
+      "Zimbabwe"
+    ],
+    "sizeSegments": [
+      {
+        "id": "under_20",
+        "label": "Under 20",
+        "min": 0,
+        "max": 19
+      },
+      {
+        "id": "20_49",
+        "label": "20 – 49",
+        "min": 20,
+        "max": 49
+      },
+      {
+        "id": "50_99",
+        "label": "50 – 99",
+        "min": 50,
+        "max": 99
+      },
+      {
+        "id": "100_199",
+        "label": "100 – 199",
+        "min": 100,
+        "max": 199
+      },
+      {
+        "id": "200_499",
+        "label": "200 – 499",
+        "min": 200,
+        "max": 499
+      },
+      {
+        "id": "500_8000",
+        "label": "500 – 8,000",
+        "min": 500,
+        "max": 8000
+      },
+      {
+        "id": "over_8000",
+        "label": "Over 8,000",
+        "min": 8001,
+        "max": null
+      }
+    ]
+  },
+  "rules": [
+    {
+      "id": "7cf6f7c8-e028-4146-9be9-3f03e4ad73b8",
+      "name": "Ownership",
+      "order": 1,
+      "product": "Distro",
+      "ruleType": "OwnershipRule",
+      "countries": [],
+      "employeeRange": null,
+      "sizeSegmentIds": [],
+      "team": {
+        "id": "ae06c40b-52bc-4023-b37c-df761071f877",
+        "name": "Ownership",
+        "memberCount": 157,
+        "members": [
+          {
+            "id": "6850bebe8638dd50c1f6983a"
+          },
+          {
+            "id": "687ed9e5366530379724d880"
+          },
+          {
+            "id": "5ffdc2d04c46df000170276c"
+          },
+          {
+            "id": "6652eb5824e5da0819d75a9e"
+          },
+          {
+            "id": "651d14b401081c2dbc592b0c"
+          },
+          {
+            "id": "6806de75ddd62d68f0f3ac58"
+          },
+          {
+            "id": "672381dbd794480c08373226"
+          },
+          {
+            "id": "62fcf649af570018f5b3d446"
+          },
+          {
+            "id": "68048662ddd62d68f0f39bd6"
+          },
+          {
+            "id": "68d3046549bea1012027a35d"
+          },
+          {
+            "id": "645b8d99a45fcf382537cbd4"
+          },
+          {
+            "id": "682bcc2e847f27225c6cdd26"
+          },
+          {
+            "id": "6594ab0bd867c424fa6619e4"
+          },
+          {
+            "id": "6716f3bc97d8fb03602f1136"
+          },
+          {
+            "id": "63aaaa150973c45ce6cf59a3"
+          },
+          {
+            "id": "660016966d0a054a868c2a0f"
+          },
+          {
+            "id": "629620e8d006b91cd3eaadc7"
+          },
+          {
+            "id": "669789a6fbdf1d3ab970eef3"
+          },
+          {
+            "id": "6418f5c12a09ef536bbf54b1"
+          },
+          {
+            "id": "66f58c42eeaec52b4c4842b0"
+          },
+          {
+            "id": "68180f0daf00f7441ced5454"
+          },
+          {
+            "id": "623856130a570b7760add162"
+          },
+          {
+            "id": "68f6d49a71fdc418e4faf912"
+          },
+          {
+            "id": "668bf49ab1ec6b5f6cdb8749"
+          },
+          {
+            "id": "689e3b504bdc9a4c1c8655b3"
+          },
+          {
+            "id": "66834a1ff586db372fe68424"
+          },
+          {
+            "id": "679b768042bf722c20e1dad3"
+          },
+          {
+            "id": "619f9d4d0f99f0214179cb53"
+          },
+          {
+            "id": "64c8b9ee4042cf6f63690972"
+          },
+          {
+            "id": "67da9cec72445e72b3f306ce"
+          },
+          {
+            "id": "67e1451672445e72b3f33213"
+          },
+          {
+            "id": "68b63b204bdc9a4c1c8726d3"
+          },
+          {
+            "id": "683e3e7e8638dd50c1f64295"
+          },
+          {
+            "id": "677ce51137971b59bdbc083e"
+          },
+          {
+            "id": "631098338df5ad198eadde01"
+          },
+          {
+            "id": "65f1892310c8124489c2b99e"
+          },
+          {
+            "id": "61d40333dbd0ec38cb30c07f"
+          },
+          {
+            "id": "65df1b8832d47324aa4621d8"
+          },
+          {
+            "id": "63ac2c162c48822df2ebcf4e"
+          },
+          {
+            "id": "67c45e82e5495402b9fc3213"
+          },
+          {
+            "id": "68a3c44d4bdc9a4c1c8672ab"
+          },
+          {
+            "id": "64c8bc464042cf6f6369097c"
+          },
+          {
+            "id": "66b2ae9147c64509faffe8f6"
+          },
+          {
+            "id": "684b649d8638dd50c1f687aa"
+          },
+          {
+            "id": "603f89ee9ee30d00019f9d9a"
+          },
+          {
+            "id": "626fb579015c0f467469c2d9"
+          },
+          {
+            "id": "612cd65a5df78b00018dc67a"
+          },
+          {
+            "id": "68db2e2749bea1012027dd46"
+          },
+          {
+            "id": "669efebb464d171cc01f44e3"
+          },
+          {
+            "id": "66e2b49d2cbf255127e5f2c1"
+          },
+          {
+            "id": "679b7b3342bf722c20e1dadf"
+          },
+          {
+            "id": "65249f607a22ca69ba161dde"
+          },
+          {
+            "id": "68195e42af00f7441ced607a"
+          },
+          {
+            "id": "665f2fa422b86a1f39c25498"
+          },
+          {
+            "id": "672b24347aed9922d8699d60"
+          },
+          {
+            "id": "66fe5f09bf05ef7bee2f5fc8"
+          },
+          {
+            "id": "68d1f35049bea101202799fc"
+          },
+          {
+            "id": "638ef39bbecbfa5d270d6679"
+          },
+          {
+            "id": "6641af29c41c2b7746197ea2"
+          },
+          {
+            "id": "68048662ddd62d68f0f39bde"
+          },
+          {
+            "id": "637c80ec5c036e41ed655c8b"
+          },
+          {
+            "id": "66169d11eca42444e0901351"
+          },
+          {
+            "id": "61f83456dc61d341123cf931"
+          },
+          {
+            "id": "624b95291a13370701e2907e"
+          },
+          {
+            "id": "68365d6a8638dd50c1f613b6"
+          },
+          {
+            "id": "67486abf915361241954d128"
+          },
+          {
+            "id": "6596c83092d79000acc13ccc"
+          },
+          {
+            "id": "667d1a6e57760c1e0917a654"
+          },
+          {
+            "id": "677ce89637971b59bdbc0846"
+          },
+          {
+            "id": "603233a82e9f8600019f9f21"
+          },
+          {
+            "id": "62af3049b9faba554909668d"
+          },
+          {
+            "id": "66fd54fcbf05ef7bee2f5805"
+          },
+          {
+            "id": "689936c04bdc9a4c1c8626b1"
+          },
+          {
+            "id": "6540f10843be780eeaa3a38e"
+          },
+          {
+            "id": "65926e59d867c424fa660fb0"
+          },
+          {
+            "id": "629767ffd006b91cd3eac222"
+          },
+          {
+            "id": "685b48c68638dd50c1f6ca85"
+          },
+          {
+            "id": "677ceaed37971b59bdbc0856"
+          },
+          {
+            "id": "6887ad3367dd973800f3a408"
+          },
+          {
+            "id": "6800a47eddd62d68f0f3811f"
+          },
+          {
+            "id": "67f580f1cd07544f52506544"
+          },
+          {
+            "id": "63c93516e0e1222380030610"
+          },
+          {
+            "id": "65f69ac78f6bb539136b798b"
+          },
+          {
+            "id": "68d1f35049bea101202799f8"
+          },
+          {
+            "id": "67214007d794480c083725f4"
+          },
+          {
+            "id": "68f6d49a71fdc418e4faf916"
+          },
+          {
+            "id": "5ffdc2cf4c46df0001702684"
+          },
+          {
+            "id": "655d505188a738209ca9687d"
+          },
+          {
+            "id": "68d1f35049bea101202799ec"
+          },
+          {
+            "id": "677d038d37971b59bdbc09de"
+          },
+          {
+            "id": "64d1937fb29d6e726ece2de5"
+          },
+          {
+            "id": "60eaa0d87a43d00001c152b9"
+          },
+          {
+            "id": "66797ac7efeda945f8e378c3"
+          },
+          {
+            "id": "66994226464d171cc01f195e"
+          },
+          {
+            "id": "65ba63b29c6241754605d1cc"
+          },
+          {
+            "id": "66021a466d0a054a868c3dd9"
+          },
+          {
+            "id": "66f3f83fbc0aa42d6b041818"
+          },
+          {
+            "id": "65e04c4432d47324aa463b90"
+          },
+          {
+            "id": "687d8ab3366530379724cccf"
+          },
+          {
+            "id": "64d1937eb29d6e726ece2ddd"
+          },
+          {
+            "id": "680a3161ddd62d68f0f3c628"
+          },
+          {
+            "id": "658bf969d867c424fa65f157"
+          },
+          {
+            "id": "65419e8e43be780eeaa3aac6"
+          },
+          {
+            "id": "66bb1c98be59d079b436bc7b"
+          },
+          {
+            "id": "667309b551001479d5682227"
+          },
+          {
+            "id": "67f96e14dd256bc6e0bf4f63"
+          },
+          {
+            "id": "61d5a4d68e9113193cebfd53"
+          },
+          {
+            "id": "65f69bf28f6bb539136b7997"
+          },
+          {
+            "id": "672ab7347aed9922d8699cbb"
+          },
+          {
+            "id": "6318b2368df5ad198eae32f3"
+          },
+          {
+            "id": "68b63b204bdc9a4c1c8726e3"
+          },
+          {
+            "id": "66847ae1f586db372fe68a2b"
+          },
+          {
+            "id": "66d0296a50958262d061aeb7"
+          },
+          {
+            "id": "68b63b214bdc9a4c1c8726eb"
+          },
+          {
+            "id": "68048662ddd62d68f0f39bca"
+          },
+          {
+            "id": "65c181421700952b7dff41a4"
+          },
+          {
+            "id": "5ffdc2cf4c46df0001702620"
+          },
+          {
+            "id": "64aca19e667cfa4529e016a7"
+          },
+          {
+            "id": "5ffdc2d04c46df000170272c"
+          },
+          {
+            "id": "61d1ec0aded7c343201624b2"
+          },
+          {
+            "id": "67eb969b02a9b108204eac9c"
+          },
+          {
+            "id": "662ba3f501431a32c66f83ed"
+          },
+          {
+            "id": "684836098638dd50c1f67295"
+          },
+          {
+            "id": "68d1f35049bea101202799f4"
+          },
+          {
+            "id": "67599e26e333db459b525118"
+          },
+          {
+            "id": "692612f7f2389b056c41dc19"
+          },
+          {
+            "id": "625dff18c35df6055b884594"
+          },
+          {
+            "id": "6951d367d6e55a4971a2d6e6"
+          },
+          {
+            "id": "667ac8d3efeda945f8e37ec7"
+          },
+          {
+            "id": "694b3825d6e55a4971a2b812"
+          },
+          {
+            "id": "64181b6c2a09ef536bbf4a7f"
+          },
+          {
+            "id": "6679579cefeda945f8e377e3"
+          },
+          {
+            "id": "6601fb8f6d0a054a868c3d9d"
+          },
+          {
+            "id": "64fb1320ce378a6a0875afd8"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae4e"
+          },
+          {
+            "id": "694b3825d6e55a4971a2b816"
+          },
+          {
+            "id": "673f5f92c574c7170a083ff3"
+          },
+          {
+            "id": "65b3f1275ab8c31546bc2142"
+          },
+          {
+            "id": "6923285cf2389b056c41c7aa"
+          },
+          {
+            "id": "62fcef3eaf570018f5b3d3c4"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae52"
+          },
+          {
+            "id": "691d81f0f2389b056c41a36e"
+          },
+          {
+            "id": "693306acf2389b056c422d2e"
+          },
+          {
+            "id": "5ffdc2d04c46df00017026a8"
+          },
+          {
+            "id": "691bbeabf2389b056c419527"
+          },
+          {
+            "id": "69b0b57ebf55ba275873f178"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae4a"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae56"
+          },
+          {
+            "id": "69b0b57efc6f0850ad953abf"
+          },
+          {
+            "id": "69b9f30009a1dee7d537bb80"
+          },
+          {
+            "id": "69c47b0028dfad8e400c6d68"
+          },
+          {
+            "id": "69c47b0028dfad8e400c6d67"
+          },
+          {
+            "id": "69c9ca284d9eb73c5d0a7f59"
+          },
+          {
+            "id": "69c9ca28d8ad566b6977af9d"
+          },
+          {
+            "id": "69cc6a1eefa6c042bd680d31"
+          },
+          {
+            "id": "69cdb888df80d38b76f38509"
+          },
+          {
+            "id": "69cf03fbf0547abcf760e9ce"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": true
+      }
+    },
+    {
+      "id": "b48e5c34-2f99-4e40-aab6-a6323ba4e7c9",
+      "name": "Customer/Churn/Pending churn/NotRelevant Ignore",
+      "order": 2,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": null,
+      "sizeSegmentIds": [],
+      "team": null,
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "01474e3e-183e-49a8-9848-7faf3ff60c1a",
+      "name": "Noa test domains",
+      "order": 3,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 20,
+        "max": 8000,
+        "label": "20 – 8000"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199",
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "1c5e0e57-83bc-416f-9646-2c49a42025f6",
+        "name": "Noa test domains",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "68d942488408bb380f4d20d4"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "83cb1788-fef7-4403-8454-bac3e5ea1e05",
+      "name": "APJ | SMB : 50-199 (evaluating)",
+      "order": 4,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "20b99727-11ba-4809-9b77-947c33943d7f",
+        "name": "APJ | SMB : 50-199",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "66169d11eca42444e0901351"
+          },
+          {
+            "id": "689936c04bdc9a4c1c8626b1"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "ba9b9935-ce8d-443f-a94a-766388737c88",
+      "name": "APJ | MM : 200-649 (evaluating)",
+      "order": 5,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 649,
+        "label": "200 – 649"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "f69d8f1b-76c5-4fc4-85b3-6168d033fe9b",
+        "name": "APJ | MM : 200-649",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "68180f0daf00f7441ced5454"
+          },
+          {
+            "id": "69e1a952dffa8028daf0a41a"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "fe9d2213-e195-4ad4-8b5e-d87a8f4562e6",
+      "name": "APJ | MM : 650-999 (evaluating)",
+      "order": 6,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "employeeRange": {
+        "min": 650,
+        "max": 999,
+        "label": "650 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "99d6de0f-3963-4949-8788-04c375a225e4",
+        "name": "APJ | MM : 650-999",
+        "memberCount": 5,
+        "members": [
+          {
+            "id": "66d0296a50958262d061aeb7"
+          },
+          {
+            "id": "66797ac7efeda945f8e378c3"
+          },
+          {
+            "id": "68180f0daf00f7441ced5454"
+          },
+          {
+            "id": "69e1a952dffa8028daf0a41a"
+          },
+          {
+            "id": "69fbe95387715bab8e5b0c68"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "e330597a-9cef-45a1-8616-a5e2aea7427e",
+      "name": "APJ | ENT : 1000-8000 (evaluating)",
+      "order": 7,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "6e0e53f6-3d61-4227-b1b2-c8b19297ba7c",
+        "name": "APJ | ENT : 1000-8000",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "66d0296a50958262d061aeb7"
+          },
+          {
+            "id": "66797ac7efeda945f8e378c3"
+          },
+          {
+            "id": "69fbe95387715bab8e5b0c68"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "cc051f2a-7660-409f-b0c4-270c8ab29d1f",
+      "name": "DACH | Micro & SMB | Switzerland : 20-199 (evaluating)",
+      "order": 8,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Switzerland"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "0395b59c-cdcd-4e4e-a956-08d25388feef",
+        "name": "DACH | Micro & SMB | Switzerland : 20-199",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69ea0901cc50f6c9cb581c88"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "098f58b0-5bd9-4496-9bf2-9a1b3d4a8e4d",
+      "name": "DACH | SMB : 50-99 (evaluating)",
+      "order": 9,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 99,
+        "label": "50 – 99"
+      },
+      "sizeSegmentIds": [
+        "50_99"
+      ],
+      "team": {
+        "id": "b3b8b826-de5d-4eb3-9f39-9266c3e1c188",
+        "name": "DACH | SMB : 50-99",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "658bf969d867c424fa65f157"
+          },
+          {
+            "id": "69ea0901cc50f6c9cb581c88"
+          },
+          {
+            "id": "69fc8e703af8999493408921"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "b8999684-13b5-493b-a16d-90ddf24a279d",
+      "name": "DACH | SMB : 100-199 (evaluating)",
+      "order": 10,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "employeeRange": {
+        "min": 100,
+        "max": 199,
+        "label": "100 – 199"
+      },
+      "sizeSegmentIds": [
+        "100_199"
+      ],
+      "team": {
+        "id": "28c5c711-1765-49a4-b8d0-8c9deca6a505",
+        "name": "DACH | SMB : 100-199",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "658bf969d867c424fa65f157"
+          },
+          {
+            "id": "69ea0901cc50f6c9cb581c88"
+          },
+          {
+            "id": "69fc8e703af8999493408921"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "7e38e62c-84b7-46e1-818c-5598d0fab70f",
+      "name": "DACH | MM : 200-499 (evaluating)",
+      "order": 11,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Austria",
+        "Germany",
+        "Switzerland"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 499,
+        "label": "200 – 499"
+      },
+      "sizeSegmentIds": [
+        "200_499"
+      ],
+      "team": {
+        "id": "e7635aef-7ae6-4b91-a390-a852aad7cb52",
+        "name": "DACH | MM : 200-499",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67da9cec72445e72b3f306ce"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "d095daa1-c0b5-4bc4-8214-e5d1067dd5f4",
+      "name": "DACH | MM | Germany & Austria : 500-999 (evaluating)",
+      "order": 12,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "employeeRange": {
+        "min": 500,
+        "max": 999,
+        "label": "500 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "3b2fd2a2-41c1-45b9-8d26-d75f3450d7c3",
+        "name": "DACH | MM | Germany & Austria : 500-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65f69ac78f6bb539136b798b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "fbe3a325-3a7c-4754-8d07-ed00362a53ae",
+      "name": "DACH | MM | Switzerland : 500-999 (evaluating)",
+      "order": 13,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Switzerland"
+      ],
+      "employeeRange": {
+        "min": 500,
+        "max": 999,
+        "label": "500 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "282c4dd3-54ea-4147-b661-dc9bb1f6212f",
+        "name": "DACH | MM | Switzerland : 500-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65f69ac78f6bb539136b798b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "4a0b1e21-4dda-441c-aa73-526e553e5fc9",
+      "name": "DACH | ENT | Germany & Austria : 1000-8000 (evaluating)",
+      "order": 14,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "b137f7d6-f748-43ac-a4b2-ae52ab80ea59",
+        "name": "DACH | ENT | Germany & Austria : 1000-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65f69ac78f6bb539136b798b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "b9f9a171-83ff-4562-abe4-04ec3c4ce6ce",
+      "name": "DACH | ENT | Switzerland : 1000-8000 (evaluating)",
+      "order": 15,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Switzerland"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "7e52a8ad-135d-4967-ae81-4065bde8987f",
+        "name": "DACH | ENT | Switzerland : 1000-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65f69ac78f6bb539136b798b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "f092bfbb-58ef-46f5-af49-0cceb64acf4e",
+      "name": "Iberia | Micro & SMB | Portugal: 20-199 (evaluating)",
+      "order": 16,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Portugal"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "429cce75-4ae2-44c4-a52b-d13403408da3",
+        "name": "Iberia | Micro & SMB | Portugal: 20-199",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "64aca19e667cfa4529e016a7"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "78c9ab3c-9b67-4322-a46a-8e8ed84543fa",
+      "name": "Iberia | Micro & SMB | Spain ,Italy : 20-199 (evaluating)",
+      "order": 17,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Italy",
+        "Spain"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "df1c707b-e9c9-47d2-84ae-2c6467eaee2a",
+        "name": "Iberia | Micro & SMB | Spain ,Italy : 20-199",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "6594ab0bd867c424fa6619e4"
+          },
+          {
+            "id": "64aca19e667cfa4529e016a7"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "7fecf588-57a3-489e-9b4d-dc318a34fba4",
+      "name": "Iberia | MM & ENT : 200-8000 (evaluating)",
+      "order": 18,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Italy",
+        "Portugal",
+        "Spain"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 8000,
+        "label": "200 – 8000"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "874d66f1-533d-4630-b26b-6f77efd92418",
+        "name": "Iberia | MM & ENT : 200-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67eb969b02a9b108204eac9c"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "4095cfa7-0917-4e28-86c0-d4367724f6f5",
+      "name": "Nordics | SMB | Sweden: 50-199 (evaluating)",
+      "order": 19,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Sweden"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "469022ff-9ac5-44eb-bd8e-44e5efd159f4",
+        "name": "Nordics | SMB | Sweden: 50-199",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "68f6d49a71fdc418e4faf912"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "5f1be930-f8f1-40dc-8a60-95ea9b3536b2",
+      "name": "Nordics | MM | Sweden: 200-999 (evaluating)",
+      "order": 20,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Sweden"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 999,
+        "label": "200 – 999"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "68aed257-a0df-4a94-bad4-2f537ee0beef",
+        "name": "Nordics | MM | Sweden: 200-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69c9ca284d9eb73c5d0a7f59"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "1b9ffde4-662c-4a4a-9431-3197ae90e12f",
+      "name": "Nordics | Micro | Denmark, Finland, Norway, Iceland : 20-49 (evaluating)",
+      "order": 21,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": null,
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "261842f5-80e5-4762-a185-fce7fa0683a2",
+      "name": "Nordics | SMB | Denmark, Finland, Norway, Iceland : 50–199 (evaluating)",
+      "order": 22,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "ea21a3be-ae82-4d6d-9cb5-8066cb0ae9df",
+        "name": "Nordics | SMB | Denmark, Finland, Norway, Iceland : 50–199",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "64aca19e667cfa4529e016a7"
+          },
+          {
+            "id": "6594ab0bd867c424fa6619e4"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "71157223-5a2f-4f94-9101-7fabe71e10b2",
+      "name": "Nordics | MM | Denmark: 200-499 (evaluating)",
+      "order": 23,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 499,
+        "label": "200 – 499"
+      },
+      "sizeSegmentIds": [
+        "200_499"
+      ],
+      "team": {
+        "id": "8d4dacdd-db4d-489e-9c1f-661d00e88222",
+        "name": "Nordics | MM | Denmark: 200-499",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67486abf915361241954d128"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "ad5f6cb4-f645-459a-82ad-97b03bd9d912",
+      "name": "Nordics | MM | Denmark: 500-999 (evaluating)",
+      "order": 24,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark"
+      ],
+      "employeeRange": {
+        "min": 500,
+        "max": 999,
+        "label": "500 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "b2fc8cde-592e-435a-8c29-4379d460f098",
+        "name": "Nordics | MM | Denmark: 500-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67486abf915361241954d128"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "2da1829d-e84a-475c-a4c4-886caf4a39fb",
+      "name": "Nordics | MM | Norway: 200-999 (evaluating)",
+      "order": 25,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Norway"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 999,
+        "label": "200 – 999"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "63df8995-0173-404d-8ee3-498231e3a3a9",
+        "name": "Nordics | MM | Norway: 200-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69c9ca284d9eb73c5d0a7f59"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "30bbda2e-f113-4020-b032-cb7b38abd150",
+      "name": "Nordics | MM | Finland & Iceland: 200-999 (evaluating)",
+      "order": 26,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Finland",
+        "Iceland"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 999,
+        "label": "200 – 999"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "0c964d17-131f-425f-ac6e-3d8efc01ad85",
+        "name": "Nordics | MM | Finland & Iceland: 200-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67486abf915361241954d128"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "2023a873-9534-4ba6-b8bb-0a5368bb2c84",
+      "name": "Nordics | ENT : 1000-8000 (evaluating)",
+      "order": 27,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway",
+        "Sweden"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "15219fb0-287c-4006-90ac-e0a523220ce0",
+        "name": "Nordics | ENT : 1000-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69c9ca28d8ad566b6977af9d"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "cf56d887-c59c-4b2a-8f9a-640b0923d944",
+      "name": "Benelux | Micro | Netherland, Belgium, Luxembourg : 20-49 (evaluating)",
+      "order": 28,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Belgium",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "7a80ced2-2b86-4e9c-8275-f6fd5f90310b",
+        "name": "Benelux | Micro | Netherland, Belgium, Luxembourg : 20-49",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "6594ab0bd867c424fa6619e4"
+          },
+          {
+            "id": "679b768042bf722c20e1dad3"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "97198ff6-1792-44a0-8958-79a362e1a088",
+      "name": "Benelux | SMB | Netherland, Belgium, Luxembourg : 50-199 (evaluating)",
+      "order": 29,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Belgium",
+        "Luxembourg",
+        "Netherland"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "810f1c61-84ab-4fab-a34a-87c5664cc966",
+        "name": "Benelux | SMB | Netherland, Belgium, Luxembourg : 50-199",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "65e04c4432d47324aa463b90"
+          },
+          {
+            "id": "6594ab0bd867c424fa6619e4"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "d1fc4256-9f38-4914-97ca-fa3a286508f3",
+      "name": "Western Europe | Micro & SMB | France: 20-199 (evaluating)",
+      "order": 30,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "France"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "8182a963-2c4f-48e9-8387-cb6ba9671020",
+        "name": "Western Europe | Micro & SMB | France: 20-199",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "68f6d49a71fdc418e4faf912"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "4aea653c-f1e8-492c-8272-c89769f29d28",
+      "name": "Benelux | MM : 200-499 (evaluating)",
+      "order": 31,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 499,
+        "label": "200 – 499"
+      },
+      "sizeSegmentIds": [
+        "200_499"
+      ],
+      "team": {
+        "id": "2f5997b3-3250-4bc9-9dcd-85ed41988307",
+        "name": "Benelux | MM : 200-499",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "6806de75ddd62d68f0f3ac58"
+          },
+          {
+            "id": "67eb969b02a9b108204eac9c"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "ac42499a-7d3a-40f1-a24c-80145014f8df",
+      "name": "Benelux | MM : 500-999 (evaluating)",
+      "order": 32,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "employeeRange": {
+        "min": 500,
+        "max": 999,
+        "label": "500 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "d6a7e4bb-a954-4370-8157-cecb08f90228",
+        "name": "Benelux | MM : 500-999",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "6806de75ddd62d68f0f3ac58"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "94958e33-e760-499a-b751-26b36b50fbac",
+      "name": "Benelux | ENT : 1000-8000 (evaluating)",
+      "order": 33,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "4f65060d-3957-46c1-a07b-83ff9c42aee1",
+        "name": "Benelux | ENT : 1000-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "6850bebe8638dd50c1f6983a"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "b308236e-b81f-4a3a-9ee8-11b7af4c71ee",
+      "name": "IL & CEE | Micro & SMB : 20-199 (evaluating)",
+      "order": 34,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "705d48e4-e7bd-4f83-b781-6e616c90fb7e",
+        "name": "IL & CEE | Micro & SMB : 20-199",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "65c181421700952b7dff41a4"
+          },
+          {
+            "id": "66bb1c98be59d079b436bc7b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "8560ea34-a15b-4bf1-8bca-ed5aa22bb22d",
+      "name": "IL & CEE | MM : 200-649 (evaluating)",
+      "order": 35,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 649,
+        "label": "200 – 649"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "f98e1da7-d6b9-4649-b049-6d7c14546131",
+        "name": "IL & CEE | MM : 200-649",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65f1892310c8124489c2b99e"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "3ebb5aa3-035a-4b07-91b2-9ba80ef3d6ba",
+      "name": "IL & CEE | MM & ENT : 650-8000 (evaluating)",
+      "order": 36,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "employeeRange": {
+        "min": 650,
+        "max": 8000,
+        "label": "650 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "2b5a0d40-c67e-4a15-866c-1804a0b5cd0a",
+        "name": "IL & CEE | MM & ENT : 650-8000",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "65f1892310c8124489c2b99e"
+          },
+          {
+            "id": "69e80abc9220e489ba2b9a47"
+          },
+          {
+            "id": "69f9ed36bb61c94c11baaa98"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "d1a5c1df-46c6-4591-8738-29aaa55cfc5c",
+      "name": "UKI & ROW | Micro : 20-49",
+      "order": 37,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "83345ccb-12d3-4de3-8ab6-8c45c5cb391e",
+        "name": "UKI & ROW | Micro : 20-49",
+        "memberCount": 17,
+        "members": [
+          {
+            "id": "68195e42af00f7441ced607a"
+          },
+          {
+            "id": "6716f3bc97d8fb03602f1136"
+          },
+          {
+            "id": "645b8d99a45fcf382537cbd4"
+          },
+          {
+            "id": "63aaaa150973c45ce6cf59a3"
+          },
+          {
+            "id": "682bcc2e847f27225c6cdd26"
+          },
+          {
+            "id": "63ac2c162c48822df2ebcf4e"
+          },
+          {
+            "id": "687ed9e5366530379724d880"
+          },
+          {
+            "id": "684836098638dd50c1f67295"
+          },
+          {
+            "id": "638ef39bbecbfa5d270d6679"
+          },
+          {
+            "id": "68a3c44d4bdc9a4c1c8672ab"
+          },
+          {
+            "id": "6418f5c12a09ef536bbf54b1"
+          },
+          {
+            "id": "672381dbd794480c08373226"
+          },
+          {
+            "id": "65df1b8832d47324aa4621d8"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae4a"
+          },
+          {
+            "id": "66021a466d0a054a868c3dd9"
+          },
+          {
+            "id": "668bf49ab1ec6b5f6cdb8749"
+          },
+          {
+            "id": "6540f10843be780eeaa3a38e"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "27664c2c-c0a4-4634-acc7-1f3c115be931",
+      "name": "UKI & ROW | SMB Small : 50-99",
+      "order": 38,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 99,
+        "label": "50 – 99"
+      },
+      "sizeSegmentIds": [
+        "50_99"
+      ],
+      "team": {
+        "id": "58330cc1-79b3-417f-a365-855fb0dc9705",
+        "name": "UKI & ROW | SMB Small : 50-99",
+        "memberCount": 20,
+        "members": [
+          {
+            "id": "6679579cefeda945f8e377e3"
+          },
+          {
+            "id": "672381dbd794480c08373226"
+          },
+          {
+            "id": "65df1b8832d47324aa4621d8"
+          },
+          {
+            "id": "687ed9e5366530379724d880"
+          },
+          {
+            "id": "68a3c44d4bdc9a4c1c8672ab"
+          },
+          {
+            "id": "684836098638dd50c1f67295"
+          },
+          {
+            "id": "63ac2c162c48822df2ebcf4e"
+          },
+          {
+            "id": "66b2ae9147c64509faffe8f6"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae4a"
+          },
+          {
+            "id": "68d1f35049bea101202799fc"
+          },
+          {
+            "id": "68195e42af00f7441ced607a"
+          },
+          {
+            "id": "6716f3bc97d8fb03602f1136"
+          },
+          {
+            "id": "645b8d99a45fcf382537cbd4"
+          },
+          {
+            "id": "63aaaa150973c45ce6cf59a3"
+          },
+          {
+            "id": "682bcc2e847f27225c6cdd26"
+          },
+          {
+            "id": "638ef39bbecbfa5d270d6679"
+          },
+          {
+            "id": "6418f5c12a09ef536bbf54b1"
+          },
+          {
+            "id": "66021a466d0a054a868c3dd9"
+          },
+          {
+            "id": "668bf49ab1ec6b5f6cdb8749"
+          },
+          {
+            "id": "6540f10843be780eeaa3a38e"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "cb916040-aed8-4015-8d42-56d706d0394b",
+      "name": "UKI & ROW | SMB Medium : 100-199",
+      "order": 39,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 100,
+        "max": 199,
+        "label": "100 – 199"
+      },
+      "sizeSegmentIds": [
+        "100_199"
+      ],
+      "team": {
+        "id": "7ab3fd5a-ddeb-47e0-9b40-581dcfad3fd8",
+        "name": "UKI & ROW | SMB Medium : 100-199",
+        "memberCount": 18,
+        "members": [
+          {
+            "id": "672381dbd794480c08373226"
+          },
+          {
+            "id": "66b2ae9147c64509faffe8f6"
+          },
+          {
+            "id": "68d1f35049bea101202799fc"
+          },
+          {
+            "id": "687ed9e5366530379724d880"
+          },
+          {
+            "id": "68a3c44d4bdc9a4c1c8672ab"
+          },
+          {
+            "id": "684836098638dd50c1f67295"
+          },
+          {
+            "id": "63ac2c162c48822df2ebcf4e"
+          },
+          {
+            "id": "6679579cefeda945f8e377e3"
+          },
+          {
+            "id": "68195e42af00f7441ced607a"
+          },
+          {
+            "id": "6716f3bc97d8fb03602f1136"
+          },
+          {
+            "id": "645b8d99a45fcf382537cbd4"
+          },
+          {
+            "id": "63aaaa150973c45ce6cf59a3"
+          },
+          {
+            "id": "682bcc2e847f27225c6cdd26"
+          },
+          {
+            "id": "638ef39bbecbfa5d270d6679"
+          },
+          {
+            "id": "6418f5c12a09ef536bbf54b1"
+          },
+          {
+            "id": "65df1b8832d47324aa4621d8"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae4a"
+          },
+          {
+            "id": "6540f10843be780eeaa3a38e"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "dd89ec08-e4cf-4c63-a107-313a03b61d13",
+      "name": "UKI & ROW | MM : 200-499",
+      "order": 40,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 499,
+        "label": "200 – 499"
+      },
+      "sizeSegmentIds": [
+        "200_499"
+      ],
+      "team": {
+        "id": "6996cee5-7cc0-4057-b44e-94bb33cf0674",
+        "name": "UKI & ROW | MM : 200-499",
+        "memberCount": 7,
+        "members": [
+          {
+            "id": "69e8e7a4f8bd57ad2ce0229c"
+          },
+          {
+            "id": "66f3f83fbc0aa42d6b041818"
+          },
+          {
+            "id": "669efebb464d171cc01f44e3"
+          },
+          {
+            "id": "677ce89637971b59bdbc0846"
+          },
+          {
+            "id": "6949e8f1d6e55a4971a2ae56"
+          },
+          {
+            "id": "69c47b0028dfad8e400c6d67"
+          },
+          {
+            "id": "69cc6a1eefa6c042bd680d31"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "f48736b4-d689-4233-8f73-39ae6ed13423",
+      "name": "UKI & ROW | MM Large : 500-999",
+      "order": 41,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 500,
+        "max": 999,
+        "label": "500 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "05e032b3-9a17-4cf6-93f3-3bbb91a79aa6",
+        "name": "UKI & ROW | MM Large : 500-999",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "68b63b204bdc9a4c1c8726d3"
+          },
+          {
+            "id": "69f9e31487715bab8e5b0c09"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "2c2ec840-c466-476c-9e00-6a4fb280042e",
+      "name": "UKI & ROW | ENT : 1000-8000",
+      "order": 42,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "097a3aa8-b4ee-4d1a-aa5a-50985d3a5b99",
+        "name": "UKI & ROW | ENT : 1000-8000",
+        "memberCount": 4,
+        "members": [
+          {
+            "id": "67214007d794480c083725f4"
+          },
+          {
+            "id": "680a3161ddd62d68f0f3c628"
+          },
+          {
+            "id": "6a01b423a3f2c291dd1d9f45"
+          },
+          {
+            "id": "6a06d90824443f1c68c37255"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "02fde717-bc89-4b14-ae4b-252f84e15eef",
+      "name": "US | SMB : 50-199",
+      "order": 43,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "02f38b53-cd0c-4d70-908d-e04b0b60a209",
+        "name": "US | SMB : 50-199",
+        "memberCount": 7,
+        "members": [
+          {
+            "id": "66fe5f09bf05ef7bee2f5fc8"
+          },
+          {
+            "id": "669789a6fbdf1d3ab970eef3"
+          },
+          {
+            "id": "64c8b9ee4042cf6f63690972"
+          },
+          {
+            "id": "672ab7347aed9922d8699cbb"
+          },
+          {
+            "id": "655d505188a738209ca9687d"
+          },
+          {
+            "id": "68db2e2749bea1012027dd46"
+          },
+          {
+            "id": "6887ad3367dd973800f3a408"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "364bedda-9e27-4dfd-9cbb-0a1554b94bf9",
+      "name": "US | MM | Northeast: 200-749 - RAD",
+      "order": 44,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 749,
+        "label": "200 – 749"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "92d6b8d9-547a-432c-a5c2-1a20ba9b4cc0",
+        "name": "US | MM | Northeast: 200-749 - RAD",
+        "memberCount": 4,
+        "members": [
+          {
+            "id": "65f69bf28f6bb539136b7997"
+          },
+          {
+            "id": "66fd54fcbf05ef7bee2f5805"
+          },
+          {
+            "id": "66f58c42eeaec52b4c4842b0"
+          },
+          {
+            "id": "66994226464d171cc01f195e"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "54540a78-c604-477f-8202-c7175c5dbefd",
+      "name": "US | MM | Southeast : 200-749- RAD",
+      "order": 45,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 749,
+        "label": "200 – 749"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "b2337cea-6f02-4f76-b9c5-eac6ca334bf6",
+        "name": "US | MM | Southeast : 200-749- RAD",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "694b3825d6e55a4971a2b816"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "dc9dc77d-1a98-4a6d-a52e-3674d3b5b8ed",
+      "name": "US | MM | West: 200-749- RAD",
+      "order": 46,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 749,
+        "label": "200 – 749"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "fcbe8774-b99d-4151-8a2b-fb47c48ed754",
+        "name": "US | MM | West: 200-749- RAD",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "64c8bc464042cf6f6369097c"
+          },
+          {
+            "id": "626fb579015c0f467469c2d9"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "15598501-68fb-4ea6-8e4b-dd91562d67fd",
+      "name": "US | MM | Central: 200-749 - RAD",
+      "order": 47,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 749,
+        "label": "200 – 749"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "360790b7-bee5-4c84-8550-51f99a746543",
+        "name": "US | MM | Central: 200-749 - RAD",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "68365d6a8638dd50c1f613b6"
+          },
+          {
+            "id": "69b0b57efc6f0850ad953abf"
+          },
+          {
+            "id": "6596c83092d79000acc13ccc"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "8bee95bb-a441-4c45-b5e3-004c708f3180",
+      "name": "US | MM | Northeast 1 : 200-749",
+      "order": 48,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 749,
+        "label": "200 – 749"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "565661ec-50bf-49d2-aee3-a69f9178e0e7",
+        "name": "US | MM | Northeast 1 : 200-749",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69cdb888df80d38b76f38509"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "4c6798a6-1af6-4ffd-827e-4ae3fb35724f",
+      "name": "US | MM | Northeast 2 : 200-749",
+      "order": 49,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 748,
+        "label": "200 – 748"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "e119c90a-9ad2-4bb3-a82f-a10075de1425",
+        "name": "US | MM | Northeast 2 : 200-749",
+        "memberCount": 4,
+        "members": [
+          {
+            "id": "692612f7f2389b056c41dc19"
+          },
+          {
+            "id": "69cf03fbf0547abcf760e9ce"
+          },
+          {
+            "id": "66994226464d171cc01f195e"
+          },
+          {
+            "id": "66847ae1f586db372fe68a2b"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "845c533b-e365-4bfb-a0b7-b43ec6291bfb",
+      "name": "US | MM | Southeast : 200-749",
+      "order": 50,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 748,
+        "label": "200 – 748"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "162f6604-b4bf-4a3b-8842-809656a924b8",
+        "name": "US | MM | Southeast : 200-749",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "684b649d8638dd50c1f687aa"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "59b6c97d-47e2-4849-86b7-326460faf4c3",
+      "name": "US | MM | West: 200-749",
+      "order": 51,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 748,
+        "label": "200 – 748"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "8971e0be-7720-4659-9038-1b9d6a6f9ad6",
+        "name": "US | MM | West: 200-749",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "689e3b504bdc9a4c1c8655b3"
+          },
+          {
+            "id": "67f96e14dd256bc6e0bf4f63"
+          },
+          {
+            "id": "68d3046549bea1012027a35d"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "95e15917-3962-45d4-a06d-a80727b3d91a",
+      "name": "US | MM | Central: 200-749",
+      "order": 52,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 748,
+        "label": "200 – 748"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "43c6286e-952f-4b59-b0eb-16b44321315f",
+        "name": "US | MM | Central: 200-749",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "677d038d37971b59bdbc09de"
+          },
+          {
+            "id": "67f580f1cd07544f52506544"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "98766da0-57cc-4ad2-90b5-47e27e34d47a",
+      "name": "US | MM : 750-999",
+      "order": 53,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 750,
+        "max": 999,
+        "label": "750 – 999"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "f899639a-07b5-460b-86b0-445fcd0c9373",
+        "name": "US | MM : 750-999",
+        "memberCount": 4,
+        "members": [
+          {
+            "id": "65f69bf28f6bb539136b7997"
+          },
+          {
+            "id": "68365d6a8638dd50c1f613b6"
+          },
+          {
+            "id": "64c8bc464042cf6f6369097c"
+          },
+          {
+            "id": "626fb579015c0f467469c2d9"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "8f39dd52-8257-4d38-b0ad-bbdadc7a8b1e",
+      "name": "US | ENT : 1000-8000",
+      "order": 54,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "424cfda1-7f2a-44b0-9eeb-5d8d8ec9a6f6",
+        "name": "US | ENT : 1000-8000",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "65926e59d867c424fa660fb0"
+          },
+          {
+            "id": "65ba63b29c6241754605d1cc"
+          },
+          {
+            "id": "67599e26e333db459b525118"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "17bc2b5c-357d-48a9-b5b6-700e1f873e35",
+      "name": "Canada | SMB : 50-199",
+      "order": 55,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Canada"
+      ],
+      "employeeRange": {
+        "min": 50,
+        "max": 199,
+        "label": "50 – 199"
+      },
+      "sizeSegmentIds": [
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "a735ddd2-09ea-45c4-b664-7e4feab32bc2",
+        "name": "Canada | SMB : 50-199",
+        "memberCount": 3,
+        "members": [
+          {
+            "id": "655d505188a738209ca9687d"
+          },
+          {
+            "id": "6887ad3367dd973800f3a408"
+          },
+          {
+            "id": "672ab7347aed9922d8699cbb"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    },
+    {
+      "id": "1027d752-cd5b-4304-b5aa-3a7195b39ce1",
+      "name": "Canada | MM : 200-999 (updated)",
+      "order": 56,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Canada"
+      ],
+      "employeeRange": {
+        "min": 200,
+        "max": 999,
+        "label": "200 – 999"
+      },
+      "sizeSegmentIds": [
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "b745b286-a29f-4edd-84e9-c6c7607b0f72",
+        "name": "Canada | MM : 200-999",
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "66847ae1f586db372fe68a2b"
+          },
+          {
+            "id": "69b0b57ebf55ba275873f178"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": true,
+        "ownership": false
+      }
+    },
+    {
+      "id": "80e50ea8-e88d-4786-a1e9-bb19d908b8d5",
+      "name": "Canada | ENT : 1000-8000 (updated)",
+      "order": 57,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Canada"
+      ],
+      "employeeRange": {
+        "min": 1000,
+        "max": 8000,
+        "label": "1000 – 8000"
+      },
+      "sizeSegmentIds": [
+        "500_8000"
+      ],
+      "team": {
+        "id": "a0d8ac34-27d9-410e-a011-2202aa8f6776",
+        "name": "Canada | ENT : 1000-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "65ba63b29c6241754605d1cc"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": true,
+        "ownership": false
+      }
+    },
+    {
+      "id": "1b288d5d-eed3-4497-b023-4c7b395cb8be",
+      "name": "LATAM | micro & SMB & MM & ENT | 20-8000",
+      "order": 58,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Antigua and Barbuda",
+        "Argentina",
+        "Barbados",
+        "Belize",
+        "Bermuda",
+        "Brazil",
+        "British Virgin Islands",
+        "Chile",
+        "Colombia",
+        "Cook Islands",
+        "Costa Rica",
+        "Cuba",
+        "Dominica",
+        "Dominican Republic",
+        "Ecuador",
+        "El Salvador",
+        "Grenada",
+        "Guatemala",
+        "Guyana",
+        "Honduras",
+        "Jamaica",
+        "Mexico",
+        "Nicaragua",
+        "Panama",
+        "Paraguay",
+        "Peru",
+        "Saint Kitts and Nevis",
+        "Saint Lucia",
+        "Saint Vincent and the Grenadines",
+        "Suriname",
+        "The Bahamas",
+        "Trinidad and Tobago",
+        "Turks and Caicos Islands",
+        "Uruguay",
+        "Venezuela"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 8000,
+        "label": "20 – 8000"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199",
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "da740156-598e-44a3-b93d-f6fdfd544bc5",
+        "name": "LATAM | micro & SMB & MM & ENT | 20-8000",
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "684b649d8638dd50c1f687aa"
+          }
+        ]
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false
+      }
+    }
+  ]
+}

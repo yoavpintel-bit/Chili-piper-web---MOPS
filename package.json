@@ -1,0 +1,21 @@
+{
+  "name": "chili-piper-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "HiBob RevOps Chili Piper routing portal with Catch-All operations dashboard",
+  "scripts": {
+    "sync:csv": "node scripts/sync-from-csv.mjs",
+    "sync:api": "node scripts/sync-from-api.mjs",
+    "sync:mcp-file": "node scripts/sync-from-mcp-file.mjs",
+    "build:aggregates": "node scripts/build-aggregates.mjs",
+    "build:router-teams": "node scripts/build-router-teams.mjs",
+    "merge:workato": "node scripts/merge-workato.mjs",
+    "sync": "node scripts/run-sync.mjs",
+    "publish": "node scripts/publish-data.mjs",
+    "backfill:api": "node scripts/backfill-api.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
