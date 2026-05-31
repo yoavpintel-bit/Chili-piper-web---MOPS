@@ -1,5 +1,5 @@
 /* global React */
-const { useMemo } = React;
+const { useMemo, useState } = React;
 
 // —— System icons (inline SVG, HiBob palette) ——
 const BobIcon = () => (
@@ -132,68 +132,98 @@ function ScenarioGlyph({ id }) {
   );
 }
 
-function ScenarioCard({ scenario, onCatchAll }) {
+function ScenarioCard({ scenario, onCatchAll, expanded, onToggle }) {
   const outcome = SCENARIO_OUTCOME[scenario.id] || { type: 'backend', label: 'Route', emoji: '•' };
   const styles = OUTCOME_STYLES[outcome.type];
   const shortTitle = scenario.title.replace(/^Scenario [A-I]:\s*/i, '');
 
   return (
     <article
-      className={`group flex flex-col rounded-2xl overflow-hidden border-2 bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 ${
-        scenario.id === 'F' ? 'border-[#E2004F]/40 ring-1 ring-[#FFD2DB]' : 'border-[#EBE5D9]'
-      } ${styles.border}`}
+      className={`rounded-xl border transition-all ${
+        expanded
+          ? `border-2 shadow-md bg-white ${styles.border}`
+          : `border-[#EBE5D9] bg-[#FAF8F5]/40 hover:bg-white hover:border-slate-300 ${scenario.id === 'F' ? 'border-[#FFD2DB]/80' : ''}`
+      }`}
     >
-      <div className={`px-3 py-2 flex items-center justify-between gap-2 border-b ${styles.badge}`}>
-        <div className="flex items-center gap-1.5 min-w-0">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/80 border border-white/50 text-sm font-black text-[#222121]">
-            {scenario.id}
-          </span>
-          <div className={`p-1 rounded-md bg-white/60 ${styles.badge}`}>
-            <ScenarioGlyph id={scenario.id} />
-          </div>
-          <h4 className="font-extrabold text-[#222121] text-xs leading-snug truncate hidden sm:block">{shortTitle}</h4>
-        </div>
-        <span className={`text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded-full border shrink-0 ${styles.badge}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={expanded}
+        className={`w-full flex items-center gap-2 px-3 py-2.5 text-left min-h-[44px] ${
+          expanded ? styles.badge : ''
+        }`}
+      >
+        <span
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-black border ${
+            expanded ? 'bg-white/90 border-white/60 text-[#222121]' : 'bg-white border-[#EBE5D9] text-[#222121]'
+          }`}
+        >
+          {scenario.id}
+        </span>
+        <span className={`shrink-0 scale-90 ${expanded ? 'opacity-90' : 'opacity-70'}`}>
+          <ScenarioGlyph id={scenario.id} />
+        </span>
+        <span className="flex-1 min-w-0 font-extrabold text-[#222121] text-xs leading-snug truncate">
+          {shortTitle}
+        </span>
+        <span className={`hidden sm:inline text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border shrink-0 ${styles.badge}`}>
           {outcome.emoji} {outcome.label}
         </span>
-      </div>
+        <span
+          className={`text-slate-400 text-[10px] shrink-0 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+          aria-hidden
+        >
+          ▼
+        </span>
+      </button>
 
-      <div className="p-3 flex flex-col gap-2 flex-1">
-        <h4 className="font-extrabold text-[#222121] text-xs leading-snug sm:hidden">{shortTitle}</h4>
-        <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
-        <p className="text-xs text-slate-600 leading-relaxed">{scenario.description}</p>
-        <div className="flex flex-wrap gap-1 pt-1.5 border-t border-[#F0EAE1]">
-          {(scenario.systems || []).map((key) => {
-            const meta = SYSTEM_META[key];
-            if (!meta) return null;
-            return (
-              <span key={key} className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-lg border ${meta.pill}`}>
-                {meta.icon}
-                {meta.label}
-              </span>
-            );
-          })}
+      {expanded && (
+        <div className="px-3 pb-3 pt-2 border-t border-[#EBE5D9] animate-fadeIn space-y-2.5">
+          <span className={`inline sm:hidden text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${styles.badge}`}>
+            {outcome.emoji} {outcome.label}
+          </span>
+          <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
+          <p className="text-xs text-slate-600 leading-relaxed">{scenario.description}</p>
+          <div className="flex flex-wrap gap-1 pt-1 border-t border-[#F0EAE1]">
+            {(scenario.systems || []).map((key) => {
+              const meta = SYSTEM_META[key];
+              if (!meta) return null;
+              return (
+                <span key={key} className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-lg border ${meta.pill}`}>
+                  {meta.icon}
+                  {meta.label}
+                </span>
+              );
+            })}
+          </div>
+          {scenario.id === 'F' && onCatchAll && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onCatchAll(); }}
+              className="w-full text-xs font-bold bg-[#E2004F] text-white py-2 rounded-xl hover:bg-[#c40044] transition-colors"
+            >
+              Open Catch-All Monitor (7d) →
+            </button>
+          )}
         </div>
-        {scenario.id === 'F' && onCatchAll && (
-          <button
-            type="button"
-            onClick={onCatchAll}
-            className="mt-1 w-full text-xs font-bold bg-[#E2004F] text-white py-2.5 rounded-xl hover:bg-[#c40044] transition-colors"
-          >
-            Open Catch-All Monitor (7d) →
-          </button>
-        )}
-      </div>
+      )}
     </article>
   );
 }
 
 function ScenarioCardsGrid({ scenarios, onCatchAll }) {
+  const [expandedId, setExpandedId] = useState(null);
+
+  const toggle = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
+
   return (
     <div className="rounded-xl border border-[#EBE5D9] bg-white overflow-hidden shadow-sm">
       <div className="px-4 py-2.5 border-b border-[#EBE5D9] bg-[#FAF8F5] flex flex-wrap items-center justify-between gap-2">
         <div>
           <h3 className="text-sm font-extrabold text-[#222121]">Scenarios A – I</h3>
+          <p className="text-[10px] text-slate-500 mt-0.5">Tap a row to expand</p>
         </div>
         <div className="flex flex-wrap gap-1.5">
           {[
@@ -209,9 +239,15 @@ function ScenarioCardsGrid({ scenarios, onCatchAll }) {
           ))}
         </div>
       </div>
-      <div className="p-2 sm:p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5">
+      <div className="p-2 flex flex-col gap-1.5 max-w-3xl">
         {scenarios.map((sc) => (
-          <ScenarioCard key={sc.id} scenario={sc} onCatchAll={sc.id === 'F' ? onCatchAll : undefined} />
+          <ScenarioCard
+            key={sc.id}
+            scenario={sc}
+            expanded={expandedId === sc.id}
+            onToggle={() => toggle(sc.id)}
+            onCatchAll={sc.id === 'F' ? onCatchAll : undefined}
+          />
         ))}
       </div>
     </div>
