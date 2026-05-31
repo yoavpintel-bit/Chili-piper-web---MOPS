@@ -118,11 +118,6 @@ function inDaysRange(iso, days) {
   return new Date(iso).getTime() >= Date.now() - days * 86400000;
 }
 
-function inLast24h(iso) {
-  if (!iso) return false;
-  return new Date(iso).getTime() >= Date.now() - 86400000;
-}
-
 function computeFilteredKpis(rows) {
   const now = Date.now();
   const weekMs = 7 * 86400000;
@@ -141,240 +136,82 @@ function computeFilteredKpis(rows) {
   return { thisWeek: thisWeek.length, prevWeek: prevWeek.length, wow, avgWeekly, weekCount: weeks.length };
 }
 
-function buildPanelInsights(rows) {
-  const insights = [];
-  if (!rows.length) {
-    insights.push({
-      type: 'empty',
-      category: 'quality',
-      severity: 'low',
-      text: 'No Catch-All records in the last 24 hours.',
-    });
-    return insights;
-  }
+function buildSimpleInsights(rows) {
+  if (!rows.length) return ['No Catch-All in this period.'];
 
-  const now = Date.now();
-  const weekMs = 7 * 86400000;
-  const thisWeek = rows.filter((r) => new Date(r.triggeredAt).getTime() >= now - weekMs);
-  const prevWeek = rows.filter((r) => {
-    const t = new Date(r.triggeredAt).getTime();
-    return t >= now - 2 * weekMs && t < now - weekMs;
-  });
-
-  if (prevWeek.length > 0) {
-    const change = Math.round(((thisWeek.length - prevWeek.length) / prevWeek.length) * 1000) / 10;
-    const dir = change >= 0 ? 'up' : 'down';
-    insights.push({
-      type: 'wow_volume',
-      category: 'trend',
-      severity: Math.abs(change) > 25 ? 'high' : 'normal',
-      text: `Volume is ${dir} ${Math.abs(change)}% vs prior week (${thisWeek.length} vs ${prevWeek.length} in window).`,
-    });
-  }
-
-  const countries = countBy(rows, (r) => r.country).filter((c) => c.name !== '(empty)');
-  if (countries.length) {
-    const top5 = countries.slice(0, 5);
-    insights.push({
-      type: 'top_countries',
-      category: 'geography',
-      severity: 'normal',
-      text: `Top countries: ${top5.map((c) => `${c.name} (${c.count})`).join(', ')}${countries.length > 5 ? ` — +${countries.length - 5} more` : ''}.`,
-    });
+  const lines = [`${rows.length} Catch-All total.`];
+  const topCountry = countBy(rows, (r) => r.country)[0];
+  if (topCountry?.name && topCountry.name !== '(empty)') {
+    lines.push(`Top country: ${topCountry.name} (${topCountry.count}).`);
   }
 
   const usRows = rows.filter((r) => isUS(r.country));
   if (usRows.length) {
-    const under50 = usRows.filter((r) => Number(r.numberOfEmployees) < 50);
-    const under50Pct = usRows.length ? Math.round((under50.length / usRows.length) * 1000) / 10 : 0;
+    const under50 = usRows.filter((r) => Number(r.numberOfEmployees) < 50).length;
+    lines.push(`US: ${Math.round((under50 / usRows.length) * 100)}% under 50 employees.`);
     const topState = countBy(usRows, (r) => r.state).find((s) => s.name !== '(empty)');
-    insights.push({
-      type: 'us_under_50',
-      category: 'geography',
-      severity: under50Pct > 40 ? 'high' : 'normal',
-      text: `United States: ${under50Pct}% under 50 employees (${under50.length}/${usRows.length}).${topState ? ` Top state: ${topState.name} (${topState.count}).` : ''}`,
-    });
-    if (under50.length / usRows.length > 0.35) {
-      insights.push({
-        type: 'recommendation',
-        category: 'recommendation',
-        severity: 'high',
-        text: `Review Concierge micro/SMB coverage for US — ${Math.round((under50.length / usRows.length) * 1000) / 10}% of US Catch-All are under 50 employees.`,
-      });
-    }
+    if (topState) lines.push(`Top US state: ${topState.name} (${topState.count}).`);
   }
 
-  const weekly = buildWeeklyFromRows(rows);
-  if (weekly.length >= 1) {
-    const last = weekly[weekly.length - 1];
-    const prev = weekly.length >= 2 ? weekly[weekly.length - 2] : null;
-    const wChange = prev && prev.count > 0
-      ? Math.round(((last.count - prev.count) / prev.count) * 1000) / 10
-      : null;
-    const weekRows = rows.filter((r) => weekKey(r.triggeredAt) === last.weekStart);
-    const topC = countBy(weekRows, (r) => r.country)[0];
-    insights.push({
-      type: 'weekly_trend',
-      category: 'trend',
-      severity: wChange != null && Math.abs(wChange) > 30 ? 'high' : 'normal',
-      text: `Latest week (${last.weekLabel}): ${last.count} Catch-All${wChange != null ? `, ${wChange >= 0 ? '+' : ''}${wChange}% vs prior week` : ''}.${topC ? ` Top driver: ${topC.name} (${topC.count}).` : ''}`,
-    });
+  const topSeg = countBy(rows, (r) => r.employeeMicroSegment)[0];
+  if (topSeg?.name && topSeg.name !== 'missing') {
+    lines.push(`Top segment: ${MICRO_LABELS[topSeg.name] || topSeg.name} (${topSeg.count}).`);
   }
 
-  const under20 = rows.filter((r) => r.employeeBand === 'under_20' || r.employeeMicroSegment === 'under_20').length;
+  const under20 = rows.filter((r) => r.employeeMicroSegment === 'under_20').length;
   if (under20) {
-    const p = Math.round((under20 / rows.length) * 1000) / 10;
-    insights.push({
-      type: 'employee_band',
-      category: 'segment',
-      severity: p > 50 ? 'high' : 'normal',
-      text: `${p}% have under 20 employees — aligns with Scenario C (out of bookable range).`,
-    });
+    lines.push(`${Math.round((under20 / rows.length) * 100)}% under 20 employees.`);
   }
 
-  const micro = countBy(rows, (r) => r.employeeMicroSegment);
-  const topMicro = micro[0];
-  if (topMicro && topMicro.name !== 'missing') {
-    insights.push({
-      type: 'top_segment',
-      category: 'segment',
-      severity: 'normal',
-      text: `Top size segment: ${MICRO_LABELS[topMicro.name] || topMicro.name} (${topMicro.count}, ${Math.round((topMicro.count / rows.length) * 1000) / 10}%).`,
-    });
-  }
-
-  const emailCounts = new Map();
-  for (const r of rows) {
-    const e = (r.guestEmail || '').toLowerCase();
-    if (!e) continue;
-    emailCounts.set(e, (emailCounts.get(e) || 0) + 1);
-  }
-  const repeats = [...emailCounts.values()].filter((c) => c > 1).length;
-  if (repeats > 0) {
-    insights.push({
-      type: 'repeat_visitors',
-      category: 'quality',
-      severity: 'low',
-      text: `${repeats} guest email(s) submitted Catch-All more than once in this window.`,
-    });
-  }
-
-  if (countries[0]) {
-    insights.push({
-      type: 'recommendation',
-      category: 'recommendation',
-      severity: 'normal',
-      text: `Prioritize MOPS review for ${countries[0].name} (${countries[0].count} in last 24h) — highest volume.`,
-    });
-  }
-
-  insights.push({
-    type: 'doc_alignment',
-    category: 'reference',
-    severity: 'normal',
-    text: 'Scenario F: no Concierge segment match — lead continues in Marketo for Catch-All list review.',
-  });
-
-  return insights;
+  return lines;
 }
 
-const BAND_LABELS = {
-  under_20: '< 20',
-  in_range: '20 – 8,000',
-  over_8000: '> 8,000',
-  missing: 'Missing',
-};
+const INSIGHT_WINDOWS = [
+  { id: '24h', label: '24h', rangeLabel: 'Last 24 hours', ms: 86400000 },
+  { id: 'week', label: 'Week', rangeLabel: 'Last 7 days', ms: 7 * 86400000 },
+  { id: 'month', label: 'Month', rangeLabel: 'Last 30 days', ms: 30 * 86400000 },
+  { id: 'quarter', label: 'Quarter', rangeLabel: 'Last 90 days', ms: 90 * 86400000 },
+];
 
-const INSIGHT_ICONS = {
-  geography: '🌍',
-  segment: '👥',
-  trend: '📈',
-  recommendation: '💡',
-  quality: '🔍',
-  reference: '📌',
-};
-
-function formatInsightWindow(start, end) {
-  const opts = { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'UTC' };
-  return `${start.toLocaleString('en-US', opts)} → ${end.toLocaleString('en-US', opts)} UTC`;
+function periodChipLabel(days) {
+  if (days === 0) return 'All time';
+  if (days === 1) return 'Last 24h';
+  return `Last ${days} days`;
 }
 
-function InsightCard({ insight }) {
-  const styles = {
-    high: 'border-l-4 border-l-rose-500 bg-rose-50/80 border border-rose-100',
-    low: 'border-l-4 border-l-slate-300 bg-slate-50/80 border border-slate-100',
-    normal: 'border-l-4 border-l-[#E2004F] bg-white border border-[#EBE5D9]',
-  }[insight.severity] || 'border-l-4 border-l-[#E2004F] bg-white border border-[#EBE5D9]';
+function InsightsPatternsPanel({ periodInsights }) {
+  const [tab, setTab] = useState('24h');
+  const current = periodInsights.find((p) => p.id === tab) || periodInsights[0];
 
   return (
-    <li className={`rounded-xl px-3 py-2.5 text-xs leading-relaxed text-slate-700 ${styles}`}>
-      {insight.text}
-    </li>
-  );
-}
-
-function InsightsPatternsPanel({ insights, windowStart, windowEnd }) {
-  const categories = ['trend', 'geography', 'segment', 'quality', 'recommendation', 'reference'];
-
-  return (
-    <div className="bg-white border border-[#EBE5D9] rounded-2xl overflow-hidden shadow-sm">
-      <div className="px-5 py-4 border-b border-[#EBE5D9] bg-gradient-to-br from-[#222121] via-[#2d2b2b] to-[#1a1919] text-white">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <h4 className="text-sm font-extrabold tracking-tight">Insights &amp; patterns</h4>
-            <p className="text-[11px] text-slate-300 mt-1 max-w-md">
-              Fixed snapshot from the last 24 hours — not affected by the filters above.
-            </p>
-          </div>
-          <div className="text-right shrink-0">
-            <span className="inline-flex text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#E2004F] text-white shadow">
-              Last 24h
-            </span>
-            <p className="text-[10px] text-slate-400 mt-1.5 font-mono">{formatInsightWindow(windowStart, windowEnd)}</p>
-            <p className="text-[10px] text-slate-500 mt-0.5">{insights.length} insight{insights.length !== 1 ? 's' : ''}</p>
-          </div>
-        </div>
+    <div className="bg-white border border-[#EBE5D9] rounded-2xl p-4 shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <h4 className="text-sm font-extrabold text-[#222121]">Insights &amp; patterns</h4>
+        <span className="text-[10px] text-slate-400">Fixed windows · not filtered</span>
       </div>
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-        {categories.map((cat) => {
-          const items = (insights || []).filter((i) => i.category === cat);
-          if (!items.length) return null;
-          return (
-            <div key={cat} className="rounded-xl border border-[#EBE5D9] bg-[#FAF8F5]/50 p-3 flex flex-col min-h-0">
-              <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-[#EBE5D9]/80">
-                <span className="text-base leading-none">{INSIGHT_ICONS[cat]}</span>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#222121]">
-                  {INSIGHT_CATEGORY_LABELS[cat]}
-                </span>
-                <span className="ml-auto text-[10px] font-bold text-slate-400">{items.length}</span>
-              </div>
-              <ul className="space-y-2 flex-1">
-                {items.map((ins, i) => (
-                  <InsightCard key={`${ins.type}-${i}`} insight={ins} />
-                ))}
-              </ul>
-            </div>
-          );
-        })}
+      <div className="flex flex-wrap gap-1 mb-3">
+        {periodInsights.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            onClick={() => setTab(p.id)}
+            className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ${
+              tab === p.id
+                ? 'bg-[#222121] text-white'
+                : 'bg-[#F5F1E9] text-slate-600 hover:bg-[#EBE5D9]'
+            }`}
+          >
+            {p.label}
+          </button>
+        ))}
       </div>
-    </div>
-  );
-}
-
-function RecommendationsPanel({ insights, windowStart, windowEnd }) {
-  const items = (insights || []).filter((i) => i.category === 'recommendation');
-  if (!items.length) return null;
-  return (
-    <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 max-h-80 overflow-y-auto custom-scroll flex flex-col">
-      <div className="shrink-0 mb-3">
-        <h4 className="text-xs font-extrabold uppercase text-rose-700 tracking-wider">Recommendations</h4>
-        <p className="text-[10px] text-slate-400 mt-1">
-          Last 24h · {formatInsightWindow(windowStart, windowEnd)}
-        </p>
-      </div>
-      <ul className="space-y-2 flex-1">
-        {items.map((ins, i) => (
-          <InsightCard key={`rec-${i}`} insight={ins} />
+      <p className="text-[10px] font-bold text-[#E2004F] uppercase tracking-wider mb-2">{current?.rangeLabel}</p>
+      <ul className="space-y-1.5">
+        {(current?.lines || []).map((line, i) => (
+          <li key={i} className="text-xs text-slate-700 flex gap-2 leading-snug">
+            <span className="text-[#E2004F] font-bold shrink-0">•</span>
+            <span>{line}</span>
+          </li>
         ))}
       </ul>
     </div>
@@ -383,7 +220,7 @@ function RecommendationsPanel({ insights, windowStart, windowEnd }) {
 
 function ActiveFilterSummary({ days, country, usState, band, microSeg, search, count }) {
   const chips = [];
-  if (days) chips.push(days === 0 ? 'All time' : `Last ${days} days`);
+  if (days !== undefined && days !== null) chips.push(periodChipLabel(days));
   if (country) chips.push(country);
   if (usState) chips.push(`State: ${usState}`);
   if (microSeg) chips.push(MICRO_LABELS[microSeg] || microSeg);
@@ -405,6 +242,13 @@ function ActiveFilterSummary({ days, country, usState, band, microSeg, search, c
   );
 }
 
+const BAND_LABELS = {
+  under_20: '< 20',
+  in_range: '20 – 8,000',
+  over_8000: '> 8,000',
+  missing: 'Missing',
+};
+
 function exportCsv(rows) {
   const headers = [
     'triggeredAt', 'guestEmail', 'company', 'country', 'state', 'numberOfEmployees',
@@ -422,15 +266,6 @@ function exportCsv(rows) {
   a.download = `catch-all-export-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
 }
-
-const INSIGHT_CATEGORY_LABELS = {
-  geography: 'Geography',
-  segment: 'Employee segments',
-  trend: 'Trends',
-  recommendation: 'Recommendations',
-  quality: 'Data quality',
-  reference: 'Reference',
-};
 
 function BreakdownCard({ title, items, nameFn }) {
   return (
@@ -553,14 +388,17 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
 
   const filteredKpis = useMemo(() => computeFilteredKpis(filtered), [filtered]);
 
-  const insightsWindow = useMemo(() => ({
-    start: new Date(Date.now() - 86400000),
-    end: new Date(),
-  }), [records]);
-
-  const insights24h = useMemo(() => {
-    const rows = records.filter((r) => inLast24h(r.triggeredAt));
-    return buildPanelInsights(rows);
+  const periodInsights = useMemo(() => {
+    const now = Date.now();
+    return INSIGHT_WINDOWS.map((w) => {
+      const rows = records.filter((r) => new Date(r.triggeredAt).getTime() >= now - w.ms);
+      return {
+        id: w.id,
+        label: w.label,
+        rangeLabel: w.rangeLabel,
+        lines: buildSimpleInsights(rows),
+      };
+    });
   }, [records]);
 
   const countries = useMemo(() => {
@@ -674,11 +512,12 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
 
       <div className="bg-white border border-[#EBE5D9] rounded-2xl p-4 flex flex-wrap gap-3 items-end">
         <p className="w-full text-[10px] text-slate-400 -mb-1">
-          KPIs, charts, breakdowns, and review queue follow these filters. Insights below are fixed to the last 24 hours.
+          KPIs, charts, breakdowns, and review queue follow these filters. Insights use fixed 24h / week / month / quarter windows.
         </p>
         <div>
           <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Period</label>
           <select value={days} onChange={(e) => setDays(Number(e.target.value))} className="text-xs border rounded-lg px-3 py-2 bg-slate-50">
+            <option value={1}>Last 24h</option>
             <option value={7}>Last 7 days</option>
             <option value={30}>Last 30 days</option>
             <option value={90}>Last 90 days</option>
@@ -743,7 +582,7 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
           {
             label: 'In period',
             value: filtered.length,
-            sub: days ? `Filtered · last ${days} days` : 'Filtered · all time',
+            sub: periodChipLabel(days),
           },
           {
             label: 'This week',
@@ -777,36 +616,25 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white border border-[#EBE5D9] rounded-2xl p-5">
-          <div className="flex justify-between items-center mb-3">
-            <div>
-              <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider">
-                {trendMode === 'weekly' ? 'Weekly Catch-All trend' : 'Daily Catch-All trend'}
-              </h4>
-              <p className="text-[10px] text-slate-400 mt-0.5">Updates with filters above</p>
-            </div>
-            <div className="flex bg-[#F5F1E9] p-0.5 rounded-lg border border-[#EBE5D9]">
-              <button type="button" onClick={() => setTrendMode('weekly')} className={`px-3 py-1 text-[10px] font-bold rounded-md ${trendMode === 'weekly' ? 'bg-[#222121] text-white' : 'text-slate-500'}`}>Weekly</button>
-              <button type="button" onClick={() => setTrendMode('daily')} className={`px-3 py-1 text-[10px] font-bold rounded-md ${trendMode === 'daily' ? 'bg-[#222121] text-white' : 'text-slate-500'}`}>Daily</button>
-            </div>
+      <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5">
+        <div className="flex justify-between items-center mb-3">
+          <div>
+            <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider">
+              {trendMode === 'weekly' ? 'Weekly Catch-All trend' : 'Daily Catch-All trend'}
+            </h4>
+            <p className="text-[10px] text-slate-400 mt-0.5">Updates with filters above</p>
           </div>
-          <div className="h-56 relative">
-            <canvas ref={chartRef} />
+          <div className="flex bg-[#F5F1E9] p-0.5 rounded-lg border border-[#EBE5D9]">
+            <button type="button" onClick={() => setTrendMode('weekly')} className={`px-3 py-1 text-[10px] font-bold rounded-md ${trendMode === 'weekly' ? 'bg-[#222121] text-white' : 'text-slate-500'}`}>Weekly</button>
+            <button type="button" onClick={() => setTrendMode('daily')} className={`px-3 py-1 text-[10px] font-bold rounded-md ${trendMode === 'daily' ? 'bg-[#222121] text-white' : 'text-slate-500'}`}>Daily</button>
           </div>
         </div>
-        <RecommendationsPanel
-          insights={insights24h}
-          windowStart={insightsWindow.start}
-          windowEnd={insightsWindow.end}
-        />
+        <div className="h-56 relative">
+          <canvas ref={chartRef} />
+        </div>
       </div>
 
-      <InsightsPatternsPanel
-        insights={insights24h}
-        windowStart={insightsWindow.start}
-        windowEnd={insightsWindow.end}
-      />
+      <InsightsPatternsPanel periodInsights={periodInsights} />
 
       <div className="bg-white border border-[#EBE5D9] rounded-2xl overflow-hidden">
         <div className="px-5 py-3 border-b border-[#EBE5D9] bg-[#FAF8F5]">
