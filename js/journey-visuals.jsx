@@ -717,6 +717,44 @@ function JourneyHero({ onStartJourney }) {
   );
 }
 
+function JourneyAccordion({ id, title, icon, open, onToggle, children }) {
+  return (
+    <div className={`rounded-2xl border bg-white transition-colors ${open ? 'border-[#E2004F]/50 shadow-sm' : 'border-[#EBE5D9]'}`}>
+      <button
+        type="button"
+        id={`${id}-btn`}
+        aria-expanded={open}
+        aria-controls={`${id}-panel`}
+        onClick={(e) => { e.stopPropagation(); onToggle(); }}
+        className={`w-full flex justify-between items-center gap-3 px-4 py-3.5 text-left text-sm font-bold transition-colors ${
+          open ? 'bg-[#FFF0F3] text-[#222121]' : 'bg-[#FAF8F5] text-slate-800 hover:bg-[#F5F1E9]'
+        }`}
+      >
+        <span className="flex items-center gap-2 min-w-0">
+          <span className="text-lg shrink-0">{icon}</span>
+          <span>{title}</span>
+        </span>
+        <span
+          className={`text-slate-400 text-xs shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          aria-hidden
+        >
+          ▼
+        </span>
+      </button>
+      {open && (
+        <div
+          id={`${id}-panel`}
+          role="region"
+          aria-labelledby={`${id}-btn`}
+          className="border-t border-[#EBE5D9] bg-white px-4 py-3 max-h-[min(280px,40vh)] overflow-y-auto custom-scroll"
+        >
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function JourneyStepCards({
   steps,
   activeStepId,
@@ -744,8 +782,8 @@ function JourneyStepCards({
             id={step.id}
             ref={(el) => { if (stepRefs) stepRefs.current[step.id] = el; }}
             onClick={singleStepOnly ? undefined : () => scrollToStep(step.id)}
-            className={`rounded-3xl border-2 transition-all duration-300 overflow-hidden h-full ${
-              singleStepOnly ? '' : 'cursor-pointer'
+            className={`rounded-3xl border-2 transition-all duration-300 ${
+              singleStepOnly ? 'flex flex-col' : 'overflow-hidden h-full cursor-pointer'
             } ${
               isActive
                 ? 'border-[#E2004F] shadow-xl bg-white'
@@ -788,7 +826,7 @@ function JourneyStepCards({
               </div>
             </div>
 
-            <div className="px-6 md:px-8 py-6 space-y-4">
+            <div className="px-6 md:px-8 py-6 pb-8 space-y-4">
               <p className="text-base text-slate-700 leading-relaxed">
                 {FormattedText ? <FormattedText text={step.simpleDesc} /> : step.simpleDesc}
               </p>
@@ -799,53 +837,39 @@ function JourneyStepCards({
               )}
               <SystemPillRow systems={meta.systems} />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                <div className="border border-[#EBE5D9] rounded-2xl overflow-hidden bg-[#FAF8F5]">
-                  <button
-                    type="button"
-                    onClick={(e) => { e.stopPropagation(); toggleBR(step.id); }}
-                    className="w-full flex justify-between items-center px-4 py-3.5 text-sm font-bold text-slate-800 hover:bg-[#F5F1E9]"
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="text-lg">⚠️</span>
-                      Business rules
-                    </span>
-                    <span className="text-xs text-slate-400">{expandedBR[step.id] ? '▲' : '▼'}</span>
-                  </button>
-                  {expandedBR[step.id] && (
-                    <ul className="px-4 pb-4 pt-1 space-y-3 bg-white border-t border-[#EBE5D9] text-sm text-slate-700 leading-relaxed">
-                      {step.businessRules.map((rule, idx) => (
-                        <li key={idx} className="flex gap-2">
-                          <span className="text-[#E2004F] font-bold shrink-0">•</span>
-                          <span>{FormattedText ? <FormattedText text={rule} /> : rule}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <div className="border border-[#EBE5D9] rounded-2xl overflow-hidden bg-[#FAF8F5]">
-                  <button
-                    type="button"
-                    onClick={(e) => { e.stopPropagation(); toggleTS(step.id); }}
-                    className="w-full flex justify-between items-center px-4 py-3.5 text-sm font-bold text-slate-800 hover:bg-[#F5F1E9]"
-                  >
-                    <span className="flex items-center gap-2">
-                      <span className="text-lg">🛠️</span>
-                      Technical details
-                    </span>
-                    <span className="text-xs text-slate-400">{expandedTS[step.id] ? '▲' : '▼'}</span>
-                  </button>
-                  {expandedTS[step.id] && (
-                    <ul className="px-4 pb-4 pt-1 space-y-3 bg-white border-t border-[#EBE5D9] text-sm text-slate-700 leading-relaxed font-mono text-[13px]">
-                      {step.techSpecs.map((spec, idx) => (
-                        <li key={idx} className="flex gap-2">
-                          <span className="text-indigo-500 font-bold shrink-0">•</span>
-                          <span className="font-sans">{FormattedText ? <FormattedText text={spec} /> : spec}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+              <div className={`flex flex-col gap-3 pt-2 ${singleStepOnly ? '' : 'md:grid md:grid-cols-2'}`}>
+                <JourneyAccordion
+                  id={`${step.id}-br`}
+                  title="Business rules"
+                  icon="⚠️"
+                  open={Boolean(expandedBR[step.id])}
+                  onToggle={() => toggleBR(step.id)}
+                >
+                  <ul className="space-y-3 text-sm text-slate-700 leading-relaxed">
+                    {step.businessRules.map((rule, idx) => (
+                      <li key={idx} className="flex gap-2">
+                        <span className="text-[#E2004F] font-bold shrink-0">•</span>
+                        <span>{FormattedText ? <FormattedText text={rule} /> : rule}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </JourneyAccordion>
+                <JourneyAccordion
+                  id={`${step.id}-ts`}
+                  title="Technical details"
+                  icon="🛠️"
+                  open={Boolean(expandedTS[step.id])}
+                  onToggle={() => toggleTS(step.id)}
+                >
+                  <ul className="space-y-3 text-sm text-slate-700 leading-relaxed">
+                    {step.techSpecs.map((spec, idx) => (
+                      <li key={idx} className="flex gap-2">
+                        <span className="text-indigo-500 font-bold shrink-0">•</span>
+                        <span className="font-sans">{FormattedText ? <FormattedText text={spec} /> : spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </JourneyAccordion>
               </div>
             </div>
           </article>

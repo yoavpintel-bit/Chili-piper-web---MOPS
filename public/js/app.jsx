@@ -422,16 +422,42 @@
       const [expandedBR, setExpandedBR] = useState({ step1: true, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
       const [expandedTS, setExpandedTS] = useState({ step1: false, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
 
+      const headerRef = useRef(null);
       const journeyTrackRef = useRef(null);
+      const stepPanelRef = useRef(null);
       const stepRefs = useRef({});
+      const [headerHeight, setHeaderHeight] = useState(140);
 
-      const JOURNEY_STICKY_TOP_PX = 112;
       const JOURNEY_STEP_VH = 90;
+      const journeyStickyTop = headerHeight + 8;
+
+      useEffect(() => {
+        const measure = () => {
+          if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+        };
+        measure();
+        window.addEventListener('resize', measure);
+        let ro;
+        if (typeof ResizeObserver !== 'undefined' && headerRef.current) {
+          ro = new ResizeObserver(measure);
+          ro.observe(headerRef.current);
+        }
+        return () => {
+          window.removeEventListener('resize', measure);
+          ro?.disconnect();
+        };
+      }, []);
+
+      useEffect(() => {
+        if (activeTab === 'process' && stepPanelRef.current) {
+          stepPanelRef.current.scrollTop = 0;
+        }
+      }, [activeStepId, activeTab]);
 
       const getJourneyScrollMetrics = () => {
         const track = journeyTrackRef.current;
         if (!track) return null;
-        const viewport = window.innerHeight - JOURNEY_STICKY_TOP_PX;
+        const viewport = window.innerHeight - journeyStickyTop;
         const trackScrollable = Math.max(track.offsetHeight - viewport, 1);
         return { track, trackScrollable };
       };
@@ -464,7 +490,7 @@
             return;
           }
           const { track, trackScrollable } = metrics;
-          const scrolled = Math.max(0, JOURNEY_STICKY_TOP_PX - track.getBoundingClientRect().top);
+          const scrolled = Math.max(0, journeyStickyTop - track.getBoundingClientRect().top);
           const progress = Math.min(1, scrolled / trackScrollable);
           const idx = Math.min(
             JOURNEY_STEPS.length - 1,
@@ -489,21 +515,21 @@
           window.removeEventListener('scroll', handleScroll);
           window.removeEventListener('resize', handleScroll);
         };
-      }, [activeTab]);
+      }, [activeTab, journeyStickyTop]);
 
       const toggleBR = (id) => {
-        setExpandedBR(prev => ({ ...prev, [id]: !prev[id] }));
+        setExpandedBR((prev) => ({ ...prev, [id]: !Boolean(prev[id]) }));
       };
 
       const toggleTS = (id) => {
-        setExpandedTS(prev => ({ ...prev, [id]: !prev[id] }));
+        setExpandedTS((prev) => ({ ...prev, [id]: !Boolean(prev[id]) }));
       };
 
 
       return (
         <div className="min-h-screen bg-[#FFFDF9] text-[#222121] font-sans antialiased selection:bg-[#FFF0F3] selection:text-[#E2004F]">
 
-          <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EBE5D9] shadow-sm">
+          <header ref={headerRef} className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EBE5D9] shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between gap-4 py-3 border-b border-[#F0EAE1]/80">
                 <div className="flex items-center gap-3 min-w-0">
@@ -599,8 +625,17 @@
                   className="relative"
                   style={{ height: `${JOURNEY_STEPS.length * JOURNEY_STEP_VH}vh` }}
                 >
-                  <div className="sticky top-28 z-20 px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 h-[calc(100vh-7rem)] min-h-[480px] max-h-[calc(100vh-7rem)]">
+                  <div
+                    className="sticky z-20 px-4 sm:px-6 lg:px-8"
+                    style={{ top: `${journeyStickyTop}px` }}
+                  >
+                    <div
+                      className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 min-h-[480px]"
+                      style={{
+                        height: `calc(100vh - ${journeyStickyTop + 8}px)`,
+                        maxHeight: `calc(100vh - ${journeyStickyTop + 8}px)`,
+                      }}
+                    >
                       {/* Left: live simulator */}
                       <div className="lg:col-span-5 flex flex-col min-h-0 gap-3">
                         <div className="bg-white border-4 border-[#222121] rounded-3xl p-4 sm:p-6 shadow-xl flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -650,7 +685,10 @@
                             ))}
                           </div>
                         </div>
-                        <div className="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0 lg:pr-2 text-left">
+                        <div
+                          ref={stepPanelRef}
+                          className="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0 lg:pr-2 text-left"
+                        >
                           {window.JourneyStepCards ? (
                             React.createElement(window.JourneyStepCards, {
                               steps: JOURNEY_STEPS,
