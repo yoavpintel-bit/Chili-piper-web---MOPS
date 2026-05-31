@@ -139,46 +139,45 @@ function ScenarioCard({ scenario, onCatchAll }) {
 
   return (
     <article
-      className={`relative rounded-2xl border border-[#EBE5D9] bg-white shadow-sm border-l-4 ${styles.border} transition-all hover:shadow-md hover:-translate-y-0.5 ${scenario.id === 'F' ? 'ring-1 ring-[#FFD2DB]' : ''}`}
+      className={`group flex flex-col rounded-2xl overflow-hidden border-2 bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 ${
+        scenario.id === 'F' ? 'border-[#E2004F]/40 ring-1 ring-[#FFD2DB]' : 'border-[#EBE5D9]'
+      } ${styles.border}`}
     >
-      <div className="p-3 flex flex-col gap-2 h-full">
-        <div className="flex items-start gap-2">
-          <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border text-sm font-black ${styles.badge}`}>
+      <div className={`px-4 py-3 flex items-center justify-between gap-2 border-b ${styles.badge}`}>
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/80 border border-white/50 text-base font-black text-[#222121] shadow-sm">
             {scenario.id}
           </span>
-          <div className={`shrink-0 p-1.5 rounded-lg ${styles.badge}`}>
+          <div className={`p-1.5 rounded-lg bg-white/60 ${styles.badge}`}>
             <ScenarioGlyph id={scenario.id} />
           </div>
-          <div className="min-w-0 flex-1">
-            <p className="font-extrabold text-[#222121] text-xs leading-snug">{shortTitle}</p>
-            <span className={`inline-block mt-1 text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${styles.badge}`}>
-              {outcome.emoji} {outcome.label}
-            </span>
-          </div>
         </div>
+        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-full border shrink-0 ${styles.badge}`}>
+          {outcome.emoji} {outcome.label}
+        </span>
+      </div>
 
+      <div className="p-4 flex flex-col gap-3 flex-1">
+        <h4 className="font-extrabold text-[#222121] text-sm leading-snug">{shortTitle}</h4>
         <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
-
-        <p className="text-slate-600 text-[11px] leading-relaxed">{scenario.description}</p>
-
-        <div className="flex flex-wrap gap-1">
+        <p className="text-sm text-slate-600 leading-relaxed flex-1">{scenario.description}</p>
+        <div className="flex flex-wrap gap-1.5 pt-1 border-t border-[#F0EAE1]">
           {(scenario.systems || []).map((key) => {
             const meta = SYSTEM_META[key];
             if (!meta) return null;
             return (
-              <span key={key} className={`inline-flex items-center gap-0.5 text-[8px] font-bold px-1.5 py-0.5 rounded-md border ${meta.pill}`}>
+              <span key={key} className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-lg border ${meta.pill}`}>
                 {meta.icon}
                 {meta.label}
               </span>
             );
           })}
         </div>
-
         {scenario.id === 'F' && onCatchAll && (
           <button
             type="button"
             onClick={onCatchAll}
-            className="mt-auto w-full text-[10px] font-bold bg-[#E2004F] text-white py-1.5 rounded-lg hover:opacity-90 transition-opacity"
+            className="mt-1 w-full text-xs font-bold bg-[#E2004F] text-white py-2.5 rounded-xl hover:bg-[#c40044] transition-colors"
           >
             Open Catch-All Monitor (7d) →
           </button>
@@ -190,20 +189,29 @@ function ScenarioCard({ scenario, onCatchAll }) {
 
 function ScenarioCardsGrid({ scenarios, onCatchAll }) {
   return (
-    <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
-      <div className="flex flex-wrap items-end justify-between gap-2 mb-4 border-b border-[#EBE5D9] pb-3">
-        <div>
-          <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wider">Routing scenarios (A – I)</h3>
-          <p className="text-xs text-slate-500 mt-1">Color-coded outcomes · mini system flows per path</p>
-        </div>
-        <div className="flex flex-wrap gap-2 text-[10px] font-bold">
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Success</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500" /> Warning</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#E2004F]" /> Catch-All</span>
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-500" /> Backend</span>
+    <div className="rounded-2xl border border-[#EBE5D9] bg-[#FAF8F5]/50 overflow-hidden shadow-sm">
+      <div className="bg-white border-b border-[#EBE5D9] px-5 py-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h3 className="text-base font-extrabold text-[#222121]">Routing scenarios A – I</h3>
+            <p className="text-xs text-slate-500 mt-1">Every inbound path — color-coded by outcome type</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { dot: 'bg-emerald-500', label: 'Success' },
+              { dot: 'bg-amber-500', label: 'Warning' },
+              { dot: 'bg-[#E2004F]', label: 'Catch-All' },
+              { dot: 'bg-slate-500', label: 'Backend' },
+            ].map((x) => (
+              <span key={x.label} className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-600 bg-[#FAF8F5] px-2 py-1 rounded-lg border border-[#EBE5D9]">
+                <span className={`w-2 h-2 rounded-full ${x.dot}`} />
+                {x.label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
+      <div className="p-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
         {scenarios.map((sc) => (
           <ScenarioCard key={sc.id} scenario={sc} onCatchAll={sc.id === 'F' ? onCatchAll : undefined} />
         ))}

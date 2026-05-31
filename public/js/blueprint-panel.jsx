@@ -355,21 +355,21 @@ const NODE_ORDER = ['website', 'zoominfo', 'concierge', 'marketo', 'salesforce',
 const PARALLEL_NODES = ['marketo', 'salesforce'];
 
 function FlowConnector({ label, variant = 'default' }) {
-  const colors = {
-    default: 'bg-[#EBE5D9]',
-    parallel: 'bg-purple-200',
-    decision: 'bg-amber-200',
-  };
+  const lineClass = {
+    default: 'from-[#E2004F]/40 to-slate-200',
+    parallel: 'from-purple-400/50 to-indigo-300/50',
+    decision: 'from-amber-400/50 to-orange-200/50',
+  }[variant] || 'from-slate-200 to-slate-200';
+
   return (
-    <div className="flex flex-col items-center py-1">
-      <div className={`w-0.5 h-5 ${colors[variant] || colors.default}`} />
+    <div className="flex flex-col items-center py-2 w-full max-w-md mx-auto">
+      <div className={`w-0.5 h-6 bg-gradient-to-b ${lineClass}`} />
       {label && (
-        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider my-1 px-2 py-0.5 bg-white rounded-full border border-[#EBE5D9]">
+        <span className="text-[10px] font-bold text-slate-500 my-1.5 px-3 py-1 bg-white rounded-full border border-[#EBE5D9] shadow-sm text-center leading-snug">
           {label}
         </span>
       )}
-      <div className={`w-0.5 h-3 ${colors[variant] || colors.default}`} />
-      <div className="w-2.5 h-2.5 border-r-2 border-b-2 border-slate-300 rotate-45 -mt-1" aria-hidden />
+      <div className={`w-0.5 h-4 bg-gradient-to-b ${lineClass}`} />
     </div>
   );
 }
@@ -405,48 +405,73 @@ function BlueprintNodeCard({ nodeId, viewMode, isActive, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(nodeId)}
-      className={`w-full text-left rounded-2xl border-2 transition-all duration-200 overflow-hidden ${
+      className={`group w-full text-left rounded-2xl border-2 transition-all duration-200 ${
         isActive
-          ? 'border-[#E2004F] shadow-lg ring-2 ring-[#E2004F]/20'
-          : 'border-[#EBE5D9] hover:border-slate-400 hover:shadow-md bg-white'
+          ? 'border-[#E2004F] bg-white shadow-lg ring-2 ring-[#E2004F]/15 scale-[1.01]'
+          : 'border-[#EBE5D9]/80 bg-white hover:border-[#E2004F]/40 hover:shadow-md'
       }`}
-      style={{ borderLeftWidth: '4px', borderLeftColor: meta.accent }}
     >
-      <div className="p-5">
-        <div className="flex items-start gap-4">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 border"
-            style={{ backgroundColor: `${meta.accent}12`, borderColor: `${meta.accent}40` }}
-          >
-            {node.emoji}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="text-[10px] font-extrabold uppercase tracking-wider" style={{ color: meta.accent }}>
-                {stageLabel}
-              </span>
-              <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-lg border ${meta.pill}`}>
-                {meta.icon}
-                {meta.label}
-              </span>
-            </div>
-            <h4 className="text-base font-extrabold text-[#222121] leading-snug">{data.title}</h4>
-            <p className="text-sm text-slate-600 mt-1 leading-relaxed">{data.sub}</p>
-            {data.bullets && (
-              <ul className="mt-3 space-y-1">
-                {data.bullets.slice(0, 2).map((b) => (
-                  <li key={b} className="text-xs text-slate-500 flex gap-1.5">
-                    <span style={{ color: meta.accent }}>•</span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <MiniFlowRow systems={node.systems} />
-          </div>
+      <div className="flex items-center gap-3 p-3 sm:p-4">
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0 border shadow-sm"
+          style={{
+            backgroundColor: `${meta.accent}14`,
+            borderColor: `${meta.accent}35`,
+          }}
+        >
+          {node.emoji}
         </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
+            <span
+              className="text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded-md"
+              style={{ color: meta.accent, backgroundColor: `${meta.accent}12` }}
+            >
+              {stageLabel}
+            </span>
+            <span className={`inline-flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-md border ${meta.pill}`}>
+              {meta.icon}
+              {meta.label}
+            </span>
+          </div>
+          <h4 className="text-sm font-extrabold text-[#222121] leading-snug truncate">{data.title}</h4>
+          <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{data.sub}</p>
+        </div>
+        <span
+          className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
+            isActive ? 'bg-[#E2004F] text-white' : 'bg-[#FAF8F5] text-slate-400 group-hover:bg-[#FFF0F3] group-hover:text-[#E2004F]'
+          }`}
+          aria-hidden
+        >
+          →
+        </span>
       </div>
     </button>
+  );
+}
+
+function BlueprintNodeRail({ activeNode, setActiveNode }) {
+  return (
+    <div className="flex gap-2 overflow-x-auto pb-2 custom-scroll -mx-1 px-1">
+      {NODE_ORDER.map((id) => {
+        const n = BLUEPRINT_NODES[id];
+        const meta = SYSTEM_META[id] || SYSTEM_META.website;
+        const active = activeNode === id;
+        return (
+          <button
+            key={id}
+            type="button"
+            onClick={() => setActiveNode(id)}
+            className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-left transition-all ${
+              active ? 'border-[#E2004F] bg-[#FFF0F3] shadow-sm' : 'border-[#EBE5D9] bg-white hover:border-slate-300'
+            }`}
+          >
+            <span className="text-lg">{n.emoji}</span>
+            <span className="text-[11px] font-extrabold text-[#222121] whitespace-nowrap">{meta.label}</span>
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -573,125 +598,115 @@ function BlueprintPanel({ viewMode, setViewMode, activeNode, setActiveNode }) {
   const linearNodes = NODE_ORDER.filter((id) => !PARALLEL_NODES.includes(id));
 
   return (
-    <div className="space-y-6 animate-fadeIn">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#222121] via-[#2d2b2b] to-[#1a1919] text-white p-6 md:p-8 border border-[#333]">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#E2004F]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative flex flex-wrap items-start justify-between gap-4">
-          <div className="max-w-2xl">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Visual Blueprint Map</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold mt-2 tracking-tight">
-              Concierge → Marketo → Salesforce → Distro
+    <div className="space-y-5 animate-fadeIn -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+      {/* Compact header + view toggle */}
+      <section className="bg-gradient-to-br from-[#222121] via-[#2d2b2b] to-[#1a1919] text-white rounded-2xl p-5 border border-[#333]">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Visual Blueprint</span>
+            <h2 className="text-xl md:text-2xl font-extrabold mt-1 tracking-tight">
+              Inbound routing pipeline
             </h2>
-            <p className="text-sm text-slate-300 mt-3 leading-relaxed">
-              Click each stage to inspect business rules, APIs, key fields, and routing outcomes.
-              Toggle Business, Technical, or Hybrid view to shift the narrative lens.
+            <p className="text-xs text-slate-300 mt-1 max-w-xl">
+              Tap a stage → inspect rules, fields &amp; outcomes in the panel on the right.
             </p>
           </div>
-          <div className="flex gap-2 flex-wrap">
-            {['📝', '🔍', '📅', '📣', '☁️', '⚙️'].map((e, i) => (
-              <span key={e} className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-lg">
-                {e}
-              </span>
+          <div className="flex rounded-xl bg-white/10 p-1 border border-white/15">
+            {VIEW_MODES.map((mode) => (
+              <button
+                key={mode.id}
+                type="button"
+                onClick={() => setViewMode(mode.id)}
+                className={`px-3 py-2 rounded-lg text-[11px] font-bold transition-all ${
+                  viewMode === mode.id ? 'bg-[#E2004F] text-white shadow' : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                {mode.icon} {mode.label}
+              </button>
             ))}
           </div>
+        </div>
+        <div className="mt-4">
+          <BlueprintNodeRail activeNode={activeNode} setActiveNode={setActiveNode} />
         </div>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-        {/* Flowchart — scrolls within viewport on large screens */}
-        <div className="lg:col-span-8 bg-[#FAF8F5] border border-[#EBE5D9] rounded-3xl p-6 md:p-8 shadow-sm lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto custom-scroll">
-          {/* View mode toggle */}
-          <div className="flex flex-col items-center mb-8 pb-6 border-b border-[#EBE5D9]">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Map perspective</span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full max-w-lg">
-              {VIEW_MODES.map((mode) => (
-                <button
-                  key={mode.id}
-                  type="button"
-                  onClick={() => setViewMode(mode.id)}
-                  className={`flex flex-col items-center p-3 rounded-xl border-2 text-left sm:text-center transition-all ${
-                    viewMode === mode.id
-                      ? 'border-[#E2004F] bg-white shadow-md'
-                      : 'border-[#EBE5D9] bg-white/60 hover:border-slate-400'
-                  }`}
-                >
-                  <span className="text-xl">{mode.icon}</span>
-                  <span className="text-sm font-extrabold text-[#222121] mt-1">{mode.label}</span>
-                  <span className="text-[10px] text-slate-500 mt-0.5">{mode.desc}</span>
-                </button>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        {/* Flowchart timeline */}
+        <div className="lg:col-span-7 xl:col-span-8 bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-sm lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto custom-scroll">
+          <div className="relative max-w-lg mx-auto">
+            <div className="absolute left-[19px] top-3 bottom-3 w-0.5 bg-gradient-to-b from-[#E2004F]/30 via-purple-300/40 to-emerald-400/40 pointer-events-none" aria-hidden />
+
+            <div className="space-y-0">
+              {linearNodes.slice(0, 3).map((nodeId, idx) => (
+                <React.Fragment key={nodeId}>
+                  {idx > 0 && (
+                    <FlowConnector label={idx === 1 ? 'Enrichment feeds Concierge' : 'Eligible → book or abandon'} />
+                  )}
+                  <div className="relative pl-2">
+                    <BlueprintNodeCard
+                      nodeId={nodeId}
+                      viewMode={viewMode}
+                      isActive={activeNode === nodeId}
+                      onSelect={setActiveNode}
+                    />
+                  </div>
+                </React.Fragment>
               ))}
-            </div>
-          </div>
 
-          {/* Pipeline graphic — linear nodes */}
-          <div className="flex flex-col items-center max-w-xl mx-auto space-y-0">
-            {linearNodes.slice(0, 3).map((nodeId, idx) => (
-              <React.Fragment key={nodeId}>
-                {idx > 0 && <FlowConnector label={idx === 1 ? 'Enrichment feeds Concierge' : 'Eligible → calendar or abandon'} />}
-                <BlueprintNodeCard
-                  nodeId={nodeId}
-                  viewMode={viewMode}
-                  isActive={activeNode === nodeId}
-                  onSelect={setActiveNode}
-                />
-              </React.Fragment>
-            ))}
+              <FlowConnector label="Parallel backend sync" variant="parallel" />
 
-            <FlowConnector label="Parallel backend sync" variant="parallel" />
+              <div className="rounded-2xl border-2 border-dashed border-purple-200 bg-purple-50/40 p-3 space-y-2">
+                <p className="text-[10px] font-extrabold text-purple-700 uppercase tracking-wider text-center">Runs in parallel</p>
+                {PARALLEL_NODES.map((nodeId) => (
+                  <BlueprintNodeCard
+                    key={nodeId}
+                    nodeId={nodeId}
+                    viewMode={viewMode}
+                    isActive={activeNode === nodeId}
+                    onSelect={setActiveNode}
+                  />
+                ))}
+              </div>
 
-            {/* Parallel branch */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-              <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-0.5 bg-purple-200" aria-hidden />
-              {PARALLEL_NODES.map((nodeId) => (
-                <BlueprintNodeCard
-                  key={nodeId}
-                  nodeId={nodeId}
-                  viewMode={viewMode}
-                  isActive={activeNode === nodeId}
-                  onSelect={setActiveNode}
-                />
-              ))}
-            </div>
+              <FlowConnector label="MQL + dedupe → Distro" />
 
-            <FlowConnector label="MQL + dedupe pass → Distro" />
+              <BlueprintNodeCard
+                nodeId="distro"
+                viewMode={viewMode}
+                isActive={activeNode === 'distro'}
+                onSelect={setActiveNode}
+              />
 
-            <BlueprintNodeCard
-              nodeId="distro"
-              viewMode={viewMode}
-              isActive={activeNode === 'distro'}
-              onSelect={setActiveNode}
-            />
-
-            {/* Catch-All branch graphic */}
-            <div className="w-full mt-4 p-4 rounded-2xl border-2 border-dashed border-[#FFD2DB] bg-[#FFF0F3]/50 text-center">
-              <p className="text-xs font-extrabold text-[#E2004F] uppercase tracking-wider">No rule match</p>
-              <p className="text-sm font-bold text-[#222121] mt-1">⊘ Catch-All → MOPS manual review</p>
-              <p className="text-xs text-slate-500 mt-1">Scenario F · tracked in Catch-All Dashboard</p>
-            </div>
-
-            {/* Handoff footer */}
-            <div className="w-full mt-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3">
-              <span className="text-2xl">🤝</span>
-              <div className="text-left">
-                <p className="text-sm font-extrabold text-emerald-900">Post-call: Handoff (Step 7)</p>
-                <p className="text-xs text-emerald-700 mt-0.5">XDR → AE via Pod pairings in Salesforce — not geography-based. Managed by RevOps.</p>
+              <div className="mt-4 space-y-2">
+                <div className="p-3 rounded-xl border-2 border-dashed border-[#FFD2DB] bg-[#FFF0F3]/60 text-center">
+                  <p className="text-[10px] font-extrabold text-[#E2004F] uppercase">No rule match</p>
+                  <p className="text-xs font-bold text-[#222121] mt-0.5">⊘ Catch-All → MOPS review</p>
+                </div>
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3">
+                  <span className="text-xl">🤝</span>
+                  <div className="text-left min-w-0">
+                    <p className="text-xs font-extrabold text-emerald-900">Post-call Handoff</p>
+                    <p className="text-[11px] text-emerald-700 mt-0.5 leading-snug">XDR → AE via Pod pairings · Managed by RevOps</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
           <BlueprintLegend />
         </div>
 
-        {/* Inspector — fixed header, scrollable body */}
-        <div className="lg:col-span-4 bg-white border border-[#EBE5D9] rounded-3xl shadow-sm sticky top-28 flex flex-col max-h-[calc(100vh-7rem)] overflow-hidden">
-          <div className="shrink-0 px-6 pt-6 pb-3 border-b border-[#EBE5D9] bg-white z-10">
+        {/* Inspector */}
+        <div className="lg:col-span-5 xl:col-span-4 bg-white border border-[#EBE5D9] rounded-2xl shadow-md sticky top-28 flex flex-col max-h-[calc(100vh-8rem)] overflow-hidden">
+          <div className="shrink-0 px-5 pt-5 pb-3 border-b border-[#EBE5D9] bg-gradient-to-r from-[#FFF0F3]/50 to-white">
             <h4 className="text-sm font-extrabold text-[#E2004F] uppercase tracking-wider">
               Blueprint Inspector
             </h4>
-            <p className="text-[11px] text-slate-500 mt-1">Click a node — details scroll below</p>
+            <p className="text-[11px] text-slate-500 mt-1">
+              {activeNode ? `Inspecting ${SYSTEM_META[activeNode]?.label || activeNode}` : 'Select a pipeline stage'}
+            </p>
           </div>
-          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll px-6 py-4">
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll px-5 py-4">
             <BlueprintInspector nodeId={activeNode} viewMode={viewMode} />
           </div>
         </div>

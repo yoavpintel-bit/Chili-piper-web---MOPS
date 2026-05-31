@@ -155,18 +155,50 @@ const SYSTEM_LABELS = {
   distro: '⚙️ Distro',
 };
 
-function RevealCard({ title, body, emoji = '✓' }) {
+function RevealCard({ title, body, stepLabel, isLatest }) {
   return (
-    <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 animate-fadeIn">
-      <p className="text-xs font-extrabold text-emerald-800 flex items-center gap-2">
-        <span>{emoji}</span> {title}
-      </p>
-      <p className="text-sm text-emerald-900 mt-2 leading-relaxed">{body}</p>
+    <div
+      className={`relative pl-9 pb-1 animate-fadeIn ${isLatest ? 'pb-4' : ''}`}
+    >
+      <div
+        className={`absolute left-[11px] top-8 bottom-0 w-0.5 ${
+          isLatest ? 'bg-[#E2004F]/30' : 'bg-emerald-200'
+        }`}
+        aria-hidden
+      />
+      <div
+        className={`absolute left-0 top-1 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-extrabold shrink-0 ${
+          isLatest
+            ? 'bg-[#E2004F] text-white shadow-md ring-4 ring-[#FFF0F3]'
+            : 'bg-white text-emerald-700 border-2 border-emerald-300'
+        }`}
+      >
+        {isLatest ? '●' : '✓'}
+      </div>
+      <div
+        className={`rounded-2xl p-4 border ${
+          isLatest
+            ? 'bg-[#FFF0F3] border-[#FFD2DB] shadow-sm'
+            : 'bg-emerald-50/80 border-emerald-200'
+        }`}
+      >
+        {stepLabel && (
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{stepLabel}</p>
+        )}
+        <p className={`text-sm font-extrabold ${isLatest ? 'text-[#E2004F]' : 'text-emerald-900'}`}>{title}</p>
+        <p className="text-sm text-slate-700 mt-1.5 leading-relaxed">{body}</p>
+        {isLatest && (
+          <span className="inline-block mt-2 text-[10px] font-bold text-[#E2004F] bg-white px-2 py-0.5 rounded-full border border-[#FFD2DB]">
+            Latest
+          </span>
+        )}
+      </div>
     </div>
   );
 }
 
 function ScenarioGamePanel({ FormattedText }) {
+  const timelineRef = React.useRef(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState({
     email: 'prospect@acme.com',
@@ -330,8 +362,12 @@ function ScenarioGamePanel({ FormattedText }) {
   const isComplete = stepIndex >= questions.length;
 
   const pushTimeline = (entry) => {
-    setTimeline((prev) => [...prev, entry]);
+    setTimeline((prev) => [{ ...entry, id: Date.now() + Math.random() }, ...prev]);
   };
+
+  React.useEffect(() => {
+    if (timelineRef.current) timelineRef.current.scrollTop = 0;
+  }, [timeline.length]);
 
   const advance = (reveal) => {
     if (reveal) {
@@ -464,27 +500,55 @@ function ScenarioGamePanel({ FormattedText }) {
         </div>
 
         <div className="lg:col-span-7 flex flex-col min-h-0 lg:max-h-[calc(100vh-11rem)] lg:overflow-hidden">
-          <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider shrink-0 mb-2 px-0.5">
-            What happened so far
-          </h4>
-          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll space-y-3 pr-0 lg:pr-1">
+          <div className="flex items-center justify-between shrink-0 mb-2 px-0.5">
+            <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider">
+              What happened so far
+            </h4>
+            {timeline.length > 0 && (
+              <span className="text-[10px] font-bold text-[#E2004F] bg-[#FFF0F3] px-2 py-0.5 rounded-full border border-[#FFD2DB]">
+                Newest first ↑
+              </span>
+            )}
+          </div>
+          <div
+            ref={timelineRef}
+            className="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0 lg:pr-1"
+          >
           {timeline.length === 0 && !isComplete && (
             <p className="text-sm text-slate-400 bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-6">
               Your routing story builds here as you answer each question…
             </p>
           )}
-          {timeline.map((item, i) => (
-            <RevealCard key={i} title={item.title} body={item.body} emoji={`${i + 1}`} />
-          ))}
+          {timeline.length > 0 && (
+            <div className="pt-1">
+              {timeline.map((item, i) => (
+                <RevealCard
+                  key={item.id || i}
+                  title={item.title}
+                  body={item.body}
+                  stepLabel={item.step}
+                  isLatest={i === 0}
+                />
+              ))}
+            </div>
+          )}
 
           {isComplete && (
-            <>
-              <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 mt-4">
+            <div className="mt-4 space-y-3 border-t border-[#EBE5D9] pt-4">
+              <div className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-2xl p-5">
+                <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Final outcome</p>
+                <h3 className="text-lg font-extrabold mt-1">{finalResult.scenario}</h3>
+                <span className={`inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full border ${finalResult.badgeColor}`}>
+                  {finalResult.type}
+                </span>
+                <p className="text-sm text-slate-300 mt-2 leading-relaxed">{finalResult.desc}</p>
+              </div>
+              <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5">
                 <p className="text-xs font-extrabold uppercase text-slate-500 mb-3">Full path trace</p>
                 <ol className="space-y-2">
                   {finalResult.flow.map((line, i) => (
                     <li key={i} className="flex gap-2 text-sm text-slate-700">
-                      <span className="text-[#E2004F] font-bold">{i + 1}.</span>
+                      <span className="text-[#E2004F] font-bold shrink-0">{i + 1}.</span>
                       {FormattedText ? <FormattedText text={line} /> : line}
                     </li>
                   ))}
@@ -497,7 +561,7 @@ function ScenarioGamePanel({ FormattedText }) {
                   </span>
                 ))}
               </div>
-            </>
+            </div>
           )}
           </div>
         </div>

@@ -779,85 +779,86 @@
                   <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading scenario cards…</div>
                 )}
 
-                {/* Pillar Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
-                    <span className="text-[#E2004F]"><ChiliPiperIcon /></span>
-                    <h4 className="text-sm font-extrabold text-[#222121] mt-2">1. Pre-Routing Gates</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed mt-1">Chili Piper evaluates spam checkers, QA allowlists, domain ownership, and customer exclusion lists prior to presenting calendar options.</p>
-                  </div>
-                  <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
-                    <span className="text-[#9F520B]"><ChiliPiperIcon /></span>
-                    <h4 className="text-sm font-extrabold text-[#222121] mt-2">2. Telemetry Hierarchy</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed mt-1">Order of priority: Pre-existing Salesforce account attributes take top priority, followed by ZoomInfo, with manual entry fallback as P3.</p>
-                  </div>
-                  <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
-                    <span className="text-teal-700"><ChiliPiperIcon /></span>
-                    <h4 className="text-sm font-extrabold text-[#222121] mt-2">3. Modular Breakdown</h4>
-                    <p className="text-xs text-slate-600 leading-relaxed mt-1">Lead lifecycle split: Chili Piper Concierge manages live scheduling, Distro handles silent backend shuffles, and Handoff drives XDR-to-AE Pod handovers.</p>
-                  </div>
+                {/* Three pillars */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {[
+                    { icon: '🛡️', color: 'border-l-[#E2004F]', title: '1. Pre-Routing Gates', body: 'Chili Piper evaluates spam checkers, QA allowlists, domain ownership, and customer exclusion lists prior to presenting calendar options.' },
+                    { icon: '📡', color: 'border-l-amber-500', title: '2. Telemetry Hierarchy', body: 'Order of priority: Pre-existing Salesforce account attributes take top priority, followed by ZoomInfo, with manual entry fallback as P3.' },
+                    { icon: '🧩', color: 'border-l-emerald-500', title: '3. Modular Breakdown', body: 'Concierge manages live scheduling, Distro handles silent backend shuffles, and Handoff drives XDR-to-AE Pod handovers.' },
+                  ].map((p) => (
+                    <div key={p.title} className={`bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-sm border-l-4 ${p.color}`}>
+                      <span className="text-2xl">{p.icon}</span>
+                      <h4 className="text-sm font-extrabold text-[#222121] mt-3">{p.title}</h4>
+                      <p className="text-sm text-slate-600 leading-relaxed mt-2">{p.body}</p>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Comparative Matrix Table */}
-                <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
-                  <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wider mb-4 border-b pb-2">Comparative Breakdown: Core Routing Modules</h3>
-                  <div className="overflow-x-auto -mx-1 px-1">
+                <div className="rounded-2xl border border-[#EBE5D9] overflow-hidden shadow-sm">
+                  <div className="bg-[#222121] text-white px-5 py-4">
+                    <h3 className="text-sm font-extrabold uppercase tracking-wider">Module comparison</h3>
+                    <p className="text-xs text-slate-400 mt-1">Concierge vs Distro vs Handoff</p>
+                  </div>
+                  <div className="overflow-x-auto bg-white">
                     <table className="w-full min-w-[640px] text-left text-xs text-[#222121] border-collapse table-fixed">
                       <thead>
-                        <tr className="border-b border-[#EBE5D9] text-slate-400 uppercase text-[9px] tracking-wider font-extrabold">
-                          <th className="py-2.5 px-3 w-[18%] align-bottom">Dimension</th>
-                          <th className="py-2.5 px-3 w-[27%] align-bottom">Chili Piper Concierge</th>
-                          <th className="py-2.5 px-3 w-[27%] align-bottom">Chili Piper Distro</th>
-                          <th className="py-2.5 px-3 w-[28%] align-bottom">Chili Piper Handoff</th>
+                        <tr className="bg-[#FAF8F5] border-b border-[#EBE5D9] text-slate-500 uppercase text-[9px] tracking-wider font-extrabold">
+                          <th className="py-3 px-4 w-[18%] align-bottom">Dimension</th>
+                          <th className="py-3 px-4 w-[27%] align-bottom text-[#FF4500]">Concierge</th>
+                          <th className="py-3 px-4 w-[27%] align-bottom text-indigo-600">Distro</th>
+                          <th className="py-3 px-4 w-[28%] align-bottom text-emerald-600">Handoff</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        <tr>
-                          <td className="py-3 px-3 font-extrabold align-top break-words">Primary Objective</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Instantly book initial discovery call on-page</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Assign cold/abandoned accounts behind scenes</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">XDR to AE transition scheduling</td>
+                      <tbody className="divide-y divide-[#F0EAE1]">
+                        <tr className="hover:bg-[#FAF8F5]/80">
+                          <td className="py-3 px-4 font-extrabold align-top break-words bg-[#FAF8F5]/50">Primary Objective</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Instantly book initial discovery call on-page</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Assign cold/abandoned accounts behind scenes</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">XDR to AE transition scheduling</td>
                         </tr>
-                        <tr>
-                          <td className="py-3 px-3 font-extrabold align-top break-words">Trigger System</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Website submission API post-enrichment</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Salesforce trigger automation post-RingLead</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Manual extension action from within CRM</td>
+                        <tr className="hover:bg-[#FAF8F5]/80">
+                          <td className="py-3 px-4 font-extrabold align-top break-words bg-[#FAF8F5]/50">Trigger System</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Website submission API post-enrichment</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Salesforce trigger automation post-RingLead</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Manual extension action from within CRM</td>
                         </tr>
-                        <tr>
-                          <td className="py-3 px-3 font-extrabold align-top break-words">Interactive Calendar</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed text-[#E2004F] font-semibold">Yes (Visible to prospect)</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed text-slate-500">No (Executed silently)</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed text-emerald-600 font-semibold">Yes (Internal reps only)</td>
+                        <tr className="hover:bg-[#FAF8F5]/80">
+                          <td className="py-3 px-4 font-extrabold align-top break-words bg-[#FAF8F5]/50">Interactive Calendar</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed text-[#E2004F] font-semibold">Yes (Visible to prospect)</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed text-slate-500">No (Executed silently)</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed text-emerald-600 font-semibold">Yes (Internal reps only)</td>
                         </tr>
-                        <tr>
-                          <td className="py-3 px-3 font-extrabold align-top break-words">Segment Routing Rules</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Region, State, employee count (20-8000)</td>
-                          <td className="py-3.5 px-3 align-top break-words leading-relaxed">HQ Region, Size limits, US States</td>
-                          <td className="py-3.5 px-3 align-top break-words leading-relaxed">Configured team Pod groupings</td>
+                        <tr className="hover:bg-[#FAF8F5]/80">
+                          <td className="py-3 px-4 font-extrabold align-top break-words bg-[#FAF8F5]/50">Segment Routing Rules</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Region, State, employee count (20-8000)</td>
+                          <td className="py-3.5 px-4 align-top break-words leading-relaxed">HQ Region, Size limits, US States</td>
+                          <td className="py-3.5 px-4 align-top break-words leading-relaxed">Configured team Pod groupings</td>
                         </tr>
-                        <tr>
-                          <td className="py-3 px-3 font-extrabold align-top break-words">Round-Robin Model</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Flexible Round-Robin (Time-slot based)</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Strict Round-Robin (Quota balanced)</td>
-                          <td className="py-3 px-3 align-top break-words leading-relaxed">Manual Selection (Suggested target list)</td>
+                        <tr className="hover:bg-[#FAF8F5]/80">
+                          <td className="py-3 px-4 font-extrabold align-top break-words bg-[#FAF8F5]/50">Round-Robin Model</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Flexible Round-Robin (Time-slot based)</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Strict Round-Robin (Quota balanced)</td>
+                          <td className="py-3 px-4 align-top break-words leading-relaxed">Manual Selection (Suggested target list)</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
 
-                {/* Warnings and Vulnerabilities */}
-                <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-xs space-y-3">
-                  <h4 className="text-xs font-extrabold text-[#222121] uppercase tracking-wider border-b pb-2">System Vulnerabilities &amp; Guardrails</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-500">
-                    <div className="bg-[#FAF8F5] p-3 rounded-xl border">
-                      <span className="font-extrabold text-[#E2004F] block">⚠️ Ingestion Filter Gaps</span>
-                      <p className="mt-1 leading-relaxed text-[11px]">If spam checkers, blacklisted country values, or blocklists inside Marketo mismatch Chili Piper parameters, a lead might book a slot but fail lead creation, creating ghost calendar slots.</p>
+                {/* Guardrails */}
+                <div className="rounded-2xl border border-[#EBE5D9] overflow-hidden shadow-sm">
+                  <div className="bg-[#FFF0F3] border-b border-[#FFD2DB] px-5 py-3">
+                    <h4 className="text-sm font-extrabold text-[#E2004F]">System vulnerabilities &amp; guardrails</h4>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-white">
+                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
+                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Ingestion filter gaps</span>
+                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">If spam checkers, blacklisted country values, or blocklists inside Marketo mismatch Chili Piper parameters, a lead might book a slot but fail lead creation, creating ghost calendar slots.</p>
                     </div>
-                    <div className="bg-[#FAF8F5] p-3 rounded-xl border">
-                      <span className="font-extrabold text-[#E2004F] block">⚠️ Stale CRM Overrides</span>
-                      <p className="mt-1 leading-relaxed text-[11px]">Because Salesforce values supersede fresh enrichment data, old accounts containing out-of-date region or size metrics will route on old parameters, skipping current telemetry.</p>
+                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
+                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Stale CRM overrides</span>
+                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">Because Salesforce values supersede fresh enrichment data, old accounts containing out-of-date region or size metrics will route on old parameters, skipping current telemetry.</p>
                     </div>
                   </div>
                 </div>
