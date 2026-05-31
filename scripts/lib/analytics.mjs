@@ -104,7 +104,13 @@ export function buildWeeklyLeaders(catchAll) {
     });
 }
 
-export function buildRichInsights(catchAll) {
+export function buildRichInsights(catchAll, options = {}) {
+  const { hours = null } = options;
+  let rows = catchAll;
+  if (hours != null) {
+    const cutoff = Date.now() - hours * 3600000;
+    rows = catchAll.filter((r) => new Date(r.triggeredAt).getTime() >= cutoff);
+  }
   const insights = [];
   const now = new Date();
   const weekAgo = new Date(now);
@@ -112,8 +118,8 @@ export function buildRichInsights(catchAll) {
   const twoWeeksAgo = new Date(now);
   twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
 
-  const thisWeek = catchAll.filter((r) => new Date(r.triggeredAt) >= weekAgo);
-  const prevWeek = catchAll.filter((r) => {
+  const thisWeek = rows.filter((r) => new Date(r.triggeredAt) >= weekAgo);
+  const prevWeek = rows.filter((r) => {
     const d = new Date(r.triggeredAt);
     return d >= twoWeeksAgo && d < weekAgo;
   });
@@ -129,7 +135,7 @@ export function buildRichInsights(catchAll) {
     });
   }
 
-  const countries = countBy(catchAll, (r) => r.country).filter((c) => c.name !== '(empty)');
+  const countries = countBy(rows, (r) => r.country).filter((c) => c.name !== '(empty)');
   if (countries.length) {
     const top5 = countries.slice(0, 5);
     const list = top5.map((c) => `${c.name} (${c.count})`).join(', ');
@@ -141,7 +147,7 @@ export function buildRichInsights(catchAll) {
     });
   }
 
-  const usRows = catchAll.filter((r) => isUnitedStates(r.country));
+  const usRows = rows.filter((r) => isUnitedStates(r.country));
   if (usRows.length) {
     const under50 = usRows.filter((r) => {
       const n = Number(r.numberOfEmployees);
@@ -174,13 +180,13 @@ export function buildRichInsights(catchAll) {
     }
   }
 
-  const weekly = buildWeeklySeries(catchAll);
+  const weekly = buildWeeklySeries(rows);
   if (weekly.length >= 2) {
     const last = weekly[weekly.length - 1];
     const prev = weekly[weekly.length - 2];
     if (prev.count > 0) {
       const wChange = pct(last.count - prev.count, prev.count);
-      const leaders = buildWeeklyLeaders(catchAll.filter((r) => weekKey(r.triggeredAt) === last.weekStart));
+      const leaders = buildWeeklyLeaders(rows.filter((r) => weekKey(r.triggeredAt) === last.weekStart));
       const topC = leaders[0]?.topCountry;
       const driver = topC
         ? ` Top driver: ${topC.name} (${topC.count}).`
@@ -194,10 +200,10 @@ export function buildRichInsights(catchAll) {
     }
   }
 
-  const bands = countBy(catchAll, (r) => r.employeeBand);
+  const bands = countBy(rows, (r) => r.employeeBand);
   const under20 = bands.find((b) => b.name === 'under_20');
-  if (under20 && catchAll.length) {
-    const p = pct(under20.count, catchAll.length);
+  if (under20 && rows.length) {
+    const p = pct(under20.count, rows.length);
     insights.push({
       type: 'employee_band',
       category: 'segment',
@@ -206,19 +212,19 @@ export function buildRichInsights(catchAll) {
     });
   }
 
-  const micro = countBy(catchAll, (r) => r.employeeMicroSegment || employeeMicroSegment(r.numberOfEmployees));
+  const micro = countBy(rows, (r) => r.employeeMicroSegment || employeeMicroSegment(r.numberOfEmployees));
   const topMicro = topEntry(micro);
   if (topMicro && topMicro.name !== 'missing') {
     insights.push({
       type: 'top_segment',
       category: 'segment',
       severity: 'normal',
-      text: `Most common employee-size segment in Catch-All: ${segmentLabel(topMicro.name)} (${topMicro.count} leads, ${pct(topMicro.count, catchAll.length)}%).`,
+      text: `Most common employee-size segment in Catch-All: ${segmentLabel(topMicro.name)} (${topMicro.count} leads, ${pct(topMicro.count, rows.length)}%).`,
     });
   }
 
   const emailCounts = new Map();
-  for (const r of catchAll) {
+  for (const r of rows) {
     const e = (r.guestEmail || '').toLowerCase();
     if (!e) continue;
     emailCounts.set(e, (emailCounts.get(e) || 0) + 1);
@@ -238,7 +244,7 @@ export function buildRichInsights(catchAll) {
       type: 'recommendation',
       category: 'recommendation',
       severity: 'normal',
-      text: `Recommendation: Prioritize MOPS review of ${countries[0].name} Catch-All rules (${countries[0].count} in dataset) — highest country volume.`,
+      text: `Recommendation: Prioritize MOPS review of ${countries[0].name} Catch-All rules (${countries[0].count}${hours != null ? ' in window' : ' in dataset'}) — highest country volume.`,
     });
   }
 

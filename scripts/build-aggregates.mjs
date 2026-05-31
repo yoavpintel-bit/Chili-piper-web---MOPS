@@ -115,6 +115,12 @@ export function buildAggregates(allRecords) {
       statuses: countBy(catchAll, (r) => r.status).slice(0, 8),
     },
     insights: buildRichInsights(catchAll),
+    insights24h: {
+      windowHours: 24,
+      windowStart: new Date(Date.now() - 86400000).toISOString(),
+      windowEnd: new Date().toISOString(),
+      insights: buildRichInsights(catchAll, { hours: 24 }),
+    },
   };
 }
 
