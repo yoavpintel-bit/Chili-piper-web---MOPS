@@ -86,6 +86,13 @@ function TeamsCountriesPanel() {
 
   useEffect(() => {
     let cancelled = false;
+    const embedded = window.__PORTAL_DATA__ && window.__PORTAL_DATA__.routerTeams;
+    if (embedded) {
+      setData(embedded);
+      setError(null);
+      setLoading(false);
+      return undefined;
+    }
     (async () => {
       try {
         const res = await fetch(DATA_URL);

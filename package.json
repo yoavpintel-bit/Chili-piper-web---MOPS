@@ -13,6 +13,7 @@
     "merge:workato": "node scripts/merge-workato.mjs",
     "sync": "node scripts/run-sync.mjs",
     "publish": "node scripts/publish-data.mjs",
+    "build:standalone": "node scripts/build-single-html.mjs",
     "backfill:api": "node scripts/backfill-api.mjs"
   },
   "engines": {

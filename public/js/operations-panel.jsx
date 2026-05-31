@@ -213,6 +213,15 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
 
   useEffect(() => {
     let cancelled = false;
+    const embedded = window.__PORTAL_DATA__ && window.__PORTAL_DATA__.catchAll;
+    if (embedded) {
+      setAggregates(embedded.aggregates || null);
+      setRecords(parseJsonl(embedded.recordsJsonl || '').map(enrichRecord));
+      setMeta(embedded.meta || {});
+      setError(null);
+      setLoading(false);
+      return undefined;
+    }
     (async () => {
       try {
         const [aggRes, recRes, metaRes] = await Promise.all([
