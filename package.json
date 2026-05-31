@@ -14,6 +14,7 @@
     "sync": "node scripts/run-sync.mjs",
     "publish": "node scripts/publish-data.mjs",
     "build:standalone": "node scripts/build-single-html.mjs",
+    "sync:pages-root": "node scripts/sync-pages-root.mjs",
     "backfill:api": "node scripts/backfill-api.mjs"
   },
   "engines": {
