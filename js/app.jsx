@@ -761,13 +761,10 @@
 
             {/* TAB 4: TECHNICAL PLAYBOOK & MATRIX COMPARISON */}
             {activeTab === 'playbook' && (
-              <div className="space-y-6 animate-fadeIn text-left pb-4">
-                <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-2xl p-5 border border-[#333]">
+              <div className="space-y-4 animate-fadeIn text-left pb-4">
+                <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-xl p-4 border border-[#333]">
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Technical Playbook</span>
-                  <h2 className="text-xl font-extrabold mt-1">Scenarios A–I &amp; module reference</h2>
-                  <p className="text-xs text-slate-300 mt-1 max-w-2xl">
-                    Routing paths, comparison matrix, and guardrails — scroll for full detail on each scenario card.
-                  </p>
+                  <h2 className="text-lg font-extrabold mt-0.5">Scenarios A–I &amp; module reference</h2>
                 </section>
                 
                 {window.ScenarioCardsGrid ? (

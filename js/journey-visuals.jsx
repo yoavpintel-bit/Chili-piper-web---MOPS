@@ -143,25 +143,26 @@ function ScenarioCard({ scenario, onCatchAll }) {
         scenario.id === 'F' ? 'border-[#E2004F]/40 ring-1 ring-[#FFD2DB]' : 'border-[#EBE5D9]'
       } ${styles.border}`}
     >
-      <div className={`px-4 py-3 flex items-center justify-between gap-2 border-b ${styles.badge}`}>
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/80 border border-white/50 text-base font-black text-[#222121] shadow-sm">
+      <div className={`px-3 py-2 flex items-center justify-between gap-2 border-b ${styles.badge}`}>
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/80 border border-white/50 text-sm font-black text-[#222121]">
             {scenario.id}
           </span>
-          <div className={`p-1.5 rounded-lg bg-white/60 ${styles.badge}`}>
+          <div className={`p-1 rounded-md bg-white/60 ${styles.badge}`}>
             <ScenarioGlyph id={scenario.id} />
           </div>
+          <h4 className="font-extrabold text-[#222121] text-xs leading-snug truncate hidden sm:block">{shortTitle}</h4>
         </div>
-        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2 py-1 rounded-full border shrink-0 ${styles.badge}`}>
+        <span className={`text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded-full border shrink-0 ${styles.badge}`}>
           {outcome.emoji} {outcome.label}
         </span>
       </div>
 
-      <div className="p-4 flex flex-col gap-3 flex-1">
-        <h4 className="font-extrabold text-[#222121] text-sm leading-snug">{shortTitle}</h4>
+      <div className="p-3 flex flex-col gap-2 flex-1">
+        <h4 className="font-extrabold text-[#222121] text-xs leading-snug sm:hidden">{shortTitle}</h4>
         <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
-        <p className="text-sm text-slate-600 leading-relaxed flex-1">{scenario.description}</p>
-        <div className="flex flex-wrap gap-1.5 pt-1 border-t border-[#F0EAE1]">
+        <p className="text-xs text-slate-600 leading-relaxed">{scenario.description}</p>
+        <div className="flex flex-wrap gap-1 pt-1.5 border-t border-[#F0EAE1]">
           {(scenario.systems || []).map((key) => {
             const meta = SYSTEM_META[key];
             if (!meta) return null;
@@ -189,29 +190,26 @@ function ScenarioCard({ scenario, onCatchAll }) {
 
 function ScenarioCardsGrid({ scenarios, onCatchAll }) {
   return (
-    <div className="rounded-2xl border border-[#EBE5D9] bg-[#FAF8F5]/50 overflow-hidden shadow-sm">
-      <div className="bg-white border-b border-[#EBE5D9] px-5 py-4">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h3 className="text-base font-extrabold text-[#222121]">Routing scenarios A – I</h3>
-            <p className="text-xs text-slate-500 mt-1">Every inbound path — color-coded by outcome type</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { dot: 'bg-emerald-500', label: 'Success' },
-              { dot: 'bg-amber-500', label: 'Warning' },
-              { dot: 'bg-[#E2004F]', label: 'Catch-All' },
-              { dot: 'bg-slate-500', label: 'Backend' },
-            ].map((x) => (
-              <span key={x.label} className="inline-flex items-center gap-1.5 text-[10px] font-bold text-slate-600 bg-[#FAF8F5] px-2 py-1 rounded-lg border border-[#EBE5D9]">
-                <span className={`w-2 h-2 rounded-full ${x.dot}`} />
-                {x.label}
-              </span>
-            ))}
-          </div>
+    <div className="rounded-xl border border-[#EBE5D9] bg-white overflow-hidden shadow-sm">
+      <div className="px-4 py-2.5 border-b border-[#EBE5D9] bg-[#FAF8F5] flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h3 className="text-sm font-extrabold text-[#222121]">Scenarios A – I</h3>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { dot: 'bg-emerald-500', label: 'Success' },
+            { dot: 'bg-amber-500', label: 'Warning' },
+            { dot: 'bg-[#E2004F]', label: 'Catch-All' },
+            { dot: 'bg-slate-500', label: 'Backend' },
+          ].map((x) => (
+            <span key={x.label} className="inline-flex items-center gap-1 text-[9px] font-bold text-slate-500">
+              <span className={`w-1.5 h-1.5 rounded-full ${x.dot}`} />
+              {x.label}
+            </span>
+          ))}
         </div>
       </div>
-      <div className="p-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
+      <div className="p-2 sm:p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5">
         {scenarios.map((sc) => (
           <ScenarioCard key={sc.id} scenario={sc} onCatchAll={sc.id === 'F' ? onCatchAll : undefined} />
         ))}
