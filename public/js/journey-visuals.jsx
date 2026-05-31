@@ -506,7 +506,7 @@ function VisualHandoff() {
       <FlowStrip
         activeIndex={2}
         nodes={[
-          { key: 'sdr', label: 'SDR', icon: <span className="text-[10px]">🎧</span> },
+          { key: 'xdr', label: 'XDR', icon: <span className="text-[10px]">🎧</span> },
           { key: 'ext', label: 'CP Extension', icon: <ChiliPiperIcon /> },
           { key: 'ae', label: 'Pod AE', icon: <span className="text-[10px]">🎯</span> },
         ]}
@@ -516,7 +516,7 @@ function VisualHandoff() {
         <p className="text-[10px] font-bold text-emerald-600 mb-2">Salesforce Pod Transfer</p>
         <div className="flex justify-between items-center gap-2">
           <div className="text-center flex-1 p-2 rounded-xl bg-slate-50 border border-slate-200">
-            <p className="text-[9px] text-slate-400">SDR</p>
+            <p className="text-[9px] text-slate-400">XDR</p>
             <p className="text-xs font-bold">Alex</p>
           </div>
           <span className="text-[#E2004F] font-bold journey-pulse">→</span>
@@ -625,9 +625,9 @@ const STEP_JOURNEY_META = {
     emoji: '🤝',
     accent: 'from-emerald-50 to-white',
     systems: ['handoff', 'salesforce'],
-    subtitle: 'SDR → AE via Handoff pods (not geography)',
+    subtitle: 'XDR → AE via Handoff pods (not geography)',
     detailedDesc:
-      'After the discovery call, the rep uses Chili Piper Handoff from Salesforce to schedule the AE meeting. Routing follows sales Pod pairings from the Handoff spreadsheet — not region or employee segments.',
+      'After the discovery call, the rep uses Chili Piper Handoff from Salesforce to schedule the AE meeting. Routing follows sales Pod pairings from the Handoff spreadsheet — not region or employee segments. Managed by the RevOps team.',
   },
 };
 
@@ -727,10 +727,15 @@ function JourneyStepCards({
   toggleBR,
   toggleTS,
   FormattedText,
+  singleStepOnly = false,
 }) {
+  const visibleSteps = singleStepOnly
+    ? steps.filter((step) => step.id === activeStepId)
+    : steps;
+
   return (
     <>
-      {steps.map((step) => {
+      {visibleSteps.map((step) => {
         const isActive = activeStepId === step.id;
         const meta = STEP_JOURNEY_META[step.id] || {};
         return (
@@ -738,10 +743,12 @@ function JourneyStepCards({
             key={step.id}
             id={step.id}
             ref={(el) => { if (stepRefs) stepRefs.current[step.id] = el; }}
-            onClick={() => scrollToStep(step.id)}
-            className={`rounded-3xl border-2 transition-all duration-300 cursor-pointer overflow-hidden scroll-mt-28 ${
+            onClick={singleStepOnly ? undefined : () => scrollToStep(step.id)}
+            className={`rounded-3xl border-2 transition-all duration-300 overflow-hidden h-full ${
+              singleStepOnly ? '' : 'cursor-pointer'
+            } ${
               isActive
-                ? 'border-[#E2004F] shadow-xl scale-[1.01] bg-white'
+                ? 'border-[#E2004F] shadow-xl bg-white'
                 : 'border-[#EBE5D9] bg-white/80 hover:border-slate-400 hover:shadow-md'
             }`}
           >

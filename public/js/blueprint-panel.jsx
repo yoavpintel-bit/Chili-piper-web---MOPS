@@ -598,9 +598,9 @@ function BlueprintPanel({ viewMode, setViewMode, activeNode, setActiveNode }) {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Flowchart */}
-        <div className="lg:col-span-8 bg-[#FAF8F5] border border-[#EBE5D9] rounded-3xl p-6 md:p-8 shadow-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        {/* Flowchart — scrolls within viewport on large screens */}
+        <div className="lg:col-span-8 bg-[#FAF8F5] border border-[#EBE5D9] rounded-3xl p-6 md:p-8 shadow-sm lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto custom-scroll">
           {/* View mode toggle */}
           <div className="flex flex-col items-center mb-8 pb-6 border-b border-[#EBE5D9]">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Map perspective</span>
@@ -675,7 +675,7 @@ function BlueprintPanel({ viewMode, setViewMode, activeNode, setActiveNode }) {
               <span className="text-2xl">🤝</span>
               <div className="text-left">
                 <p className="text-sm font-extrabold text-emerald-900">Post-call: Handoff (Step 7)</p>
-                <p className="text-xs text-emerald-700 mt-0.5">SDR → AE via Pod pairings in Salesforce — not geography-based</p>
+                <p className="text-xs text-emerald-700 mt-0.5">XDR → AE via Pod pairings in Salesforce — not geography-based. Managed by RevOps.</p>
               </div>
             </div>
           </div>
@@ -683,12 +683,17 @@ function BlueprintPanel({ viewMode, setViewMode, activeNode, setActiveNode }) {
           <BlueprintLegend />
         </div>
 
-        {/* Inspector */}
-        <div className="lg:col-span-4 bg-white border border-[#EBE5D9] rounded-3xl p-6 shadow-sm sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scroll">
-          <h4 className="text-sm font-extrabold text-[#E2004F] uppercase tracking-wider mb-4 border-b border-[#EBE5D9] pb-3">
-            Blueprint Inspector
-          </h4>
-          <BlueprintInspector nodeId={activeNode} viewMode={viewMode} />
+        {/* Inspector — fixed header, scrollable body */}
+        <div className="lg:col-span-4 bg-white border border-[#EBE5D9] rounded-3xl shadow-sm sticky top-28 flex flex-col max-h-[calc(100vh-7rem)] overflow-hidden">
+          <div className="shrink-0 px-6 pt-6 pb-3 border-b border-[#EBE5D9] bg-white z-10">
+            <h4 className="text-sm font-extrabold text-[#E2004F] uppercase tracking-wider">
+              Blueprint Inspector
+            </h4>
+            <p className="text-[11px] text-slate-500 mt-1">Click a node — details scroll below</p>
+          </div>
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll px-6 py-4">
+            <BlueprintInspector nodeId={activeNode} viewMode={viewMode} />
+          </div>
         </div>
       </div>
     </div>

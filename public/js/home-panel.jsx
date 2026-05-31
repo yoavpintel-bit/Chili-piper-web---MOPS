@@ -26,7 +26,7 @@ const SOURCE_LINKS = [
   },
   {
     title: 'Handoff spreadsheet',
-    desc: 'SDR → AE pod pairings and Handoff module calendar mappings.',
+    desc: 'XDR → AE pod pairings and Handoff module calendar mappings.',
     href: 'https://docs.google.com/spreadsheets/d/197PLS_Im3xKQn1-v4uCeGYdj04648_AxC4snN1ZE4u4/edit?gid=1309113080#gid=1309113080',
     tag: 'Google Sheets',
     icon: '📘',
@@ -40,17 +40,10 @@ const SOURCE_LINKS = [
   },
 ];
 
-const DATA_PIPELINE = [
-  { title: 'Chili Piper API & MCP', desc: 'Catch-All dashboard syncs Concierge exports where Routing Rule Matched = Catch All.', icon: '🌶️' },
-  { title: 'CSV exports', desc: 'Manual Concierge CSV drops feed sync-from-csv.mjs when API access is unavailable.', icon: '📁' },
-  { title: 'Workato (optional)', desc: 'Daily Catch-All export merge via WORKATO_CSV_PATH when automation exists.', icon: '⚡' },
-  { title: 'Router teams build', desc: 'Teams & Countries tab from Chili Piper rules export (MCP cache or data/router_teams/raw/).', icon: '👥' },
-];
-
 const MODULE_GLOSSARY = [
   { id: 'concierge', name: 'Concierge', emoji: '📅', accent: 'text-orange-700 bg-orange-50 border-orange-200', summary: 'Live on-page scheduling for qualified inbound handraisers (typically 20–8,000 employees). Runs spam, QA, ownership, and segment rules before showing a calendar.' },
   { id: 'distro', name: 'Distro', emoji: '⚙️', accent: 'text-indigo-700 bg-indigo-50 border-indigo-200', summary: 'Silent backend assignment when a lead does not book live. Strict round-robin by region, state, and size after Marketo MQL and RingLead pass.' },
-  { id: 'handoff', name: 'Handoff', emoji: '🤝', accent: 'text-teal-700 bg-teal-50 border-teal-200', summary: 'Post-discovery SDR → AE scheduling inside Salesforce via the Chili Piper Chrome extension. Routes by sales Pod, not geography.' },
+  { id: 'handoff', name: 'Handoff', emoji: '🤝', accent: 'text-teal-700 bg-teal-50 border-teal-200', summary: 'Post-discovery XDR → AE scheduling inside Salesforce via the Chili Piper Chrome extension. Routes by sales Pod, not geography. Managed by the RevOps team.' },
   { id: 'enrichment', name: 'Enrichment', emoji: '🔍', accent: 'text-cyan-700 bg-cyan-50 border-cyan-200', summary: 'Firmographic lookup (ZoomInfo today; Clay planned) for HQ country, state, and employee count. Manual form fill is the lowest-priority fallback.' },
   { id: 'catch-all', name: 'Catch-All', emoji: '⊘', accent: 'text-[#E2004F] bg-[#FFF0F3] border-[#FFD2DB]', summary: 'Safety net when Concierge or Distro cannot match an active segment rule. No live calendar; MOPS reviews and assigns manually.' },
   { id: 'marketo', name: 'Marketo', emoji: '📣', accent: 'text-purple-700 bg-purple-50 border-purple-200', summary: 'Universal lead log — every submission flows here for scoring, dedupe, and MQL conversion before Salesforce sync.' },
@@ -277,31 +270,6 @@ function HomePanel({ onNavigateTab }) {
             <SourceCard key={src.href} {...src} />
           ))}
         </div>
-      </section>
-
-      {/* Data pipeline */}
-      <section className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-3xl p-6 md:p-8">
-        <SectionHeader
-          title="Data behind this site"
-          subtitle={
-            <>
-              Static JSON in{' '}
-              <code className="text-xs bg-white px-1.5 py-0.5 rounded border border-[#EBE5D9]">public/data/</code>
-              {' '}is rebuilt by npm scripts — see README for sync commands.
-            </>
-          }
-        />
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {DATA_PIPELINE.map((item) => (
-            <li key={item.title} className="flex gap-4 bg-white border border-[#EBE5D9] rounded-2xl p-5">
-              <span className="text-2xl shrink-0">{item.icon}</span>
-              <div>
-                <span className="font-extrabold text-[#222121] block text-sm">{item.title}</span>
-                <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">{item.desc}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );

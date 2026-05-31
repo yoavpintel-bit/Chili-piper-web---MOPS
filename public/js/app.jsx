@@ -422,54 +422,55 @@
       const [expandedBR, setExpandedBR] = useState({ step1: true, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
       const [expandedTS, setExpandedTS] = useState({ step1: false, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
 
-      const scrollContainerRef = useRef(null);
+      const journeyTrackRef = useRef(null);
       const stepRefs = useRef({});
 
-      const usesJourneyContainerScroll = () => {
-        const container = scrollContainerRef.current;
-        if (!container || window.innerWidth < 1024) return false;
-        return container.scrollHeight > container.clientHeight + 1;
+      const JOURNEY_STICKY_TOP_PX = 112;
+      const JOURNEY_STEP_VH = 90;
+
+      const getJourneyScrollMetrics = () => {
+        const track = journeyTrackRef.current;
+        if (!track) return null;
+        const viewport = window.innerHeight - JOURNEY_STICKY_TOP_PX;
+        const trackScrollable = Math.max(track.offsetHeight - viewport, 1);
+        return { track, trackScrollable };
       };
 
-      // Track active step from container scroll (desktop) or window scroll (mobile)
+      const scrollToStep = (id, behavior = 'smooth') => {
+        const metrics = getJourneyScrollMetrics();
+        if (!metrics) return;
+        const idx = JOURNEY_STEPS.findIndex((s) => s.id === id);
+        if (idx < 0) return;
+        setActiveStepId(id);
+        const progress = idx / JOURNEY_STEPS.length;
+        window.scrollTo({
+          top: metrics.track.offsetTop + progress * metrics.trackScrollable,
+          behavior,
+        });
+      };
+
+      const startJourney = () => scrollToStep('step1');
+
+      // Page scroll through the journey track drives the active step
       useEffect(() => {
         if (activeTab !== 'process') return;
 
         let ticking = false;
 
         const updateActiveStep = () => {
-          const container = scrollContainerRef.current;
-          const contained = usesJourneyContainerScroll();
-          const triggerY = contained && container
-            ? container.getBoundingClientRect().top + 160
-            : 180;
-
-          let currentActiveId = JOURNEY_STEPS[0]?.id || 'step1';
-
-          if (contained && container) {
-            const containerTop = container.getBoundingClientRect().top;
-            for (let i = 0; i < JOURNEY_STEPS.length; i++) {
-              const step = JOURNEY_STEPS[i];
-              const el = stepRefs.current[step.id];
-              if (el) {
-                const rect = el.getBoundingClientRect();
-                if (rect.bottom - containerTop > 160) {
-                  currentActiveId = step.id;
-                  break;
-                }
-              }
-            }
-          } else {
-            for (let i = 0; i < JOURNEY_STEPS.length; i++) {
-              const step = JOURNEY_STEPS[i];
-              const el = stepRefs.current[step.id];
-              if (el && el.getBoundingClientRect().top <= triggerY) {
-                currentActiveId = step.id;
-              }
-            }
+          const metrics = getJourneyScrollMetrics();
+          if (!metrics) {
+            ticking = false;
+            return;
           }
-
-          setActiveStepId(currentActiveId);
+          const { track, trackScrollable } = metrics;
+          const scrolled = Math.max(0, JOURNEY_STICKY_TOP_PX - track.getBoundingClientRect().top);
+          const progress = Math.min(1, scrolled / trackScrollable);
+          const idx = Math.min(
+            JOURNEY_STEPS.length - 1,
+            Math.floor(progress * JOURNEY_STEPS.length)
+          );
+          setActiveStepId(JOURNEY_STEPS[idx].id);
           ticking = false;
         };
 
@@ -480,39 +481,15 @@
           }
         };
 
-        const container = scrollContainerRef.current;
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleScroll, { passive: true });
-        if (container) container.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
 
         return () => {
           window.removeEventListener('scroll', handleScroll);
           window.removeEventListener('resize', handleScroll);
-          if (container) container.removeEventListener('scroll', handleScroll);
         };
       }, [activeTab]);
-
-      const scrollToStep = (id) => {
-        const el = stepRefs.current[id];
-        const container = scrollContainerRef.current;
-        if (!el) return;
-        setActiveStepId(id);
-
-        if (usesJourneyContainerScroll() && container) {
-          const elRect = el.getBoundingClientRect();
-          const containerRect = container.getBoundingClientRect();
-          container.scrollTo({
-            top: container.scrollTop + (elRect.top - containerRect.top) - 16,
-            behavior: 'smooth',
-          });
-        } else {
-          window.scrollTo({
-            top: el.getBoundingClientRect().top + window.scrollY - 120,
-            behavior: 'smooth',
-          });
-        }
-      };
 
       const toggleBR = (id) => {
         setExpandedBR(prev => ({ ...prev, [id]: !prev[id] }));
@@ -609,80 +586,102 @@
             
             {/* TAB 1: SCROLL STORYTELLER */}
             {activeTab === 'process' && (
-              <div className="space-y-8 animate-fadeIn">
-                {window.JourneyHero && React.createElement(window.JourneyHero, {
-                  onStartJourney: () => scrollToStep('step1'),
-                })}
+              <div className="animate-fadeIn -mx-4 sm:-mx-6 lg:-mx-8">
+                <div className="px-4 sm:px-6 lg:px-8 space-y-6">
+                  {window.JourneyHero && React.createElement(window.JourneyHero, {
+                    onStartJourney: startJourney,
+                  })}
+                </div>
 
-                {/* Split Screen Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
-                  
-                  {/* STICKY LEFT COLUMN: VISUAL PREVIEW SCREEN (5 COLS) */}
-                  <div className="lg:col-span-5 sticky top-28 space-y-4">
-                    
-                    {/* Visual Sandbox Monitor Frame */}
-                    <div className="bg-white border-4 border-[#222121] rounded-3xl p-6 shadow-xl relative overflow-hidden min-h-[560px] flex flex-col justify-between">
-                      {/* Decorative System Header */}
-                      <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                        <div className="flex space-x-1.5">
-                          <span className="w-3 h-3 rounded-full bg-rose-400" />
-                          <span className="w-3 h-3 rounded-full bg-amber-400" />
-                          <span className="w-3 h-3 rounded-full bg-emerald-400" />
+                {/* Tall scroll track — page scroll advances steps; panel stays sticky */}
+                <div
+                  ref={journeyTrackRef}
+                  className="relative"
+                  style={{ height: `${JOURNEY_STEPS.length * JOURNEY_STEP_VH}vh` }}
+                >
+                  <div className="sticky top-28 z-20 px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 h-[calc(100vh-7rem)] min-h-[480px] max-h-[calc(100vh-7rem)]">
+                      {/* Left: live simulator */}
+                      <div className="lg:col-span-5 flex flex-col min-h-0 gap-3">
+                        <div className="bg-white border-4 border-[#222121] rounded-3xl p-4 sm:p-6 shadow-xl flex flex-col flex-1 min-h-0 overflow-hidden">
+                          <div className="flex justify-between items-center border-b border-slate-100 pb-3 shrink-0">
+                            <div className="flex space-x-1.5">
+                              <span className="w-3 h-3 rounded-full bg-rose-400" />
+                              <span className="w-3 h-3 rounded-full bg-amber-400" />
+                              <span className="w-3 h-3 rounded-full bg-emerald-400" />
+                            </div>
+                            <span className="text-[10px] font-bold text-slate-400 font-mono tracking-widest uppercase">HiBob Live Simulator</span>
+                          </div>
+                          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll py-2">
+                            {window.JourneyVisualMonitor ? (
+                              React.createElement(window.JourneyVisualMonitor, {
+                                activeStepId,
+                                journeySteps: JOURNEY_STEPS,
+                                onStepClick: scrollToStep,
+                              })
+                            ) : (
+                              <p className="text-center text-slate-400 text-sm py-12">Loading journey visuals…</p>
+                            )}
+                          </div>
                         </div>
-                        <span className="text-[10px] font-bold text-slate-400 font-mono tracking-widest uppercase">HiBob Live Simulator</span>
+                        <div className="hidden lg:block bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-4 text-sm shrink-0 text-left">
+                          <div className="font-extrabold text-[#222121]">💡 Scroll to walk the journey</div>
+                          <p className="text-slate-600 leading-relaxed mt-1 text-xs">
+                            Keep scrolling — the simulator stays on screen while each step updates.
+                            After step 7, scroll continues to quick-jump below.
+                          </p>
+                        </div>
                       </div>
 
-                      {window.JourneyVisualMonitor ? (
-                        React.createElement(window.JourneyVisualMonitor, {
-                          activeStepId,
-                          journeySteps: JOURNEY_STEPS,
-                          onStepClick: scrollToStep,
-                        })
-                      ) : (
-                        <p className="text-center text-slate-400 text-sm py-12">Loading journey visuals…</p>
-                      )}
-                    </div>
-
-                    {/* Legend & Instructions */}
-                    <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-5 text-sm space-y-2 text-left">
-                      <div className="font-extrabold text-[#222121]">💡 How to use this tab</div>
-                      <p className="text-slate-600 leading-relaxed">
-                        Scroll the step cards on the right — each stage includes business rules, technical specs, and system tags.
-                        The live simulator on the left updates automatically to match the active step.
-                      </p>
+                      {/* Right: one step at a time */}
+                      <div className="lg:col-span-7 flex flex-col min-h-0">
+                        <div className="flex items-center justify-between gap-2 mb-2 shrink-0 px-0.5">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            Step {JOURNEY_STEPS.findIndex((s) => s.id === activeStepId) + 1} of {JOURNEY_STEPS.length}
+                          </span>
+                          <div className="flex gap-1">
+                            {JOURNEY_STEPS.map((s) => (
+                              <span
+                                key={s.id}
+                                className={`h-1.5 rounded-full transition-all ${
+                                  s.id === activeStepId ? 'w-6 bg-[#E2004F]' : 'w-1.5 bg-slate-200'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0 lg:pr-2 text-left">
+                          {window.JourneyStepCards ? (
+                            React.createElement(window.JourneyStepCards, {
+                              steps: JOURNEY_STEPS,
+                              activeStepId,
+                              stepRefs,
+                              scrollToStep,
+                              expandedBR,
+                              expandedTS,
+                              toggleBR,
+                              toggleTS,
+                              FormattedText,
+                              singleStepOnly: true,
+                            })
+                          ) : (
+                            <p className="text-slate-400 text-sm py-8">Loading journey steps…</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* SCROLLABLE RIGHT COLUMN: STORY CARDS (7 COLS) */}
-                  <div 
-                    ref={scrollContainerRef}
-                    className="lg:col-span-7 space-y-6 lg:h-[680px] max-h-none overflow-visible lg:overflow-y-auto pr-0 lg:pr-3 custom-scroll text-left"
-                  >
-                    {window.JourneyStepCards ? (
-                      React.createElement(window.JourneyStepCards, {
-                        steps: JOURNEY_STEPS,
-                        activeStepId,
-                        stepRefs,
-                        scrollToStep,
-                        expandedBR,
-                        expandedTS,
-                        toggleBR,
-                        toggleTS,
-                        FormattedText,
-                      })
-                    ) : (
-                      <p className="text-slate-400 text-sm py-8">Loading journey steps…</p>
-                    )}
-
-                  </div>
-
-                  {/* STICKY CLICK-NAVIGATION BAR AT BOTTOM FOR ACCESSIBILITY */}
-                  <div className="lg:col-span-12 bg-white border border-[#EBE5D9] p-3 rounded-2xl flex flex-col sm:flex-row justify-between items-center text-xs font-bold gap-3 z-30">
-                    <span className="text-[10px] text-slate-400 uppercase tracking-wider pl-1">Scroll Steps Quick-Jump:</span>
+                {/* Quick-jump — only reachable after scrolling past the track */}
+                <div className="px-4 sm:px-6 lg:px-8 mt-6 mb-2">
+                  <div className="bg-white border border-[#EBE5D9] p-3 rounded-2xl flex flex-col sm:flex-row justify-between items-center text-xs font-bold gap-3">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider pl-1">Jump to a step:</span>
                     <div className="flex flex-wrap gap-1 justify-center flex-1">
-                      {JOURNEY_STEPS.map((s, idx) => (
+                      {JOURNEY_STEPS.map((s) => (
                         <button
                           key={s.id}
+                          type="button"
                           onClick={() => scrollToStep(s.id)}
                           className={`py-1 px-3 rounded-lg text-[11px] transition-all border ${
                             s.id === activeStepId
@@ -695,9 +694,7 @@
                       ))}
                     </div>
                   </div>
-
                 </div>
-
               </div>
             )}
 
