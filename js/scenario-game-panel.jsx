@@ -364,28 +364,32 @@ function ScenarioGamePanel({ FormattedText }) {
   };
 
   return (
-    <div className="space-y-6 animate-fadeIn text-left">
-      <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-3xl p-6 md:p-8 border border-[#333]">
-        <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Routing game</span>
-        <h2 className="text-2xl font-extrabold mt-2">Walk a lead through the pipeline</h2>
-        <p className="text-sm text-slate-300 mt-2 max-w-2xl">
-          Answer one question at a time — after each answer you&apos;ll see what happened in the stack before moving on.
-        </p>
-        <div className="mt-4 flex items-center gap-2">
-          <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-[#E2004F] transition-all duration-300"
-              style={{ width: `${Math.min(100, ((stepIndex) / Math.max(questions.length, 1)) * 100)}%` }}
-            />
+    <div className="flex flex-col lg:max-h-[calc(100vh-7rem)] min-h-0 animate-fadeIn text-left">
+      <section className="shrink-0 bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-2xl p-4 md:p-5 border border-[#333] mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Routing game</span>
+            <h2 className="text-lg md:text-xl font-extrabold mt-1">Walk a lead through the pipeline</h2>
+            <p className="text-xs text-slate-300 mt-1 max-w-xl hidden sm:block">
+              Answer one question at a time — see what happened before moving on.
+            </p>
           </div>
-          <span className="text-xs text-slate-400 shrink-0">
-            {Math.min(stepIndex + 1, questions.length)}/{questions.length}
-          </span>
+          <div className="flex items-center gap-2 min-w-[140px] flex-1 sm:flex-none sm:w-40">
+            <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-[#E2004F] transition-all duration-300"
+                style={{ width: `${Math.min(100, ((stepIndex) / Math.max(questions.length, 1)) * 100)}%` }}
+              />
+            </div>
+            <span className="text-[10px] text-slate-400 shrink-0 tabular-nums">
+              {Math.min(stepIndex + 1, questions.length)}/{questions.length}
+            </span>
+          </div>
         </div>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-5 space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 lg:overflow-hidden">
+        <div className="lg:col-span-5 min-h-0 lg:overflow-y-auto custom-scroll lg:pr-1 space-y-3">
           {!isComplete && currentQ && (
             <div className="bg-white border-2 border-[#E2004F] rounded-3xl p-6 shadow-lg">
               <p className="text-[11px] font-extrabold text-[#E2004F] uppercase tracking-wider">{currentQ.title}</p>
@@ -459,8 +463,11 @@ function ScenarioGamePanel({ FormattedText }) {
           )}
         </div>
 
-        <div className="lg:col-span-7 space-y-3">
-          <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider">What happened so far</h4>
+        <div className="lg:col-span-7 flex flex-col min-h-0 lg:max-h-[calc(100vh-11rem)] lg:overflow-hidden">
+          <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider shrink-0 mb-2 px-0.5">
+            What happened so far
+          </h4>
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scroll space-y-3 pr-0 lg:pr-1">
           {timeline.length === 0 && !isComplete && (
             <p className="text-sm text-slate-400 bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-6">
               Your routing story builds here as you answer each question…
@@ -492,6 +499,7 @@ function ScenarioGamePanel({ FormattedText }) {
               </div>
             </>
           )}
+          </div>
         </div>
       </div>
     </div>

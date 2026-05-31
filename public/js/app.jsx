@@ -561,7 +561,7 @@
           </header>
 
           {/* Hero Banner Area (non-home, non-process tabs) */}
-          {activeTab !== 'home' && activeTab !== 'process' && activeTab !== 'blueprint' && (
+          {activeTab !== 'home' && activeTab !== 'process' && activeTab !== 'blueprint' && activeTab !== 'simulator' && activeTab !== 'playbook' && (
             <section className="bg-gradient-to-b from-white to-[#FFFDF9] py-8 border-b border-[#F0EAE1]">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <span className="text-xs font-extrabold text-[#E2004F] uppercase tracking-wider bg-[#FFF0F3] px-3.5 py-1.5 rounded-full border border-[#FFD2DB]">
@@ -713,7 +713,9 @@
 
             {/* TAB 3: SCENARIO PLAYGROUND — step-by-step routing game */}
             {activeTab === 'simulator' && window.ScenarioGamePanel && (
-              React.createElement(window.ScenarioGamePanel, { FormattedText })
+              <div className="animate-fadeIn -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+                {React.createElement(window.ScenarioGamePanel, { FormattedText })}
+              </div>
             )}
             {activeTab === 'simulator' && !window.ScenarioGamePanel && (
               <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading scenario game…</div>
@@ -721,7 +723,14 @@
 
             {/* TAB 4: TECHNICAL PLAYBOOK & MATRIX COMPARISON */}
             {activeTab === 'playbook' && (
-              <div className="space-y-6 animate-fadeIn text-left">
+              <div className="space-y-6 animate-fadeIn text-left pb-4">
+                <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-2xl p-5 border border-[#333]">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Technical Playbook</span>
+                  <h2 className="text-xl font-extrabold mt-1">Scenarios A–I &amp; module reference</h2>
+                  <p className="text-xs text-slate-300 mt-1 max-w-2xl">
+                    Routing paths, comparison matrix, and guardrails — scroll for full detail on each scenario card.
+                  </p>
+                </section>
                 
                 {window.ScenarioCardsGrid ? (
                   React.createElement(window.ScenarioCardsGrid, {
@@ -747,53 +756,53 @@
                   <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
                     <span className="text-teal-700"><ChiliPiperIcon /></span>
                     <h4 className="text-sm font-extrabold text-[#222121] mt-2">3. Modular Breakdown</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed mt-1">Lead lifecycle split: Chili Piper Concierge manages live scheduling, Distro handles silent backend shuffles, and Handoff drives SDR-to-AE Pod handovers.</p>
+                    <p className="text-xs text-slate-600 leading-relaxed mt-1">Lead lifecycle split: Chili Piper Concierge manages live scheduling, Distro handles silent backend shuffles, and Handoff drives XDR-to-AE Pod handovers.</p>
                   </div>
                 </div>
 
                 {/* Comparative Matrix Table */}
                 <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-xs">
                   <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wider mb-4 border-b pb-2">Comparative Breakdown: Core Routing Modules</h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs text-[#222121] border-collapse">
+                  <div className="overflow-x-auto -mx-1 px-1">
+                    <table className="w-full min-w-[640px] text-left text-xs text-[#222121] border-collapse table-fixed">
                       <thead>
                         <tr className="border-b border-[#EBE5D9] text-slate-400 uppercase text-[9px] tracking-wider font-extrabold">
-                          <th className="py-2.5 px-3">Dimension</th>
-                          <th className="py-2.5 px-3">Chili Piper Concierge</th>
-                          <th className="py-2.5 px-3">Chili Piper Distro</th>
-                          <th className="py-2.5 px-3">Chili Piper Handoff</th>
+                          <th className="py-2.5 px-3 w-[18%] align-bottom">Dimension</th>
+                          <th className="py-2.5 px-3 w-[27%] align-bottom">Chili Piper Concierge</th>
+                          <th className="py-2.5 px-3 w-[27%] align-bottom">Chili Piper Distro</th>
+                          <th className="py-2.5 px-3 w-[28%] align-bottom">Chili Piper Handoff</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
                         <tr>
-                          <td className="py-3 px-3 font-extrabold">Primary Objective</td>
-                          <td className="py-3 px-3">Instantly book initial discovery call on-page</td>
-                          <td className="py-3 px-3">Assign cold/abandoned accounts behind scenes</td>
-                          <td className="py-3 px-3">SDR to AE transition scheduling</td>
+                          <td className="py-3 px-3 font-extrabold align-top break-words">Primary Objective</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Instantly book initial discovery call on-page</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Assign cold/abandoned accounts behind scenes</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">XDR to AE transition scheduling</td>
                         </tr>
                         <tr>
-                          <td className="py-3 px-3 font-extrabold">Trigger System</td>
-                          <td className="py-3 px-3">Website submission API post-enrichment</td>
-                          <td className="py-3 px-3">Salesforce trigger automation post-RingLead</td>
-                          <td className="py-3 px-3">Manual extension action from within CRM</td>
+                          <td className="py-3 px-3 font-extrabold align-top break-words">Trigger System</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Website submission API post-enrichment</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Salesforce trigger automation post-RingLead</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Manual extension action from within CRM</td>
                         </tr>
                         <tr>
-                          <td className="py-3 px-3 font-extrabold">Interactive Calendar</td>
-                          <td className="py-3 px-3 text-[#E2004F] font-semibold">Yes (Visible to prospect)</td>
-                          <td className="py-3 px-3 text-slate-400">No (Executed silently)</td>
-                          <td className="py-3 px-3 text-emerald-600 font-semibold">Yes (Internal reps only)</td>
+                          <td className="py-3 px-3 font-extrabold align-top break-words">Interactive Calendar</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed text-[#E2004F] font-semibold">Yes (Visible to prospect)</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed text-slate-500">No (Executed silently)</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed text-emerald-600 font-semibold">Yes (Internal reps only)</td>
                         </tr>
                         <tr>
-                          <td className="py-3 px-3 font-extrabold">Segment Routing Rules</td>
-                          <td className="py-3 px-3">Region, State, employee count (20-8000)</td>
-                          <td className="py-3.5 px-3">HQ Region, Size limits, US States</td>
-                          <td className="py-3.5 px-3">Configured team Pod groupings</td>
+                          <td className="py-3 px-3 font-extrabold align-top break-words">Segment Routing Rules</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Region, State, employee count (20-8000)</td>
+                          <td className="py-3.5 px-3 align-top break-words leading-relaxed">HQ Region, Size limits, US States</td>
+                          <td className="py-3.5 px-3 align-top break-words leading-relaxed">Configured team Pod groupings</td>
                         </tr>
                         <tr>
-                          <td className="py-3 px-3 font-extrabold">Round-Robin Model</td>
-                          <td className="py-3 px-3">Flexible Round-Robin (Time-slot based)</td>
-                          <td className="py-3 px-3">Strict Round-Robin (Quota balanced)</td>
-                          <td className="py-3 px-3">Manual Selection (Suggested target list)</td>
+                          <td className="py-3 px-3 font-extrabold align-top break-words">Round-Robin Model</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Flexible Round-Robin (Time-slot based)</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Strict Round-Robin (Quota balanced)</td>
+                          <td className="py-3 px-3 align-top break-words leading-relaxed">Manual Selection (Suggested target list)</td>
                         </tr>
                       </tbody>
                     </table>

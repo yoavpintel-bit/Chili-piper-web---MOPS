@@ -100,11 +100,11 @@ function MiniFlowDiagram({ systems, outcomeType }) {
           <React.Fragment key={`${key}-${i}`}>
             {i > 0 && <FlowArrow className={styles.arrow} />}
             <div
-              className={`flex flex-col items-center min-w-[44px] max-w-[52px] px-1 py-1 rounded-lg border text-[7px] font-bold leading-tight text-center ${styles.node}`}
+              className={`flex flex-col items-center min-w-[44px] max-w-[56px] px-1 py-1 rounded-lg border text-[7px] font-bold leading-tight text-center ${styles.node}`}
               title={meta.label}
             >
               <span className="mb-0.5 scale-90">{meta.icon}</span>
-              <span className="truncate w-full">{meta.label}</span>
+              <span className="w-full break-words leading-tight">{meta.label}</span>
             </div>
           </React.Fragment>
         );
@@ -139,7 +139,7 @@ function ScenarioCard({ scenario, onCatchAll }) {
 
   return (
     <article
-      className={`relative overflow-hidden rounded-2xl border border-[#EBE5D9] bg-white shadow-sm border-l-4 ${styles.border} transition-all hover:shadow-md hover:-translate-y-0.5 ${scenario.id === 'F' ? 'ring-1 ring-[#FFD2DB]' : ''}`}
+      className={`relative rounded-2xl border border-[#EBE5D9] bg-white shadow-sm border-l-4 ${styles.border} transition-all hover:shadow-md hover:-translate-y-0.5 ${scenario.id === 'F' ? 'ring-1 ring-[#FFD2DB]' : ''}`}
     >
       <div className="p-3 flex flex-col gap-2 h-full">
         <div className="flex items-start gap-2">
@@ -150,7 +150,7 @@ function ScenarioCard({ scenario, onCatchAll }) {
             <ScenarioGlyph id={scenario.id} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="font-extrabold text-[#222121] text-[11px] leading-snug">{shortTitle}</p>
+            <p className="font-extrabold text-[#222121] text-xs leading-snug">{shortTitle}</p>
             <span className={`inline-block mt-1 text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${styles.badge}`}>
               {outcome.emoji} {outcome.label}
             </span>
@@ -159,7 +159,7 @@ function ScenarioCard({ scenario, onCatchAll }) {
 
         <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
 
-        <p className="text-slate-500 text-[10px] leading-relaxed line-clamp-2">{scenario.description}</p>
+        <p className="text-slate-600 text-[11px] leading-relaxed">{scenario.description}</p>
 
         <div className="flex flex-wrap gap-1">
           {(scenario.systems || []).map((key) => {
@@ -194,16 +194,16 @@ function ScenarioCardsGrid({ scenarios, onCatchAll }) {
       <div className="flex flex-wrap items-end justify-between gap-2 mb-4 border-b border-[#EBE5D9] pb-3">
         <div>
           <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wider">Routing scenarios (A – I)</h3>
-          <p className="text-[10px] text-slate-500 mt-1">Color-coded outcomes · mini system flows per path</p>
+          <p className="text-xs text-slate-500 mt-1">Color-coded outcomes · mini system flows per path</p>
         </div>
-        <div className="flex flex-wrap gap-2 text-[9px] font-bold">
+        <div className="flex flex-wrap gap-2 text-[10px] font-bold">
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Success</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500" /> Warning</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#E2004F]" /> Catch-All</span>
           <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-500" /> Backend</span>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch">
         {scenarios.map((sc) => (
           <ScenarioCard key={sc.id} scenario={sc} onCatchAll={sc.id === 'F' ? onCatchAll : undefined} />
         ))}
