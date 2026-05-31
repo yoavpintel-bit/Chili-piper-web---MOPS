@@ -143,6 +143,36 @@ const EMPLOYEE_FIELDS = new Set([
   '5fc0bf49-0e0a-4c5a-9f3a-8e8d5e5d5e5e',
 ]);
 
+const SKIP_GEO_VALUES = new Set(['Americas', 'EMEA', 'APAC', 'rad', 'wad', 'pricing', 'demo']);
+
+function extractStates(conditions) {
+  const states = new Set();
+  walkConditions(conditions, (node) => {
+    if (node.type !== 'StaticValueCondition') return;
+    const field = String(node.dataReference?.field || '');
+    if (EMPLOYEE_FIELDS.has(field) || /employee/i.test(field)) return;
+    if (field === 'Region_PB__c' || /region/i.test(field)) return;
+    if (field === 'PersonCountry' || /country/i.test(field)) return;
+
+    const isStateField = field === 'BillingState' || /state/i.test(field);
+    const values = Array.isArray(node.value) ? node.value : node.value != null ? [node.value] : [];
+    if (!values.length) return;
+
+    if (!isStateField) {
+      if (node.operator !== 'containsAnyOf' || values.length < 2) return;
+      if (!values.every((v) => typeof v === 'string' && v.length > 2)) return;
+      if (values.some((v) => SKIP_GEO_VALUES.has(v))) return;
+    }
+
+    for (const v of values) {
+      const s = String(v).trim();
+      if (!s || SKIP_GEO_VALUES.has(s)) continue;
+      states.add(s);
+    }
+  });
+  return [...states].sort((a, b) => a.localeCompare(b));
+}
+
 function extractEmployeeRangeFromConditions(conditions) {
   let min = null;
   let max = null;
@@ -272,6 +302,7 @@ function main() {
     const segmentLabel = displaySegmentLabel(rule.name);
     const team = resolveTeam(rule, teams);
     const countries = extractCountries(rule.conditions);
+    const states = extractStates(rule.conditions);
     const nameLower = rule.name.toLowerCase();
     const members = team ? mapMembers(team.members, userMap) : [];
     const teamNameExact = team && normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
@@ -284,6 +315,7 @@ function main() {
       product: rule.product || null,
       ruleType: rule.type || null,
       countries,
+      states,
       employeeRange: employeeRange
         ? {
             min: employeeRange.min,
@@ -307,13 +339,16 @@ function main() {
         evaluating: nameLower.includes('(evaluating)'),
         updated: nameLower.includes('(updated)'),
         ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
+        rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
       },
     });
   }
 
   const countrySet = new Set();
+  const stateSet = new Set();
   for (const e of entries) {
     for (const c of e.countries) countrySet.add(c);
+    for (const s of e.states) stateSet.add(s);
   }
 
   const payload = {
@@ -334,6 +369,7 @@ function main() {
     },
     filters: {
       countries: [...countrySet].sort((a, b) => a.localeCompare(b)),
+      states: [...stateSet].sort((a, b) => a.localeCompare(b)),
       sizeSegments: SIZE_SEGMENTS.map(({ id, label, min, max }) => ({
         id,
         label,
@@ -357,7 +393,8 @@ function main() {
 
   const withTeam = entries.filter((e) => e.team).length;
   const withCountry = entries.filter((e) => e.countries.length).length;
-  console.log(`Wrote ${entries.length} rules (${withTeam} with team, ${withCountry} with countries)`);
+  const withStates = entries.filter((e) => e.states.length).length;
+  console.log(`Wrote ${entries.length} rules (${withTeam} with team, ${withCountry} with countries, ${withStates} with states)`);
   console.log(`  → ${OUT_FILE}`);
   console.log(`  → ${PUBLIC_OUT}`);
 }

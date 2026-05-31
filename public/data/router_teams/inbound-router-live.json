@@ -1,6 +1,6 @@
 {
   "meta": {
-    "builtAt": "2026-05-31T08:58:22.077Z",
+    "builtAt": "2026-05-31T13:22:43.700Z",
     "workspaceId": "5ffdc2c64c46df00017023a8",
     "routerId": "7e9c794d-b6db-40ec-ae07-f363d77b5f36",
     "routerName": "MQL Inbound flow - Main router - Live",
@@ -217,6 +217,233 @@
       "Zambia",
       "Zimbabwe"
     ],
+    "states": [
+      "@eagleray",
+      "@hibob.com",
+      "@hitest",
+      "@hitest.com",
+      "@hitest.io",
+      "@testtttttt.com",
+      "@tstmail.link",
+      "Alabama",
+      "Alaska",
+      "Albania",
+      "Algeria",
+      "Angola",
+      "Anguilla",
+      "Arizona",
+      "Arkansas",
+      "armenia",
+      "Ascension and Tristan da Cunha",
+      "Australia",
+      "Austria",
+      "Bahrain",
+      "Bangladesh",
+      "Belarus",
+      "Belgium",
+      "Bosnia and Herzegovina",
+      "British Indian",
+      "Bulgaria",
+      "California",
+      "Cameroon",
+      "Cayman Islands",
+      "Chad",
+      "china",
+      "Colorado",
+      "Comoros",
+      "Connecticut",
+      "Croatia",
+      "Cyprus",
+      "Czech Republic",
+      "Delaware",
+      "Denmark",
+      "District of Columbia",
+      "eagleray.co.il",
+      "Egypt",
+      "Equatorial Guinea",
+      "Eritrea",
+      "Estonia",
+      "Eswatini",
+      "Ethiopia",
+      "Falkland Islands",
+      "Faroe Islands",
+      "Fiji",
+      "Finland",
+      "Florida",
+      "France",
+      "French Guiana",
+      "French Polynesia",
+      "French Southern Territories",
+      "Gabon",
+      "Gambia",
+      "Georgia",
+      "Germany",
+      "Ghana",
+      "Gibraltar",
+      "Greece",
+      "Greenland",
+      "Guadeloupe",
+      "Guernsey",
+      "Guinea",
+      "Guinea-Bissau",
+      "Hawaii",
+      "Heard Island and McDonald Islands",
+      "hibob.co.il",
+      "hibob.io",
+      "Holy See",
+      "Hong Kong",
+      "Hungary",
+      "Iceland",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Indonesia",
+      "Iowa",
+      "Ireland",
+      "Isle of Man",
+      "Israel",
+      "Italy",
+      "Japan",
+      "Jersey",
+      "Kansas",
+      "Kentucky",
+      "Kenya",
+      "Kiribati",
+      "Korea",
+      "Latvia",
+      "Lesotho",
+      "Liberia",
+      "Libya",
+      "Lithuania",
+      "Louisiana",
+      "Luxembourg",
+      "Macao",
+      "macedonia",
+      "Madagascar",
+      "Maine",
+      "Malawi",
+      "Malaysia",
+      "Maldives",
+      "Mali",
+      "Malta",
+      "Martinique",
+      "Maryland",
+      "Massachusetts",
+      "Mauritania",
+      "Mauritius",
+      "Mayotte",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Moldova",
+      "Monaco",
+      "Mongolia",
+      "Montana",
+      "Montenegro",
+      "Montserrat",
+      "Morocco",
+      "Mozambique",
+      "Myanmar",
+      "Namibia",
+      "Nauru",
+      "Nebraska",
+      "Nepal",
+      "Netherland",
+      "Netherlands",
+      "Nevada",
+      "New Caledonia",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "New Zealand",
+      "Niger",
+      "Nigeria",
+      "Niue",
+      "Norfolk Island",
+      "North Carolina",
+      "North Dakota",
+      "Norway",
+      "Ocean Territory",
+      "Ohio",
+      "Oklahoma",
+      "Oman",
+      "Oregon",
+      "Papua New Guinea",
+      "Pennsylvania",
+      "Philippines",
+      "Pitcairn",
+      "Poland",
+      "Portugal",
+      "Réunion",
+      "Rhode Island",
+      "Romania",
+      "Russia",
+      "Rwanda",
+      "Saint Helena",
+      "Saint Maarten (Dutch part)",
+      "Saint Martin (French part)",
+      "Saint Pierre and Miquelon",
+      "Samoa",
+      "San Marino",
+      "Sao Tome and Principe",
+      "Saudi Arabia",
+      "Scotland",
+      "Senegal",
+      "Serbia",
+      "Seychelles",
+      "Sierra Leone",
+      "Singapore",
+      "Slovakia",
+      "Slovenia",
+      "Solomon Islands",
+      "Somalia",
+      "South Africa",
+      "South Carolina",
+      "South Dakota",
+      "South Georgia and the South Sandwich Islands",
+      "South Korea",
+      "Spain",
+      "Sri Lanka",
+      "Svalbard and Jan Mayen",
+      "Sweden",
+      "Switzerland",
+      "Taiwan",
+      "Tanzania",
+      "Tennessee",
+      "Texas",
+      "Thailand",
+      "Timor-Leste",
+      "Togo",
+      "Tokelau",
+      "Tonga",
+      "Tunisia",
+      "Turkey",
+      "Turkmenistan",
+      "Tuvalu",
+      "Uganda",
+      "ukr.net",
+      "Ukraine",
+      "United Arab Emirates",
+      "United Kingdom",
+      "Utah",
+      "Uzbekistan",
+      "Vanuatu",
+      "Vermont",
+      "Viet Nam",
+      "Virgin Islands (British)",
+      "Virginia",
+      "Wallis and Futuna",
+      "Washington",
+      "West Virginia",
+      "Western Sahara",
+      "Wisconsin",
+      "Wyoming",
+      "Yemen",
+      "Zambia",
+      "Zimbabwe"
+    ],
     "sizeSegments": [
       {
         "id": "under_20",
@@ -271,6 +498,7 @@
       "product": "Distro",
       "ruleType": "OwnershipRule",
       "countries": [],
+      "states": [],
       "employeeRange": null,
       "sizeSegmentIds": [],
       "team": {
@@ -1071,7 +1299,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": true
+        "ownership": true,
+        "rad": false
       }
     },
     {
@@ -1082,13 +1311,15 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [],
       "employeeRange": null,
       "sizeSegmentIds": [],
       "team": null,
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1099,6 +1330,19 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "@eagleray",
+        "@hibob.com",
+        "@hitest",
+        "@hitest.com",
+        "@hitest.io",
+        "@testtttttt.com",
+        "@tstmail.link",
+        "eagleray.co.il",
+        "hibob.co.il",
+        "hibob.io",
+        "ukr.net"
+      ],
       "employeeRange": {
         "min": 20,
         "max": 8000,
@@ -1129,7 +1373,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1140,6 +1385,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "states": [
         "Australia",
         "Bangladesh",
         "china",
@@ -1194,7 +1462,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1205,6 +1474,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "states": [
         "Australia",
         "Bangladesh",
         "china",
@@ -1259,7 +1551,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1270,6 +1563,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "states": [
         "Australia",
         "Bangladesh",
         "china",
@@ -1338,7 +1654,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1349,6 +1666,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "states": [
         "Australia",
         "Bangladesh",
         "china",
@@ -1407,7 +1747,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1420,6 +1761,7 @@
       "countries": [
         "Switzerland"
       ],
+      "states": [],
       "employeeRange": {
         "min": 20,
         "max": 199,
@@ -1448,7 +1790,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1459,6 +1802,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "states": [
         "Austria",
         "Germany"
       ],
@@ -1498,7 +1845,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1509,6 +1857,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "states": [
         "Austria",
         "Germany"
       ],
@@ -1548,7 +1900,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1559,6 +1912,11 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Austria",
+        "Germany",
+        "Switzerland"
+      ],
+      "states": [
         "Austria",
         "Germany",
         "Switzerland"
@@ -1589,7 +1947,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1600,6 +1959,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "states": [
         "Austria",
         "Germany"
       ],
@@ -1629,7 +1992,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1642,6 +2006,7 @@
       "countries": [
         "Switzerland"
       ],
+      "states": [],
       "employeeRange": {
         "min": 500,
         "max": 999,
@@ -1668,7 +2033,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1679,6 +2045,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Austria",
+        "Germany"
+      ],
+      "states": [
         "Austria",
         "Germany"
       ],
@@ -1708,7 +2078,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1721,6 +2092,7 @@
       "countries": [
         "Switzerland"
       ],
+      "states": [],
       "employeeRange": {
         "min": 1000,
         "max": 8000,
@@ -1747,7 +2119,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1760,6 +2133,7 @@
       "countries": [
         "Portugal"
       ],
+      "states": [],
       "employeeRange": {
         "min": 20,
         "max": 199,
@@ -1788,7 +2162,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1799,6 +2174,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Italy",
+        "Spain"
+      ],
+      "states": [
         "Italy",
         "Spain"
       ],
@@ -1835,7 +2214,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1846,6 +2226,11 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Italy",
+        "Portugal",
+        "Spain"
+      ],
+      "states": [
         "Italy",
         "Portugal",
         "Spain"
@@ -1877,7 +2262,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1890,6 +2276,7 @@
       "countries": [
         "Sweden"
       ],
+      "states": [],
       "employeeRange": {
         "min": 50,
         "max": 199,
@@ -1917,7 +2304,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1930,6 +2318,7 @@
       "countries": [
         "Sweden"
       ],
+      "states": [],
       "employeeRange": {
         "min": 200,
         "max": 999,
@@ -1957,7 +2346,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1968,6 +2358,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway"
+      ],
+      "states": [
         "Denmark",
         "Finland",
         "Iceland",
@@ -1985,7 +2381,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -1996,6 +2393,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway"
+      ],
+      "states": [
         "Denmark",
         "Finland",
         "Iceland",
@@ -2033,7 +2436,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2046,6 +2450,7 @@
       "countries": [
         "Denmark"
       ],
+      "states": [],
       "employeeRange": {
         "min": 200,
         "max": 499,
@@ -2072,7 +2477,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2085,6 +2491,7 @@
       "countries": [
         "Denmark"
       ],
+      "states": [],
       "employeeRange": {
         "min": 500,
         "max": 999,
@@ -2111,7 +2518,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2124,6 +2532,7 @@
       "countries": [
         "Norway"
       ],
+      "states": [],
       "employeeRange": {
         "min": 200,
         "max": 999,
@@ -2151,7 +2560,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2162,6 +2572,10 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Finland",
+        "Iceland"
+      ],
+      "states": [
         "Finland",
         "Iceland"
       ],
@@ -2192,7 +2606,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2203,6 +2618,13 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway",
+        "Sweden"
+      ],
+      "states": [
         "Denmark",
         "Finland",
         "Iceland",
@@ -2235,7 +2657,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2246,6 +2669,11 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Belgium",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "states": [
         "Belgium",
         "Luxembourg",
         "Netherlands"
@@ -2281,7 +2709,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2292,6 +2721,11 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Belgium",
+        "Luxembourg",
+        "Netherland"
+      ],
+      "states": [
         "Belgium",
         "Luxembourg",
         "Netherland"
@@ -2328,7 +2762,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2341,6 +2776,7 @@
       "countries": [
         "France"
       ],
+      "states": [],
       "employeeRange": {
         "min": 20,
         "max": 199,
@@ -2369,7 +2805,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2380,6 +2817,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "states": [
         "Belgium",
         "France",
         "Luxembourg",
@@ -2416,7 +2859,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2427,6 +2871,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "states": [
         "Belgium",
         "France",
         "Luxembourg",
@@ -2458,7 +2908,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2469,6 +2920,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Belgium",
+        "France",
+        "Luxembourg",
+        "Netherlands"
+      ],
+      "states": [
         "Belgium",
         "France",
         "Luxembourg",
@@ -2500,7 +2957,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2511,6 +2969,40 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "states": [
         "Albania",
         "armenia",
         "Bahrain",
@@ -2577,7 +3069,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2588,6 +3081,40 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "states": [
         "Albania",
         "armenia",
         "Bahrain",
@@ -2648,7 +3175,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2659,6 +3187,40 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Albania",
+        "armenia",
+        "Bahrain",
+        "Belarus",
+        "Bosnia and Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Egypt",
+        "Estonia",
+        "Georgia",
+        "Greece",
+        "Hungary",
+        "Israel",
+        "Latvia",
+        "Lithuania",
+        "macedonia",
+        "Malta",
+        "Moldova",
+        "Montenegro",
+        "Oman",
+        "Poland",
+        "Romania",
+        "Russia",
+        "Saudi Arabia",
+        "Serbia",
+        "Slovakia",
+        "Turkey",
+        "Ukraine",
+        "United Arab Emirates",
+        "Uzbekistan"
+      ],
+      "states": [
         "Albania",
         "armenia",
         "Bahrain",
@@ -2723,7 +3285,8 @@
       "flags": {
         "evaluating": true,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -2833,6 +3396,7 @@
         "Zambia",
         "Zimbabwe"
       ],
+      "states": [],
       "employeeRange": {
         "min": 20,
         "max": 49,
@@ -2939,7 +3503,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3049,6 +3614,7 @@
         "Zambia",
         "Zimbabwe"
       ],
+      "states": [],
       "employeeRange": {
         "min": 50,
         "max": 99,
@@ -3170,7 +3736,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3280,6 +3847,7 @@
         "Zambia",
         "Zimbabwe"
       ],
+      "states": [],
       "employeeRange": {
         "min": 100,
         "max": 199,
@@ -3391,7 +3959,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3402,6 +3971,106 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "states": [
         "Algeria",
         "Angola",
         "Anguilla",
@@ -3557,7 +4226,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3568,6 +4238,106 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "states": [
         "Algeria",
         "Angola",
         "Anguilla",
@@ -3698,7 +4468,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3709,6 +4480,106 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
+      "states": [
         "Algeria",
         "Angola",
         "Anguilla",
@@ -3849,7 +4720,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3860,6 +4732,59 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      ],
       "employeeRange": {
         "min": 50,
         "max": 199,
@@ -3917,7 +4842,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -3928,6 +4854,26 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Kentucky",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "New Hampshire",
+        "New Jersey",
+        "New York",
+        "Pennsylvania",
+        "Rhode Island",
+        "Tennessee",
+        "Vermont",
+        "Virginia",
+        "West Virginia"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 749,
@@ -3970,7 +4916,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": true
       }
     },
     {
@@ -3981,6 +4928,14 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alabama",
+        "Georgia",
+        "Louisiana",
+        "Mississippi",
+        "North Carolina",
+        "South Carolina"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 749,
@@ -4008,7 +4963,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": true
       }
     },
     {
@@ -4019,6 +4975,14 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Arizona",
+        "California",
+        "Hawaii",
+        "Nevada",
+        "New Mexico",
+        "Utah"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 749,
@@ -4056,7 +5020,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": true
       }
     },
     {
@@ -4067,6 +5032,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alaska",
+        "Arkansas",
+        "Colorado",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Minnesota",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "South Dakota",
+        "Texas",
+        "Washington",
+        "Wisconsin",
+        "Wyoming"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 749,
@@ -4099,7 +5087,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": true
       }
     },
     {
@@ -4110,6 +5099,22 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Kentucky",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "New Hampshire",
+        "Rhode Island",
+        "Tennessee",
+        "Vermont",
+        "Virginia",
+        "West Virginia"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 749,
@@ -4137,7 +5142,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4148,6 +5154,12 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Florida",
+        "New Jersey",
+        "New York",
+        "Pennsylvania"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 748,
@@ -4190,7 +5202,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4201,6 +5214,14 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alabama",
+        "Georgia",
+        "Louisiana",
+        "Mississippi",
+        "North Carolina",
+        "South Carolina"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 748,
@@ -4228,7 +5249,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4239,6 +5261,14 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Arizona",
+        "California",
+        "Hawaii",
+        "Nevada",
+        "New Mexico",
+        "Utah"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 748,
@@ -4276,7 +5306,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4287,6 +5318,29 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alaska",
+        "Arkansas",
+        "Colorado",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Minnesota",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "South Dakota",
+        "Texas",
+        "Washington",
+        "Wisconsin",
+        "Wyoming"
+      ],
       "employeeRange": {
         "min": 200,
         "max": 748,
@@ -4319,7 +5373,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4330,6 +5385,59 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      ],
       "employeeRange": {
         "min": 750,
         "max": 999,
@@ -4371,7 +5479,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4382,6 +5491,59 @@
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [],
+      "states": [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+      ],
       "employeeRange": {
         "min": 1000,
         "max": 8000,
@@ -4418,7 +5580,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4431,6 +5594,7 @@
       "countries": [
         "Canada"
       ],
+      "states": [],
       "employeeRange": {
         "min": 50,
         "max": 199,
@@ -4468,7 +5632,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4481,6 +5646,7 @@
       "countries": [
         "Canada"
       ],
+      "states": [],
       "employeeRange": {
         "min": 200,
         "max": 999,
@@ -4513,7 +5679,8 @@
       "flags": {
         "evaluating": false,
         "updated": true,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4526,6 +5693,7 @@
       "countries": [
         "Canada"
       ],
+      "states": [],
       "employeeRange": {
         "min": 1000,
         "max": 8000,
@@ -4552,7 +5720,8 @@
       "flags": {
         "evaluating": false,
         "updated": true,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     },
     {
@@ -4599,6 +5768,7 @@
         "Uruguay",
         "Venezuela"
       ],
+      "states": [],
       "employeeRange": {
         "min": 20,
         "max": 8000,
@@ -4629,7 +5799,8 @@
       "flags": {
         "evaluating": false,
         "updated": false,
-        "ownership": false
+        "ownership": false,
+        "rad": false
       }
     }
   ]

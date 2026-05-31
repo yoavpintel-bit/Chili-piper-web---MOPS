@@ -738,12 +738,15 @@
 
             {/* TAB 2: VISUAL BLUEPRINT MAP */}
             {activeTab === 'blueprint' && window.BlueprintPanel && (
-              React.createElement(window.BlueprintPanel, {
-                viewMode: blueprintViewMode,
-                setViewMode: setBlueprintViewMode,
-                activeNode: hoveredBlueprintNode,
-                setActiveNode: setHoveredBlueprintNode,
-              })
+              <div className="animate-fadeIn -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 -my-6 lg:-my-4">
+                {React.createElement(window.BlueprintPanel, {
+                  viewMode: blueprintViewMode,
+                  setViewMode: setBlueprintViewMode,
+                  activeNode: hoveredBlueprintNode,
+                  setActiveNode: setHoveredBlueprintNode,
+                  headerOffset: journeyStickyTop,
+                })}
+              </div>
             )}
             {activeTab === 'blueprint' && !window.BlueprintPanel && (
               <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading blueprint…</div>

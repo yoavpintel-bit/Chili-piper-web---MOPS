@@ -1,7 +1,7 @@
 /* global React */
 const { useState, useEffect, useMemo } = React;
 
-const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260531f';
+const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260601h';
 const SPREADSHEET_URL =
   'https://docs.google.com/spreadsheets/d/1sUUDp7n0uwrYDKZZMmBwVNe2-8sQEwzEKMWW47IgYFk/edit?gid=837037962#gid=837037962';
 
@@ -18,9 +18,12 @@ const REGIONS = [
 
 function segmentLabel(rule) {
   return rule.segmentLabel || String(rule.name || '')
-    .replace(/\s*\((evaluating|updated|AAEs|RAD)\)\s*/gi, '')
-    .replace(/\s*-\s*RAD\s*$/i, '')
+    .replace(/\s*\((evaluating|updated|AAEs)\)\s*/gi, '')
     .trim();
+}
+
+function isRadRule(rule) {
+  return Boolean(rule.flags?.rad) || /\bRAD\b/i.test(rule.name || '') || /-\s*RAD\s*$/i.test(rule.name || '');
 }
 
 function parseRangeFromName(name) {
@@ -72,9 +75,14 @@ function RegionTile({ region, count, active, onClick }) {
   );
 }
 
-function SegmentRow({ rule, open, onToggle, pinned, onPin }) {
+function SegmentRow({ rule, open, onToggle, pinned, onPin, regionId }) {
   const label = segmentLabel(rule);
+  const rad = isRadRule(rule);
   const names = memberNames(rule);
+  const geoLabel = regionId === 'us' ? 'States' : 'Countries';
+  const geoValues = regionId === 'us'
+    ? (rule.states?.length ? rule.states : rule.countries)
+    : rule.countries;
 
   return (
     <div className={`rounded-2xl border-2 overflow-hidden transition-all ${open ? 'border-[#E2004F] bg-white shadow-md' : 'border-[#EBE5D9] bg-white'}`}>
@@ -84,12 +92,24 @@ function SegmentRow({ rule, open, onToggle, pinned, onPin }) {
           onClick={onToggle}
           className="flex-1 text-left px-4 py-4 min-w-0"
         >
-          <p className="text-sm font-extrabold text-[#222121] leading-snug pr-2">{label}</p>
+          <div className="flex flex-wrap items-center gap-2 pr-2">
+            <p className="text-sm font-extrabold text-[#222121] leading-snug">{label}</p>
+            {rad && (
+              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
+                RAD
+              </span>
+            )}
+          </div>
           {names.length > 0 && !open && (
             <p className="text-xs text-slate-500 mt-1 truncate">{names.join(' · ')}</p>
           )}
           {rule.employeeRange?.label && (
             <p className="text-[11px] text-slate-400 mt-1">Employees {rule.employeeRange.label}</p>
+          )}
+          {!open && geoValues?.length > 0 && (
+            <p className="text-[11px] text-slate-400 mt-1 truncate">
+              {geoValues.length} {geoLabel.toLowerCase()}
+            </p>
           )}
         </button>
         <button
@@ -131,15 +151,18 @@ function SegmentRow({ rule, open, onToggle, pinned, onPin }) {
               <p className="text-xs text-rose-600">No members listed</p>
             )}
           </div>
-          {rule.countries?.length > 0 && (
+          {geoValues?.length > 0 && (
             <div className="mt-4">
               <p className="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider mb-2">
-                Countries ({rule.countries.length})
+                {geoLabel} ({geoValues.length})
               </p>
               <p className="text-xs text-slate-600 leading-relaxed">
-                {rule.countries.join(' · ')}
+                {geoValues.join(' · ')}
               </p>
             </div>
+          )}
+          {regionId === 'us' && !geoValues?.length && (
+            <p className="mt-4 text-xs text-slate-400 italic">No state list in router conditions</p>
           )}
         </div>
       )}
@@ -295,6 +318,7 @@ function TeamsCountriesPanel() {
                 <SegmentRow
                   key={rule.id}
                   rule={rule}
+                  regionId={regionId}
                   open={openIds.includes(rule.id)}
                   pinned={pinnedIds.includes(rule.id)}
                   onToggle={() => toggleOpen(rule.id)}
