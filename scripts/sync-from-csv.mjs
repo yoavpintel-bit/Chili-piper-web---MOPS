@@ -28,12 +28,22 @@ function resolveInputPaths() {
   if (env) {
     return env.split(path.delimiter).map((p) => p.trim()).filter(Boolean);
   }
-  const defaults = [
-    path.join(process.env.HOME || '', 'Downloads/routing_log_export_1779801577558.csv'),
-    path.join(process.env.HOME || '', 'Downloads/Concierge Logs Export.csv'),
-    path.join(process.env.HOME || '', 'Downloads/routing_log_export_1779869041851.csv'),
-  ];
-  return defaults.filter((p) => fs.existsSync(p));
+  const downloads = path.join(process.env.HOME || '', 'Downloads');
+  const routingExports = fs
+    .readdirSync(downloads)
+    .filter((f) => /^routing_log_export_\d+\.csv$/i.test(f))
+    .map((f) => path.join(downloads, f))
+    .filter((p) => fs.existsSync(p))
+    .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
+
+  const concierge = path.join(downloads, 'Concierge Logs Export.csv');
+  const picked = [];
+  if (routingExports.length) picked.push(routingExports[0]);
+  for (const p of routingExports.slice(1, 4)) {
+    if (!picked.includes(p)) picked.push(p);
+  }
+  if (fs.existsSync(concierge) && !picked.includes(concierge)) picked.push(concierge);
+  return picked;
 }
 
 function main() {

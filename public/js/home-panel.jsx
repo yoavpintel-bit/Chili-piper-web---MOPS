@@ -9,11 +9,11 @@ const ExternalLinkIcon = () => (
 const PORTAL_TABS = [
   { id: 'process', icon: '📖', label: 'Interactive Story', desc: 'Scroll-through lead journey with a live visual simulator for each pipeline stage.' },
   { id: 'blueprint', icon: '🗺️', label: 'Visual Blueprint Map', desc: 'Clickable Concierge → Marketo → Distro flowchart with business, technical, and hybrid views.' },
-  { id: 'simulator', icon: '🧪', label: 'Scenario Playground', desc: 'What-if routing sandbox — tweak enrichment, booking, RingLead, and Distro inputs.' },
+  { id: 'simulator', icon: '🧪', label: 'Scenario Playground', desc: 'Step-by-step routing game — answer each question and watch what happens at every stage.' },
   { id: 'playbook', icon: '📋', label: 'Technical Playbook', desc: 'Scenarios A–I reference cards, module comparison matrix, and routing guardrails.' },
-  { id: 'fields', icon: '🔑', label: 'Field Mappings', desc: 'API field dictionary: enrichment variables, Chili Piper event fields, and Salesforce destinations.' },
   { id: 'teams', icon: '🌍', label: 'Teams & Countries', desc: 'Inbound router by region — segment rules and team rosters (column I).' },
   { id: 'operations', icon: '📊', label: 'Catch-All Dashboard', desc: 'Catch-All KPIs, trends, MOPS review queue, and Scenario F monitoring.' },
+  { id: 'fields', icon: '🔑', label: 'Field Mappings', desc: 'API field dictionary: enrichment variables, Chili Piper event fields, and Salesforce destinations.' },
 ];
 
 const SOURCE_LINKS = [

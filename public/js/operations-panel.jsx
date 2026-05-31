@@ -362,8 +362,26 @@ function OperationsPanel({ initialDays = 30, onOpenScenario }) {
   const wow = kpi.wowChangePct;
   const insights = aggregates?.insights || [];
 
+  const syncAgeHours = meta?.lastSyncAt
+    ? (Date.now() - new Date(meta.lastSyncAt).getTime()) / 3600000
+    : null;
+  const isStaleSync = syncAgeHours != null && syncAgeHours > 26;
+  const dataMaxDay = aggregates?.dateRange?.max
+    ? new Date(aggregates.dateRange.max).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : null;
+
   return (
     <div className="space-y-6 animate-fadeIn text-left">
+      {isStaleSync && (
+        <div className="bg-amber-50 border border-amber-300 rounded-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-amber-900">
+            <span className="font-extrabold">Data may be stale.</span>{' '}
+            Last sync was {Math.round(syncAgeHours)}h ago
+            {dataMaxDay ? ` — newest record: ${dataMaxDay}` : ''}.
+            The daily GitHub Action refreshes this dashboard when <code className="bg-white px-1 rounded text-xs">CHILI_PIPER_API_KEY</code> is configured.
+          </p>
+        </div>
+      )}
       <div className="bg-gradient-to-r from-[#FFF0F3] to-white border border-[#FFD2DB] rounded-3xl p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>

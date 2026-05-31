@@ -2,7 +2,8 @@ name: Daily Catch-All Sync
 
 on:
   schedule:
-    - cron: '0 7 * * *'
+    # 09:00 Israel (IDT, UTC+3) ≈ 06:00 UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       full_backfill:
@@ -40,12 +41,15 @@ jobs:
           npm run merge:workato || true
           npm run build:aggregates
           node scripts/publish-data.mjs
+          npm run build:router-teams || true
+          node scripts/sync-pages-root.mjs
 
       - name: Commit and push data updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/catch_all public/data/catch_all
+          git add data/catch_all public/data/catch_all data/router_teams public/data/router_teams
+          git add index.html js/ data/ 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No data changes"
             exit 0

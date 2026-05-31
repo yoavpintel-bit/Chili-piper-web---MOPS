@@ -70,7 +70,7 @@ const OUTCOME_STYLES = {
     node: 'bg-amber-50 border-amber-300 text-amber-900',
     arrow: 'text-amber-400',
   },
-  catch-all: {
+  'catch-all': {
     border: 'border-l-[#E2004F]',
     badge: 'bg-[#FFF0F3] text-[#E2004F] border-[#FFD2DB]',
     node: 'bg-[#FFF0F3] border-[#FFD2DB] text-[#E2004F]',
@@ -300,7 +300,7 @@ function VisualForm() {
           <path d="M10 20 C 30 10, 45 40, 30 60 C 15 80, 5 50, 10 20 Z" fill="#EFA94A" opacity="0.8" />
           <path d="M50 20 L53 35 L68 32 L58 42 L72 50 L57 52 L62 67 L50 56 L38 67 L43 52 L28 50 L42 42 L32 32 L47 35 Z" fill="#E2004F" />
         </svg>
-        <span className="relative z-10 text-white font-extrabold text-sm">bob</span>
+        <span className="relative z-10 text-white font-extrabold text-sm">HiBob</span>
       </div>
     </div>
   </div>
@@ -739,7 +739,7 @@ function JourneyStepCards({
             id={step.id}
             ref={(el) => { if (stepRefs) stepRefs.current[step.id] = el; }}
             onClick={() => scrollToStep(step.id)}
-            className={`rounded-3xl border-2 transition-all duration-300 cursor-pointer overflow-hidden ${
+            className={`rounded-3xl border-2 transition-all duration-300 cursor-pointer overflow-hidden scroll-mt-28 ${
               isActive
                 ? 'border-[#E2004F] shadow-xl scale-[1.01] bg-white'
                 : 'border-[#EBE5D9] bg-white/80 hover:border-slate-400 hover:shadow-md'

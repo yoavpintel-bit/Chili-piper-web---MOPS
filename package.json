@@ -10,6 +10,7 @@
     "sync:mcp-file": "node scripts/sync-from-mcp-file.mjs",
     "build:aggregates": "node scripts/build-aggregates.mjs",
     "build:router-teams": "node scripts/build-router-teams.mjs",
+    "refresh:router-teams": "node scripts/refresh-router-teams-from-mcp.mjs",
     "merge:workato": "node scripts/merge-workato.mjs",
     "sync": "node scripts/run-sync.mjs",
     "publish": "node scripts/publish-data.mjs",

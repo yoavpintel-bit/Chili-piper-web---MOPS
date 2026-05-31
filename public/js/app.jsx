@@ -1,4 +1,4 @@
-    const { useState, useEffect, useRef, useMemo } = React;
+    const { useState, useEffect, useRef } = React;
 
     // High-fidelity vector SVGs representing system badges
     const BobIcon = () => (
@@ -358,6 +358,17 @@
       { field: 'Router_Name_CP__c', source: 'Chili Piper Router', dest: 'Salesforce Activity', purpose: 'Captures the Concierge or Distro router name' }
     ];
 
+    const NAV_TABS = [
+      { id: 'home', label: 'Home', accent: true },
+      { id: 'process', label: 'Interactive Story', short: 'Story' },
+      { id: 'blueprint', label: 'Visual Blueprint', short: 'Blueprint' },
+      { id: 'simulator', label: 'Scenario Playground', short: 'Playground' },
+      { id: 'playbook', label: 'Technical Playbook', short: 'Playbook' },
+      { id: 'teams', label: 'Teams & Countries', short: 'Teams' },
+      { id: 'operations', label: 'Catch-All Dashboard', short: 'Catch-All', accent: true },
+      { id: 'fields', label: 'Field Mappings', short: 'Fields' },
+    ];
+
     function App() {
       const VALID_TABS = ['home', 'process', 'blueprint', 'simulator', 'playbook', 'fields', 'teams', 'operations'];
       const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
@@ -366,6 +377,17 @@
       const initialOpsDays = Number(params.get('days')) || 7;
 
       const [activeTab, setActiveTab] = useState(initialTab);
+      const [, panelLoadTick] = useState(0);
+
+      useEffect(() => {
+        const id = setInterval(() => {
+          setPanelLoadTick((t) => t + 1);
+          if (window.HomePanel && window.BlueprintPanel && window.TeamsCountriesPanel && window.OperationsPanel) {
+            clearInterval(id);
+          }
+        }, 100);
+        return () => clearInterval(id);
+      }, []);
       const [opsDays, setOpsDays] = useState(initialOpsDays);
 
       const syncTabUrl = (tab, extra = {}) => {
@@ -400,76 +422,95 @@
       const [expandedBR, setExpandedBR] = useState({ step1: true, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
       const [expandedTS, setExpandedTS] = useState({ step1: false, step2: false, step3: false, step4: false, step5: false, step6: false, step7: false });
 
-      // Simulation State
-      const [simFormType, setSimFormType] = useState('RAD');
-      const [simEmail, setSimEmail] = useState('yoav@hitest.io');
-      const [simZoominfo, setSimZoominfo] = useState('success');
-      const [simEmployees, setSimEmployees] = useState(350);
-      const [simIsExclusion, setSimIsExclusion] = useState('no');
-      const [simSfdcOwner, setSimSfdcOwner] = useState('no_owner');
-      const [simBooksMeeting, setSimBooksMeeting] = useState('yes');
-      const [simRingLead, setSimRingLead] = useState('pass');
-      const [simDistroRule, setSimDistroRule] = useState('match');
-
       const scrollContainerRef = useRef(null);
       const stepRefs = useRef({});
 
-      // Lock current step logic into central container tracking (for iframes on Google Sites)
+      const usesJourneyContainerScroll = () => {
+        const container = scrollContainerRef.current;
+        if (!container || window.innerWidth < 1024) return false;
+        return container.scrollHeight > container.clientHeight + 1;
+      };
+
+      // Track active step from container scroll (desktop) or window scroll (mobile)
       useEffect(() => {
         if (activeTab !== 'process') return;
 
-        const container = scrollContainerRef.current;
-        if (!container) return;
-
         let ticking = false;
+
+        const updateActiveStep = () => {
+          const container = scrollContainerRef.current;
+          const contained = usesJourneyContainerScroll();
+          const triggerY = contained && container
+            ? container.getBoundingClientRect().top + 160
+            : 180;
+
+          let currentActiveId = JOURNEY_STEPS[0]?.id || 'step1';
+
+          if (contained && container) {
+            const containerTop = container.getBoundingClientRect().top;
+            for (let i = 0; i < JOURNEY_STEPS.length; i++) {
+              const step = JOURNEY_STEPS[i];
+              const el = stepRefs.current[step.id];
+              if (el) {
+                const rect = el.getBoundingClientRect();
+                if (rect.bottom - containerTop > 160) {
+                  currentActiveId = step.id;
+                  break;
+                }
+              }
+            }
+          } else {
+            for (let i = 0; i < JOURNEY_STEPS.length; i++) {
+              const step = JOURNEY_STEPS[i];
+              const el = stepRefs.current[step.id];
+              if (el && el.getBoundingClientRect().top <= triggerY) {
+                currentActiveId = step.id;
+              }
+            }
+          }
+
+          setActiveStepId(currentActiveId);
+          ticking = false;
+        };
 
         const handleScroll = () => {
           if (!ticking) {
-            window.requestAnimationFrame(() => {
-              const containerRect = container.getBoundingClientRect();
-              const triggerPoint = containerRect.top + 160; 
-
-              let currentActiveId = JOURNEY_STEPS.id;
-
-              for (let i = 0; i < JOURNEY_STEPS.length; i++) {
-                const step = JOURNEY_STEPS[i];
-                const el = stepRefs.current[step.id];
-                if (el) {
-                  const rect = el.getBoundingClientRect();
-                  // Check if the relative bottom of the card is still below our trigger threshold
-                  if (rect.bottom - containerRect.top > 160) {
-                    currentActiveId = step.id;
-                    break;
-                  }
-                }
-              }
-
-              setActiveStepId(currentActiveId);
-              ticking = false;
-            });
             ticking = true;
+            window.requestAnimationFrame(updateActiveStep);
           }
         };
 
-        container.addEventListener('scroll', handleScroll, { passive: true });
+        const container = scrollContainerRef.current;
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll, { passive: true });
+        if (container) container.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
 
-        return () => container.removeEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+          window.removeEventListener('resize', handleScroll);
+          if (container) container.removeEventListener('scroll', handleScroll);
+        };
       }, [activeTab]);
 
       const scrollToStep = (id) => {
         const el = stepRefs.current[id];
         const container = scrollContainerRef.current;
-        if (el && container) {
+        if (!el) return;
+        setActiveStepId(id);
+
+        if (usesJourneyContainerScroll() && container) {
           const elRect = el.getBoundingClientRect();
           const containerRect = container.getBoundingClientRect();
-          const targetScrollTop = container.scrollTop + (elRect.top - containerRect.top) - 16;
-          
           container.scrollTo({
-            top: targetScrollTop,
-            behavior: 'smooth'
+            top: container.scrollTop + (elRect.top - containerRect.top) - 16,
+            behavior: 'smooth',
           });
-          setActiveStepId(id);
+        } else {
+          window.scrollTo({
+            top: el.getBoundingClientRect().top + window.scrollY - 120,
+            behavior: 'smooth',
+          });
         }
       };
 
@@ -481,254 +522,64 @@
         setExpandedTS(prev => ({ ...prev, [id]: !prev[id] }));
       };
 
-      // Live calculation for Scenario Playground
-      const calculatedSimulationResult = useMemo(() => {
-        if (simEmail.includes('test') || simEmail.includes('qa')) {
-          return {
-            scenario: 'QA/Test Route',
-            type: 'Test Allowlist',
-            desc: 'This lead is recognized as internal testing or QA. Chili Piper Concierge redirects to a specialized QA calendar.',
-            badgeColor: 'bg-amber-100 text-amber-700 border-amber-300',
-            flow: ['Form Submitted', 'ZoomInfo Triggered', 'Spam/Test Check: TEST DETECTED', 'QA Calendar Shown'],
-            systems: ['website', 'concierge']
-          };
-        }
-
-        if (simIsExclusion === 'yes') {
-          return {
-            scenario: 'Scenario F: Excluded Account (No Live Routing)',
-            type: 'Exclusion Match',
-            desc: 'Customer, Churn, or Not Relevant accounts are bypassed. No calendar is shown. Handled in Marketo/SFDC.',
-            badgeColor: 'bg-rose-100 text-rose-700 border-rose-300',
-            flow: ['Form Submitted', 'Exclusion Match: Customer/Churn detected', 'Parallel Marketo Flow', 'No Chili Piper Calendar'],
-            systems: ['website', 'marketo', 'salesforce']
-          };
-        }
-
-        if (simSfdcOwner === 'has_owner') {
-          return {
-            scenario: 'Scenario E: Existing Salesforce Owner Routed',
-            type: 'Owner Override',
-            desc: 'Salesforce contains a matching active account owner. The live routing engine bypasses round-robin and suggests the existing owner\'s calendar.',
-            badgeColor: 'bg-teal-100 text-teal-700 border-teal-300',
-            flow: ['Form Submitted', 'Enrichment Step', 'Ownership Check: MATCH FOUND', 'Direct Calendar Route'],
-            systems: ['website', 'concierge', 'salesforce']
-          };
-        }
-
-        if (simZoominfo === 'failed') {
-          if (simEmployees >= 20 && simEmployees <= 8000) {
-            if (simBooksMeeting === 'yes') {
-              return {
-                scenario: 'Scenario D ➡️ Scenario A (Manual Fallback & Booked)',
-                type: 'Partial Enrichment Success',
-                desc: 'ZoomInfo failed, triggering the 2nd form. The user manually entered valid employees (20-8000) and booked successfully.',
-                badgeColor: 'bg-indigo-100 text-indigo-700 border-indigo-300',
-                flow: ['Form Submitted', 'Enrichment Failed', '2nd Step Form Displayed', 'Manual Input Validated', 'Chili Piper Concierge Live', 'Meeting Booked'],
-                systems: ['website', 'second_form', 'concierge', 'marketo', 'salesforce']
-              };
-            } else {
-              return {
-                scenario: 'Scenario D ➡️ Scenario B (Manual Fallback, Not Booked)',
-                type: 'Partial Enrichment Unbooked',
-                desc: 'ZoomInfo failed, triggering the 2nd form. User entered valid employee range, saw the calendar, but closed the window without booking. Sent to Distro.',
-                badgeColor: 'bg-sky-100 text-sky-700 border-sky-300',
-                flow: ['Form Submitted', 'Enrichment Failed', '2nd Step Form Displayed', 'Manual Input Validated', 'Chili Piper Concierge Live', 'User Skipped Booking', 'Marketo MQL Created', 'RingLead Passed', 'Distro Strict Round-Robin'],
-                systems: ['website', 'second_form', 'concierge', 'marketo', 'salesforce', 'ringlead', 'distro']
-              };
-            }
-          } else {
-            return {
-              scenario: 'Scenario D ➡️ Scenario C (Ineligible Fallback)',
-              type: 'Manual Input Out of Range',
-              desc: 'ZoomInfo failed. User manually specified employee size outside the 20-8000 range. Bypassed Concierge directly to Marketo and Distro.',
-              badgeColor: 'bg-amber-100 text-amber-700 border-amber-300',
-              flow: ['Form Submitted', 'Enrichment Failed', '2nd Step Form Displayed', 'Manual Input: Ineligible Size', 'Parallel Marketo Flow', 'RingLead Step', 'Distro Strict Round-Robin'],
-              systems: ['website', 'second_form', 'marketo', 'salesforce', 'ringlead', 'distro']
-            };
-          }
-        }
-
-        if (simEmployees < 20 || simEmployees > 8000) {
-          if (simRingLead === 'fail') {
-            return {
-              scenario: 'Scenario C ➡️ Scenario G (Ineligible, RingLead Fails)',
-              type: 'No Calendar & RingLead Blocked',
-              desc: 'Employee count is out of range. No live calendar. Marketo creates Account but RingLead blocks assignment due to deduplication errors.',
-              badgeColor: 'bg-red-100 text-red-700 border-red-300',
-              flow: ['Form Submitted', 'Enrichment Success: Out of Range', 'No Calendar Shown', 'Parallel Marketo Flow', 'MQL Triggered', 'RingLead Steps: DETECTED DUPLICATE', 'Blocked: Account remains unassigned'],
-              systems: ['website', 'marketo', 'salesforce', 'ringlead']
-            };
-          }
-          if (simDistroRule === 'no_match') {
-            return {
-              scenario: 'Scenario C ➡️ Scenario H (Ineligible, Distro Catch-All)',
-              type: 'No Calendar & Distro Catch-All',
-              desc: 'Employee count is out of range. No live calendar. Backend Distro triggers but cannot match any active region rules, leaving it to MOPS monitoring.',
-              badgeColor: 'bg-yellow-100 text-yellow-700 border-yellow-300',
-              flow: ['Form Submitted', 'Enrichment Success: Out of Range', 'No Calendar Shown', 'Parallel Marketo Flow', 'MQL Triggered', 'RingLead Passed', 'Distro Routing: NO MATCHING RULE', 'Catch-All: Manual Review'],
-              systems: ['website', 'marketo', 'salesforce', 'ringlead', 'distro']
-            };
-          }
-          return {
-            scenario: 'Scenario C: Ineligible Lead Routed via Backend Distro',
-            type: 'Standard Backend Routing',
-            desc: 'Lead is not eligible for live web calendar due to size. It gets processed by Marketo, passes RingLead, and is assigned by Distro backend round-robin.',
-            badgeColor: 'bg-blue-100 text-blue-700 border-blue-300',
-            flow: ['Form Submitted', 'Enrichment Success: Out of Range', 'No Calendar Shown', 'Parallel Marketo Flow', 'MQL Triggered', 'RingLead Passed', 'Distro Assigned (Strict Round-Robin)'],
-            systems: ['website', 'marketo', 'salesforce', 'ringlead', 'distro']
-          };
-        }
-
-        if (simBooksMeeting === 'yes') {
-          return {
-            scenario: 'Scenario A: Pure Inbound Gold Path (Enriched & Booked)',
-            type: 'Perfect Live Match',
-            desc: 'The gold standard RevOps scenario. The prospect gets enriched, passes spam/ownership checks, matches CP Concierge rules, and books the Disco Call.',
-            badgeColor: 'bg-emerald-100 text-[#1F7A55] border-emerald-300',
-            flow: ['Form Submitted', 'ZoomInfo Enriched (20-8000)', 'Chili Piper Concierge Live', 'Segment Rule Match', 'Calendar Chosen', 'Salesforce Activity Created', 'Account marked Prospect'],
-            systems: ['website', 'zoominfo', 'concierge', 'marketo', 'salesforce']
-          };
-        } else {
-          if (simRingLead === 'fail') {
-            return {
-              scenario: 'Scenario B ➡️ Scenario G (Unbooked & RingLead Blocked)',
-              type: 'Failed Backend Sync',
-              desc: 'Prospect qualifies but does not book. The backend fallback routing triggers, but RingLead fails to process matching rules.',
-              badgeColor: 'bg-rose-100 text-rose-700 border-rose-300',
-              flow: ['Form Submitted', 'ZoomInfo Enriched', 'Chili Piper Concierge Live', 'User Left Without Booking', 'Parallel Marketo Flow', 'RingLead Step: FAILURE', 'Blocked: Manual review required'],
-              systems: ['website', 'zoominfo', 'concierge', 'marketo', 'salesforce', 'ringlead']
-            };
-          }
-          if (simDistroRule === 'no_match') {
-            return {
-              scenario: 'Scenario B ➡️ Scenario H (Unbooked & Distro Catch-All)',
-              type: 'Failed Distro Segment Matching',
-              desc: 'Prospect qualifies but does not book. The backend fallback routing triggers, passes RingLead, but Distro finds no matching territory rule.',
-              badgeColor: 'bg-orange-100 text-orange-700 border-orange-300',
-              flow: ['Form Submitted', 'ZoomInfo Enriched', 'Chili Piper Concierge Live', 'User Left Without Booking', 'Parallel Marketo Flow', 'RingLead Passed', 'Distro Steps: NO MATCH FOUND', 'Catch-All: Monitored by MOPS'],
-              systems: ['website', 'zoominfo', 'concierge', 'marketo', 'salesforce', 'ringlead', 'distro']
-            };
-          }
-
-          return {
-            scenario: 'Scenario B: Enriched Lead Qualifies but Does Not Book',
-            type: 'Backend Fallback Assigned',
-            desc: 'Prospect qualifies but doesn\'t book online. Behind the scenes, Marketo, RingLead, and Chili Piper Distro successfully process the lead and assign it to the next rep in the round-robin.',
-            badgeColor: 'bg-violet-100 text-violet-700 border-violet-300',
-            flow: ['Form Submitted', 'ZoomInfo Enriched', 'Chili Piper Concierge Live', 'User Left Without Booking', 'Parallel Marketo Flow', 'RingLead Passed', 'Distro Rules Checked', 'Distro Assigned (Strict Round-Robin)'],
-            systems: ['website', 'zoominfo', 'concierge', 'marketo', 'salesforce', 'ringlead', 'distro']
-          };
-        }
-      }, [simEmail, simEmployees, simZoominfo, simIsExclusion, simSfdcOwner, simBooksMeeting, simRingLead, simDistroRule]);
 
       return (
         <div className="min-h-screen bg-[#FFFDF9] text-[#222121] font-sans antialiased selection:bg-[#FFF0F3] selection:text-[#E2004F]">
-          
-          {/* Bob Premium Header */}
-          <header className="border-b border-[#F0EAE1] bg-white sticky top-0 z-50 shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-              
-              {/* Logo Brand Area */}
-              <div className="flex items-center space-x-3">
-                <div className="bg-[#E2004F] p-2.5 rounded-2xl shadow-sm text-white flex items-center justify-center">
-                  <BobIcon />
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xl font-extrabold text-[#222121] tracking-tight">hibob</span>
-                    <span className="text-xs bg-[#FFF0F3] text-[#E2004F] font-bold px-2 py-0.5 rounded-full border border-[#FFD2DB]">
-                      RevOps Engine
-                    </span>
+
+          <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EBE5D9] shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between gap-4 py-3 border-b border-[#F0EAE1]/80">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#E2004F] to-[#ff4d7a] text-white flex items-center justify-center shadow-md shrink-0">
+                    <BobIcon />
                   </div>
-                  <p className="text-xs text-slate-500 font-medium">Chili Piper &amp; Marketo Integration Blueprint</p>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xl font-extrabold text-[#222121] tracking-tight">HiBob</span>
+                      <span className="text-[10px] bg-[#FFF0F3] text-[#E2004F] font-bold px-2 py-0.5 rounded-full border border-[#FFD2DB]">
+                        RevOps
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 font-medium truncate">
+                      Chili piper in HiBob — all you need to know
+                    </p>
+                    {typeof window !== 'undefined' && window.__PORTAL_BUILD__ && (
+                      <p className="text-[9px] text-slate-400 font-mono mt-0.5">build {window.__PORTAL_BUILD__}</p>
+                    )}
+                  </div>
                 </div>
+                <a
+                  href="?tab=operations&days=7"
+                  onClick={(e) => { e.preventDefault(); goToCatchAllDashboard(7); }}
+                  className="hidden sm:inline-flex text-xs font-bold text-[#E2004F] bg-[#FFF0F3] border border-[#FFD2DB] px-3 py-2 rounded-xl hover:bg-white shrink-0"
+                >
+                  Catch-All ↗
+                </a>
               </div>
-              
-              {/* Main Navigation tabs - fully in English */}
-              <div className="flex flex-wrap bg-[#F5F1E9] p-1 rounded-2xl border border-[#EBE5D9]">
-                <button
-                  onClick={() => navigateToTab('home')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'home'
-                      ? 'bg-[#E2004F] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => navigateToTab('process')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'process'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Interactive Story (Scroll)
-                </button>
-                <button
-                  onClick={() => navigateToTab('blueprint')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'blueprint'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Visual Blueprint Map
-                </button>
-                <button
-                  onClick={() => navigateToTab('simulator')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'simulator'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Scenario Playground
-                </button>
-                <button
-                  onClick={() => navigateToTab('playbook')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'playbook'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Technical Playbook
-                </button>
-                <button
-                  onClick={() => navigateToTab('fields')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'fields'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Field Mappings
-                </button>
-                <button
-                  onClick={() => navigateToTab('teams')}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'teams'
-                      ? 'bg-[#222121] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Teams &amp; Countries
-                </button>
-                <button
-                  data-tab-operations
-                  onClick={() => goToCatchAllDashboard(7)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === 'operations'
-                      ? 'bg-[#E2004F] text-white shadow-sm'
-                      : 'text-[#5A5755] hover:text-[#222121]'
-                  }`}
-                >
-                  Catch-All Dashboard
-                </button>
-              </div>
+              <nav className="flex gap-1 overflow-x-auto py-2.5 custom-scroll -mx-1 px-1" aria-label="Main">
+                {NAV_TABS.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  const isOps = tab.id === 'operations';
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      data-tab-operations={isOps || undefined}
+                      onClick={() => (isOps ? goToCatchAllDashboard(7) : navigateToTab(tab.id))}
+                      className={`shrink-0 px-3 py-2 rounded-xl text-[11px] font-bold transition-all whitespace-nowrap ${
+                        isActive
+                          ? tab.accent
+                            ? 'bg-[#E2004F] text-white shadow-sm'
+                            : 'bg-[#222121] text-white shadow-sm'
+                          : 'text-[#5A5755] hover:bg-[#F5F1E9] hover:text-[#222121]'
+                      }`}
+                    >
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden">{tab.short || tab.label}</span>
+                    </button>
+                  );
+                })}
+              </nav>
             </div>
           </header>
 
@@ -805,7 +656,7 @@
                   {/* SCROLLABLE RIGHT COLUMN: STORY CARDS (7 COLS) */}
                   <div 
                     ref={scrollContainerRef}
-                    className="lg:col-span-7 space-y-6 h-[680px] overflow-y-auto pr-3 custom-scroll text-left"
+                    className="lg:col-span-7 space-y-6 lg:h-[680px] max-h-none overflow-visible lg:overflow-y-auto pr-0 lg:pr-3 custom-scroll text-left"
                   >
                     {window.JourneyStepCards ? (
                       React.createElement(window.JourneyStepCards, {
@@ -863,141 +714,12 @@
               <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading blueprint…</div>
             )}
 
-            {/* TAB 3: SCENARIO PLAYGROUND / SIMULATOR */}
-            {activeTab === 'simulator' && (
-              <div className="space-y-8 animate-fadeIn text-left">
-                <div className="bg-[#FAF8F5] border border-[#EBE5D9] p-5 rounded-3xl relative overflow-hidden">
-                  <div className="max-w-2xl mb-6">
-                    <span className="text-[10px] font-extrabold text-[#E2004F] bg-[#FFF0F3] px-3 py-1 rounded-full border border-[#FFD2DB] uppercase tracking-wider">Sandbox Simulator</span>
-                    <h3 className="text-xl font-extrabold text-[#222121] mt-3">Interactive Logic Playground</h3>
-                    <p className="text-xs text-slate-500 mt-1">Adjust the parameters below to preview how a lead flows through the platform. The systems checklist will dynamically highlight which systems are engaged!</p>
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    {/* Simulator Control board (5 Cols) */}
-                    <div className="lg:col-span-5 bg-white p-5 rounded-2xl border border-[#EBE5D9] space-y-4">
-                      <h4 className="text-xs font-extrabold uppercase text-[#222121] tracking-wider border-b pb-2 flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#E2004F] animate-pulse" />Configure Lead Telemetry</h4>
-                      
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Form Category</label>
-                          <select value={simFormType} onChange={(e) => setSimFormType(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2 font-medium">
-                            <option value="RAD">Request a Demo (RAD)</option>
-                            <option value="WAD">Watch a Demo (WAD)</option>
-                            <option value="Pricing">Pricing Page</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Email / Domain</label>
-                          <input type="text" value={simEmail} onChange={(e) => setSimEmail(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2 font-mono" />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">ZoomInfo Status</label>
-                          <select value={simZoominfo} onChange={(e) => setSimZoominfo(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2">
-                            <option value="success">Successfully Enriched</option>
-                            <option value="failed">Failed / No Data</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Employee Count</label>
-                          <input type="number" value={simEmployees} onChange={(e) => setSimEmployees(Number(e.target.value))} className="w-full bg-white border rounded-lg p-2 font-mono" />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Customer / Exclusion</label>
-                          <select value={simIsExclusion} onChange={(e) => setSimIsExclusion(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2">
-                            <option value="no">Not Excluded</option>
-                            <option value="yes">Exclusion Flag Matches</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">CRM Preexisting Owner</label>
-                          <select value={simSfdcOwner} onChange={(e) => setSimSfdcOwner(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2">
-                            <option value="no_owner">No existing Owner</option>
-                            <option value="has_owner">Active Owner Found</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs border-t pt-4">
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">User Books Calendar?</label>
-                          <select value={simBooksMeeting} onChange={(e) => setSimBooksMeeting(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2">
-                            <option value="yes">Yes (Booked Slot)</option>
-                            <option value="no">No (Abandoned)</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">RingLead Match</label>
-                          <select value={simRingLead} onChange={(e) => setSimRingLead(e.target.value)} className="w-full bg-slate-50 border rounded-lg p-2">
-                            <option value="pass">Passes duplication</option>
-                            <option value="fail">Fails (Duplicate Flagged)</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Simulator Calculated Results & Trace Systems (7 Cols) */}
-                    <div className="lg:col-span-7 space-y-4">
-                      <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 shadow-inner">
-                        <div className="flex justify-between items-start gap-2">
-                          <div>
-                            <span className="text-[9px] uppercase font-bold text-slate-400">Logic Calculation</span>
-                            <h3 className="text-sm font-extrabold text-slate-800 mt-1"><FormattedText text={calculatedSimulationResult.scenario} /></h3>
-                          </div>
-                          <span className={`text-[10px] px-2.5 py-1 rounded-full font-bold border shrink-0 ${calculatedSimulationResult.badgeColor}`}>{calculatedSimulationResult.type}</span>
-                        </div>
-                        <p className="text-slate-500 text-xs mt-3 leading-relaxed"><FormattedText text={calculatedSimulationResult.desc} /></p>
-
-                        <div className="mt-4 border-t pt-4">
-                          <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-3">Calculated Path trace</h4>
-                          <div className="relative border-l-2 border-slate-200 ml-1 space-y-3.5">
-                            {calculatedSimulationResult.flow.map((step, idx) => (
-                              <div key={idx} className="relative pl-5">
-                                <span className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-[#E2004F] ring-4 ring-white" />
-                                <div className="text-xs font-semibold text-slate-700"><FormattedText text={step} /></div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Checkbox board showing active platforms */}
-                      <div className="bg-white border border-[#EBE5D9] rounded-2xl p-4">
-                        <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wide mb-3">Ecosystem systems Engaged Checklist:</h4>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-[10px] font-bold">
-                          {[
-                            { key: 'website', name: 'Website Form', icon: <BobIcon /> },
-                            { key: 'zoominfo', name: 'ZoomInfo API', icon: <ZoomInfoIcon /> },
-                            { key: 'second_form', name: 'Fallback Form', icon: <BobIcon /> },
-                            { key: 'concierge', name: 'CP Concierge', icon: <ChiliPiperIcon /> },
-                            { key: 'marketo', name: 'Marketo Engine', icon: <MarketoIcon /> },
-                            { key: 'salesforce', name: 'Salesforce CRM', icon: <SalesforceIcon /> },
-                            { key: 'ringlead', name: 'RingLead Dedupe', icon: <RingLeadIcon /> },
-                            { key: 'distro', name: 'CP Distro', icon: <ChiliPiperIcon /> }
-                          ].map((sys) => {
-                            const engaged = calculatedSimulationResult.systems.includes(sys.key);
-                            return (
-                              <div key={sys.key} className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 ${engaged ? 'bg-[#FFF0F3] border-[#E2004F] text-[#E2004F]' : 'bg-slate-50 text-slate-300 opacity-40'}`}>
-                                <span className="flex items-center gap-1">{sys.icon}{sys.name}</span>
-                                <span className="text-[8px] uppercase tracking-wider">{engaged ? '● ENGAGED' : '○ BYPASSED'}</span>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+            {/* TAB 3: SCENARIO PLAYGROUND — step-by-step routing game */}
+            {activeTab === 'simulator' && window.ScenarioGamePanel && (
+              React.createElement(window.ScenarioGamePanel, { FormattedText })
+            )}
+            {activeTab === 'simulator' && !window.ScenarioGamePanel && (
+              <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading scenario game…</div>
             )}
 
             {/* TAB 4: TECHNICAL PLAYBOOK & MATRIX COMPARISON */}

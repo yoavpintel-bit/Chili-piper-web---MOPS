@@ -1,55 +1,23 @@
 /* global React */
 const { useState, useEffect, useMemo } = React;
 
-const DATA_URL = 'data/router_teams/inbound-router-live.json';
+const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260531f';
+const SPREADSHEET_URL =
+  'https://docs.google.com/spreadsheets/d/1sUUDp7n0uwrYDKZZMmBwVNe2-8sQEwzEKMWW47IgYFk/edit?gid=837037962#gid=837037962';
 
-/** Inbound router regions (matches spreadsheet territory groupings) */
 const REGIONS = [
-  {
-    id: 'apj',
-    label: 'APJ',
-    match: (name) => /^APJ\s*\|/i.test(name),
-  },
-  {
-    id: 'dach',
-    label: 'DACH',
-    match: (name) => /^DACH\s*\|/i.test(name),
-  },
-  {
-    id: 'neb',
-    label: 'Nordics / Benelux / EuroWest / Iberia',
-    shortLabel: 'Nordics · Benelux · EuroWest · Iberia',
-    match: (name) => /^(Nordics|Benelux|Western Europe|EuroWest|Iberia)\s*\|/i.test(name),
-  },
-  {
-    id: 'ilcee',
-    label: 'IL/CEE',
-    match: (name) => /^IL\s*&\s*CEE/i.test(name),
-  },
-  {
-    id: 'uki',
-    label: 'UKI & ROW',
-    match: (name) => /^UKI\s*&\s*ROW/i.test(name),
-  },
-  {
-    id: 'us',
-    label: 'US',
-    match: (name) => /^US\s*\|/i.test(name),
-  },
-  {
-    id: 'ca',
-    label: 'Canada',
-    match: (name) => /^Canada\s*\|/i.test(name),
-  },
-  {
-    id: 'latam',
-    label: 'LATAM',
-    match: (name) => /^LATAM\s*\|/i.test(name),
-  },
+  { id: 'ca', label: 'Canada', emoji: '🇨🇦', match: (n) => /^Canada\s*\|/i.test(n), grid: 'col-start-1 row-start-1' },
+  { id: 'us', label: 'United States', emoji: '🇺🇸', match: (n) => /^US\s*\|/i.test(n), grid: 'col-start-1 row-start-2' },
+  { id: 'latam', label: 'LATAM', emoji: '🌎', match: (n) => /^LATAM\s*\|/i.test(n), grid: 'col-start-1 row-start-3' },
+  { id: 'uki', label: 'UKI & ROW', emoji: '🇬🇧', match: (n) => /^UKI\s*&\s*ROW/i.test(n), grid: 'col-start-2 row-start-1' },
+  { id: 'neb', label: 'NEB / Iberia', emoji: '🇪🇺', match: (n) => /^(Nordics|Benelux|Western Europe|EuroWest|Iberia)\s*\|/i.test(n), grid: 'col-start-2 row-start-2' },
+  { id: 'dach', label: 'DACH', emoji: '🇩🇪', match: (n) => /^DACH\s*\|/i.test(n), grid: 'col-start-3 row-start-2' },
+  { id: 'ilcee', label: 'IL & CEE', emoji: '🌍', match: (n) => /^IL\s*&\s*CEE/i.test(n), grid: 'col-start-3 row-start-3' },
+  { id: 'apj', label: 'APJ', emoji: '🌏', match: (n) => /^APJ\s*\|/i.test(n), grid: 'col-start-4 row-start-2 row-span-2' },
 ];
 
-function displayRuleName(name) {
-  return String(name || '')
+function segmentLabel(rule) {
+  return rule.segmentLabel || String(rule.name || '')
     .replace(/\s*\((evaluating|updated|AAEs|RAD)\)\s*/gi, '')
     .replace(/\s*-\s*RAD\s*$/i, '')
     .trim();
@@ -66,42 +34,141 @@ function sortRules(rules) {
     const ra = parseRangeFromName(a.name) ?? 99999;
     const rb = parseRangeFromName(b.name) ?? 99999;
     if (ra !== rb) return ra - rb;
-    return displayRuleName(a.name).localeCompare(displayRuleName(b.name));
+    return segmentLabel(a).localeCompare(segmentLabel(b));
   });
 }
 
 function getRegionForRule(rule) {
-  const name = rule.name || '';
-  return REGIONS.find((r) => r.match(name)) || null;
+  return REGIONS.find((r) => r.match(rule.name || '')) || null;
+}
+
+function memberNames(rule) {
+  const fromColumn = rule.team?.columnI;
+  if (fromColumn) return fromColumn.split(',').map((s) => s.trim()).filter(Boolean);
+  return (rule.team?.members || []).map((m) => m.name).filter(Boolean);
+}
+
+function RegionTile({ region, count, active, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`text-left p-4 rounded-2xl border-2 transition-all min-h-[88px] flex flex-col justify-between ${
+        active
+          ? 'border-[#E2004F] bg-[#FFF0F3] shadow-md ring-2 ring-[#E2004F]/20'
+          : 'border-[#EBE5D9] bg-white hover:border-[#E2004F]/50 hover:shadow-sm'
+      }`}
+    >
+      <span className="text-2xl leading-none">{region.emoji}</span>
+      <div>
+        <span className={`text-sm font-extrabold block leading-tight ${active ? 'text-[#E2004F]' : 'text-[#222121]'}`}>
+          {region.label}
+        </span>
+        <span className="text-[11px] text-slate-400 mt-0.5 block">
+          {count} segment{count !== 1 ? 's' : ''}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function SegmentRow({ rule, open, onToggle, pinned, onPin }) {
+  const label = segmentLabel(rule);
+  const names = memberNames(rule);
+
+  return (
+    <div className={`rounded-2xl border-2 overflow-hidden transition-all ${open ? 'border-[#E2004F] bg-white shadow-md' : 'border-[#EBE5D9] bg-white'}`}>
+      <div className="flex items-stretch">
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex-1 text-left px-4 py-4 min-w-0"
+        >
+          <p className="text-sm font-extrabold text-[#222121] leading-snug pr-2">{label}</p>
+          {names.length > 0 && !open && (
+            <p className="text-xs text-slate-500 mt-1 truncate">{names.join(' · ')}</p>
+          )}
+          {rule.employeeRange?.label && (
+            <p className="text-[11px] text-slate-400 mt-1">Employees {rule.employeeRange.label}</p>
+          )}
+        </button>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onPin(); }}
+          title={pinned ? 'Unpin from compare' : 'Keep open while browsing others'}
+          className={`shrink-0 px-3 border-l border-[#EBE5D9] text-[10px] font-bold ${
+            pinned ? 'bg-[#E2004F] text-white' : 'text-slate-400 hover:bg-[#FAF8F5]'
+          }`}
+        >
+          {pinned ? 'Pinned' : 'Pin'}
+        </button>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="shrink-0 px-4 text-slate-400 font-bold text-lg border-l border-[#EBE5D9] hover:bg-[#FAF8F5]"
+          aria-label={open ? 'Collapse' : 'Expand'}
+        >
+          {open ? '−' : '+'}
+        </button>
+      </div>
+
+      {open && (
+        <div className="px-4 pb-4 pt-0 border-t border-[#F0EAE1] bg-[#FAF8F5]/40 animate-fadeIn">
+          <div className="pt-4">
+            <p className="text-[10px] font-extrabold uppercase text-[#E2004F] tracking-wider mb-2">Team members</p>
+            {names.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {names.map((name) => (
+                  <span
+                    key={name}
+                    className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#FFF0F3] border border-[#FFD2DB] text-[#222121]"
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs text-rose-600">No members listed</p>
+            )}
+          </div>
+          {rule.countries?.length > 0 && (
+            <div className="mt-4">
+              <p className="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider mb-2">
+                Countries ({rule.countries.length})
+              </p>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {rule.countries.join(' · ')}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
 function TeamsCountriesPanel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [regionId, setRegionId] = useState('');
-  const [teamFilter, setTeamFilter] = useState('');
-  const [selectedRuleId, setSelectedRuleId] = useState(null);
-  const [showEvaluating, setShowEvaluating] = useState(true);
+  const [regionId, setRegionId] = useState(null);
+  const [openIds, setOpenIds] = useState([]);
+  const [pinnedIds, setPinnedIds] = useState([]);
 
   useEffect(() => {
     let cancelled = false;
     const embedded = window.__PORTAL_DATA__ && window.__PORTAL_DATA__.routerTeams;
     if (embedded) {
       setData(embedded);
-      setError(null);
       setLoading(false);
       return undefined;
     }
     (async () => {
       try {
-        const res = await fetch(DATA_URL);
-        if (!res.ok) throw new Error('Could not load router teams — run npm run build:router-teams');
+        const res = await fetch(DATA_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Could not load router teams');
         const json = await res.json();
-        if (!cancelled) {
-          setData(json);
-          setError(null);
-        }
+        if (!cancelled) setData(json);
       } catch (e) {
         if (!cancelled) setError(e.message);
       } finally {
@@ -114,285 +181,149 @@ function TeamsCountriesPanel() {
   const routableRules = useMemo(() => {
     if (!data?.rules) return [];
     return data.rules.filter((r) => {
-      if (r.flags?.ownership || r.flags?.spam) return false;
       const n = (r.name || '').toLowerCase();
-      if (n === 'ownership') return false;
+      if (r.flags?.ownership || n === 'ownership') return false;
       if (/customer\/churn|notrelevant|spam|test domain/i.test(n)) return false;
       return getRegionForRule(r) != null;
     });
   }, [data]);
 
+  const regionCounts = useMemo(() => {
+    const m = {};
+    REGIONS.forEach((r) => { m[r.id] = 0; });
+    routableRules.forEach((rule) => {
+      const reg = getRegionForRule(rule);
+      if (reg) m[reg.id] += 1;
+    });
+    return m;
+  }, [routableRules]);
+
   const regionRules = useMemo(() => {
     if (!regionId) return [];
     const region = REGIONS.find((r) => r.id === regionId);
     if (!region) return [];
-    return sortRules(
-      routableRules.filter((rule) => {
-        if (!showEvaluating && rule.flags?.evaluating) return false;
-        return region.match(rule.name);
-      })
-    );
-  }, [routableRules, regionId, showEvaluating]);
+    return sortRules(routableRules.filter((r) => region.match(r.name)));
+  }, [routableRules, regionId]);
 
-  const teamsInRegion = useMemo(() => {
-    const names = new Map();
-    for (const rule of regionRules) {
-      const t = rule.team?.name;
-      if (t) names.set(t, (names.get(t) || 0) + 1);
-    }
-    return [...names.entries()]
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-  }, [regionRules]);
-
-  const filteredSegments = useMemo(() => {
-    if (!teamFilter) return regionRules;
-    return regionRules.filter((r) => r.team?.name === teamFilter);
-  }, [regionRules, teamFilter]);
-
-  const selectedRule = useMemo(
-    () => filteredSegments.find((r) => r.id === selectedRuleId) || null,
-    [filteredSegments, selectedRuleId]
-  );
-
-  const selectRegion = (id) => {
+  const pickRegion = (id) => {
     setRegionId(id);
-    setTeamFilter('');
-    setSelectedRuleId(null);
+    setOpenIds([]);
+    setPinnedIds([]);
   };
 
-  if (loading) {
-    return (
-      <div className="text-center py-16 text-sm text-slate-500 animate-pulse">
-        Loading Teams &amp; Countries…
-      </div>
-    );
-  }
+  const toggleOpen = (id) => {
+    setOpenIds((prev) => {
+      if (prev.includes(id)) return prev.filter((x) => x !== id);
+      return [...prev, id];
+    });
+  };
 
+  const togglePin = (id) => {
+    setPinnedIds((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      if (!prev.includes(id)) {
+        setOpenIds((o) => (o.includes(id) ? o : [...o, id]));
+      }
+      return next;
+    });
+  };
+
+  const activeRegion = REGIONS.find((r) => r.id === regionId);
+  const meta = data?.meta || {};
+
+  if (loading) {
+    return <div className="text-center py-16 text-sm text-slate-500 animate-pulse">Loading…</div>;
+  }
   if (error) {
     return (
       <div className="bg-rose-50 border border-rose-200 rounded-2xl p-6 text-sm text-rose-900">
-        <p className="font-bold">Could not load routing teams</p>
-        <p className="mt-2 text-xs">{error}</p>
+        <p className="font-bold">{error}</p>
       </div>
     );
   }
 
-  const meta = data?.meta || {};
-
   return (
-    <div className="space-y-6 animate-fadeIn text-left">
-      <div className="bg-white border border-[#EBE5D9] rounded-3xl p-6 shadow-sm">
-        <h3 className="text-lg font-extrabold text-[#222121]">Teams &amp; Countries</h3>
-        <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
-          MQL Inbound Router (live) — pick a <strong>region</strong>, then a segment rule, to see the assigned team
-          (spreadsheet column I) and members.
+    <div className="space-y-5 animate-fadeIn text-left max-w-4xl mx-auto">
+      <div className="text-center sm:text-left">
+        <h3 className="text-xl font-extrabold text-[#222121]">Teams &amp; Countries</h3>
+        <p className="text-sm text-slate-500 mt-1">
+          Pick a region → tap a segment → see reps &amp; countries. Tap <strong>Pin</strong> to keep several open.
         </p>
-        <p className="text-[10px] text-slate-400 mt-2 font-mono">
-          {meta.routerName} · {meta.ruleCount} rules · synced {meta.builtAt?.slice(0, 10) || '—'}
-        </p>
+        <a
+          href={SPREADSHEET_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-2 text-xs font-bold text-[#E2004F] hover:underline"
+        >
+          Open spreadsheet ↗
+        </a>
       </div>
 
-      {/* Step 1: Region */}
-      <section>
-        <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider mb-3">
-          1 · Select region
-        </h4>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-          {REGIONS.map((region) => {
-            const count = routableRules.filter((r) => region.match(r.name)).length;
-            const active = regionId === region.id;
-            return (
-              <button
-                key={region.id}
-                type="button"
-                onClick={() => selectRegion(region.id)}
-                className={`text-left p-3 rounded-xl border-2 transition-all ${
-                  active
-                    ? 'border-[#E2004F] bg-[#FFF0F3] shadow-sm'
-                    : 'border-[#EBE5D9] bg-white hover:border-slate-400'
-                }`}
-              >
-                <span className={`text-xs font-extrabold leading-snug block ${active ? 'text-[#E2004F]' : 'text-[#222121]'}`}>
-                  {region.shortLabel || region.label}
-                </span>
-                <span className="text-[10px] text-slate-400 mt-1 block">{count} segments</span>
-              </button>
-            );
-          })}
+      {/* Region picker tiles */}
+      <div className="bg-white border border-[#EBE5D9] rounded-3xl p-4 sm:p-5 shadow-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          {REGIONS.map((region) => (
+            <RegionTile
+              key={region.id}
+              region={region}
+              count={regionCounts[region.id] || 0}
+              active={regionId === region.id}
+              onClick={() => pickRegion(region.id)}
+            />
+          ))}
         </div>
-      </section>
+      </div>
 
       {!regionId && (
-        <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-8 text-center text-sm text-slate-500">
-          Choose a region above to see segment rules and teams.
-        </div>
+        <p className="text-center text-sm text-slate-400 py-6">
+          ↑ Choose a region to see segment rules
+        </p>
       )}
 
       {regionId && (
-        <>
-          {/* Step 2: Optional team filter */}
-          <section className="bg-white border border-[#EBE5D9] rounded-2xl p-4">
-            <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider mb-3">
-              2 · Filter by team (optional)
-            </h4>
-            <div className="flex flex-wrap gap-2 items-center">
-              <button
-                type="button"
-                onClick={() => { setTeamFilter(''); setSelectedRuleId(null); }}
-                className={`text-xs font-bold px-3 py-1.5 rounded-lg border ${
-                  !teamFilter ? 'bg-[#222121] text-white border-[#222121]' : 'bg-white text-slate-600 border-[#EBE5D9]'
-                }`}
-              >
-                All teams ({regionRules.length})
-              </button>
-              {teamsInRegion.map((t) => (
-                <button
-                  key={t.name}
-                  type="button"
-                  onClick={() => { setTeamFilter(t.name); setSelectedRuleId(null); }}
-                  className={`text-xs font-bold px-3 py-1.5 rounded-lg border max-w-[220px] truncate ${
-                    teamFilter === t.name
-                      ? 'bg-[#E2004F] text-white border-[#E2004F]'
-                      : 'bg-white text-slate-600 border-[#EBE5D9] hover:border-[#E2004F]'
-                  }`}
-                  title={t.name}
-                >
-                  {t.name} ({t.count})
-                </button>
+        <div className="space-y-3">
+          <h4 className="text-sm font-extrabold text-[#222121]">
+            {activeRegion?.emoji} {activeRegion?.label}
+            <span className="text-slate-400 font-medium ml-2">({regionRules.length} segments)</span>
+          </h4>
+
+          {regionRules.length === 0 ? (
+            <p className="text-sm text-slate-500">No segments in this region.</p>
+          ) : (
+            <div className="space-y-2">
+              {regionRules.map((rule) => (
+                <SegmentRow
+                  key={rule.id}
+                  rule={rule}
+                  open={openIds.includes(rule.id)}
+                  pinned={pinnedIds.includes(rule.id)}
+                  onToggle={() => toggleOpen(rule.id)}
+                  onPin={() => togglePin(rule.id)}
+                />
               ))}
             </div>
-            <label className="mt-3 flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showEvaluating}
-                onChange={(e) => setShowEvaluating(e.target.checked)}
-                className="rounded"
-              />
-              Show evaluating rules
-            </label>
-          </section>
+          )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {/* Step 3: Segment list */}
-            <section className="lg:col-span-5">
-              <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider mb-3">
-                3 · Segment rules
-              </h4>
-              {filteredSegments.length === 0 ? (
-                <p className="text-sm text-slate-500 p-4 bg-slate-50 rounded-xl border">No segments for this filter.</p>
-              ) : (
-                <ul className="space-y-2 max-h-[480px] overflow-y-auto custom-scroll pr-1">
-                  {filteredSegments.map((rule) => {
-                    const active = selectedRuleId === rule.id;
-                    const label = displayRuleName(rule.name);
-                    return (
-                      <li key={rule.id}>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedRuleId(rule.id)}
-                          className={`w-full text-left p-3 rounded-xl border-2 transition-all ${
-                            active
-                              ? 'border-[#E2004F] bg-[#FFF0F3]'
-                              : 'border-[#EBE5D9] bg-white hover:border-slate-300'
-                          }`}
-                        >
-                          <p className={`text-xs font-extrabold leading-snug ${active ? 'text-[#E2004F]' : 'text-[#222121]'}`}>
-                            {label}
-                          </p>
-                          {rule.team?.name && (
-                            <p className="text-[10px] text-slate-400 mt-1 truncate" title={rule.team.name}>
-                              Team: {rule.team.name}
-                            </p>
-                          )}
-                          {rule.flags?.evaluating && (
-                            <span className="inline-block mt-1 text-[9px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">
-                              evaluating
-                            </span>
-                          )}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </section>
-
-            {/* Step 4: Team detail (column I) */}
-            <section className="lg:col-span-7">
-              <h4 className="text-xs font-extrabold uppercase text-slate-500 tracking-wider mb-3">
-                4 · Team (column I)
-              </h4>
-              {!selectedRule ? (
-                <div className="bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-8 text-center text-sm text-slate-500 min-h-[200px] flex items-center justify-center">
-                  Select a segment rule to view its team and roster.
-                </div>
-              ) : (
-                <div className="bg-white border-2 border-[#E2004F] rounded-2xl p-6 shadow-sm space-y-4">
-                  <div>
-                    <p className="text-[10px] uppercase text-slate-400 font-extrabold tracking-wider">Segment</p>
-                    <p className="text-sm font-extrabold text-[#222121] mt-1">{displayRuleName(selectedRule.name)}</p>
-                  </div>
-
-                  {selectedRule.employeeRange?.label && (
-                    <p className="text-xs text-slate-600">
-                      Employees: <span className="font-bold">{selectedRule.employeeRange.label}</span>
-                    </p>
-                  )}
-
-                  <div className="border-t border-[#EBE5D9] pt-4">
-                    <p className="text-[10px] uppercase text-[#E2004F] font-extrabold tracking-wider">Assigned team</p>
-                    {selectedRule.team ? (
-                      <>
-                        <p className="text-xl font-extrabold text-[#222121] mt-2">{selectedRule.team.name}</p>
-                        <p className="text-xs text-slate-500 mt-1">
-                          {selectedRule.team.memberCount} member{selectedRule.team.memberCount !== 1 ? 's' : ''} in Chili Piper
-                        </p>
-                      </>
-                    ) : (
-                      <p className="text-sm text-rose-600 font-semibold mt-2">No team matched in export</p>
-                    )}
-                  </div>
-
-                  {selectedRule.countries?.length > 0 && (
-                    <div>
-                      <p className="text-[10px] uppercase text-slate-400 font-extrabold tracking-wider mb-2">Countries in rule</p>
-                      <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto custom-scroll">
-                        {selectedRule.countries.map((c) => (
-                          <span key={c} className="text-[10px] px-2 py-0.5 rounded-full bg-[#FAF8F5] border border-[#EBE5D9] text-slate-600">
-                            {c}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedRule.team?.members?.length > 0 && (
-                    <div>
-                      <p className="text-[10px] uppercase text-slate-400 font-extrabold tracking-wider mb-2">Team members</p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-48 overflow-y-auto custom-scroll">
-                        {selectedRule.team.members.map((m, i) => (
-                          <li
-                            key={m.id || i}
-                            className="text-xs bg-[#FAF8F5] border border-[#EBE5D9] rounded-lg px-3 py-2 font-medium text-[#222121]"
-                          >
-                            {m.name || m.email || m.id}
-                          </li>
-                        ))}
-                      </ul>
-                      {!selectedRule.team.members.some((m) => m.name) && (
-                        <p className="text-[10px] text-slate-400 mt-2 italic">
-                          Names require a Chili Piper users export — IDs shown when unavailable.
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-            </section>
-          </div>
-        </>
+          {pinnedIds.length > 1 && (
+            <div className="bg-[#FFF0F3] border border-[#FFD2DB] rounded-2xl p-4 mt-4">
+              <p className="text-xs font-extrabold text-[#E2004F] mb-2">
+                Pinned comparison — all members
+              </p>
+              <p className="text-sm text-[#222121] font-medium">
+                {[...new Set(
+                  regionRules
+                    .filter((r) => pinnedIds.includes(r.id))
+                    .flatMap((r) => memberNames(r))
+                )].join(', ')}
+              </p>
+            </div>
+          )}
+        </div>
       )}
+
+      <p className="text-[10px] text-slate-400 text-center font-mono">
+        {meta.routerName} · synced {meta.builtAt?.slice(0, 10) || '—'}
+      </p>
     </div>
   );
 }

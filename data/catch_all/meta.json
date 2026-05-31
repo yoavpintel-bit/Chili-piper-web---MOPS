@@ -1,13 +1,15 @@
 {
-  "lastSyncAt": "2026-05-28T11:52:07.402Z",
+  "lastSyncAt": "2026-05-31T08:57:59.960Z",
   "source": "csv",
   "files": [
+    "/Users/yoav.pintel/Downloads/routing_log_export_1780216485479.csv",
+    "/Users/yoav.pintel/Downloads/routing_log_export_1779869041851.csv",
+    "/Users/yoav.pintel/Downloads/routing_log_export_1779868938832.csv",
     "/Users/yoav.pintel/Downloads/routing_log_export_1779801577558.csv",
-    "/Users/yoav.pintel/Downloads/Concierge Logs Export.csv",
-    "/Users/yoav.pintel/Downloads/routing_log_export_1779869041851.csv"
+    "/Users/yoav.pintel/Downloads/Concierge Logs Export.csv"
   ],
-  "recordCount": 3680,
-  "totalRowsMerged": 25537,
-  "aggregatesBuiltAt": "2026-05-28T11:52:07.478Z",
-  "catchAllCount": 3680
+  "recordCount": 3822,
+  "totalRowsMerged": 26619,
+  "aggregatesBuiltAt": "2026-05-31T08:58:00.069Z",
+  "catchAllCount": 3822
 }

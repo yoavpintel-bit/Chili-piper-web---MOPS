@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-05-28T11:52:07.478Z",
+  "generatedAt": "2026-05-31T08:58:00.069Z",
   "dateRange": {
     "min": "2026-01-19T13:15:18.378579Z",
-    "max": "2026-05-27T08:01:14.657190Z"
+    "max": "2026-05-31T06:38:54.079624Z"
   },
   "totals": {
-    "catchAll": 3680,
-    "allRecords": 3680
+    "catchAll": 3822,
+    "allRecords": 3822
   },
   "kpi": {
-    "today": 0,
-    "yesterday": 14,
-    "thisWeek": 219,
-    "prevWeek": 322,
-    "wowChangePct": -32,
-    "avgDaily30": 39.9,
-    "avgWeekly30": 278.6
+    "today": 9,
+    "yesterday": 21,
+    "thisWeek": 259,
+    "prevWeek": 329,
+    "wowChangePct": -21.3,
+    "avgDaily30": 40.1,
+    "avgWeekly30": 279.8
   },
   "daily": [
     {
@@ -388,7 +388,23 @@
     },
     {
       "date": "2026-05-27",
-      "count": 14
+      "count": 41
+    },
+    {
+      "date": "2026-05-28",
+      "count": 50
+    },
+    {
+      "date": "2026-05-29",
+      "count": 35
+    },
+    {
+      "date": "2026-05-30",
+      "count": 21
+    },
+    {
+      "date": "2026-05-31",
+      "count": 9
     }
   ],
   "weekly": [
@@ -465,7 +481,7 @@
     {
       "weekStart": "2026-05-25",
       "weekLabel": "May 25 – May 31",
-      "count": 106
+      "count": 248
     }
   ],
   "weeklyLeaders": [
@@ -766,74 +782,74 @@
     {
       "weekStart": "2026-05-25",
       "weekLabel": "May 25 – May 31",
-      "total": 106,
+      "total": 248,
       "topCountry": {
         "name": "United States",
-        "count": 30
+        "count": 100
       },
       "topSegment": {
         "name": "Under 20",
         "key": "under_20",
-        "count": 61
+        "count": 147
       },
       "topUsState": {
         "name": "California",
-        "count": 20
+        "count": 49
       },
-      "usCatchAll": 30,
-      "usUnder50": 30,
-      "usUnder50Pct": 100
+      "usCatchAll": 100,
+      "usUnder50": 96,
+      "usUnder50Pct": 96
     }
   ],
   "breakdowns": {
     "countries": [
       {
         "name": "United States",
-        "count": 1453
+        "count": 1523
       },
       {
         "name": "United Kingdom",
-        "count": 528
+        "count": 537
       },
       {
         "name": "Israel",
-        "count": 300
+        "count": 310
       },
       {
         "name": "Australia",
-        "count": 192
+        "count": 198
       },
       {
         "name": "India",
-        "count": 184
+        "count": 196
       },
       {
         "name": "Canada",
-        "count": 116
+        "count": 124
       },
       {
         "name": "Germany",
-        "count": 106
+        "count": 113
       },
       {
         "name": "Pakistan",
         "count": 57
       },
       {
-        "name": "Netherlands",
-        "count": 47
+        "name": "New Zealand",
+        "count": 52
       },
       {
-        "name": "New Zealand",
-        "count": 45
+        "name": "Netherlands",
+        "count": 48
+      },
+      {
+        "name": "Sweden",
+        "count": 33
       },
       {
         "name": "Denmark",
         "count": 33
-      },
-      {
-        "name": "Sweden",
-        "count": 30
       },
       {
         "name": "Ukraine",
@@ -851,15 +867,15 @@
     "employeeBands": [
       {
         "name": "under_20",
-        "count": 2466
+        "count": 2552
       },
       {
         "name": "in_range",
-        "count": 1119
+        "count": 1173
       },
       {
         "name": "over_8000",
-        "count": 92
+        "count": 94
       },
       {
         "name": "missing",
@@ -870,27 +886,27 @@
       {
         "name": "Under 20",
         "key": "under_20",
-        "count": 2466
+        "count": 2552
       },
       {
         "name": "20 – 49",
         "key": "20_49",
-        "count": 715
+        "count": 754
       },
       {
         "name": "50 – 99",
         "key": "50_99",
-        "count": 141
+        "count": 147
       },
       {
         "name": "100 – 199",
         "key": "100_199",
-        "count": 138
+        "count": 139
       },
       {
         "name": "Over 8,000",
         "key": "over_8000",
-        "count": 92
+        "count": 94
       },
       {
         "name": "200 – 499",
@@ -900,7 +916,7 @@
       {
         "name": "500 – 8,000",
         "key": "500_8000",
-        "count": 44
+        "count": 52
       },
       {
         "name": "Missing",
@@ -911,27 +927,27 @@
     "usStates": [
       {
         "name": "California",
-        "count": 624
-      },
-      {
-        "name": "New York",
-        "count": 82
+        "count": 653
       },
       {
         "name": "Florida",
-        "count": 78
+        "count": 87
+      },
+      {
+        "name": "New York",
+        "count": 85
       },
       {
         "name": "Texas",
-        "count": 75
+        "count": 77
       },
       {
         "name": "null",
-        "count": 49
+        "count": 50
       },
       {
         "name": "Ohio",
-        "count": 42
+        "count": 43
       },
       {
         "name": "Virginia",
@@ -943,19 +959,23 @@
       },
       {
         "name": "Illinois",
-        "count": 31
+        "count": 34
       },
       {
         "name": "Georgia",
-        "count": 30
+        "count": 32
       },
       {
         "name": "Washington",
-        "count": 27
+        "count": 31
       },
       {
         "name": "North Carolina",
         "count": 26
+      },
+      {
+        "name": "Indiana",
+        "count": 25
       },
       {
         "name": "Massachusetts",
@@ -963,11 +983,7 @@
       },
       {
         "name": "Colorado",
-        "count": 22
-      },
-      {
-        "name": "Indiana",
-        "count": 22
+        "count": 24
       }
     ],
     "formPages": [
@@ -977,23 +993,23 @@
       },
       {
         "name": "rad",
-        "count": 271
+        "count": 317
       },
       {
         "name": "wad",
-        "count": 169
+        "count": 217
       },
       {
         "name": "pricing",
-        "count": 127
+        "count": 151
       },
       {
         "name": "product_tour",
-        "count": 60
+        "count": 76
       },
       {
         "name": "trial",
-        "count": 29
+        "count": 37
       },
       {
         "name": "gated",
@@ -1003,7 +1019,7 @@
     "statuses": [
       {
         "name": "Disqualified",
-        "count": 3680
+        "count": 3822
       }
     ]
   },
@@ -1011,56 +1027,56 @@
     {
       "type": "wow_volume",
       "category": "trend",
-      "severity": "high",
-      "text": "Catch-All volume is down 32% vs prior week (219 vs 322)."
+      "severity": "normal",
+      "text": "Catch-All volume is down 21.3% vs prior week (259 vs 329)."
     },
     {
       "type": "top_countries",
       "category": "geography",
       "severity": "normal",
-      "text": "Countries that recur most in Catch-All: United States (1453), United Kingdom (528), Israel (300), Australia (192), India (184) — +93 more."
+      "text": "Countries that recur most in Catch-All: United States (1523), United Kingdom (537), Israel (310), Australia (198), India (196) — +93 more."
     },
     {
       "type": "us_under_50",
       "category": "geography",
       "severity": "high",
-      "text": "United States: 86.4% of US Catch-All have under 50 employees (1256 of 1453). Top US state: California (624)."
+      "text": "United States: 86.8% of US Catch-All have under 50 employees (1322 of 1523). Top US state: California (653)."
     },
     {
       "type": "recommendation",
       "category": "recommendation",
       "severity": "high",
-      "text": "Recommendation: Review Concierge micro/SMB segment coverage for United States — 86.4% of US Catch-All are under 50 employees."
+      "text": "Recommendation: Review Concierge micro/SMB segment coverage for United States — 86.8% of US Catch-All are under 50 employees."
     },
     {
       "type": "weekly_trend",
       "category": "trend",
-      "severity": "high",
-      "text": "Latest week (May 25 – May 31): 106 Catch-All, -66.3% vs previous week. Top driver: United States (30)."
+      "severity": "normal",
+      "text": "Latest week (May 25 – May 31): 248 Catch-All, -21.3% vs previous week. Top driver: United States (100)."
     },
     {
       "type": "employee_band",
       "category": "segment",
       "severity": "high",
-      "text": "67% of Catch-All have <20 employees — aligns with Scenario C (enrichment out of bookable range)."
+      "text": "66.8% of Catch-All have <20 employees — aligns with Scenario C (enrichment out of bookable range)."
     },
     {
       "type": "top_segment",
       "category": "segment",
       "severity": "normal",
-      "text": "Most common employee-size segment in Catch-All: Under 20 (2466 leads, 67%)."
+      "text": "Most common employee-size segment in Catch-All: Under 20 (2552 leads, 66.8%)."
     },
     {
       "type": "repeat_visitors",
       "category": "quality",
       "severity": "low",
-      "text": "889 guest email(s) submitted Catch-All more than once — worth checking duplicate routing or re-submits."
+      "text": "930 guest email(s) submitted Catch-All more than once — worth checking duplicate routing or re-submits."
     },
     {
       "type": "recommendation",
       "category": "recommendation",
       "severity": "normal",
-      "text": "Recommendation: Prioritize MOPS review of United States Catch-All rules (1453 in dataset) — highest country volume."
+      "text": "Recommendation: Prioritize MOPS review of United States Catch-All rules (1523 in dataset) — highest country volume."
     },
     {
       "type": "doc_alignment",

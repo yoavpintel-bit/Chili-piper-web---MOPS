@@ -65,14 +65,28 @@ function normalizeRuleName(name) {
     .toLowerCase();
 }
 
+function displaySegmentLabel(ruleName) {
+  return String(ruleName || '')
+    .replace(/\s*\((evaluating|updated|AAEs|RAD)\)\s*/gi, '')
+    .replace(/\s*-\s*RAD\s*$/i, '')
+    .trim();
+}
+
 function resolveTeam(rule, teams) {
+  const segmentKey = normalizeRuleName(displaySegmentLabel(rule.name));
+
   if (rule.teamId) {
-    const byId = teams.find((t) => t.id === rule.teamId);
+    const byId = teams.find((t) => t.id === rule.teamId || t.teamId === rule.teamId);
     if (byId) return byId;
   }
-  const key = normalizeRuleName(rule.name);
-  const exact = teams.find((t) => t.name.toLowerCase().trim() === key);
+
+  // Column I teams in Chili Piper match segment label exactly (spreadsheet row)
+  const exact = teams.find((t) => normalizeRuleName(t.name) === segmentKey);
   if (exact) return exact;
+
+  const key = normalizeRuleName(rule.name);
+  const exactRaw = teams.find((t) => t.name.toLowerCase().trim() === rule.name.toLowerCase().trim());
+  if (exactRaw) return exactRaw;
 
   const stripped = teams.filter((t) => {
     const tn = normalizeRuleName(t.name);
@@ -194,6 +208,33 @@ function rangesOverlap(a, b) {
   return Math.max(a.min, b.min) <= Math.min(a.max, b.max);
 }
 
+function loadUserMap() {
+  const usersPath =
+    process.env.ROUTER_TEAMS_USERS_FILE || path.join(RAW_DIR, 'users-cache.json');
+  if (!fs.existsSync(usersPath)) return new Map();
+  const raw = JSON.parse(fs.readFileSync(usersPath, 'utf8'));
+  const arr = Array.isArray(raw) ? raw : raw.results || [];
+  return new Map(
+    arr.map((u) => [
+      String(u.id),
+      { name: u.name || null, email: u.email || null },
+    ])
+  );
+}
+
+function mapMembers(memberIds, userMap) {
+  return (memberIds || []).map((id) => {
+    const uid = String(id);
+    const u = userMap.get(uid);
+    return { id: uid, name: u?.name || null, email: u?.email || null };
+  }).filter((m) => m.name || m.email);
+}
+
+function columnIMembersText(members) {
+  const names = (members || []).map((m) => m.name).filter(Boolean);
+  return names.length ? names.join(', ') : null;
+}
+
 function main() {
   const teamsPath = resolveInputPath('ROUTER_TEAMS_TEAMS_FILE', 'teams.json', DEFAULT_CACHE.teams);
   const rulesPath = resolveInputPath('ROUTER_TEAMS_RULES_FILE', 'rules.json', DEFAULT_CACHE.rules);
@@ -205,6 +246,7 @@ function main() {
 
   const teams = teamsPayload.results || [];
   const rules = rulesPayload.results || [];
+  const userMap = loadUserMap();
   const ruleMap = new Map(rules.map((r) => [r.id, r]));
 
   const routerEntry = (routerPayload.routers || []).find(
@@ -227,13 +269,17 @@ function main() {
     const fromName = parseEmployeeRangeFromName(rule.name);
     const fromConds = extractEmployeeRangeFromConditions(rule.conditions);
     const employeeRange = mergeRanges(fromName, fromConds) || fromName || fromConds;
+    const segmentLabel = displaySegmentLabel(rule.name);
     const team = resolveTeam(rule, teams);
     const countries = extractCountries(rule.conditions);
     const nameLower = rule.name.toLowerCase();
+    const members = team ? mapMembers(team.members, userMap) : [];
+    const teamNameExact = team && normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
 
     entries.push({
       id: rule.id,
       name: rule.name,
+      segmentLabel,
       order,
       product: rule.product || null,
       ruleType: rule.type || null,
@@ -248,10 +294,13 @@ function main() {
       sizeSegmentIds: segmentIdsForRange(employeeRange),
       team: team
         ? {
-            id: team.id,
-            name: team.name,
-            memberCount: (team.members || []).length,
-            members: (team.members || []).map((id) => ({ id: String(id) })),
+            id: team.id || team.teamId,
+            name: segmentLabel,
+            chiliPiperTeamName: team.name,
+            nameMatchesSegment: teamNameExact,
+            memberCount: members.length,
+            members,
+            columnI: columnIMembersText(members),
           }
         : null,
       flags: {
@@ -280,6 +329,7 @@ function main() {
         teams: sourceLabel(teamsPath),
         rules: sourceLabel(rulesPath),
         router: sourceLabel(routerPath),
+        users: fs.existsSync(path.join(RAW_DIR, 'users-cache.json')) ? 'data/router_teams/raw/users-cache.json' : null,
       },
     },
     filters: {

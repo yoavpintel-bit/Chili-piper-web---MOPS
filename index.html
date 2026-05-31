@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <!-- GitHub Pages project sites live at /REPO_NAME/ — fix relative js/data paths -->
   <script>
     (function () {
@@ -81,11 +84,14 @@
   <!-- React root element -->
   <div id="root"></div>
 
-  <script type="text/babel" src="js/home-panel.jsx"></script>
-  <script type="text/babel" src="js/operations-panel.jsx"></script>
-  <script type="text/babel" src="js/teams-countries-panel.jsx"></script>
-  <script type="text/babel" src="js/journey-visuals.jsx"></script>
-  <script type="text/babel" src="js/blueprint-panel.jsx"></script>
+  <script>
+    window.__PORTAL_BUILD__ = '20260531f';
+  </script>
+  <script type="text/babel" src="js/home-panel.jsx?v=20260531f"></script>
+  <script type="text/babel" src="js/operations-panel.jsx?v=20260531f"></script>
+  <script type="text/babel" src="js/teams-countries-panel.jsx?v=20260531f"></script>
+  <script type="text/babel" src="js/scenario-game-panel.jsx?v=20260531f"></script>
+  <script type="text/babel" src="js/blueprint-panel.jsx?v=20260531f"></script>
   <!-- app.jsx loaded explicitly by boot script (large file; Babel src tag is unreliable) -->
   <script>
     (function bootPortal() {
@@ -97,25 +103,32 @@
           '<h2 style="color:#E2004F;font-weight:800">Portal did not load</h2>' +
           '<p style="color:#5A5755;margin-top:0.5rem">' + msg + '</p></div>';
       }
-      function mount() {
-        if (!window.React || !window.ReactDOM || !window.App) return false;
-        ReactDOM.createRoot(rootEl).render(React.createElement(window.App));
-        return true;
-      }
-      function loadAppJsx() {
-        if (window.App) return Promise.resolve();
+      var BUILD = window.__PORTAL_BUILD__ || String(Date.now());
+      function loadBabelModule(path, readyKey) {
+        if (readyKey && window[readyKey]) return Promise.resolve();
         if (typeof Babel === 'undefined') {
           return Promise.reject(new Error('Babel failed to load. Check your network.'));
         }
-        return fetch('js/app.jsx')
+        return fetch(path + '?v=' + BUILD, { cache: 'no-store' })
           .then(function (r) {
-            if (!r.ok) throw new Error('Could not load js/app.jsx (' + r.status + ')');
+            if (!r.ok) throw new Error('Could not load ' + path + ' (' + r.status + ')');
             return r.text();
           })
           .then(function (src) {
             var code = Babel.transform(src, { presets: ['react', 'env'] }).code;
             eval(code);
           });
+      }
+      function loadAppJsx() {
+        return loadBabelModule('js/app.jsx', 'App');
+      }
+      function loadJourneyVisuals() {
+        return loadBabelModule('js/journey-visuals.jsx', 'JourneyStepCards');
+      }
+      function mount() {
+        if (!window.React || !window.ReactDOM || !window.App) return false;
+        ReactDOM.createRoot(rootEl).render(React.createElement(window.App));
+        return true;
       }
       function waitForPanels(attempt) {
         if (mount()) return;
@@ -134,8 +147,11 @@
       if (typeof Babel !== 'undefined') {
         try { Babel.transformScriptTags(); } catch (e) { console.warn(e); }
       }
-      loadAppJsx()
-        .catch(function (e) { console.error(e); })
+      Promise.all([loadAppJsx(), loadJourneyVisuals()])
+        .catch(function (e) {
+          console.error(e);
+          showError(e.message || String(e));
+        })
         .finally(function () { waitForPanels(0); });
     })();
   </script>
