@@ -82,12 +82,35 @@ npm run build:aggregates && node scripts/publish-data.mjs
 
 Initial dataset was seeded from Concierge CSV exports (~3,680 Catch-All rows, Jan–May 2026).
 
-## GitHub Pages
+## GitHub Pages & daily sync
 
-1. Push this repo to GitHub.
-2. **Settings → Pages → Build and deployment**: GitHub Actions.
-3. Add secret **`CHILI_PIPER_API_KEY`** (or `CHILI_PIPER_TOKEN`) for [daily-sync.yml](.github/workflows/daily-sync.yml).
-4. Site root: `/public` (deployed by [pages.yml](.github/workflows/pages.yml)).
+1. Push this repo to GitHub (`main` branch).
+2. **Settings → Pages → Build and deployment**: GitHub Actions ([pages.yml](.github/workflows/pages.yml)).
+3. Add repository secret **`CHILI_PIPER_API_KEY`** (Command Center → Credentials) for [daily-sync.yml](.github/workflows/daily-sync.yml).
+4. Site deploys automatically on every push to `main`.
+
+### Daily sync (09:00 Israel time)
+
+Workflow: [`.github/workflows/daily-sync.yml`](.github/workflows/daily-sync.yml)
+
+| Step | What |
+|------|------|
+| **Concierge logs** | Last 7 days of Catch-All via Chili Piper API → `records.jsonl` |
+| **Router teams** | Rebuild from `data/router_teams/raw/` (refresh locally via MCP or paste exports) |
+| **Aggregates** | KPIs + insights → dashboard |
+| **Publish** | Copy to `public/data/` and push → Pages redeploys |
+
+Schedule: **06:00 UTC** = **09:00 Israel (IDT, summer)**. In winter (IST) runs at 08:00 local.
+
+Manual run: **Actions → Daily prod sync → Run workflow**.
+
+Optional secrets: `WORKATO_CSV_PATH` / `WORKATO_JSON_PATH` if Workato export is available on the runner.
+
+### Authoritative documents (reference links on Home)
+
+- [Inbound routing spreadsheet](https://docs.google.com/spreadsheets/d/1sUUDp7n0uwrYDKZZMmBwVNe2-8sQEwzEKMWW47IgYFk/edit?gid=837037962#gid=837037962)
+- [Handoff spreadsheet](https://docs.google.com/spreadsheets/d/197PLS_Im3xKQn1-v4uCeGYdj04648_AxC4snN1ZE4u4/edit?gid=1309113080#gid=1309113080)
+- [Full Chili logic doc](https://docs.google.com/document/d/1Suq33IhURUZJr1GNPZKQpAo8RlrWK60M42rz0ZCepmc/edit)
 
 Deep links: `?tab=home` (default) · `?tab=operations&days=7` · `?tab=teams`
 

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "builtAt": "2026-05-31T13:22:43.700Z",
+    "builtAt": "2026-05-31T15:25:44.750Z",
     "workspaceId": "5ffdc2c64c46df00017023a8",
     "routerId": "7e9c794d-b6db-40ec-ae07-f363d77b5f36",
     "routerName": "MQL Inbound flow - Main router - Live",
@@ -154,6 +154,7 @@
       "Poland",
       "Portugal",
       "Réunion",
+      "Réunion",
       "Romania",
       "Russia",
       "Rwanda",
@@ -377,6 +378,7 @@
       "Poland",
       "Portugal",
       "Réunion",
+      "Réunion",
       "Rhode Island",
       "Romania",
       "Russia",
@@ -3290,8 +3292,8 @@
       }
     },
     {
-      "id": "d1a5c1df-46c6-4591-8738-29aaa55cfc5c",
-      "name": "UKI & ROW | Micro : 20-49",
+      "id": "5698b13a-bc6b-41dd-9d22-c117f20f5a57",
+      "name": "UKI & ROW | Micro : 20-49 (evaluating)",
       "segmentLabel": "UKI & ROW | Micro : 20-49",
       "order": 37,
       "product": "Distro",
@@ -3396,7 +3398,106 @@
         "Zambia",
         "Zimbabwe"
       ],
-      "states": [],
+      "states": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
       "employeeRange": {
         "min": 20,
         "max": 49,
@@ -3501,15 +3602,15 @@
         "columnI": "Oliver Logan, Callum Mackenzie, Remy-Rose Stone, Fergus Mulhern, Fraser Sloss, Patrick Bailey, Matthew McCue, Joe Ruler, Joel Adesegun, Anna Kotsa, Rayan Bouguerra, Daniel Boston, Eimer Halliden, Lucy Thorniley, Zoe Shephard, Benjamin Worlock, Phoebe Moore"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "27664c2c-c0a4-4634-acc7-1f3c115be931",
-      "name": "UKI & ROW | SMB Small : 50-99",
+      "id": "536d5287-a064-4e47-9a35-3fea0e30c8a6",
+      "name": "UKI & ROW | SMB Small : 50-99 (evaluating)",
       "segmentLabel": "UKI & ROW | SMB Small : 50-99",
       "order": 38,
       "product": "Distro",
@@ -3614,7 +3715,106 @@
         "Zambia",
         "Zimbabwe"
       ],
-      "states": [],
+      "states": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
       "employeeRange": {
         "min": 50,
         "max": 99,
@@ -3734,15 +3934,15 @@
         "columnI": "Ciara Whyte, Daniel Boston, Eimer Halliden, Matthew McCue, Anna Kotsa, Joe Ruler, Patrick Bailey, Briony Richards, Lucy Thorniley, Bradley Ferguson, Oliver Logan, Callum Mackenzie, Remy-Rose Stone, Fergus Mulhern, Fraser Sloss, Joel Adesegun, Rayan Bouguerra, Zoe Shephard, Benjamin Worlock, Phoebe Moore"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "cb916040-aed8-4015-8d42-56d706d0394b",
-      "name": "UKI & ROW | SMB Medium : 100-199",
+      "id": "b06422f0-170e-4bee-a5fd-092bbb830fda",
+      "name": "UKI & ROW | SMB Medium : 100-199 (evaluating)",
       "segmentLabel": "UKI & ROW | SMB Medium : 100-199",
       "order": 39,
       "product": "Distro",
@@ -3847,7 +4047,106 @@
         "Zambia",
         "Zimbabwe"
       ],
-      "states": [],
+      "states": [
+        "Algeria",
+        "Angola",
+        "Anguilla",
+        "Ascension and Tristan da Cunha",
+        "British Indian",
+        "Cameroon",
+        "Cayman Islands",
+        "Chad",
+        "Comoros",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands",
+        "Faroe Islands",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Ghana",
+        "Gibraltar",
+        "Greenland",
+        "Guadeloupe",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Heard Island and McDonald Islands",
+        "Holy See",
+        "Ireland",
+        "Isle of Man",
+        "Jersey",
+        "Kenya",
+        "Kiribati",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Monaco",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "New Caledonia",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Ocean Territory",
+        "Papua New Guinea",
+        "Pitcairn",
+        "Réunion",
+        "Rwanda",
+        "Saint Helena",
+        "Saint Maarten (Dutch part)",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Scotland",
+        "Senegal",
+        "Seychelles",
+        "Sierra Leone",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "Svalbard and Jan Mayen",
+        "Tanzania",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tunisia",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "United Kingdom",
+        "Vanuatu",
+        "Virgin Islands (British)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+      ],
       "employeeRange": {
         "min": 100,
         "max": 199,
@@ -3957,15 +4256,15 @@
         "columnI": "Daniel Boston, Briony Richards, Bradley Ferguson, Matthew McCue, Anna Kotsa, Joe Ruler, Patrick Bailey, Ciara Whyte, Oliver Logan, Callum Mackenzie, Remy-Rose Stone, Fergus Mulhern, Fraser Sloss, Joel Adesegun, Rayan Bouguerra, Eimer Halliden, Lucy Thorniley, Phoebe Moore"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "dd89ec08-e4cf-4c63-a107-313a03b61d13",
-      "name": "UKI & ROW | MM : 200-499",
+      "id": "ce7ebbcd-eb8f-4ebd-bcfc-07b8bd3b6534",
+      "name": "UKI & ROW | MM : 200-499 (evaluating)",
       "segmentLabel": "UKI & ROW | MM : 200-499",
       "order": 40,
       "product": "Distro",
@@ -4224,15 +4523,15 @@
         "columnI": "Harvey Simmons, Ava Michelini, Matthew Scott, Jennifer Iboko, Sean McAlister, Luke Sargent, Krishan Mootin"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "f48736b4-d689-4233-8f73-39ae6ed13423",
-      "name": "UKI & ROW | MM Large : 500-999",
+      "id": "afb87fcd-8ae0-497a-8bb3-b43ba13f2af4",
+      "name": "UKI & ROW | MM Large : 500-999 (evaluating)",
       "segmentLabel": "UKI & ROW | MM Large : 500-999",
       "order": 41,
       "product": "Distro",
@@ -4300,7 +4599,7 @@
         "Ocean Territory",
         "Papua New Guinea",
         "Pitcairn",
-        "Réunion",
+        "Réunion",
         "Rwanda",
         "Saint Helena",
         "Saint Maarten (Dutch part)",
@@ -4400,7 +4699,7 @@
         "Ocean Territory",
         "Papua New Guinea",
         "Pitcairn",
-        "Réunion",
+        "Réunion",
         "Rwanda",
         "Saint Helena",
         "Saint Maarten (Dutch part)",
@@ -4466,15 +4765,15 @@
         "columnI": "Jemima Mulligan, Dan Cohen"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "2c2ec840-c466-476c-9e00-6a4fb280042e",
-      "name": "UKI & ROW | ENT : 1000-8000",
+      "id": "c94f9a93-bd93-4bd3-961a-e8e919c347e3",
+      "name": "UKI & ROW | ENT : 1000-8000 (evaluating)",
       "segmentLabel": "UKI & ROW | ENT : 1000-8000",
       "order": 42,
       "product": "Distro",
@@ -4718,15 +5017,15 @@
         "columnI": "Rima Pathak, Liam Gallagher, Anushka Redkar, Himani Singh"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "02fde717-bc89-4b14-ae4b-252f84e15eef",
-      "name": "US | SMB : 50-199",
+      "id": "122a0676-0dad-4d1b-8751-d4b61192529e",
+      "name": "US | SMB : 50-199 (evaluating)",
       "segmentLabel": "US | SMB : 50-199",
       "order": 43,
       "product": "Distro",
@@ -4840,7 +5139,7 @@
         "columnI": "Olivia Eastwood, Remi Sanderford, Paul Terhune, Thaila Morganstern, Anna Park, Rich Blain, Ebony Orozco"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
@@ -5092,9 +5391,9 @@
       }
     },
     {
-      "id": "8bee95bb-a441-4c45-b5e3-004c708f3180",
-      "name": "US | MM | Northeast 1 : 200-749",
-      "segmentLabel": "US | MM | Northeast 1 : 200-749",
+      "id": "d2249926-443d-40de-8d0b-4b4255597e53",
+      "name": "US | MM | Northeast 1: 200-749 (evaluating)",
+      "segmentLabel": "US | MM | Northeast 1: 200-749",
       "order": 48,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
@@ -5124,32 +5423,18 @@
         "200_499",
         "500_8000"
       ],
-      "team": {
-        "id": "565661ec-50bf-49d2-aee3-a69f9178e0e7",
-        "name": "US | MM | Northeast 1 : 200-749",
-        "chiliPiperTeamName": "US | MM | Northeast 1 : 200-749",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "69cdb888df80d38b76f38509",
-            "name": "Luke Elijah",
-            "email": "luke.elijah@hibob.io"
-          }
-        ],
-        "columnI": "Luke Elijah"
-      },
+      "team": null,
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "4c6798a6-1af6-4ffd-827e-4ae3fb35724f",
-      "name": "US | MM | Northeast 2 : 200-749",
-      "segmentLabel": "US | MM | Northeast 2 : 200-749",
+      "id": "e4e573c6-f67f-4973-8086-95517cb9bb21",
+      "name": "US | MM | Northeast 2: 200-749 (evaluating)",
+      "segmentLabel": "US | MM | Northeast 2: 200-749",
       "order": 49,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
@@ -5162,53 +5447,24 @@
       ],
       "employeeRange": {
         "min": 200,
-        "max": 748,
-        "label": "200 – 748"
+        "max": 749,
+        "label": "200 – 749"
       },
       "sizeSegmentIds": [
         "200_499",
         "500_8000"
       ],
-      "team": {
-        "id": "e119c90a-9ad2-4bb3-a82f-a10075de1425",
-        "name": "US | MM | Northeast 2 : 200-749",
-        "chiliPiperTeamName": "US | MM | Northeast 2 : 200-749",
-        "nameMatchesSegment": true,
-        "memberCount": 4,
-        "members": [
-          {
-            "id": "692612f7f2389b056c41dc19",
-            "name": "Charlotte Robins",
-            "email": "charlotte.robins@hibob.io"
-          },
-          {
-            "id": "69cf03fbf0547abcf760e9ce",
-            "name": "Ryan Krebs",
-            "email": "ryan.krebs@hibob.io"
-          },
-          {
-            "id": "66994226464d171cc01f195e",
-            "name": "Tyler Pullen",
-            "email": "tyler.pullen@hibob.io"
-          },
-          {
-            "id": "66847ae1f586db372fe68a2b",
-            "name": "Evelyn Paredes",
-            "email": "evelyn.paredes@hibob.io"
-          }
-        ],
-        "columnI": "Charlotte Robins, Ryan Krebs, Tyler Pullen, Evelyn Paredes"
-      },
+      "team": null,
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "845c533b-e365-4bfb-a0b7-b43ec6291bfb",
-      "name": "US | MM | Southeast : 200-749",
+      "id": "7674f0c5-01d6-4e5e-ac10-ecf3836afe2c",
+      "name": "US | MM | Southeast : 200-749 (evaluating)",
       "segmentLabel": "US | MM | Southeast : 200-749",
       "order": 50,
       "product": "Distro",
@@ -5224,8 +5480,8 @@
       ],
       "employeeRange": {
         "min": 200,
-        "max": 748,
-        "label": "200 – 748"
+        "max": 749,
+        "label": "200 – 749"
       },
       "sizeSegmentIds": [
         "200_499",
@@ -5247,15 +5503,15 @@
         "columnI": "Edgar Marquez"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "59b6c97d-47e2-4849-86b7-326460faf4c3",
-      "name": "US | MM | West: 200-749",
+      "id": "fbc72004-c975-47f2-a9de-661e4be622a0",
+      "name": "US | MM | West: 200-749 (evaluating)",
       "segmentLabel": "US | MM | West: 200-749",
       "order": 51,
       "product": "Distro",
@@ -5271,8 +5527,8 @@
       ],
       "employeeRange": {
         "min": 200,
-        "max": 748,
-        "label": "200 – 748"
+        "max": 749,
+        "label": "200 – 749"
       },
       "sizeSegmentIds": [
         "200_499",
@@ -5304,15 +5560,15 @@
         "columnI": "Iann Nguyen, Michael  Stafford, Jordan Siton"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "95e15917-3962-45d4-a06d-a80727b3d91a",
-      "name": "US | MM | Central: 200-749",
+      "id": "af944ee1-ab79-46e8-9e83-137bc27340c3",
+      "name": "US | MM | Central: 200-749 (evaluating)",
       "segmentLabel": "US | MM | Central: 200-749",
       "order": 52,
       "product": "Distro",
@@ -5343,8 +5599,8 @@
       ],
       "employeeRange": {
         "min": 200,
-        "max": 748,
-        "label": "200 – 748"
+        "max": 749,
+        "label": "200 – 749"
       },
       "sizeSegmentIds": [
         "200_499",
@@ -5371,15 +5627,15 @@
         "columnI": "Ayman Abdalla, Diarmuid Gallagher"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "98766da0-57cc-4ad2-90b5-47e27e34d47a",
-      "name": "US | MM : 750-999",
+      "id": "64ee01c0-def3-478c-a0bf-df1ebb7c5ed9",
+      "name": "US | MM : 750-999 (evaluating)",
       "segmentLabel": "US | MM : 750-999",
       "order": 53,
       "product": "Distro",
@@ -5477,15 +5733,15 @@
         "columnI": "Alexa Yow, Laura Hladky, Clay Steel, Giovanna Bayly"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false
       }
     },
     {
-      "id": "8f39dd52-8257-4d38-b0ad-bbdadc7a8b1e",
-      "name": "US | ENT : 1000-8000",
+      "id": "71702b46-5f84-4795-9c9d-97e501b94756",
+      "name": "US | ENT : 1000-8000 (evaluating)",
       "segmentLabel": "US | ENT : 1000-8000",
       "order": 54,
       "product": "Distro",
@@ -5578,7 +5834,7 @@
         "columnI": "Gunel Mammadova, Dana Kurzner, Christopher Devlin"
       },
       "flags": {
-        "evaluating": false,
+        "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false

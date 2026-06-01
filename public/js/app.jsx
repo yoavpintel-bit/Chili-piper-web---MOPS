@@ -359,14 +359,14 @@
     ];
 
     const NAV_TABS = [
-      { id: 'home', label: 'Home', accent: true },
-      { id: 'process', label: 'Interactive Story', short: 'Story' },
-      { id: 'blueprint', label: 'Visual Blueprint', short: 'Blueprint' },
-      { id: 'simulator', label: 'Scenario Playground', short: 'Playground' },
-      { id: 'playbook', label: 'Technical Playbook', short: 'Playbook' },
-      { id: 'teams', label: 'Teams & Countries', short: 'Teams' },
-      { id: 'operations', label: 'Catch-All Dashboard', short: 'Catch-All', accent: true },
-      { id: 'fields', label: 'Field Mappings', short: 'Fields' },
+      { id: 'home', label: 'Home', short: 'Home', accent: true },
+      { id: 'process', label: 'Lead journey', short: 'Journey', technical: 'Interactive Story' },
+      { id: 'blueprint', label: 'Routing map', short: 'Map', technical: 'Visual Blueprint' },
+      { id: 'simulator', label: 'Practice', short: 'Try it', technical: 'Scenario Playground' },
+      { id: 'playbook', label: 'Outcomes & rules', short: 'Rules', technical: 'Technical Playbook' },
+      { id: 'teams', label: 'Teams & regions', short: 'Teams', technical: 'Teams & Countries' },
+      { id: 'operations', label: 'Unassigned leads', short: 'Catch-All', accent: true, technical: 'Catch-All Dashboard' },
+      { id: 'fields', label: 'Data fields', short: 'Fields', technical: 'Field Mappings' },
     ];
 
     function App() {
@@ -559,7 +559,10 @@
                   Catch-All ↗
                 </a>
               </div>
-              <nav className="flex gap-1 overflow-x-auto py-2.5 custom-scroll -mx-1 px-1" aria-label="Main">
+              <nav
+                className={`flex gap-1 overflow-x-auto py-2.5 custom-scroll -mx-1 px-1 ${activeTab === 'home' ? 'hidden sm:flex' : ''}`}
+                aria-label="Main"
+              >
                 {NAV_TABS.map((tab) => {
                   const isActive = activeTab === tab.id;
                   const isOps = tab.id === 'operations';
@@ -594,13 +597,20 @@
                   HiBob RevOps · Chili Piper Hub
                 </span>
                 <h2 className="text-3xl font-extrabold text-[#222121] mt-4 tracking-tight leading-tight max-w-2xl mx-auto">
-                  {activeTab === 'operations' ? 'Catch-All Operations' : 'Routing documentation'}
+                  {activeTab === 'operations'
+                    ? 'Leads we could not auto-assign'
+                    : (NAV_TABS.find((t) => t.id === activeTab)?.label || 'Learn more')}
                 </h2>
+                {NAV_TABS.find((t) => t.id === activeTab)?.technical && (
+                  <p className="text-xs text-slate-500 mt-2 font-medium">
+                    {NAV_TABS.find((t) => t.id === activeTab).technical}
+                  </p>
+                )}
               </div>
             </section>
           )}
 
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${activeTab === 'home' ? 'py-6' : 'py-8'}`}>
 
             {/* TAB: HOME LANDING */}
             {activeTab === 'home' && window.HomePanel && (
@@ -766,8 +776,9 @@
             {activeTab === 'playbook' && (
               <div className="space-y-4 animate-fadeIn text-left pb-4">
                 <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-xl p-4 border border-[#333]">
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Technical Playbook</span>
-                  <h2 className="text-lg font-extrabold mt-0.5">Scenarios A–I &amp; module reference</h2>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Outcomes &amp; rules</span>
+                  <h2 className="text-lg font-extrabold mt-0.5">What can happen to an inbound lead</h2>
+                  <p className="text-xs text-slate-400 mt-1">Technical names (Scenarios A–I) appear on each card when you expand it.</p>
                 </section>
                 
                 {window.ScenarioCardsGrid ? (

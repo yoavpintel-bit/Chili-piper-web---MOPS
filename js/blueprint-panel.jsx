@@ -612,8 +612,8 @@ function BlueprintPanel({ viewMode, setViewMode, activeNode, setActiveNode, head
         <section className="bg-gradient-to-br from-[#222121] via-[#2d2b2b] to-[#1a1919] text-white rounded-xl p-3 border border-[#333] shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="min-w-0">
-              <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Visual Blueprint</span>
-              <h2 className="text-base font-extrabold tracking-tight leading-tight">Inbound routing pipeline</h2>
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Routing map</span>
+            <h2 className="text-base font-extrabold tracking-tight leading-tight">How a lead moves through our systems</h2>
             </div>
             <div className="flex rounded-lg bg-white/10 p-0.5 border border-white/15 shrink-0">
               {VIEW_MODES.map((mode) => (

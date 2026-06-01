@@ -1,15 +1,16 @@
-name: Daily Catch-All Sync
+name: Daily prod sync (Chili logs)
 
 on:
   schedule:
-    # 09:00 Israel (IDT, UTC+3) ≈ 06:00 UTC
+    # 09:00 Asia/Jerusalem (IDT, UTC+3) = 06:00 UTC
+    # During IST (UTC+2) this runs at 08:00 local — adjust to 07:00 UTC if needed in winter
     - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       full_backfill:
-        description: 'Run 180-day backfill (SYNC_FULL_BACKFILL=1)'
+        description: 'Pull ~180 days of Concierge logs'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 permissions:
@@ -25,34 +26,26 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Sync from Chili Piper API
+      - name: Sync Concierge logs, router teams, aggregates
         env:
           CHILI_PIPER_API_KEY: ${{ secrets.CHILI_PIPER_API_KEY }}
           CHILI_PIPER_TOKEN: ${{ secrets.CHILI_PIPER_TOKEN }}
-          SYNC_FULL_BACKFILL: ${{ github.event.inputs.full_backfill == 'true' && '1' || '0' }}
-          SYNC_INCREMENTAL_DAYS: '3'
-        run: |
-          if [ -z "$CHILI_PIPER_API_KEY" ] && [ -z "$CHILI_PIPER_TOKEN" ]; then
-            echo "No API key — falling back to CSV paths if present"
-            npm run sync:csv || true
-          else
-            npm run sync:api || npm run sync:csv
-          fi
-          npm run merge:workato || true
-          npm run build:aggregates
-          node scripts/publish-data.mjs
-          npm run build:router-teams || true
-          node scripts/sync-pages-root.mjs
+          WORKATO_CSV_PATH: ${{ secrets.WORKATO_CSV_PATH }}
+          WORKATO_JSON_PATH: ${{ secrets.WORKATO_JSON_PATH }}
+          SYNC_FULL_BACKFILL: ${{ github.event.inputs.full_backfill == true && '1' || '0' }}
+          SYNC_INCREMENTAL_DAYS: '7'
+        run: node scripts/daily-prod-sync.mjs
 
-      - name: Commit and push data updates
+      - name: Commit and push to main (triggers GitHub Pages deploy)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/catch_all public/data/catch_all data/router_teams public/data/router_teams
-          git add index.html js/ data/ 2>/dev/null || true
+          git add data/catch_all public/data/catch_all
+          git add data/router_teams public/data/router_teams
+          git add index.html js/ data/ public/index.html public/js/ public/data/ 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "No data changes"
+            echo "No data changes to commit"
             exit 0
           fi
-          git commit -m "chore: daily Catch-All sync $(date -u +%Y-%m-%d)"
+          git commit -m "chore: daily Chili logs sync $(date -u +%Y-%m-%dT%H:%MZ)"
           git push

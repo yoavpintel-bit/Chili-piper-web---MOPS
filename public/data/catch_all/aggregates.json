@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-31T08:58:00.069Z",
+  "generatedAt": "2026-05-31T15:25:44.877Z",
   "dateRange": {
     "min": "2026-01-19T13:15:18.378579Z",
     "max": "2026-05-31T06:38:54.079624Z"
@@ -11,11 +11,11 @@
   "kpi": {
     "today": 9,
     "yesterday": 21,
-    "thisWeek": 259,
-    "prevWeek": 329,
-    "wowChangePct": -21.3,
-    "avgDaily30": 40.1,
-    "avgWeekly30": 279.8
+    "thisWeek": 249,
+    "prevWeek": 330,
+    "wowChangePct": -24.5,
+    "avgDaily30": 39.8,
+    "avgWeekly30": 277.9
   },
   "daily": [
     {
@@ -1028,7 +1028,7 @@
       "type": "wow_volume",
       "category": "trend",
       "severity": "normal",
-      "text": "Catch-All volume is down 21.3% vs prior week (259 vs 329)."
+      "text": "Catch-All volume is down 24.5% vs prior week (249 vs 330)."
     },
     {
       "type": "top_countries",
@@ -1084,5 +1084,60 @@
       "severity": "normal",
       "text": "Scenario F: no Concierge segment match — lead continues in Marketo for Catch-All list review."
     }
-  ]
+  ],
+  "insights24h": {
+    "windowHours": 24,
+    "windowStart": "2026-05-30T15:25:44.890Z",
+    "windowEnd": "2026-05-31T15:25:44.890Z",
+    "insights": [
+      {
+        "type": "top_countries",
+        "category": "geography",
+        "severity": "normal",
+        "text": "Countries that recur most in Catch-All: United States (8), India (3), Israel (2)."
+      },
+      {
+        "type": "us_under_50",
+        "category": "geography",
+        "severity": "high",
+        "text": "United States: 87.5% of US Catch-All have under 50 employees (7 of 8). Top US state: California (7)."
+      },
+      {
+        "type": "recommendation",
+        "category": "recommendation",
+        "severity": "high",
+        "text": "Recommendation: Review Concierge micro/SMB segment coverage for United States — 87.5% of US Catch-All are under 50 employees."
+      },
+      {
+        "type": "employee_band",
+        "category": "segment",
+        "severity": "high",
+        "text": "61.5% of Catch-All have <20 employees — aligns with Scenario C (enrichment out of bookable range)."
+      },
+      {
+        "type": "top_segment",
+        "category": "segment",
+        "severity": "normal",
+        "text": "Most common employee-size segment in Catch-All: Under 20 (8 leads, 61.5%)."
+      },
+      {
+        "type": "repeat_visitors",
+        "category": "quality",
+        "severity": "low",
+        "text": "4 guest email(s) submitted Catch-All more than once — worth checking duplicate routing or re-submits."
+      },
+      {
+        "type": "recommendation",
+        "category": "recommendation",
+        "severity": "normal",
+        "text": "Recommendation: Prioritize MOPS review of United States Catch-All rules (8 in window) — highest country volume."
+      },
+      {
+        "type": "doc_alignment",
+        "category": "reference",
+        "severity": "normal",
+        "text": "Scenario F: no Concierge segment match — lead continues in Marketo for Catch-All list review."
+      }
+    ]
+  }
 }
