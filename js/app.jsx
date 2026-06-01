@@ -389,6 +389,7 @@
         return () => clearInterval(id);
       }, []);
       const [opsDays, setOpsDays] = useState(initialOpsDays);
+      const [exploreOpen, setExploreOpen] = useState(false);
 
       const syncTabUrl = (tab, extra = {}) => {
         const url = new URL(window.location.href);
@@ -411,6 +412,16 @@
       const goToCatchAllDashboard = (days = 7) => {
         navigateToTab('operations', { days });
       };
+
+      const handleExploreNavigate = (tab, extra = {}) => {
+        if (tab === 'operations') {
+          goToCatchAllDashboard(extra?.days ?? 7);
+        } else {
+          navigateToTab(tab, extra);
+        }
+      };
+
+      const activeNav = NAV_TABS.find((t) => t.id === activeTab);
       const [selectedScenarioId, setSelectedScenarioId] = useState('A');
       const [activeStepId, setActiveStepId] = useState('step1');
       const [hoveredBlueprintNode, setHoveredBlueprintNode] = useState(null);
@@ -529,14 +540,25 @@
       return (
         <div className="min-h-screen bg-[#FFFDF9] text-[#222121] font-sans antialiased selection:bg-[#FFF0F3] selection:text-[#E2004F]">
 
+          {window.ExploreMenu && React.createElement(window.ExploreMenu, {
+            open: exploreOpen,
+            onClose: () => setExploreOpen(false),
+            onNavigate: handleExploreNavigate,
+            activeTab,
+          })}
+
           <header ref={headerRef} className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EBE5D9] shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-center justify-between gap-4 py-3 border-b border-[#F0EAE1]/80">
-                <div className="flex items-center gap-3 min-w-0">
+              <div className="flex items-center justify-between gap-3 py-3">
+                <button
+                  type="button"
+                  onClick={() => navigateToTab('home')}
+                  className="flex items-center gap-3 min-w-0 text-left hover:opacity-90 transition-opacity"
+                >
                   <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#E2004F] to-[#ff4d7a] text-white flex items-center justify-center shadow-md shrink-0">
                     <BobIcon />
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 hidden sm:block">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-xl font-extrabold text-[#222121] tracking-tight">HiBob</span>
                       <span className="text-[10px] bg-[#FFF0F3] text-[#E2004F] font-bold px-2 py-0.5 rounded-full border border-[#FFD2DB]">
@@ -544,48 +566,21 @@
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 font-medium truncate">
-                      Chili piper in HiBob — all you need to know
+                      {activeTab === 'home' ? 'Inbound lead routing' : (activeNav?.label || 'Learn more')}
                     </p>
-                    {typeof window !== 'undefined' && window.__PORTAL_BUILD__ && (
-                      <p className="text-[9px] text-slate-400 font-mono mt-0.5">build {window.__PORTAL_BUILD__}</p>
-                    )}
                   </div>
+                </button>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setExploreOpen(true)}
+                    className="inline-flex items-center gap-2 text-xs font-bold bg-[#222121] text-white px-3 py-2.5 rounded-xl hover:bg-[#333] shadow-sm"
+                  >
+                    {window.MenuIcon && React.createElement(window.MenuIcon, { open: exploreOpen })}
+                    <span className="hidden xs:inline sm:inline">Explore topics</span>
+                  </button>
                 </div>
-                <a
-                  href="?tab=operations&days=7"
-                  onClick={(e) => { e.preventDefault(); goToCatchAllDashboard(7); }}
-                  className="hidden sm:inline-flex text-xs font-bold text-[#E2004F] bg-[#FFF0F3] border border-[#FFD2DB] px-3 py-2 rounded-xl hover:bg-white shrink-0"
-                >
-                  Catch-All ↗
-                </a>
               </div>
-              <nav
-                className={`flex gap-1 overflow-x-auto py-2.5 custom-scroll -mx-1 px-1 ${activeTab === 'home' ? 'hidden sm:flex' : ''}`}
-                aria-label="Main"
-              >
-                {NAV_TABS.map((tab) => {
-                  const isActive = activeTab === tab.id;
-                  const isOps = tab.id === 'operations';
-                  return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      data-tab-operations={isOps || undefined}
-                      onClick={() => (isOps ? goToCatchAllDashboard(7) : navigateToTab(tab.id))}
-                      className={`shrink-0 px-3 py-2 rounded-xl text-[11px] font-bold transition-all whitespace-nowrap ${
-                        isActive
-                          ? tab.accent
-                            ? 'bg-[#E2004F] text-white shadow-sm'
-                            : 'bg-[#222121] text-white shadow-sm'
-                          : 'text-[#5A5755] hover:bg-[#F5F1E9] hover:text-[#222121]'
-                      }`}
-                    >
-                      <span className="hidden sm:inline">{tab.label}</span>
-                      <span className="sm:hidden">{tab.short || tab.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
             </div>
           </header>
 
@@ -614,7 +609,10 @@
 
             {/* TAB: HOME LANDING */}
             {activeTab === 'home' && window.HomePanel && (
-              React.createElement(window.HomePanel, { onNavigateTab: navigateToTab })
+              React.createElement(window.HomePanel, {
+                onNavigateTab: navigateToTab,
+                onOpenExplore: () => setExploreOpen(true),
+              })
             )}
             {activeTab === 'home' && !window.HomePanel && (
               <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading home…</div>
