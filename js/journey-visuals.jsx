@@ -1,5 +1,5 @@
 /* global React */
-const { useMemo, useState } = React;
+const { useMemo, useState, useEffect } = React;
 
 // —— System icons (inline SVG, HiBob palette) ——
 const BobIcon = () => (
@@ -132,6 +132,18 @@ function ScenarioGlyph({ id }) {
   );
 }
 
+const SCENARIO_EXAMPLES = {
+  A: 'A 350-person software company in the US fills out Pricing, ZoomInfo enriches the domain, they book a Disco Call on the page, and Salesforce shows a booked activity for the round-robin rep.',
+  B: 'Same qualified lead sees the calendar but closes the tab. Marketo still scores them; RingLead passes; Distro silently assigns an owner overnight.',
+  C: 'A 12-person agency submits the form — no live calendar. Marketo processes the lead; Distro assigns via backend rules without the prospect ever scheduling.',
+  D: 'ZoomInfo returns nothing for a new domain. The site shows a second form for company size; the prospect enters 80 employees and then books (or abandons) from manual data.',
+  E: 'The domain already has an active Salesforce owner on the CP Ownership team — Concierge skips round-robin and shows that rep’s calendar directly.',
+  F: 'Enrichment works and the lead is real, but no Concierge segment matches their region/size/state combo — they land in Catch-All for MOPS to assign manually.',
+  G: 'MQL syncs to Salesforce, but RingLead flags a dedupe conflict — Distro never runs and the account stays on the MOPS monitoring list.',
+  H: 'RingLead passes, but Distro has no active rule for that region and employee band — Catch-All, same as a Concierge miss from the rep’s perspective.',
+  I: 'After a successful discovery call, the XDR opens Handoff in Salesforce and schedules the AE from their Pod pairing spreadsheet — not geographic routing.',
+};
+
 function ScenarioCard({ scenario, onCatchAll, expanded, onToggle }) {
   const outcome = SCENARIO_OUTCOME[scenario.id] || { type: 'backend', label: 'Route', emoji: '•' };
   const styles = OUTCOME_STYLES[outcome.type];
@@ -139,6 +151,7 @@ function ScenarioCard({ scenario, onCatchAll, expanded, onToggle }) {
 
   return (
     <article
+      id={`scenario-card-${scenario.id}`}
       className={`rounded-xl border transition-all ${
         expanded
           ? `border-2 shadow-md bg-white ${styles.border}`
@@ -177,13 +190,41 @@ function ScenarioCard({ scenario, onCatchAll, expanded, onToggle }) {
         </span>
       </button>
 
+      {!expanded && (
+        <div className="px-3 pb-2.5 border-t border-[#EBE5D9]/60">
+          <p className="text-[11px] text-slate-600 leading-relaxed mt-2 line-clamp-2">{scenario.description}</p>
+          {SCENARIO_EXAMPLES[scenario.id] && (
+            <p className="text-[10px] text-amber-800/80 mt-1.5 italic">Tap to see example &amp; full path →</p>
+          )}
+        </div>
+      )}
+
       {expanded && (
-        <div className="px-3 pb-3 pt-2 border-t border-[#EBE5D9] animate-fadeIn space-y-2.5">
+        <div className="px-3 pb-3 pt-2 border-t border-[#EBE5D9] animate-fadeIn space-y-3">
           <span className={`inline sm:hidden text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full border ${styles.badge}`}>
             {outcome.emoji} {outcome.label}
           </span>
-          <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
+          <p className="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+            Scenario {scenario.id} · {scenario.title.replace(/^Scenario [A-I]:\s*/i, '')}
+          </p>
           <p className="text-xs text-slate-600 leading-relaxed">{scenario.description}</p>
+          {SCENARIO_EXAMPLES[scenario.id] && (
+            <div className="rounded-xl bg-amber-50/80 border border-amber-200 p-3">
+              <p className="text-[10px] font-extrabold text-amber-900 uppercase tracking-wider mb-1.5">Example</p>
+              <p className="text-xs text-amber-950 leading-relaxed">{SCENARIO_EXAMPLES[scenario.id]}</p>
+            </div>
+          )}
+          {scenario.steps?.length > 0 && (
+            <div className="rounded-xl bg-[#FAF8F5] border border-[#EBE5D9] p-3">
+              <p className="text-[10px] font-extrabold text-[#222121] uppercase tracking-wider mb-2">What happens</p>
+              <ol className="space-y-1.5 list-decimal list-inside">
+                {scenario.steps.map((st, i) => (
+                  <li key={i} className="text-xs text-slate-600 leading-snug">{st}</li>
+                ))}
+              </ol>
+            </div>
+          )}
+          <MiniFlowDiagram systems={scenario.systems} outcomeType={outcome.type} />
           <div className="flex flex-wrap gap-1 pt-1 border-t border-[#F0EAE1]">
             {(scenario.systems || []).map((key) => {
               const meta = SYSTEM_META[key];
@@ -211,8 +252,19 @@ function ScenarioCard({ scenario, onCatchAll, expanded, onToggle }) {
   );
 }
 
-function ScenarioCardsGrid({ scenarios, onCatchAll }) {
-  const [expandedId, setExpandedId] = useState(null);
+function ScenarioCardsGrid({ scenarios, onCatchAll, initialExpandedId }) {
+  const [expandedId, setExpandedId] = useState(initialExpandedId || null);
+
+  useEffect(() => {
+    if (initialExpandedId) {
+      setExpandedId(initialExpandedId);
+      const t = setTimeout(() => {
+        document.getElementById(`scenario-card-${initialExpandedId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
+      return () => clearTimeout(t);
+    }
+    return undefined;
+  }, [initialExpandedId]);
 
   const toggle = (id) => {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -290,14 +342,35 @@ function FlowStrip({ nodes, activeIndex }) {
   );
 }
 
-function StepContextBar({ step, journeySteps }) {
+function StepContextBar({ step, journeySteps, onStepClick }) {
   if (!step) return null;
   return (
-    <div className="w-full text-left mb-2 pb-2 border-b border-slate-100">
-      <p className="text-[9px] font-extrabold uppercase tracking-widest text-[#E2004F]">
-        Step {step.num} of {journeySteps.length}
-      </p>
-      <p className="text-xs font-extrabold text-[#222121] mt-0.5 leading-snug">{step.title}</p>
+    <div className="w-full text-left mb-2 pb-2 border-b border-slate-100 space-y-2">
+      <div>
+        <p className="text-[9px] font-extrabold uppercase tracking-widest text-[#E2004F]">
+          Step {step.num} of {journeySteps.length}
+        </p>
+        <p className="text-xs font-extrabold text-[#222121] mt-0.5 leading-snug">{step.title}</p>
+      </div>
+      {onStepClick && (
+        <div className="flex flex-wrap gap-1">
+          {journeySteps.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => onStepClick(s.id)}
+              title={s.title}
+              className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all ${
+                s.id === step.id
+                  ? 'bg-[#E2004F] text-white border-[#E2004F]'
+                  : 'bg-white text-slate-600 border-[#EBE5D9] hover:border-[#E2004F]'
+              }`}
+            >
+              {s.num}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -592,7 +665,7 @@ function JourneyVisualMonitor({ activeStepId, journeySteps, onStepClick }) {
 
   return (
     <>
-      <StepContextBar step={step} journeySteps={journeySteps} />
+      <StepContextBar step={step} journeySteps={journeySteps} onStepClick={onStepClick} />
       <div className="my-auto py-2 flex flex-col items-center justify-center text-center w-full min-h-[380px]">
         {Visual ? <Visual key={visualState} /> : <p className="text-slate-400 text-sm">Select a step</p>}
       </div>
@@ -694,15 +767,15 @@ function SystemPillRow({ systems }) {
   );
 }
 
-function JourneyHero({ onStartJourney }) {
+function JourneyHero({ onStartJourney, onStepClick, journeySteps }) {
   const pipeline = [
-    { num: 1, label: 'Form', emoji: '📝' },
-    { num: 2, label: 'Enrich', emoji: '🔍' },
-    { num: 3, label: 'Validate', emoji: '🛡️' },
-    { num: 4, label: 'Book', emoji: '📅' },
-    { num: 5, label: 'Dedupe', emoji: '🔗' },
-    { num: 6, label: 'Distro', emoji: '⚙️' },
-    { num: 7, label: 'Handoff', emoji: '🤝' },
+    { num: 1, id: 'step1', label: 'Form', emoji: '📝' },
+    { num: 2, id: 'step2', label: 'Enrich', emoji: '🔍' },
+    { num: 3, id: 'step3', label: 'Validate', emoji: '🛡️' },
+    { num: 4, id: 'step4', label: 'Book', emoji: '📅' },
+    { num: 5, id: 'step5', label: 'Dedupe', emoji: '🔗' },
+    { num: 6, id: 'step6', label: 'Distro', emoji: '⚙️' },
+    { num: 7, id: 'step7', label: 'Handoff', emoji: '🤝' },
   ];
 
   return (
@@ -735,16 +808,32 @@ function JourneyHero({ onStartJourney }) {
         <div className="hidden md:flex items-center justify-center gap-1 mt-10 flex-wrap">
           {pipeline.map((p, i) => (
             <React.Fragment key={p.num}>
-              <div className="flex flex-col items-center gap-1 min-w-[52px]">
-                <span className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-lg">
-                  {p.emoji}
-                </span>
-                <span className="text-[9px] font-bold text-slate-400 uppercase">{p.label}</span>
-              </div>
+              {onStepClick ? (
+                <button
+                  type="button"
+                  onClick={() => onStepClick(p.id)}
+                  className="flex flex-col items-center gap-1 min-w-[52px] rounded-xl p-1 hover:bg-white/10 transition-colors"
+                >
+                  <span className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-lg">
+                    {p.emoji}
+                  </span>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">{p.label}</span>
+                </button>
+              ) : (
+                <div className="flex flex-col items-center gap-1 min-w-[52px]">
+                  <span className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-lg">
+                    {p.emoji}
+                  </span>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">{p.label}</span>
+                </div>
+              )}
               {i < pipeline.length - 1 && <span className="text-slate-500 text-sm pb-4">→</span>}
             </React.Fragment>
           ))}
         </div>
+        {onStepClick && journeySteps?.length > 0 && (
+          <p className="text-[11px] text-slate-400 mt-4">Tip: click a stage above or use the step numbers in the simulator to jump.</p>
+        )}
         {onStartJourney && (
           <button
             type="button"
@@ -823,10 +912,10 @@ function JourneyStepCards({
             key={step.id}
             id={step.id}
             ref={(el) => { if (stepRefs) stepRefs.current[step.id] = el; }}
-            onClick={singleStepOnly ? undefined : () => scrollToStep(step.id)}
+            onClick={scrollToStep ? () => scrollToStep(step.id) : undefined}
             className={`rounded-3xl border-2 transition-all duration-300 ${
-              singleStepOnly ? 'flex flex-col' : 'overflow-hidden h-full cursor-pointer'
-            } ${
+              singleStepOnly ? 'flex flex-col' : 'overflow-hidden h-full'
+            } ${scrollToStep ? 'cursor-pointer' : ''} ${
               isActive
                 ? 'border-[#E2004F] shadow-xl bg-white'
                 : 'border-[#EBE5D9] bg-white/80 hover:border-slate-400 hover:shadow-md'

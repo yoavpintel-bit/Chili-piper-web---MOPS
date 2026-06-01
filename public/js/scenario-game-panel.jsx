@@ -1,6 +1,11 @@
 /* global React */
 const { useState, useMemo } = React;
 
+function primaryScenarioId(scenarioText) {
+  const matches = [...String(scenarioText || '').matchAll(/Scenario ([A-I])/gi)];
+  return matches.length ? matches[matches.length - 1][1].toUpperCase() : null;
+}
+
 function evaluateLeadSimulation(input) {
   const {
     email = '',
@@ -197,7 +202,21 @@ function RevealCard({ title, body, stepLabel, isLatest }) {
   );
 }
 
-function ScenarioGamePanel({ FormattedText }) {
+function ScenarioResultLink({ finalResult, onOpenScenario }) {
+  const scenarioId = primaryScenarioId(finalResult?.scenario);
+  if (!scenarioId || typeof onOpenScenario !== 'function') return null;
+  return (
+    <button
+      type="button"
+      onClick={() => onOpenScenario(scenarioId)}
+      className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#E2004F] bg-[#FFF0F3] border border-[#FFD2DB] px-4 py-2 rounded-xl hover:bg-white transition-colors"
+    >
+      Read full Scenario {scenarioId} in Outcomes &amp; rules →
+    </button>
+  );
+}
+
+function ScenarioGamePanel({ FormattedText, onOpenScenario }) {
   const timelineRef = React.useRef(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState({
@@ -492,7 +511,8 @@ function ScenarioGamePanel({ FormattedText }) {
                 {finalResult.type}
               </span>
               <p className="text-sm text-slate-600 mt-3 leading-relaxed">{finalResult.desc}</p>
-              <button type="button" onClick={reset} className="mt-4 text-sm font-bold text-[#E2004F] underline">
+              <ScenarioResultLink finalResult={finalResult} onOpenScenario={onOpenScenario} />
+              <button type="button" onClick={reset} className="mt-4 block text-sm font-bold text-[#E2004F] underline">
                 Play again
               </button>
             </div>
@@ -542,6 +562,7 @@ function ScenarioGamePanel({ FormattedText }) {
                   {finalResult.type}
                 </span>
                 <p className="text-sm text-slate-300 mt-2 leading-relaxed">{finalResult.desc}</p>
+                <ScenarioResultLink finalResult={finalResult} onOpenScenario={onOpenScenario} />
               </div>
               <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5">
                 <p className="text-xs font-extrabold uppercase text-slate-500 mb-3">Full path trace</p>

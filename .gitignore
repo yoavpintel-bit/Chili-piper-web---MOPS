@@ -5,3 +5,5 @@ node_modules/
 *.log
 data/catch_all/raw/*.json
 !data/catch_all/raw/.gitkeep
+# Standalone MQL dashboard site has its own git repo (mql-dashboard-web/.git)
+mql-dashboard-web/

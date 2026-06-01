@@ -366,7 +366,7 @@
       { id: 'playbook', label: 'Outcomes & rules', short: 'Rules', technical: 'Technical Playbook' },
       { id: 'teams', label: 'Teams & regions', short: 'Teams', technical: 'Teams & Countries' },
       { id: 'operations', label: 'Unassigned leads', short: 'Catch-All', accent: true, technical: 'Catch-All Dashboard' },
-      { id: 'fields', label: 'Data fields', short: 'Fields', technical: 'Field Mappings' },
+      { id: 'fields', label: 'Technical stuff', short: 'Technical', technical: 'Fields & module comparison' },
     ];
 
     function App() {
@@ -375,6 +375,8 @@
       const tabParam = params.get('tab');
       const initialTab = VALID_TABS.includes(tabParam) ? tabParam : 'home';
       const initialOpsDays = Number(params.get('days')) || 7;
+      const initialScenarioParam = (params.get('scenario') || '').toUpperCase();
+      const initialScenario = /^[A-I]$/.test(initialScenarioParam) ? initialScenarioParam : null;
 
       const [activeTab, setActiveTab] = useState(initialTab);
       const [, panelLoadTick] = useState(0);
@@ -390,6 +392,7 @@
       }, []);
       const [opsDays, setOpsDays] = useState(initialOpsDays);
       const [exploreOpen, setExploreOpen] = useState(false);
+      const [highlightScenario, setHighlightScenario] = useState(initialScenario);
 
       const syncTabUrl = (tab, extra = {}) => {
         const url = new URL(window.location.href);
@@ -399,6 +402,11 @@
         } else if (tab !== 'operations') {
           url.searchParams.delete('days');
         }
+        if (tab === 'playbook' && extra.scenario) {
+          url.searchParams.set('scenario', extra.scenario);
+        } else if (tab !== 'playbook') {
+          url.searchParams.delete('scenario');
+        }
         window.history.replaceState({}, '', url);
       };
 
@@ -406,7 +414,15 @@
         if (!VALID_TABS.includes(tab)) return;
         setActiveTab(tab);
         if (tab === 'operations' && extra.days != null) setOpsDays(extra.days);
+        if (tab === 'playbook' && extra.scenario) setHighlightScenario(extra.scenario);
         syncTabUrl(tab, extra);
+      };
+
+      const navigateToPlaybookScenario = (scenarioId) => {
+        const id = String(scenarioId || '').toUpperCase();
+        if (!/^[A-I]$/.test(id)) return;
+        setHighlightScenario(id);
+        navigateToTab('playbook', { scenario: id });
       };
 
       const goToCatchAllDashboard = (days = 7) => {
@@ -566,7 +582,7 @@
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 font-medium truncate">
-                      {activeTab === 'home' ? 'Inbound lead routing' : (activeNav?.label || 'Learn more')}
+                      {activeTab === 'home' ? 'Chili piper — all you need to know' : (activeNav?.label || 'Learn more')}
                     </p>
                   </div>
                 </button>
@@ -624,6 +640,8 @@
                 <div className="px-4 sm:px-6 lg:px-8 space-y-6">
                   {window.JourneyHero && React.createElement(window.JourneyHero, {
                     onStartJourney: startJourney,
+                    onStepClick: scrollToStep,
+                    journeySteps: JOURNEY_STEPS,
                   })}
                 </div>
 
@@ -670,8 +688,7 @@
                         <div className="hidden lg:block bg-[#FAF8F5] border border-[#EBE5D9] rounded-2xl p-4 text-sm shrink-0 text-left">
                           <div className="font-extrabold text-[#222121]">💡 Scroll to walk the journey</div>
                           <p className="text-slate-600 leading-relaxed mt-1 text-xs">
-                            Keep scrolling — the simulator stays on screen while each step updates.
-                            After step 7, scroll continues to quick-jump below.
+                            Scroll or click step numbers to move through the journey.
                           </p>
                         </div>
                       </div>
@@ -684,10 +701,13 @@
                           </span>
                           <div className="flex gap-1">
                             {JOURNEY_STEPS.map((s) => (
-                              <span
+                              <button
                                 key={s.id}
+                                type="button"
+                                onClick={() => scrollToStep(s.id)}
+                                aria-label={`Go to step ${s.num}`}
                                 className={`h-1.5 rounded-full transition-all ${
-                                  s.id === activeStepId ? 'w-6 bg-[#E2004F]' : 'w-1.5 bg-slate-200'
+                                  s.id === activeStepId ? 'w-6 bg-[#E2004F]' : 'w-1.5 bg-slate-200 hover:bg-slate-400'
                                 }`}
                               />
                             ))}
@@ -763,7 +783,10 @@
             {/* TAB 3: SCENARIO PLAYGROUND — step-by-step routing game */}
             {activeTab === 'simulator' && window.ScenarioGamePanel && (
               <div className="animate-fadeIn -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-                {React.createElement(window.ScenarioGamePanel, { FormattedText })}
+                {React.createElement(window.ScenarioGamePanel, {
+                  FormattedText,
+                  onOpenScenario: navigateToPlaybookScenario,
+                })}
               </div>
             )}
             {activeTab === 'simulator' && !window.ScenarioGamePanel && (
@@ -783,6 +806,7 @@
                   React.createElement(window.ScenarioCardsGrid, {
                     scenarios: SCENARIOS,
                     onCatchAll: () => goToCatchAllDashboard(7),
+                    initialExpandedId: highlightScenario,
                   })
                 ) : (
                   <div className="bg-white border border-[#EBE5D9] rounded-2xl p-5 text-sm text-slate-500">Loading scenario cards…</div>
@@ -803,7 +827,50 @@
                   ))}
                 </div>
 
-                {/* Comparative Matrix Table */}
+                {/* Guardrails */}
+                <div className="rounded-2xl border border-[#EBE5D9] overflow-hidden shadow-sm">
+                  <div className="bg-[#FFF0F3] border-b border-[#FFD2DB] px-5 py-3">
+                    <h4 className="text-sm font-extrabold text-[#E2004F]">System vulnerabilities &amp; guardrails</h4>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-white">
+                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
+                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Ingestion filter gaps</span>
+                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">If spam checkers, blacklisted country values, or blocklists inside Marketo mismatch Chili Piper parameters, a lead might book a slot but fail lead creation, creating ghost calendar slots.</p>
+                    </div>
+                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
+                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Stale CRM overrides</span>
+                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">Because Salesforce values supersede fresh enrichment data, old accounts containing out-of-date region or size metrics will route on old parameters, skipping current telemetry.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* TAB 6: CATCH-ALL OPERATIONS DASHBOARD */}
+            {activeTab === 'teams' && window.TeamsCountriesPanel && (
+              React.createElement(window.TeamsCountriesPanel)
+            )}
+
+            {activeTab === 'operations' && window.OperationsPanel && (
+              React.createElement(window.OperationsPanel, {
+                initialDays: opsDays,
+                onOpenScenario: () => {
+                  setSelectedScenarioId('F');
+                  navigateToTab('playbook');
+                },
+              })
+            )}
+
+            {/* TAB 5: SCHEMA REFERENCE TABLE */}
+            {activeTab === 'fields' && (
+              <div className="space-y-6 animate-fadeIn text-left">
+                <section className="bg-gradient-to-br from-[#222121] to-[#2d2b2b] text-white rounded-xl p-4 border border-[#333]">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFB3C7]">Technical stuff</span>
+                  <h2 className="text-lg font-extrabold mt-0.5">Fields, modules &amp; API reference</h2>
+                  <p className="text-xs text-slate-400 mt-1">For RevOps, MOPS, and integrations — plain names above, technical detail below.</p>
+                </section>
+
                 <div className="rounded-2xl border border-[#EBE5D9] overflow-hidden shadow-sm">
                   <div className="bg-[#222121] text-white px-5 py-4">
                     <h3 className="text-sm font-extrabold uppercase tracking-wider">Module comparison</h3>
@@ -855,70 +922,34 @@
                   </div>
                 </div>
 
-                {/* Guardrails */}
-                <div className="rounded-2xl border border-[#EBE5D9] overflow-hidden shadow-sm">
-                  <div className="bg-[#FFF0F3] border-b border-[#FFD2DB] px-5 py-3">
-                    <h4 className="text-sm font-extrabold text-[#E2004F]">System vulnerabilities &amp; guardrails</h4>
+                <div className="bg-white border border-[#EBE5D9] rounded-3xl p-6 shadow-sm">
+                  <div className="mb-4">
+                    <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wide">Field mappings</h3>
+                    <p className="text-xs text-slate-500 mt-1">API dictionary of enrichment variables and CRM fields used in routing.</p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 bg-white">
-                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
-                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Ingestion filter gaps</span>
-                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">If spam checkers, blacklisted country values, or blocklists inside Marketo mismatch Chili Piper parameters, a lead might book a slot but fail lead creation, creating ghost calendar slots.</p>
-                    </div>
-                    <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4">
-                      <span className="font-extrabold text-amber-900 text-sm block">⚠️ Stale CRM overrides</span>
-                      <p className="mt-2 text-sm text-amber-950/80 leading-relaxed">Because Salesforce values supersede fresh enrichment data, old accounts containing out-of-date region or size metrics will route on old parameters, skipping current telemetry.</p>
-                    </div>
-                  </div>
-                </div>
 
-              </div>
-            )}
-
-            {/* TAB 6: CATCH-ALL OPERATIONS DASHBOARD */}
-            {activeTab === 'teams' && window.TeamsCountriesPanel && (
-              React.createElement(window.TeamsCountriesPanel)
-            )}
-
-            {activeTab === 'operations' && window.OperationsPanel && (
-              React.createElement(window.OperationsPanel, {
-                initialDays: opsDays,
-                onOpenScenario: () => {
-                  setSelectedScenarioId('F');
-                  navigateToTab('playbook');
-                },
-              })
-            )}
-
-            {/* TAB 5: SCHEMA REFERENCE TABLE */}
-            {activeTab === 'fields' && (
-              <div className="bg-white border border-[#EBE5D9] rounded-3xl p-6 shadow-sm animate-fadeIn text-left">
-                <div className="mb-4">
-                  <h3 className="text-sm font-extrabold text-[#222121] uppercase tracking-wide">Technical Schema Mappings</h3>
-                  <p className="text-xs text-slate-500 mt-1">Complete API dictionary of enrichment variables and backend CRM fields compiled within the routing architecture.</p>
-                </div>
-
-                <div className="overflow-x-auto border rounded-2xl">
-                  <table className="w-full text-left text-xs border-collapse">
-                    <thead>
-                      <tr className="bg-[#FAF8F5] border-b border-[#EBE5D9] text-slate-400 font-extrabold text-[9px] uppercase tracking-wider">
-                        <th className="py-3 px-4">Field API Name</th>
-                        <th className="py-3 px-4">Origin Channel</th>
-                        <th className="py-3 px-4">Target Destination</th>
-                        <th className="py-3 px-4">System Purpose</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {FIELDS_REFERENCE.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-slate-50">
-                          <td className="py-3 px-4 font-mono text-[#E2004F] font-semibold">{row.field}</td>
-                          <td className="py-3 px-4 text-slate-700 font-medium">{row.source}</td>
-                          <td className="py-3 px-4 text-slate-500 font-medium">{row.dest}</td>
-                          <td className="py-3 px-4 text-slate-600 text-[11px]"><FormattedText text={row.purpose} /></td>
+                  <div className="overflow-x-auto border rounded-2xl">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-[#FAF8F5] border-b border-[#EBE5D9] text-slate-400 font-extrabold text-[9px] uppercase tracking-wider">
+                          <th className="py-3 px-4">Field API Name</th>
+                          <th className="py-3 px-4">Origin Channel</th>
+                          <th className="py-3 px-4">Target Destination</th>
+                          <th className="py-3 px-4">System Purpose</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {FIELDS_REFERENCE.map((row, idx) => (
+                          <tr key={idx} className="hover:bg-slate-50">
+                            <td className="py-3 px-4 font-mono text-[#E2004F] font-semibold">{row.field}</td>
+                            <td className="py-3 px-4 text-slate-700 font-medium">{row.source}</td>
+                            <td className="py-3 px-4 text-slate-500 font-medium">{row.dest}</td>
+                            <td className="py-3 px-4 text-slate-600 text-[11px]"><FormattedText text={row.purpose} /></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             )}

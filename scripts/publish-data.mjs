@@ -13,7 +13,10 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DATA = path.resolve(__dirname, '../public/data/catch_all');
 const PUBLIC_ROUTER_TEAMS = path.resolve(__dirname, '../public/data/router_teams');
+const PUBLIC_MQL_DRILLDOWN = path.resolve(__dirname, '../public/data/mql_drilldown');
 const ROUTER_TEAMS_PATH = path.resolve(__dirname, '../data/router_teams/inbound-router-live.json');
+const MQL_REPORT_JSON = path.resolve(__dirname, '../data/mql_drilldown_report.json');
+const MQL_REPORT_CSV = path.resolve(__dirname, '../data/mql_drilldown_report.csv');
 
 function copyIfExists(src, dest) {
   if (fs.existsSync(src)) {
@@ -37,4 +40,10 @@ copyIfExists(
 console.log(`Published data to ${PUBLIC_DATA}`);
 if (fs.existsSync(path.join(PUBLIC_ROUTER_TEAMS, 'inbound-router-live.json'))) {
   console.log(`Published router teams to ${PUBLIC_ROUTER_TEAMS}`);
+}
+fs.mkdirSync(PUBLIC_MQL_DRILLDOWN, { recursive: true });
+copyIfExists(MQL_REPORT_JSON, path.join(PUBLIC_MQL_DRILLDOWN, 'report.json'));
+copyIfExists(MQL_REPORT_CSV, path.join(PUBLIC_MQL_DRILLDOWN, 'report.csv'));
+if (fs.existsSync(path.join(PUBLIC_MQL_DRILLDOWN, 'report.json'))) {
+  console.log(`Published MQL drilldown to ${PUBLIC_MQL_DRILLDOWN}`);
 }

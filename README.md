@@ -114,6 +114,22 @@ Optional secrets: `WORKATO_CSV_PATH` / `WORKATO_JSON_PATH` if Workato export is 
 
 Deep links: `?tab=home` (default) · `?tab=operations&days=7` · `?tab=teams`
 
+### MQL cohort dashboard (Marketing & Sales)
+
+Single-page view of the MQL drilldown matched to Concierge routing logs:
+
+```bash
+npx serve public
+# → http://localhost:3000/mql-drilldown.html
+```
+
+Rebuild from drilldown + Concierge exports, then publish:
+
+```bash
+npm run build:mql-drilldown
+npm run publish
+```
+
 ## Workato
 
 Workato adds recent Catch-All rows. When you have a stable export path:

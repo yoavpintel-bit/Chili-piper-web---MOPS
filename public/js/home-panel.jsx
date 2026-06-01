@@ -83,7 +83,7 @@ function HomePanel({ onNavigateTab, onOpenExplore }) {
           HiBob inbound leads
         </span>
         <h1 className="text-2xl md:text-3xl font-extrabold text-[#222121] mt-4 tracking-tight leading-tight">
-          How website leads get a sales rep
+          Chili piper — all you need to know
         </h1>
         <p className="text-sm text-slate-600 mt-3 leading-relaxed max-w-lg mx-auto">
           A short overview of booking, assignment, and what to do when automation cannot place a lead.

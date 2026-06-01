@@ -9,7 +9,7 @@ const EXPLORE_LINKS = [
   { id: 'playbook', icon: '📋', label: 'What can happen to a lead', technical: 'Technical Playbook', desc: 'Nine outcomes (A–I), tools compared, and routing rules.' },
   { id: 'teams', icon: '🌍', label: 'Who covers which region', technical: 'Teams & Countries', desc: 'Sales teams and countries by inbound segment.' },
   { id: 'operations', icon: '📊', label: 'Leads we could not auto-assign', technical: 'Catch-All Dashboard', desc: 'Monitor and review leads that did not match a rule.', extra: { days: 7 } },
-  { id: 'fields', icon: '🔑', label: 'Which data fields are used', technical: 'Field Mappings', desc: 'Field names for integrations and Salesforce.' },
+  { id: 'fields', icon: '⚙️', label: 'Technical stuff', technical: 'Field Mappings & modules', desc: 'Data fields, Concierge vs Distro vs Handoff, and API names.' },
 ];
 
 function MenuIcon({ open }) {
