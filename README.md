@@ -21,11 +21,12 @@ cd "Chili piper"
 npm run sync          # CSV from ~/Downloads (or API if key set)
 ```
 
-Open the site (requires a local server so `fetch` works):
+Open the site locally (required — **not published** on GitHub Pages):
 
 ```bash
-npx serve public
-# → http://localhost:3000
+npm start
+# → http://localhost:3000  (main portal)
+# → http://localhost:3000/mql-drilldown.html  (MQL cohort dashboard)
 ```
 
 ## Data pipeline
@@ -83,12 +84,19 @@ npm run build:aggregates && node scripts/publish-data.mjs
 
 Initial dataset was seeded from Concierge CSV exports (~3,680 Catch-All rows, Jan–May 2026).
 
-## GitHub Pages & daily sync
+## Hosting (local only)
+
+The portal is **not** served from `public/` on GitHub Pages. The live URL shows a short offline notice only ([`site-offline/`](site-offline/)).
+
+To run locally: `npm start` after `npm run publish` (or `npm run sync`).
+
+Optional: **Settings → Pages → Unpublish site** in GitHub to remove the `github.io` URL entirely.
+
+## GitHub Actions & daily sync
 
 1. Push this repo to GitHub (`main` branch).
-2. **Settings → Pages → Build and deployment**: GitHub Actions ([pages.yml](.github/workflows/pages.yml)).
-3. Add repository secret **`CHILI_PIPER_API_KEY`** (Command Center → Integrations → Credentials → API Access Tokens) for [daily-sync.yml](.github/workflows/daily-sync.yml).
-4. Site deploys automatically on every push to `main`.
+2. Add repository secret **`CHILI_PIPER_API_KEY`** (Command Center → Integrations → Credentials → API Access Tokens) for [daily-sync.yml](.github/workflows/daily-sync.yml).
+3. Daily sync updates `data/` and `public/data/` in the repo; it does **not** publish the full portal to the web.
 
 ### Daily sync (09:00 Israel time)
 

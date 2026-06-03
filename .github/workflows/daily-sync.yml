@@ -36,7 +36,7 @@ jobs:
           SYNC_INCREMENTAL_DAYS: '7'
         run: node scripts/daily-prod-sync.mjs
 
-      - name: Commit and push to main (triggers GitHub Pages deploy)
+      - name: Commit and push to main (data only; site is local — not GitHub Pages)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

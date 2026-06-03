@@ -1,4 +1,5 @@
-name: Deploy GitHub Pages
+# Deploys a minimal "local only" page — not the portal. Portal: npm start (serve public/).
+name: Deploy GitHub Pages (offline notice)
 
 on:
   push:
@@ -27,7 +28,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: site-offline
 
       - id: deployment
         uses: actions/deploy-pages@v4
