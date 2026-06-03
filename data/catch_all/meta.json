@@ -1,15 +1,10 @@
 {
-  "lastSyncAt": "2026-05-31T08:57:59.960Z",
-  "source": "csv",
-  "files": [
-    "/Users/yoav.pintel/Downloads/routing_log_export_1780216485479.csv",
-    "/Users/yoav.pintel/Downloads/routing_log_export_1779869041851.csv",
-    "/Users/yoav.pintel/Downloads/routing_log_export_1779868938832.csv",
-    "/Users/yoav.pintel/Downloads/routing_log_export_1779801577558.csv",
-    "/Users/yoav.pintel/Downloads/Concierge Logs Export.csv"
-  ],
-  "recordCount": 3822,
-  "totalRowsMerged": 26619,
-  "aggregatesBuiltAt": "2026-06-02T19:02:25.886Z",
-  "catchAllCount": 3822
+  "lastSyncAt": "2026-06-03T12:31:15.057Z",
+  "source": "api",
+  "workspaceId": "5ffdc2c64c46df00017023a8",
+  "routerId": "7e9c794d-b6db-40ec-ae07-f363d77b5f36",
+  "recordCount": 3908,
+  "windows": 7,
+  "aggregatesBuiltAt": "2026-06-03T12:31:15.428Z",
+  "catchAllCount": 3908
 }

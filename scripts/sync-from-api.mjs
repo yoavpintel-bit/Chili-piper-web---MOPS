@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Incremental sync from Chili Piper Concierge logs API.
+ * Incremental sync from Chili Piper Concierge logs (Fire Edge API).
  * Requires: CHILI_PIPER_API_KEY (or CHILI_PIPER_TOKEN), optional CHILI_PIPER_API_BASE
  */
 import fs from 'fs';
@@ -14,7 +14,10 @@ import {
 import { mergeRecords, normalizeApiLog } from './lib/normalize.mjs';
 
 const API_BASE =
-  process.env.CHILI_PIPER_API_BASE || 'https://api.chilipiper.com';
+  process.env.CHILI_PIPER_API_BASE || 'https://fire.chilipiper.com';
+const LOGS_PATH =
+  process.env.CHILI_PIPER_LOGS_PATH ||
+  '/api/fire-edge/v1/org/concierge/logs';
 
 function readJsonl(filePath) {
   if (!fs.existsSync(filePath)) return [];
@@ -31,13 +34,14 @@ function writeJsonl(filePath, records) {
 }
 
 async function fetchLogs(workspaceId, routerId, start, end, apiKey) {
-  const url = new URL('/api/concierge/v1/logs', API_BASE);
+  const url = new URL(LOGS_PATH, API_BASE);
   url.searchParams.set('workspaceId', workspaceId);
   url.searchParams.set('routerId', routerId);
   url.searchParams.set('start', start);
   url.searchParams.set('end', end);
 
   const res = await fetch(url.toString(), {
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
       Accept: 'application/json',
@@ -72,6 +76,25 @@ function* monthWindows(daysBack) {
   }
 }
 
+/** One-day chunks — large multi-day responses can 502 on Fire Edge. */
+function* dayWindows(daysBack) {
+  const end = new Date();
+  const startLimit = new Date(end);
+  startLimit.setDate(startLimit.getDate() - daysBack);
+  let cursor = new Date(startLimit);
+  while (cursor < end) {
+    const windowStart = new Date(cursor);
+    const windowEnd = new Date(cursor);
+    windowEnd.setDate(windowEnd.getDate() + 1);
+    if (windowEnd > end) windowEnd.setTime(end.getTime());
+    yield {
+      start: windowStart.toISOString(),
+      end: windowEnd.toISOString(),
+    };
+    cursor = windowEnd;
+  }
+}
+
 async function main() {
   const apiKey = process.env.CHILI_PIPER_API_KEY || process.env.CHILI_PIPER_TOKEN;
   if (!apiKey) {
@@ -88,12 +111,7 @@ async function main() {
 
   const windows = fullBackfill
     ? [...monthWindows(daysBack)]
-    : [
-        {
-          start: new Date(Date.now() - incrementalDays * 86400000).toISOString(),
-          end: new Date().toISOString(),
-        },
-      ];
+    : [...dayWindows(incrementalDays)];
 
   const existing = readJsonl(RECORDS_PATH);
   let batch = [];

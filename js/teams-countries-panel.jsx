@@ -1,7 +1,7 @@
 /* global React */
 const { useState, useEffect, useMemo } = React;
 
-const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260601h';
+const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260603a';
 const SPREADSHEET_URL =
   'https://docs.google.com/spreadsheets/d/1sUUDp7n0uwrYDKZZMmBwVNe2-8sQEwzEKMWW47IgYFk/edit?gid=837037962#gid=837037962';
 
@@ -97,6 +97,11 @@ function SegmentRow({ rule, open, onToggle, pinned, onPin, regionId }) {
             {rad && (
               <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
                 RAD
+              </span>
+            )}
+            {rule.flags?.onRouter === false && (
+              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                Not on router yet
               </span>
             )}
           </div>

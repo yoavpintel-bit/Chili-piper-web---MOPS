@@ -31,7 +31,7 @@ npx serve public
 ## Data pipeline
 
 1. **`scripts/sync-from-csv.mjs`** — Imports Concierge export CSVs (`Routing Rule Matched = Catch All`).
-2. **`scripts/sync-from-api.mjs`** — Incremental/full sync via Chili Piper API (30-day windows).
+2. **`scripts/sync-from-api.mjs`** — Incremental/full sync via Chili Piper Fire Edge API (`POST` concierge logs, 30-day windows).
 3. **`scripts/sync-from-mcp-file.mjs`** — Import JSON saved from Cursor MCP `concierge-logs`.
 4. **`scripts/build-aggregates.mjs`** — KPIs, daily buckets, insights.
 5. **`scripts/publish-data.mjs`** — Copies JSON into `public/data/catch_all/` for the static site.
@@ -65,7 +65,8 @@ Deep link: `?tab=teams`
 | Variable | Purpose |
 |----------|---------|
 | `CSV_PATHS` | Semicolon-separated CSV paths for `sync:csv` |
-| `CHILI_PIPER_API_KEY` or `CHILI_PIPER_TOKEN` | API auth for `sync:api` |
+| `CHILI_PIPER_API_KEY` or `CHILI_PIPER_TOKEN` | API auth for `sync:api` (Command Center → Integrations → API Access Tokens) |
+| `CHILI_PIPER_API_BASE` | Optional; defaults to `https://fire.chilipiper.com` |
 | `SYNC_FULL_BACKFILL=1` | Pull ~180 days in 30-day windows |
 | `SYNC_INCREMENTAL_DAYS=3` | Days to refresh on daily run |
 | `WORKATO_CSV_PATH` | Workato daily Catch-All export for merge |
@@ -86,7 +87,7 @@ Initial dataset was seeded from Concierge CSV exports (~3,680 Catch-All rows, Ja
 
 1. Push this repo to GitHub (`main` branch).
 2. **Settings → Pages → Build and deployment**: GitHub Actions ([pages.yml](.github/workflows/pages.yml)).
-3. Add repository secret **`CHILI_PIPER_API_KEY`** (Command Center → Credentials) for [daily-sync.yml](.github/workflows/daily-sync.yml).
+3. Add repository secret **`CHILI_PIPER_API_KEY`** (Command Center → Integrations → Credentials → API Access Tokens) for [daily-sync.yml](.github/workflows/daily-sync.yml).
 4. Site deploys automatically on every push to `main`.
 
 ### Daily sync (09:00 Israel time)

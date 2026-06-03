@@ -289,6 +289,8 @@ function main() {
   const routingRules = router.routing?.rules || [];
 
   const entries = [];
+  const onRouterIds = new Set();
+  const regionPrefixes = new Set();
   let order = 0;
   for (const route of routingRules) {
     if (route.type !== 'RuleRoute' || !route.id) continue;
@@ -306,6 +308,10 @@ function main() {
     const nameLower = rule.name.toLowerCase();
     const members = team ? mapMembers(team.members, userMap) : [];
     const teamNameExact = team && normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
+
+    onRouterIds.add(rule.id);
+    const regionPrefix = segmentLabel.split('|')[0]?.trim();
+    if (regionPrefix) regionPrefixes.add(regionPrefix);
 
     entries.push({
       id: rule.id,
@@ -340,6 +346,70 @@ function main() {
         updated: nameLower.includes('(updated)'),
         ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
         rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
+        onRouter: true,
+      },
+    });
+  }
+
+  const onRouterSegmentKeys = new Set(
+    entries.map((e) => normalizeRuleName(e.segmentLabel))
+  );
+
+  // Rules + teams in Chili Piper for an active region, not yet on the router flow
+  for (const rule of rules) {
+    if (onRouterIds.has(rule.id)) continue;
+    const segmentLabel = displaySegmentLabel(rule.name);
+    if (onRouterSegmentKeys.has(normalizeRuleName(segmentLabel))) continue;
+    const regionPrefix = segmentLabel.split('|')[0]?.trim();
+    if (!regionPrefix || !regionPrefixes.has(regionPrefix)) continue;
+    if (!segmentLabel.includes('|')) continue;
+
+    const team = resolveTeam(rule, teams);
+    if (!team) continue;
+    if (normalizeRuleName(team.name) !== normalizeRuleName(segmentLabel)) continue;
+
+    order += 1;
+    const fromName = parseEmployeeRangeFromName(rule.name);
+    const fromConds = extractEmployeeRangeFromConditions(rule.conditions);
+    const employeeRange = mergeRanges(fromName, fromConds) || fromName || fromConds;
+    const countries = extractCountries(rule.conditions);
+    const states = extractStates(rule.conditions);
+    const nameLower = rule.name.toLowerCase();
+    const members = mapMembers(team.members, userMap);
+    const teamNameExact = normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
+
+    entries.push({
+      id: rule.id,
+      name: rule.name,
+      segmentLabel,
+      order,
+      product: rule.product || null,
+      ruleType: rule.type || null,
+      countries,
+      states,
+      employeeRange: employeeRange
+        ? {
+            min: employeeRange.min,
+            max: employeeRange.max === Infinity ? null : employeeRange.max,
+            label: rangeLabel(employeeRange),
+          }
+        : null,
+      sizeSegmentIds: segmentIdsForRange(employeeRange),
+      team: {
+        id: team.id || team.teamId,
+        name: segmentLabel,
+        chiliPiperTeamName: team.name,
+        nameMatchesSegment: teamNameExact,
+        memberCount: members.length,
+        members,
+        columnI: columnIMembersText(members),
+      },
+      flags: {
+        evaluating: nameLower.includes('(evaluating)'),
+        updated: nameLower.includes('(updated)'),
+        ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
+        rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
+        onRouter: false,
       },
     });
   }
