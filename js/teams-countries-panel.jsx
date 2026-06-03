@@ -1,7 +1,7 @@
 /* global React */
 const { useState, useEffect, useMemo } = React;
 
-const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260603a';
+const DATA_URL = 'data/router_teams/inbound-router-live.json?v=20260603b';
 const SPREADSHEET_URL =
   'https://docs.google.com/spreadsheets/d/1sUUDp7n0uwrYDKZZMmBwVNe2-8sQEwzEKMWW47IgYFk/edit?gid=837037962#gid=837037962';
 
@@ -99,9 +99,19 @@ function SegmentRow({ rule, open, onToggle, pinned, onPin, regionId }) {
                 RAD
               </span>
             )}
-            {rule.flags?.onRouter === false && (
-              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-                Not on router yet
+            {rule.flags?.distro && !rule.flags?.concierge && (
+              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-900 border border-indigo-200">
+                Distro
+              </span>
+            )}
+            {rule.flags?.concierge && rule.flags?.distro && (
+              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-violet-100 text-violet-900 border border-violet-200">
+                Live + Distro
+              </span>
+            )}
+            {rule.flags?.concierge && !rule.flags?.distro && (
+              <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">
+                Live booking
               </span>
             )}
           </div>
@@ -276,6 +286,14 @@ function TeamsCountriesPanel() {
         <h3 className="text-xl font-extrabold text-[#222121]">Teams &amp; Countries</h3>
         <p className="text-sm text-slate-500 mt-1">
           Pick a region → tap a segment → see reps &amp; countries. Tap <strong>Pin</strong> to keep several open.
+        </p>
+        <p className="text-xs text-slate-400 mt-1">
+          <span className="inline-flex items-center gap-1.5 flex-wrap justify-center sm:justify-start">
+            <span className="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-bold">Live booking</span>
+            Concierge router ·
+            <span className="px-1.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-bold">Distro</span>
+            Account Assignment (backend)
+          </span>
         </p>
         <a
           href={SPREADSHEET_URL}

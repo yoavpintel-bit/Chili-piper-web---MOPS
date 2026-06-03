@@ -1,0 +1,4673 @@
+[
+  {
+    "id": "9728937b-2349-450b-88a8-9720e46ee9d5",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Lead/Contact - Inbound MQL - No Meeting Booked",
+    "description": "",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "expression": {
+          "expressions": [
+            {
+              "fieldName": "Status__c",
+              "type": "FieldUpdate"
+            }
+          ],
+          "type": "FieldUpdateOr"
+        },
+        "type": "UpdateFieldTrigger"
+      },
+      "objectType": "Contact",
+      "eventTypes": [
+        {
+          "expression": {
+            "expressions": [
+              {
+                "fieldName": "Status__c",
+                "type": "FieldUpdate"
+              }
+            ],
+            "type": "FieldUpdateOr"
+          },
+          "type": "UpdateFieldTrigger"
+        }
+      ],
+      "evaluation": "05fc064a-354f-4e80-84cc-c2e705dc2789"
+    },
+    "metadata": {
+      "createdAt": "2026-01-25T07:19:55.367461Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-05-17T10:06:52.085154Z",
+      "updatedBy": "user/6581088e6df3bb1a52ac4023",
+      "revision": 16
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [
+        {
+          "id": "TwJqlU__FaTpm9F_yy_aQ-routingRule",
+          "matchers": [],
+          "ruleId": "f08ebdd4-7db3-4142-9804-eeb79a33784d",
+          "actions": [
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "rKpUNslLZnf64Wp93xDUv-routingRule",
+          "matchers": [],
+          "ruleId": "6a10ee3e-ca6b-4e9c-9232-78d296cb74f0",
+          "actions": [
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Status__c",
+                "value": "Nurture",
+                "isNull": false
+              },
+              "type": "UpdateField"
+            },
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Nurturing_Reason__c",
+                "value": "Churn",
+                "isNull": false
+              },
+              "type": "UpdateField"
+            },
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Assign_Contact_To_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "sUD1JEPfKKnTRfBIkHLfs-routingRule",
+          "matchers": [],
+          "ruleId": "f36f1f63-33af-4158-aa6d-24b8eeb14f46",
+          "actions": [
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Status__c",
+                "value": "Nurture",
+                "isNull": false
+              },
+              "type": "UpdateField"
+            },
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Nurturing_Reason__c",
+                "value": "Current customer",
+                "isNull": false
+              },
+              "type": "UpdateField"
+            },
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Assign_Contact_To_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Rg9SRjm7003QFUCzfB2DB",
+          "matchers": [],
+          "ruleId": "791ab664-ac76-41ea-b042-611e195548ef",
+          "actions": [
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "78phydCue3KGhHyEVfRer-routingRule",
+          "matchers": [],
+          "ruleId": "a69bb52a-ea67-42b5-8b7b-a6c77a984d4d",
+          "actions": [
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "U3_56pd07Jszg5dXFXEZG",
+          "matchers": [],
+          "ruleId": "27c0fbe1-4c73-4175-9e78-cb21463a6379",
+          "distribution": {
+            "type": "FromVariableAssignment"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Contact",
+                "field": "OwnerId",
+                "value": {
+                  "variableId": "4ae2f1c1-ce30-4739-b760-516210f2f940",
+                  "object": {
+                    "topObject": "Account",
+                    "relations": [
+                      "Contact"
+                    ]
+                  },
+                  "field": "SDR_BDR_Owner__c",
+                  "setNullIfMissing": false,
+                  "type": "SfdcField"
+                }
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnershipDynamic"
+            },
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "OwnerId",
+                "value": {
+                  "variableId": "4ae2f1c1-ce30-4739-b760-516210f2f940",
+                  "object": {
+                    "topObject": "Account",
+                    "relations": [
+                      "Contact"
+                    ]
+                  },
+                  "field": "SDR_BDR_Owner__c",
+                  "setNullIfMissing": false,
+                  "type": "SfdcField"
+                }
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnershipDynamic"
+            },
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "ViQy0xn_qrckPLF7ddUu1",
+          "matchers": [],
+          "ruleId": "9f437a2d-3eda-4c9a-b965-f53b9ee33f52",
+          "actions": [
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            },
+            {
+              "target": {
+                "object": "Contact",
+                "field": "Converted_Lead_Status__c",
+                "value": "Priority",
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Q_GdQ8JQZxxJEPGWP7sL1-routingRule",
+          "matchers": [],
+          "ruleId": "9397fab5-0d2e-4f00-bb16-8cd5dd91af32",
+          "actions": [
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "OwnerId",
+                "value": {
+                  "text": "{!4ae2f1c1-ce30-4739-b760-516210f2f940.Owner_Assignment_Override__c}",
+                  "type": "TemplateText"
+                }
+              },
+              "type": "UpdateFieldDynamic"
+            },
+            {
+              "target": {
+                "object": {
+                  "topObject": "Account",
+                  "relations": [
+                    "Contact"
+                  ]
+                },
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        }
+      ],
+      "catchAll": {
+        "id": "K4l5FtFnFIrVi7THmdmZi-routingRule",
+        "actions": [],
+        "sendToRouters": [
+          {
+            "routerId": "7d0582ff-8455-4791-9b4d-05e691abad9d",
+            "variableId": "4ae2f1c1-ce30-4739-b760-516210f2f940",
+            "path": [
+              "Account"
+            ],
+            "executionSettings": {
+              "skipEntryRule": true,
+              "skipDelay": true
+            }
+          }
+        ]
+      }
+    },
+    "variables": [
+      {
+        "id": "4ae2f1c1-ce30-4739-b760-516210f2f940",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Contact",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      }
+    ],
+    "routingSteps": []
+  },
+  {
+    "id": "d239846a-03c2-4329-a9ab-9afc35c39fdf",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Account – Reroute",
+    "description": "",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "expression": {
+          "expressions": [
+            {
+              "fieldName": "Last_Account_Re_Route_Date__c",
+              "type": "FieldUpdate"
+            }
+          ],
+          "type": "FieldUpdateOr"
+        },
+        "type": "UpdateFieldTrigger"
+      },
+      "objectType": "Account",
+      "eventTypes": [
+        {
+          "expression": {
+            "expressions": [
+              {
+                "fieldName": "Last_Account_Re_Route_Date__c",
+                "type": "FieldUpdate"
+              }
+            ],
+            "type": "FieldUpdateOr"
+          },
+          "type": "UpdateFieldTrigger"
+        }
+      ],
+      "evaluation": "bee52955-b4e1-4970-a470-ddeddba124e9"
+    },
+    "metadata": {
+      "createdAt": "2026-01-26T10:54:29.123360Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-01-26T11:04:33.395430Z",
+      "updatedBy": "user/6581088e6df3bb1a52ac4023",
+      "revision": 1
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [],
+      "catchAll": {
+        "id": "eI_wX7FHyRGTmb8vlp6ft-routingRule",
+        "actions": [],
+        "sendToRouters": [
+          {
+            "routerId": "7d0582ff-8455-4791-9b4d-05e691abad9d",
+            "variableId": "99e8a468-bad0-4a4e-bd73-b34bf36c41e6",
+            "executionSettings": {
+              "skipEntryRule": false,
+              "skipDelay": false
+            }
+          }
+        ]
+      }
+    },
+    "variables": [
+      {
+        "id": "99e8a468-bad0-4a4e-bd73-b34bf36c41e6",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Account",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      }
+    ],
+    "routingSteps": []
+  },
+  {
+    "id": "9b6dbabe-7e2e-45c7-b312-bb3f6ddfca20",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Account –  Rev Ops Priority Rank / Manual Execution ",
+    "description": "",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "expression": {
+          "expressions": [
+            {
+              "fieldName": "Flow_Assignment_Trigger_Checkbox__c",
+              "type": "FieldUpdate"
+            }
+          ],
+          "type": "FieldUpdateOr"
+        },
+        "type": "UpdateFieldTrigger"
+      },
+      "objectType": "Account",
+      "eventTypes": [
+        {
+          "expression": {
+            "expressions": [
+              {
+                "fieldName": "Flow_Assignment_Trigger_Checkbox__c",
+                "type": "FieldUpdate"
+              }
+            ],
+            "type": "FieldUpdateOr"
+          },
+          "type": "UpdateFieldTrigger"
+        }
+      ],
+      "evaluation": "474d7b1a-5cc9-47f8-8044-babe5d6ee854"
+    },
+    "metadata": {
+      "createdAt": "2026-01-26T11:00:18.507566Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-03-30T13:17:44.815101Z",
+      "updatedBy": "user/6581088e6df3bb1a52ac4023",
+      "revision": 3
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [],
+      "catchAll": {
+        "id": "eI_wX7FHyRGTmb8vlp6ft-routingRule",
+        "actions": [
+          {
+            "target": {
+              "object": "Account",
+              "field": "Flow_Assignment_Trigger_Checkbox__c",
+              "value": false,
+              "isNull": false
+            },
+            "type": "UpdateField"
+          }
+        ],
+        "sendToRouters": [
+          {
+            "routerId": "7d0582ff-8455-4791-9b4d-05e691abad9d",
+            "variableId": "99e8a468-bad0-4a4e-bd73-b34bf36c41e6",
+            "executionSettings": {
+              "skipEntryRule": true,
+              "skipDelay": true
+            }
+          }
+        ]
+      }
+    },
+    "variables": [
+      {
+        "id": "99e8a468-bad0-4a4e-bd73-b34bf36c41e6",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Account",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      }
+    ],
+    "routingSteps": []
+  },
+  {
+    "id": "7feb1c5c-1a38-488b-95bc-c1bca107400d",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Account - Partner Leads Assignment",
+    "description": "",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "type": "SignalTrigger"
+      },
+      "objectType": "Account",
+      "eventTypes": [
+        {
+          "type": "SignalTrigger"
+        },
+        {
+          "type": "NewRecordTrigger"
+        },
+        {
+          "expression": {
+            "expressions": [
+              {
+                "fieldName": "PartnerStack_Key__c",
+                "type": "FieldUpdate"
+              }
+            ],
+            "type": "FieldUpdateOr"
+          },
+          "type": "UpdateFieldTrigger"
+        }
+      ],
+      "evaluation": "92985454-3717-4298-89ef-86aeeaa5f9c9",
+      "delay": {
+        "duration": "PT30S",
+        "type": "AfterRecordEval"
+      }
+    },
+    "metadata": {
+      "createdAt": "2026-01-07T13:21:46.161415Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-04-16T05:26:38.415634Z",
+      "updatedBy": "user/6581088e6df3bb1a52ac4023",
+      "revision": 6
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [
+        {
+          "id": "PWuCEcsAM3QaiOFBPHpUb-routingRule",
+          "matchers": [],
+          "ruleId": "a69bb52a-ea67-42b5-8b7b-a6c77a984d4d",
+          "distribution": {
+            "type": "FromVariableAssignment"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": {
+                  "variableId": "21b0326b-344b-496a-a36a-4834c901c74d",
+                  "object": "Account",
+                  "field": "OwnerId",
+                  "setNullIfMissing": false,
+                  "type": "SfdcField"
+                }
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnershipDynamic"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Yppb9Ylv5X2lv6Hq21XCJ-routingRule",
+          "matchers": [],
+          "ruleId": "323e5809-631f-49c2-b1c6-61a3c779a82c",
+          "distribution": {
+            "type": "FromVariableAssignment"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": {
+                  "variableId": "21b0326b-344b-496a-a36a-4834c901c74d",
+                  "object": "Account",
+                  "field": "CP_Override_Designated_AE__c",
+                  "setNullIfMissing": false,
+                  "type": "SfdcField"
+                }
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnershipDynamic"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "O0KTEGRGGI3p03HSfAQ73-routingRule",
+          "matchers": [],
+          "ruleId": "a91981a1-391c-4ad8-9ad9-9a43cfde834b",
+          "distribution": {
+            "distributionId": "c0db784a-1d18-4e1d-8f1d-ec59d37e7f2c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "sYx7i0hh3siMaduMsRpu4",
+          "matchers": [],
+          "ruleId": "4827f4a1-bac5-41a0-96dc-da70e4d92e21",
+          "distribution": {
+            "distributionId": "5f0c7386-e853-4582-91fb-34450c2dd2c0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "ZF34CNKXG4uP9ns4kpnRl",
+          "matchers": [],
+          "ruleId": "9512eabe-837d-4c22-9fbb-c7d8a53f183d",
+          "distribution": {
+            "distributionId": "117f5f33-55a9-452c-815a-a6b9775fce29",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "CrS7sn5Kus6ejzhZzosun",
+          "matchers": [],
+          "ruleId": "dedde591-0456-4de0-8501-5b356a42fb0f",
+          "distribution": {
+            "distributionId": "d7140fcd-aaf0-49cb-a0a3-99d7d8cdaaff",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "auUEJrcRyJYf_f_tEExYZ",
+          "matchers": [],
+          "ruleId": "ed3adb8b-ccca-4fee-9f99-c2df4022e5f7",
+          "distribution": {
+            "distributionId": "e38b44db-d38d-4fde-97bb-396ac660fa00",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "ZvUcc-LiENhQymhyXmUBy",
+          "matchers": [],
+          "ruleId": "8232bc60-733c-448b-b45f-7b9342d62f8b",
+          "distribution": {
+            "distributionId": "4b9244df-2fb7-4ed5-b4c1-805668a6ed3c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "WTSK4I1mz1s4meXr8cVJO",
+          "matchers": [],
+          "ruleId": "e80f4685-8a97-4086-bf12-01d9f17700c0",
+          "distribution": {
+            "distributionId": "a65fcf5d-7cc2-4695-9ec4-2e28d36df3c8",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "6kpAE9K_PH3f3k_L83D6K",
+          "matchers": [],
+          "ruleId": "c5c4492c-69d6-4b53-b2fb-395e5cfc2ba3",
+          "distribution": {
+            "distributionId": "e6cfcdbd-a3f0-4b38-b4f7-74ccc227c6f1",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "B8N83ulg8fQDJfWtTsPjw",
+          "matchers": [],
+          "ruleId": "97c41057-7187-4775-81cb-b89368ee3f32",
+          "distribution": {
+            "distributionId": "89c9b0e2-1c91-4f44-ac0e-f3fd761987b8",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Z6VtB9iz-qfBywulGd0Zd",
+          "matchers": [],
+          "ruleId": "d7422e9b-b7fe-4d02-946a-65b7fee6c129",
+          "distribution": {
+            "distributionId": "4737be8b-414c-401a-92b9-fdebe73f17d8",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "MFGJU4meCTczVzDPDsnDH",
+          "matchers": [],
+          "ruleId": "842c592e-2b55-49ab-8682-946408210f76",
+          "distribution": {
+            "distributionId": "69df51e1-f4cd-4801-8c23-0094f958a037",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "ftabaYQiNk_dcrXrUzwO1",
+          "matchers": [],
+          "ruleId": "b21a7eb0-f81b-4571-bcbf-f769ee3eff01",
+          "distribution": {
+            "distributionId": "2b81b665-2dfc-47f0-b3c1-110c98f40134",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "BEA3hUknRYL016Uqng6I_",
+          "matchers": [],
+          "ruleId": "83c9f510-a1e8-4355-b5cc-8621b9648f75",
+          "distribution": {
+            "distributionId": "a1a444b6-f6e4-4949-912c-b320e9fc6f23",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Zf4iSboSH-nDRR0hci4rf",
+          "matchers": [],
+          "ruleId": "c46cae7e-f1e0-4035-9de1-8356c93605fb",
+          "distribution": {
+            "distributionId": "2d510bfd-b438-4d74-84b7-eab13ba5902a",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "d-h4cNwc1W34-j8TNFcGS",
+          "matchers": [],
+          "ruleId": "66b467b6-0cde-4d01-93b0-2a2eae885683",
+          "distribution": {
+            "distributionId": "69493a51-baa0-4434-8b3c-d64bc41e74a8",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "z1VaSROwI-1v4fnNWvmk5",
+          "matchers": [],
+          "ruleId": "a69b708c-4aca-4df7-9e95-6fb6e02cac1a",
+          "distribution": {
+            "distributionId": "dc75c18e-636f-4cd5-a4ad-69b37aae5c8c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "uviSC-3_i30BPkcR0GqVD",
+          "matchers": [],
+          "ruleId": "12a16175-7d89-4962-a202-06c30111213f",
+          "distribution": {
+            "distributionId": "a4f80080-4259-4ecd-8197-80807fc483b0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "MWP5bFBc0AD4i9PNtc54t",
+          "matchers": [],
+          "ruleId": "82a28309-a060-4d55-ba7f-4f83efb573a4",
+          "distribution": {
+            "distributionId": "f132a888-37cc-42ff-a3df-2a6c58d387e7",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Fa27vpR0WlMoSoFZMkUYF",
+          "matchers": [],
+          "ruleId": "83c6959f-532e-47a0-ac8f-b2464884442d",
+          "distribution": {
+            "distributionId": "c347edba-8e32-499d-aafc-5f399c1aac82",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "mDkomrPz_QbO2E617PMXO",
+          "matchers": [],
+          "ruleId": "4c4f05bf-9987-4cf8-9046-8aeea07eb7cc",
+          "distribution": {
+            "distributionId": "611262ad-c109-4bd4-8571-85a84de1d699",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "CqQ9pTirKb--WOhL6tzH1",
+          "matchers": [],
+          "ruleId": "6f8b0267-2c2b-42ae-9041-bc012233d9cf",
+          "distribution": {
+            "distributionId": "eca7b190-f8e2-43ca-8bb6-a6fa9db2d2b0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "N8Gg8o5m9C0ceylC42LWo",
+          "matchers": [],
+          "ruleId": "720f3c34-7391-41f0-85eb-b0c40255ef33",
+          "distribution": {
+            "distributionId": "195b8eea-63f8-4970-bb92-ee959b56d66f",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "OSgH3hO7VKU62f-jJ9AS2",
+          "matchers": [],
+          "ruleId": "8cbd486a-9a3e-4048-9c25-2db0ecc78e65",
+          "distribution": {
+            "distributionId": "5b33368a-1253-498d-9197-c2c5fe8957e9",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "oIzywTuw6zL0EADVAG1w0",
+          "matchers": [],
+          "ruleId": "0276f152-67ff-45e5-ab30-ce02701a9184",
+          "distribution": {
+            "distributionId": "0c12eea4-b358-4ad4-99ed-a82e6afceca2",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "pXO3kHKrluzpm0W5_vkS_",
+          "matchers": [],
+          "ruleId": "a3fa6b11-ce02-42e1-9794-3cd462091b50",
+          "distribution": {
+            "distributionId": "5d7417ec-bfbd-486d-af98-96563c6cea7a",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "uvrVP4RlGrs4VtQK-wMQT",
+          "matchers": [],
+          "ruleId": "e4b2fd14-1212-4f6b-aa81-8ff93894acc2",
+          "distribution": {
+            "distributionId": "59bb47c4-ecdf-4561-a5be-3ed8ad87bce3",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            }
+          ],
+          "sendToRouters": []
+        }
+      ],
+      "catchAll": {
+        "id": "WHNWk70qHxPGdfVR7IpTQ-routingRule",
+        "distribution": {
+          "type": "FromVariableAssignment"
+        },
+        "actions": [
+          {
+            "target": {
+              "object": "Account",
+              "field": "OwnerId",
+              "value": {
+                "variableId": "21b0326b-344b-496a-a36a-4834c901c74d",
+                "object": "Account",
+                "field": "OwnerId",
+                "setNullIfMissing": false,
+                "type": "SfdcField"
+              }
+            },
+            "respectWorkingHours": false,
+            "notificationSettings": {
+              "sendSlackNotification": true,
+              "sendEmailNotification": true
+            },
+            "type": "UpdateOwnershipDynamic"
+          }
+        ],
+        "sendToRouters": []
+      }
+    },
+    "variables": [
+      {
+        "id": "21b0326b-344b-496a-a36a-4834c901c74d",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Account",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      }
+    ],
+    "routingSteps": []
+  },
+  {
+    "id": "7d0582ff-8455-4791-9b4d-05e691abad9d",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Account Assignment – Main Router",
+    "description": "Canada | Micro : 20-49",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "type": "SignalTrigger"
+      },
+      "objectType": "Account",
+      "eventTypes": [
+        {
+          "type": "SignalTrigger"
+        }
+      ],
+      "delay": {
+        "duration": "PT15S",
+        "type": "BeforeRecordEval"
+      }
+    },
+    "metadata": {
+      "createdAt": "2026-01-22T13:00:53.963802Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-06-03T11:27:14.266275Z",
+      "updatedBy": "user/666fe0e651001479d567af56",
+      "revision": 29
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [
+        {
+          "id": "3Lt0AYiKFceiFwpRnZ-dX",
+          "matchers": [],
+          "ruleId": "f36529ef-aedf-4bcd-94ec-f09517036f0d",
+          "distribution": {
+            "distributionId": "55bf58f2-4ef9-4e14-ac83-34d39e862d6f",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "i0V4B1huZ_4uLWh6DbzbP",
+          "matchers": [],
+          "ruleId": "83cb1788-fef7-4403-8454-bac3e5ea1e05",
+          "distribution": {
+            "distributionId": "b77f45e6-ad78-459d-82ea-bbecdba6ee63",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "IcBsTuPF0xNQ0EXfoGlNU",
+          "matchers": [],
+          "ruleId": "ba9b9935-ce8d-443f-a94a-766388737c88",
+          "distribution": {
+            "distributionId": "32b10081-d620-4904-93e7-78eb51d996a9",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "OdEwKdVPO6HujEKQXvj1R",
+          "matchers": [],
+          "ruleId": "fe9d2213-e195-4ad4-8b5e-d87a8f4562e6",
+          "distribution": {
+            "distributionId": "03e67004-e6bc-4bf3-98be-6e2814c18532",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "7nMCopa_xJvY8SaKkaAzt",
+          "matchers": [],
+          "ruleId": "e330597a-9cef-45a1-8616-a5e2aea7427e",
+          "distribution": {
+            "distributionId": "fd0c838a-a0da-4f59-8403-80863b36aa19",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "zSkbFVv6Sg_7J047anMRf",
+          "matchers": [],
+          "ruleId": "d5392704-9e65-4926-9aab-11c1e835793c",
+          "distribution": {
+            "distributionId": "e62a41cc-696d-4085-90f3-ee29c46f99a2",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "jgk4oyWCMV2jkcCR6-mim",
+          "matchers": [],
+          "ruleId": "098f58b0-5bd9-4496-9bf2-9a1b3d4a8e4d",
+          "distribution": {
+            "distributionId": "83c436df-2911-411f-96e6-0dd9625c49b5",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "yCmtgVW7Xw27qqoZ8g_qW",
+          "matchers": [],
+          "ruleId": "b8999684-13b5-493b-a16d-90ddf24a279d",
+          "distribution": {
+            "distributionId": "74478ef0-3c63-4d16-8854-49ba0d9529cb",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "APvTAq_snOJb9iTnTKbg6",
+          "matchers": [],
+          "ruleId": "7e38e62c-84b7-46e1-818c-5598d0fab70f",
+          "distribution": {
+            "distributionId": "348bd778-60bd-4e62-9ca5-ce51aa07c120",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "lXykDibMpd0QvwiPV9veh",
+          "matchers": [],
+          "ruleId": "d095daa1-c0b5-4bc4-8214-e5d1067dd5f4",
+          "distribution": {
+            "distributionId": "02b1a586-17c1-4811-8630-0b260f243af0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "KdN1aLsrIC5tRe0WpTRjD",
+          "matchers": [],
+          "ruleId": "fbe3a325-3a7c-4754-8d07-ed00362a53ae",
+          "distribution": {
+            "distributionId": "b1de6121-c068-4dee-8660-4cee1af45e1e",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "y1bgPRLwV3PJq35HnNV42",
+          "matchers": [],
+          "ruleId": "4a0b1e21-4dda-441c-aa73-526e553e5fc9",
+          "distribution": {
+            "distributionId": "ab924271-3a5f-41fd-9087-e32765c8f2de",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "vzneKFORcTL7ZZtJwm_AL",
+          "matchers": [],
+          "ruleId": "b9f9a171-83ff-4562-abe4-04ec3c4ce6ce",
+          "distribution": {
+            "distributionId": "6ed1bb1e-94b6-4489-bfa6-d51f569e8440",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "tgbAy1JCWL-FhTZGODJ4W",
+          "matchers": [],
+          "ruleId": "cc051f2a-7660-409f-b0c4-270c8ab29d1f",
+          "distribution": {
+            "distributionId": "25021927-bdd6-479f-8985-86db41a96919",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "-V3eC_Z86PxYR7KD6hIVd",
+          "matchers": [],
+          "ruleId": "f092bfbb-58ef-46f5-af49-0cceb64acf4e",
+          "distribution": {
+            "distributionId": "6034964a-42f7-425d-a8f3-6a3e812c9895",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "QhfsKub6_ErNPe4oGVa9b",
+          "matchers": [],
+          "ruleId": "78c9ab3c-9b67-4322-a46a-8e8ed84543fa",
+          "distribution": {
+            "distributionId": "7e0a8e1e-e3ef-4d18-83c9-94757e42237d",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "DO8zi0PY0UbdDgoajzlW5",
+          "matchers": [],
+          "ruleId": "7fecf588-57a3-489e-9b4d-dc318a34fba4",
+          "distribution": {
+            "distributionId": "3247ebcb-e276-4335-8446-a09c24250a41",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "zQPVDFRKLgXK8v1yw0StH",
+          "matchers": [],
+          "ruleId": "a3953226-9ee7-4751-986d-58c5ad6cb837",
+          "distribution": {
+            "distributionId": "a7347506-3290-4794-ba1f-d5c9dfcf3021",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "mBP7adJHpNnk4Aq6Kx6yC",
+          "matchers": [],
+          "ruleId": "4095cfa7-0917-4e28-86c0-d4367724f6f5",
+          "distribution": {
+            "distributionId": "b6b12e72-5740-4616-98d7-88729adb9a33",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Q3uqVSjyY8N0LUVVQci-w",
+          "matchers": [],
+          "ruleId": "5f1be930-f8f1-40dc-8a60-95ea9b3536b2",
+          "distribution": {
+            "distributionId": "966af640-1743-4f59-8b55-49702251ba06",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "30aXcaAIUJOSSw0QLIuAS",
+          "matchers": [],
+          "ruleId": "0b3aa96c-305e-4e72-b3bf-26cf2bf3de45",
+          "distribution": {
+            "distributionId": "134763db-9edc-42d8-8cfa-b84b691564c6",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "yUk46B7YZ_l6pssAqrSEq",
+          "matchers": [],
+          "ruleId": "261842f5-80e5-4762-a185-fce7fa0683a2",
+          "distribution": {
+            "distributionId": "1190b619-4b7c-4bf7-87aa-c96cbaea1d67",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "zsBMQJZ52vuKDbyfaDPJ8",
+          "matchers": [],
+          "ruleId": "ad64371b-bef5-4649-adb6-5a4c7d6685b8",
+          "distribution": {
+            "distributionId": "7fef360d-ef8e-4782-9022-e18bf4595807",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "2h6JE3xm8JAt3wjNCOIOS",
+          "matchers": [],
+          "ruleId": "ad5f6cb4-f645-459a-82ad-97b03bd9d912",
+          "distribution": {
+            "distributionId": "2a179efb-06f1-4304-8209-b12895cbff4f",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "VrZrjkO6J2ClYqAhr4kAx",
+          "matchers": [],
+          "ruleId": "2da1829d-e84a-475c-a4c4-886caf4a39fb",
+          "distribution": {
+            "distributionId": "18e7e31a-740c-4896-9c23-aa46db403d79",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "mlGqTC7OuaCju7ZqBEFQb",
+          "matchers": [],
+          "ruleId": "30bbda2e-f113-4020-b032-cb7b38abd150",
+          "distribution": {
+            "distributionId": "66ab568c-f4b8-48d1-b356-21fe50c37f9c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "tAB30VGTxnvO5F4p7ufbf",
+          "matchers": [],
+          "ruleId": "2023a873-9534-4ba6-b8bb-0a5368bb2c84",
+          "distribution": {
+            "distributionId": "2deacea4-1757-4c7a-bf0c-0341d9951451",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "xv3rH2mvB2ggCKZsU6u-L",
+          "matchers": [],
+          "ruleId": "cf56d887-c59c-4b2a-8f9a-640b0923d944",
+          "distribution": {
+            "distributionId": "7143876d-2d78-408c-882b-497225e9fe78",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "uYwj_PFKJ9b3jWJfvLP5l",
+          "matchers": [],
+          "ruleId": "97198ff6-1792-44a0-8958-79a362e1a088",
+          "distribution": {
+            "distributionId": "fc24e021-8128-48ff-9c9f-018b15d32b39",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "kRdjOssqwEl4T8mVfbof9",
+          "matchers": [],
+          "ruleId": "4aea653c-f1e8-492c-8272-c89769f29d28",
+          "distribution": {
+            "distributionId": "26e1bbf7-8c45-4ed2-ab1d-03951de833aa",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "7UjafdOzPa6vsQ3-yMtnS",
+          "matchers": [],
+          "ruleId": "ac42499a-7d3a-40f1-a24c-80145014f8df",
+          "distribution": {
+            "distributionId": "7ad15ab5-f840-49a2-921c-9b30c2d6fc93",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "_iWNRZUIoqO7oy41WplsH",
+          "matchers": [],
+          "ruleId": "d1fc4256-9f38-4914-97ca-fa3a286508f3",
+          "distribution": {
+            "distributionId": "93a52f53-c187-4850-8a25-b1ac618a29a0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "hU4SP_KD0M4VXZFHxkVzt",
+          "matchers": [],
+          "ruleId": "94958e33-e760-499a-b751-26b36b50fbac",
+          "distribution": {
+            "distributionId": "f8be98a6-9a01-497f-82ff-5cf308a4512c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "UrJfyZSzmuBAWYIFITLui",
+          "matchers": [],
+          "ruleId": "b308236e-b81f-4a3a-9ee8-11b7af4c71ee",
+          "distribution": {
+            "distributionId": "5ebeb100-f081-453f-9e77-9f0ef580a9c0",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "nU7zOs3yatySTMkrbSkNi",
+          "matchers": [],
+          "ruleId": "8560ea34-a15b-4bf1-8bca-ed5aa22bb22d",
+          "distribution": {
+            "distributionId": "10437968-b621-4458-88f2-a21a8f7294b9",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "yvqLMthL9y1GOTN4g5wyd",
+          "matchers": [],
+          "ruleId": "3ebb5aa3-035a-4b07-91b2-9ba80ef3d6ba",
+          "distribution": {
+            "distributionId": "3691bf94-1273-4656-b84f-f2661a7633d5",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "3qSXcKsjXvOItY2211uiL",
+          "matchers": [],
+          "ruleId": "5698b13a-bc6b-41dd-9d22-c117f20f5a57",
+          "distribution": {
+            "distributionId": "dcb34605-5a8b-4990-946e-54293253c2a4",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "mYbNYkftath9VIv5U11d5",
+          "matchers": [],
+          "ruleId": "536d5287-a064-4e47-9a35-3fea0e30c8a6",
+          "distribution": {
+            "distributionId": "f045d155-281b-466c-bd4d-e9ebf927acce",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "DOLjpu5Gl_AtZSBVROtXO",
+          "matchers": [],
+          "ruleId": "b06422f0-170e-4bee-a5fd-092bbb830fda",
+          "distribution": {
+            "distributionId": "e98fa39e-8aa0-48e8-a910-8a2297caafcf",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "0COUiYGbUAXlZLCSES8-e",
+          "matchers": [],
+          "ruleId": "ce7ebbcd-eb8f-4ebd-bcfc-07b8bd3b6534",
+          "distribution": {
+            "distributionId": "8a3198b8-e17c-47f1-9795-77e7c240ef09",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "fGZZ3Zdt8vne9q-U_tOCi",
+          "matchers": [],
+          "ruleId": "afb87fcd-8ae0-497a-8bb3-b43ba13f2af4",
+          "distribution": {
+            "distributionId": "a4f0c8da-b8e4-43cf-b3c5-e31d5da29bdf",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "gE98CgRdoCCl49u-GdDXN",
+          "matchers": [],
+          "ruleId": "c94f9a93-bd93-4bd3-961a-e8e919c347e3",
+          "distribution": {
+            "distributionId": "ac737f9c-c985-4029-b4d6-d3d1c9677e0a",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "C-z9G01q0GJcTYYV3alVP",
+          "matchers": [],
+          "ruleId": "5ff56b55-8f28-457a-b878-b322658fd478",
+          "distribution": {
+            "distributionId": "9d528dce-9f05-4d37-b265-d4fc8a16dd5f",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "P8xWJkyEY_IkNq0jGdx5K",
+          "matchers": [],
+          "ruleId": "122a0676-0dad-4d1b-8751-d4b61192529e",
+          "distribution": {
+            "distributionId": "d6889cd3-3ca4-478f-a3e7-a5bd6ffc4503",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "VOIQCDyVx6KwcacVWId5m",
+          "matchers": [],
+          "ruleId": "364bedda-9e27-4dfd-9cbb-0a1554b94bf9",
+          "distribution": {
+            "distributionId": "74883b87-3a98-4b08-84f6-6299684d9770",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "sIlOvAb_KXtWEoQz8DLIa",
+          "matchers": [],
+          "ruleId": "54540a78-c604-477f-8202-c7175c5dbefd",
+          "distribution": {
+            "distributionId": "55dc5918-5911-4868-8834-8359a372d9aa",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "PAJqJGsbcAD6NgmJk4rJo",
+          "matchers": [],
+          "ruleId": "dc9dc77d-1a98-4a6d-a52e-3674d3b5b8ed",
+          "distribution": {
+            "distributionId": "f76d3579-2537-4bb3-b9d1-548dfcb98480",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "WoVMzctjK2KVQWiX9L9qN",
+          "matchers": [],
+          "ruleId": "15598501-68fb-4ea6-8e4b-dd91562d67fd",
+          "distribution": {
+            "distributionId": "d7680077-7837-4c14-aa93-8bac5ecae6ad",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "cdKMjKGYAza8e7k_vYgYj",
+          "matchers": [],
+          "ruleId": "d2249926-443d-40de-8d0b-4b4255597e53",
+          "distribution": {
+            "distributionId": "a422706b-de7c-467c-a6f3-320ad9714361",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "bHpDYTM3rqMBD5tSNCnGL",
+          "matchers": [],
+          "ruleId": "e4e573c6-f67f-4973-8086-95517cb9bb21",
+          "distribution": {
+            "distributionId": "782d5a59-8828-44d7-bb77-b8ee9837112c",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "pMrDzkOgYvtZH2mOg_164",
+          "matchers": [],
+          "ruleId": "7674f0c5-01d6-4e5e-ac10-ecf3836afe2c",
+          "distribution": {
+            "distributionId": "89e31968-020c-42ce-9892-9d9d47b772ae",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "Ii9u8sW4pG5_NKc9u6GqK",
+          "matchers": [],
+          "ruleId": "fbc72004-c975-47f2-a9de-661e4be622a0",
+          "distribution": {
+            "distributionId": "3d2d2cd3-ca97-4e20-956f-cd2b1ada45e9",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "X46uqSY9ovN-7-V3iviMJ",
+          "matchers": [],
+          "ruleId": "af944ee1-ab79-46e8-9e83-137bc27340c3",
+          "distribution": {
+            "distributionId": "94a9da16-84b8-4208-9bae-c0ecd97ac3ef",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "ojIuKST1u2pmiqxGJvi2k",
+          "matchers": [],
+          "ruleId": "64ee01c0-def3-478c-a0bf-df1ebb7c5ed9",
+          "distribution": {
+            "distributionId": "560304a7-540c-4023-bdd7-5f5569715924",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "_QbezPefNqKB2bTC978sn",
+          "matchers": [],
+          "ruleId": "71702b46-5f84-4795-9c9d-97e501b94756",
+          "distribution": {
+            "distributionId": "f283e556-0c26-49b1-99cd-c5ab018d283d",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "W8RzNacN4VBb-Q5VzT802",
+          "matchers": [],
+          "ruleId": "aaeee53d-9a1f-4a64-afc4-fa7f54792d87",
+          "distribution": {
+            "distributionId": "02116d21-4084-4de1-9bef-a3c89abe7e8e",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "2_CHx34GlWej4B3PRRZKX",
+          "matchers": [],
+          "ruleId": "17bc2b5c-357d-48a9-b5b6-700e1f873e35",
+          "distribution": {
+            "distributionId": "020035aa-6bcd-420f-892a-9463fef5fd63",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "gIIGvZgDMg_gFGLngq4YD",
+          "matchers": [],
+          "ruleId": "1027d752-cd5b-4304-b5aa-3a7195b39ce1",
+          "distribution": {
+            "distributionId": "68266748-85f8-4d87-b126-78abd84e0921",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "OIAxAaTYeih8So8-29TI_",
+          "matchers": [],
+          "ruleId": "80e50ea8-e88d-4786-a1e9-bb19d908b8d5",
+          "distribution": {
+            "distributionId": "07d3d5c6-5fcc-4bc5-80d1-154e2d494364",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        },
+        {
+          "id": "I7g-07HZBl2P37aUSOZeA",
+          "matchers": [],
+          "ruleId": "1b288d5d-eed3-4497-b023-4c7b395cb8be",
+          "distribution": {
+            "distributionId": "a3b7a035-304a-49e6-b1e1-ff9e4ca3b43f",
+            "type": "RoundRobin"
+          },
+          "actions": [
+            {
+              "target": {
+                "object": "Account",
+                "field": "OwnerId",
+                "value": "Id"
+              },
+              "respectWorkingHours": false,
+              "notificationSettings": {
+                "sendSlackNotification": true,
+                "sendEmailNotification": true
+              },
+              "type": "UpdateOwnership"
+            },
+            {
+              "target": {
+                "object": "Account",
+                "field": "Assign_Related_Contacts_to_Account_Owner__c",
+                "value": true,
+                "isNull": false
+              },
+              "type": "UpdateField"
+            }
+          ],
+          "sendToRouters": []
+        }
+      ],
+      "catchAll": {
+        "id": "-if8CatMthQjWVES9uI_--routingRule",
+        "distribution": {
+          "type": "FromVariableAssignment"
+        },
+        "actions": [
+          {
+            "target": {
+              "object": "Account",
+              "field": "OwnerId",
+              "value": {
+                "variableId": "8fecb5e1-d3f5-4373-9e24-9a0ea6692244",
+                "object": "Account",
+                "field": "OwnerId",
+                "setNullIfMissing": false,
+                "type": "SfdcField"
+              }
+            },
+            "respectWorkingHours": false,
+            "notificationSettings": {
+              "sendSlackNotification": true,
+              "sendEmailNotification": true
+            },
+            "type": "UpdateOwnershipDynamic"
+          }
+        ],
+        "sendToRouters": []
+      }
+    },
+    "variables": [
+      {
+        "id": "8fecb5e1-d3f5-4373-9e24-9a0ea6692244",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Account",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      },
+      {
+        "id": "6f5997df-e526-4c90-8afd-f4f65d807b20",
+        "originNode": {
+          "routeId": "3Lt0AYiKFceiFwpRnZ-dX",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "3Lt0AYiKFceiFwpRnZ-dX",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "3Lt0AYiKFceiFwpRnZ-dX",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-3Lt0AYiKFceiFwpRnZ-dX"
+      },
+      {
+        "id": "6faed347-fbd2-40f7-b64e-0e0f07352e02",
+        "originNode": {
+          "routeId": "i0V4B1huZ_4uLWh6DbzbP",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "i0V4B1huZ_4uLWh6DbzbP",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "i0V4B1huZ_4uLWh6DbzbP",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-i0V4B1huZ_4uLWh6DbzbP"
+      },
+      {
+        "id": "e24fa9ef-7d26-469f-9d5c-8a1bdec7edfd",
+        "originNode": {
+          "routeId": "IcBsTuPF0xNQ0EXfoGlNU",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "IcBsTuPF0xNQ0EXfoGlNU",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "IcBsTuPF0xNQ0EXfoGlNU",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-IcBsTuPF0xNQ0EXfoGlNU"
+      },
+      {
+        "id": "5cef065a-8074-4a49-960a-a2111b3636fa",
+        "originNode": {
+          "routeId": "OdEwKdVPO6HujEKQXvj1R",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "OdEwKdVPO6HujEKQXvj1R",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "OdEwKdVPO6HujEKQXvj1R",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-OdEwKdVPO6HujEKQXvj1R"
+      },
+      {
+        "id": "2e830001-2c5b-461c-a560-7bf5537abba1",
+        "originNode": {
+          "routeId": "7nMCopa_xJvY8SaKkaAzt",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "7nMCopa_xJvY8SaKkaAzt",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "7nMCopa_xJvY8SaKkaAzt",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-7nMCopa_xJvY8SaKkaAzt"
+      },
+      {
+        "id": "67f9526c-854f-4400-a4ba-338db91b7d7e",
+        "originNode": {
+          "routeId": "zSkbFVv6Sg_7J047anMRf",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "zSkbFVv6Sg_7J047anMRf",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "zSkbFVv6Sg_7J047anMRf",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-zSkbFVv6Sg_7J047anMRf"
+      },
+      {
+        "id": "63c9e8e2-d138-4f8c-86ca-9a32abeadf94",
+        "originNode": {
+          "routeId": "jgk4oyWCMV2jkcCR6-mim",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "jgk4oyWCMV2jkcCR6-mim",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "jgk4oyWCMV2jkcCR6-mim",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-jgk4oyWCMV2jkcCR6-mim"
+      },
+      {
+        "id": "bef07558-81d4-4aa6-b582-f0ed2f3405e1",
+        "originNode": {
+          "routeId": "yCmtgVW7Xw27qqoZ8g_qW",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "yCmtgVW7Xw27qqoZ8g_qW",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "yCmtgVW7Xw27qqoZ8g_qW",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-yCmtgVW7Xw27qqoZ8g_qW"
+      },
+      {
+        "id": "edb0cc7f-c547-4dd6-b51e-7ba750bdd0d1",
+        "originNode": {
+          "routeId": "APvTAq_snOJb9iTnTKbg6",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "APvTAq_snOJb9iTnTKbg6",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "APvTAq_snOJb9iTnTKbg6",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-APvTAq_snOJb9iTnTKbg6"
+      },
+      {
+        "id": "a121fb63-45eb-483b-ab75-e11be6b8f75f",
+        "originNode": {
+          "routeId": "lXykDibMpd0QvwiPV9veh",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "lXykDibMpd0QvwiPV9veh",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "lXykDibMpd0QvwiPV9veh",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-lXykDibMpd0QvwiPV9veh"
+      },
+      {
+        "id": "9fa41766-a092-44a4-af42-d6fc3a38245a",
+        "originNode": {
+          "routeId": "KdN1aLsrIC5tRe0WpTRjD",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "KdN1aLsrIC5tRe0WpTRjD",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "KdN1aLsrIC5tRe0WpTRjD",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-KdN1aLsrIC5tRe0WpTRjD"
+      },
+      {
+        "id": "d00f9992-26e5-448f-af1b-4791a9acaae0",
+        "originNode": {
+          "routeId": "y1bgPRLwV3PJq35HnNV42",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "y1bgPRLwV3PJq35HnNV42",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "y1bgPRLwV3PJq35HnNV42",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-y1bgPRLwV3PJq35HnNV42"
+      },
+      {
+        "id": "075bcefe-0ddc-4742-ab8a-a78ff13e3e2d",
+        "originNode": {
+          "routeId": "vzneKFORcTL7ZZtJwm_AL",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "vzneKFORcTL7ZZtJwm_AL",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "vzneKFORcTL7ZZtJwm_AL",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-vzneKFORcTL7ZZtJwm_AL"
+      },
+      {
+        "id": "e668f6ff-6f3b-46e4-b05a-c944733b7348",
+        "originNode": {
+          "routeId": "tgbAy1JCWL-FhTZGODJ4W",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "tgbAy1JCWL-FhTZGODJ4W",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "tgbAy1JCWL-FhTZGODJ4W",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-tgbAy1JCWL-FhTZGODJ4W"
+      },
+      {
+        "id": "25ae3eb9-8332-4e14-827f-4c89e34546dc",
+        "originNode": {
+          "routeId": "-V3eC_Z86PxYR7KD6hIVd",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "-V3eC_Z86PxYR7KD6hIVd",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "-V3eC_Z86PxYR7KD6hIVd",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput--V3eC_Z86PxYR7KD6hIVd"
+      },
+      {
+        "id": "cdbb9820-6a1b-42c7-acf5-aa8594b9a6c1",
+        "originNode": {
+          "routeId": "QhfsKub6_ErNPe4oGVa9b",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "QhfsKub6_ErNPe4oGVa9b",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "QhfsKub6_ErNPe4oGVa9b",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-QhfsKub6_ErNPe4oGVa9b"
+      },
+      {
+        "id": "e36421e3-5aa8-46f2-8ec9-e2462ed10120",
+        "originNode": {
+          "routeId": "DO8zi0PY0UbdDgoajzlW5",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "DO8zi0PY0UbdDgoajzlW5",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "DO8zi0PY0UbdDgoajzlW5",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-DO8zi0PY0UbdDgoajzlW5"
+      },
+      {
+        "id": "e9085134-aea7-440a-a5b5-3e28fd63fb7b",
+        "originNode": {
+          "routeId": "zQPVDFRKLgXK8v1yw0StH",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "zQPVDFRKLgXK8v1yw0StH",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "zQPVDFRKLgXK8v1yw0StH",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-zQPVDFRKLgXK8v1yw0StH"
+      },
+      {
+        "id": "48f1b5ba-a22e-406e-89fb-a0d2b772a754",
+        "originNode": {
+          "routeId": "mBP7adJHpNnk4Aq6Kx6yC",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "mBP7adJHpNnk4Aq6Kx6yC",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "mBP7adJHpNnk4Aq6Kx6yC",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-mBP7adJHpNnk4Aq6Kx6yC"
+      },
+      {
+        "id": "730c7b7a-bf94-4a24-ba15-070fa23401f6",
+        "originNode": {
+          "routeId": "Q3uqVSjyY8N0LUVVQci-w",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "Q3uqVSjyY8N0LUVVQci-w",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "Q3uqVSjyY8N0LUVVQci-w",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-Q3uqVSjyY8N0LUVVQci-w"
+      },
+      {
+        "id": "5e21a100-83cb-45fc-b9e0-6d85df77d040",
+        "originNode": {
+          "routeId": "30aXcaAIUJOSSw0QLIuAS",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "30aXcaAIUJOSSw0QLIuAS",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "30aXcaAIUJOSSw0QLIuAS",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-30aXcaAIUJOSSw0QLIuAS"
+      },
+      {
+        "id": "c352fb88-201d-4ad8-9d29-ebef00ce76dc",
+        "originNode": {
+          "routeId": "yUk46B7YZ_l6pssAqrSEq",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "yUk46B7YZ_l6pssAqrSEq",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "yUk46B7YZ_l6pssAqrSEq",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-yUk46B7YZ_l6pssAqrSEq"
+      },
+      {
+        "id": "cec9c318-5869-4cf1-8f4c-49bf10600600",
+        "originNode": {
+          "routeId": "zsBMQJZ52vuKDbyfaDPJ8",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "zsBMQJZ52vuKDbyfaDPJ8",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "zsBMQJZ52vuKDbyfaDPJ8",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-zsBMQJZ52vuKDbyfaDPJ8"
+      },
+      {
+        "id": "f38885f6-7e50-460a-9b35-44cdf7675c2f",
+        "originNode": {
+          "routeId": "2h6JE3xm8JAt3wjNCOIOS",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "2h6JE3xm8JAt3wjNCOIOS",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "2h6JE3xm8JAt3wjNCOIOS",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-2h6JE3xm8JAt3wjNCOIOS"
+      },
+      {
+        "id": "dff8d9f4-c3dc-44bd-8a03-a91d7439373b",
+        "originNode": {
+          "routeId": "VrZrjkO6J2ClYqAhr4kAx",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "VrZrjkO6J2ClYqAhr4kAx",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "VrZrjkO6J2ClYqAhr4kAx",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-VrZrjkO6J2ClYqAhr4kAx"
+      },
+      {
+        "id": "3cd41673-a815-4532-a145-5f940fec9803",
+        "originNode": {
+          "routeId": "mlGqTC7OuaCju7ZqBEFQb",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "mlGqTC7OuaCju7ZqBEFQb",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "mlGqTC7OuaCju7ZqBEFQb",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-mlGqTC7OuaCju7ZqBEFQb"
+      },
+      {
+        "id": "2849c268-6e35-4c85-b16c-346a89673178",
+        "originNode": {
+          "routeId": "tAB30VGTxnvO5F4p7ufbf",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "tAB30VGTxnvO5F4p7ufbf",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "tAB30VGTxnvO5F4p7ufbf",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-tAB30VGTxnvO5F4p7ufbf"
+      },
+      {
+        "id": "3986aefc-3f9f-4796-a0d9-f5024a7a2eac",
+        "originNode": {
+          "routeId": "xv3rH2mvB2ggCKZsU6u-L",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "xv3rH2mvB2ggCKZsU6u-L",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "xv3rH2mvB2ggCKZsU6u-L",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-xv3rH2mvB2ggCKZsU6u-L"
+      },
+      {
+        "id": "644fcaa7-24ed-4d80-92af-d5e16efb25e4",
+        "originNode": {
+          "routeId": "uYwj_PFKJ9b3jWJfvLP5l",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "uYwj_PFKJ9b3jWJfvLP5l",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "uYwj_PFKJ9b3jWJfvLP5l",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-uYwj_PFKJ9b3jWJfvLP5l"
+      },
+      {
+        "id": "381ce49f-ecc2-42b8-90a4-9891e22e5020",
+        "originNode": {
+          "routeId": "kRdjOssqwEl4T8mVfbof9",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "kRdjOssqwEl4T8mVfbof9",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "kRdjOssqwEl4T8mVfbof9",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-kRdjOssqwEl4T8mVfbof9"
+      },
+      {
+        "id": "9994ddec-4a49-4888-95aa-05b7697d475a",
+        "originNode": {
+          "routeId": "7UjafdOzPa6vsQ3-yMtnS",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "7UjafdOzPa6vsQ3-yMtnS",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "7UjafdOzPa6vsQ3-yMtnS",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-7UjafdOzPa6vsQ3-yMtnS"
+      },
+      {
+        "id": "7a289e7f-fe66-4f29-b994-1241e73d9051",
+        "originNode": {
+          "routeId": "_iWNRZUIoqO7oy41WplsH",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "_iWNRZUIoqO7oy41WplsH",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "_iWNRZUIoqO7oy41WplsH",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-_iWNRZUIoqO7oy41WplsH"
+      },
+      {
+        "id": "d01f1546-5d25-47ca-8ede-8b6e069d95e3",
+        "originNode": {
+          "routeId": "hU4SP_KD0M4VXZFHxkVzt",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "hU4SP_KD0M4VXZFHxkVzt",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "hU4SP_KD0M4VXZFHxkVzt",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-hU4SP_KD0M4VXZFHxkVzt"
+      },
+      {
+        "id": "659a6516-044c-447f-8caa-1985ef25894d",
+        "originNode": {
+          "routeId": "UrJfyZSzmuBAWYIFITLui",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "UrJfyZSzmuBAWYIFITLui",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "UrJfyZSzmuBAWYIFITLui",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-UrJfyZSzmuBAWYIFITLui"
+      },
+      {
+        "id": "e8931ad8-de1a-4739-8db3-57a7d71068b1",
+        "originNode": {
+          "routeId": "nU7zOs3yatySTMkrbSkNi",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "nU7zOs3yatySTMkrbSkNi",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "nU7zOs3yatySTMkrbSkNi",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-nU7zOs3yatySTMkrbSkNi"
+      },
+      {
+        "id": "e1420422-5cc3-4cb6-a1e7-d229c0c5dc75",
+        "originNode": {
+          "routeId": "yvqLMthL9y1GOTN4g5wyd",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "yvqLMthL9y1GOTN4g5wyd",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "yvqLMthL9y1GOTN4g5wyd",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-yvqLMthL9y1GOTN4g5wyd"
+      },
+      {
+        "id": "ce9ed745-306a-45cc-8e04-0b3e02336514",
+        "originNode": {
+          "routeId": "3qSXcKsjXvOItY2211uiL",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "3qSXcKsjXvOItY2211uiL",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "3qSXcKsjXvOItY2211uiL",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-3qSXcKsjXvOItY2211uiL"
+      },
+      {
+        "id": "c4aaef93-d9db-4961-a350-e38ae1894504",
+        "originNode": {
+          "routeId": "mYbNYkftath9VIv5U11d5",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "mYbNYkftath9VIv5U11d5",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "mYbNYkftath9VIv5U11d5",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-mYbNYkftath9VIv5U11d5"
+      },
+      {
+        "id": "ec461e3a-e410-49c1-8a2e-9b6d0bd51739",
+        "originNode": {
+          "routeId": "DOLjpu5Gl_AtZSBVROtXO",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "DOLjpu5Gl_AtZSBVROtXO",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "DOLjpu5Gl_AtZSBVROtXO",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-DOLjpu5Gl_AtZSBVROtXO"
+      },
+      {
+        "id": "4acc8145-1980-4a1e-9398-a002d9f5019c",
+        "originNode": {
+          "routeId": "0COUiYGbUAXlZLCSES8-e",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "0COUiYGbUAXlZLCSES8-e",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "0COUiYGbUAXlZLCSES8-e",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-0COUiYGbUAXlZLCSES8-e"
+      },
+      {
+        "id": "42ff8e7f-f095-4577-9cbd-0be7115db1f5",
+        "originNode": {
+          "routeId": "fGZZ3Zdt8vne9q-U_tOCi",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "fGZZ3Zdt8vne9q-U_tOCi",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "fGZZ3Zdt8vne9q-U_tOCi",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-fGZZ3Zdt8vne9q-U_tOCi"
+      },
+      {
+        "id": "2c74610f-3cf4-4db0-88b8-7c87588836d1",
+        "originNode": {
+          "routeId": "gE98CgRdoCCl49u-GdDXN",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "gE98CgRdoCCl49u-GdDXN",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "gE98CgRdoCCl49u-GdDXN",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-gE98CgRdoCCl49u-GdDXN"
+      },
+      {
+        "id": "a3f98315-3e16-4929-9d20-65d996f71c43",
+        "originNode": {
+          "routeId": "C-z9G01q0GJcTYYV3alVP",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "C-z9G01q0GJcTYYV3alVP",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "C-z9G01q0GJcTYYV3alVP",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-C-z9G01q0GJcTYYV3alVP"
+      },
+      {
+        "id": "69aeb33c-64a6-470d-8633-f118fe81f41d",
+        "originNode": {
+          "routeId": "P8xWJkyEY_IkNq0jGdx5K",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "P8xWJkyEY_IkNq0jGdx5K",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "P8xWJkyEY_IkNq0jGdx5K",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-P8xWJkyEY_IkNq0jGdx5K"
+      },
+      {
+        "id": "6e27d431-f326-469f-9dac-3d1fa7f2aa81",
+        "originNode": {
+          "routeId": "VOIQCDyVx6KwcacVWId5m",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "VOIQCDyVx6KwcacVWId5m",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "VOIQCDyVx6KwcacVWId5m",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-VOIQCDyVx6KwcacVWId5m"
+      },
+      {
+        "id": "0415402e-2c4f-4d1c-8d72-0b217ce7493f",
+        "originNode": {
+          "routeId": "sIlOvAb_KXtWEoQz8DLIa",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "sIlOvAb_KXtWEoQz8DLIa",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "sIlOvAb_KXtWEoQz8DLIa",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-sIlOvAb_KXtWEoQz8DLIa"
+      },
+      {
+        "id": "6e5b4cea-259d-4a34-acfe-8fa0cdab4ecc",
+        "originNode": {
+          "routeId": "PAJqJGsbcAD6NgmJk4rJo",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "PAJqJGsbcAD6NgmJk4rJo",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "PAJqJGsbcAD6NgmJk4rJo",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-PAJqJGsbcAD6NgmJk4rJo"
+      },
+      {
+        "id": "9cedd381-5324-4c71-bf5f-3375d9e00bac",
+        "originNode": {
+          "routeId": "WoVMzctjK2KVQWiX9L9qN",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "WoVMzctjK2KVQWiX9L9qN",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "WoVMzctjK2KVQWiX9L9qN",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-WoVMzctjK2KVQWiX9L9qN"
+      },
+      {
+        "id": "96ed2195-d824-4eb6-85fd-7a1c0d133a00",
+        "originNode": {
+          "routeId": "cdKMjKGYAza8e7k_vYgYj",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "cdKMjKGYAza8e7k_vYgYj",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "cdKMjKGYAza8e7k_vYgYj",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-cdKMjKGYAza8e7k_vYgYj"
+      },
+      {
+        "id": "45a34d8d-f642-47b3-8a95-b1313b48c1ee",
+        "originNode": {
+          "routeId": "bHpDYTM3rqMBD5tSNCnGL",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "bHpDYTM3rqMBD5tSNCnGL",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "bHpDYTM3rqMBD5tSNCnGL",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-bHpDYTM3rqMBD5tSNCnGL"
+      },
+      {
+        "id": "8bc1179a-0116-42d9-97ba-d4921b3b5511",
+        "originNode": {
+          "routeId": "pMrDzkOgYvtZH2mOg_164",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "pMrDzkOgYvtZH2mOg_164",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "pMrDzkOgYvtZH2mOg_164",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-pMrDzkOgYvtZH2mOg_164"
+      },
+      {
+        "id": "c0730299-f85c-4527-a89b-30445999d9ba",
+        "originNode": {
+          "routeId": "Ii9u8sW4pG5_NKc9u6GqK",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "Ii9u8sW4pG5_NKc9u6GqK",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "Ii9u8sW4pG5_NKc9u6GqK",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-Ii9u8sW4pG5_NKc9u6GqK"
+      },
+      {
+        "id": "6968c3a5-a495-4f16-bc1b-1217ddfa4377",
+        "originNode": {
+          "routeId": "X46uqSY9ovN-7-V3iviMJ",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "X46uqSY9ovN-7-V3iviMJ",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "X46uqSY9ovN-7-V3iviMJ",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-X46uqSY9ovN-7-V3iviMJ"
+      },
+      {
+        "id": "fa441e3c-7ddf-4bb1-b4ef-2f636fc64cbe",
+        "originNode": {
+          "routeId": "ojIuKST1u2pmiqxGJvi2k",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "ojIuKST1u2pmiqxGJvi2k",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "ojIuKST1u2pmiqxGJvi2k",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-ojIuKST1u2pmiqxGJvi2k"
+      },
+      {
+        "id": "ad7bf2fb-7a95-4fb5-8f45-64adfc875b6e",
+        "originNode": {
+          "routeId": "_QbezPefNqKB2bTC978sn",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "_QbezPefNqKB2bTC978sn",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "_QbezPefNqKB2bTC978sn",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-_QbezPefNqKB2bTC978sn"
+      },
+      {
+        "id": "3e828461-d976-44fa-b112-e3ee4f4477e3",
+        "originNode": {
+          "routeId": "W8RzNacN4VBb-Q5VzT802",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "W8RzNacN4VBb-Q5VzT802",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "W8RzNacN4VBb-Q5VzT802",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-W8RzNacN4VBb-Q5VzT802"
+      },
+      {
+        "id": "def2bf48-bc23-4601-94f4-00d644a11fc7",
+        "originNode": {
+          "routeId": "2_CHx34GlWej4B3PRRZKX",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "2_CHx34GlWej4B3PRRZKX",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "2_CHx34GlWej4B3PRRZKX",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-2_CHx34GlWej4B3PRRZKX"
+      },
+      {
+        "id": "60275417-1754-410b-b383-9b0f4ed80af4",
+        "originNode": {
+          "routeId": "gIIGvZgDMg_gFGLngq4YD",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "gIIGvZgDMg_gFGLngq4YD",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "gIIGvZgDMg_gFGLngq4YD",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-gIIGvZgDMg_gFGLngq4YD"
+      },
+      {
+        "id": "729bef51-df53-4cd1-b6cd-751a13c23b9e",
+        "originNode": {
+          "routeId": "OIAxAaTYeih8So8-29TI_",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "OIAxAaTYeih8So8-29TI_",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "OIAxAaTYeih8So8-29TI_",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-OIAxAaTYeih8So8-29TI_"
+      },
+      {
+        "id": "5f76b458-0ef0-4cb4-9845-0823353867dd",
+        "originNode": {
+          "routeId": "I7g-07HZBl2P37aUSOZeA",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "I7g-07HZBl2P37aUSOZeA",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "I7g-07HZBl2P37aUSOZeA",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput-I7g-07HZBl2P37aUSOZeA"
+      },
+      {
+        "id": "4e825b39-9d9a-4dd2-a7ed-39d5ed63bab3",
+        "originNode": {
+          "routeId": "-if8CatMthQjWVES9uI_--routingRule",
+          "type": "OwnershipActionNode"
+        },
+        "referencedObject": {
+          "routeId": "-if8CatMthQjWVES9uI_--routingRule",
+          "type": "AssigneeOutput"
+        },
+        "availableInNodes": [
+          {
+            "routeId": "-if8CatMthQjWVES9uI_--routingRule",
+            "type": "FieldUpdateNodesInRoute"
+          }
+        ],
+        "name": "AssigneeOutput--if8CatMthQjWVES9uI_--routingRule"
+      }
+    ],
+    "routingSteps": []
+  },
+  {
+    "id": "1812e31b-914a-44b0-97f0-d4c96d9f4fe4",
+    "tenantId": "hibob",
+    "workspaceId": "5ffdc2c64c46df00017023a8",
+    "name": "Partner Assignment - Manual Execution",
+    "description": "",
+    "status": {
+      "type": "Active"
+    },
+    "trigger": {
+      "eventType": {
+        "expression": {
+          "expressions": [
+            {
+              "fieldName": "Admin_Ringlead_Text_Field__c",
+              "type": "FieldUpdate"
+            }
+          ],
+          "type": "FieldUpdateOr"
+        },
+        "type": "UpdateFieldTrigger"
+      },
+      "objectType": "Account",
+      "eventTypes": [
+        {
+          "expression": {
+            "expressions": [
+              {
+                "fieldName": "Admin_Ringlead_Text_Field__c",
+                "type": "FieldUpdate"
+              }
+            ],
+            "type": "FieldUpdateOr"
+          },
+          "type": "UpdateFieldTrigger"
+        }
+      ],
+      "evaluation": "1c1ffa28-a875-4f32-bb6c-8f29aa0cb707"
+    },
+    "metadata": {
+      "createdAt": "2026-04-16T05:27:15.099458Z",
+      "createdBy": "user/6581088e6df3bb1a52ac4023",
+      "updatedAt": "2026-04-16T05:33:00.441308Z",
+      "updatedBy": "user/6581088e6df3bb1a52ac4023",
+      "revision": 2
+    },
+    "modelVersion": 2,
+    "flowRoutes": {
+      "duplicateMatching": [],
+      "routes": [],
+      "catchAll": {
+        "id": "Da51LWCjP92BnpNNXd4aG-routingRule",
+        "actions": [],
+        "sendToRouters": [
+          {
+            "routerId": "7feb1c5c-1a38-488b-95bc-c1bca107400d",
+            "variableId": "87775060-9509-450b-b865-c63962009c00",
+            "executionSettings": {
+              "skipEntryRule": true,
+              "skipDelay": true
+            }
+          }
+        ]
+      }
+    },
+    "variables": [
+      {
+        "id": "87775060-9509-450b-b865-c63962009c00",
+        "originNode": {
+          "type": "TriggerNode"
+        },
+        "referencedObject": {
+          "objectType": "Account",
+          "type": "TriggeredSfdcObject"
+        },
+        "availableInNodes": [
+          {
+            "type": "AnyFieldUpdateNodes"
+          }
+        ],
+        "name": "TriggeredObject"
+      }
+    ],
+    "routingSteps": []
+  }
+]

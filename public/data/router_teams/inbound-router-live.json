@@ -1,16 +1,19 @@
 {
   "meta": {
-    "builtAt": "2026-06-03T12:32:34.761Z",
+    "builtAt": "2026-06-03T12:40:00.441Z",
     "workspaceId": "5ffdc2c64c46df00017023a8",
     "routerId": "7e9c794d-b6db-40ec-ae07-f363d77b5f36",
     "routerName": "MQL Inbound flow - Main router - Live",
     "routerSlug": "rad-flow",
-    "ruleCount": 88,
+    "distroRouterId": "7d0582ff-8455-4791-9b4d-05e691abad9d",
+    "distroRouterName": "Account Assignment – Main Router",
+    "ruleCount": 66,
     "teamCount": 290,
     "sources": {
       "teams": "data/router_teams/raw/teams.json",
       "rules": "data/router_teams/raw/rules.json",
       "router": "data/router_teams/raw/router.json",
+      "distro": "data/router_teams/raw/distro-routers.json",
       "users": "data/router_teams/raw/users-cache.json"
     }
   },
@@ -206,7 +209,6 @@
       "Ukraine",
       "United Arab Emirates",
       "United Kingdom",
-      "United States",
       "Uruguay",
       "Uzbekistan",
       "Vanuatu",
@@ -244,7 +246,6 @@
       "Belarus",
       "Belgium",
       "Bosnia and Herzegovina",
-      "British Columbia",
       "British Indian",
       "Bulgaria",
       "California",
@@ -329,7 +330,6 @@
       "Maldives",
       "Mali",
       "Malta",
-      "Manitoba",
       "Martinique",
       "Maryland",
       "Massachusetts",
@@ -356,14 +356,12 @@
       "Netherland",
       "Netherlands",
       "Nevada",
-      "New Brunswick",
       "New Caledonia",
       "New Hampshire",
       "New Jersey",
       "New Mexico",
       "New York",
       "New Zealand",
-      "Newfoundland and Labrador",
       "Niger",
       "Nigeria",
       "Niue",
@@ -371,12 +369,10 @@
       "North Carolina",
       "North Dakota",
       "Norway",
-      "Nova Scotia",
       "Ocean Territory",
       "Ohio",
       "Oklahoma",
       "Oman",
-      "Ontario",
       "Oregon",
       "Papua New Guinea",
       "Pennsylvania",
@@ -384,7 +380,6 @@
       "Pitcairn",
       "Poland",
       "Portugal",
-      "Quebec",
       "Réunion",
       "Réunion",
       "Rhode Island",
@@ -398,7 +393,6 @@
       "Samoa",
       "San Marino",
       "Sao Tome and Principe",
-      "Saskatchewan",
       "Saudi Arabia",
       "Scotland",
       "Senegal",
@@ -1402,7 +1396,102 @@
         "updated": false,
         "ownership": true,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "f36529ef-aedf-4bcd-94ec-f09517036f0d",
+      "name": "APJ | Micro : 20-49 (evaluating)",
+      "segmentLabel": "APJ | Micro : 20-49",
+      "order": 1,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "states": [
+        "Australia",
+        "Bangladesh",
+        "china",
+        "Fiji",
+        "Hong Kong",
+        "Indonesia",
+        "Japan",
+        "Korea",
+        "Malaysia",
+        "Mongolia",
+        "Myanmar",
+        "Nepal",
+        "New Zealand",
+        "Philippines",
+        "Singapore",
+        "South Korea",
+        "Sri Lanka",
+        "Taiwan",
+        "Thailand",
+        "Timor-Leste",
+        "Viet Nam"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "09700f15-54a5-4c93-8432-7e195cfcd5e3",
+        "name": "APJ | Micro : 20-49",
+        "chiliPiperTeamName": "APJ | Micro : 20-49",
+        "nameMatchesSegment": true,
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "66169d11eca42444e0901351",
+            "name": "Scarlett Scotland",
+            "email": "scarlett.scotland@hibob.io"
+          },
+          {
+            "id": "689936c04bdc9a4c1c8626b1",
+            "name": "Ross Drury",
+            "email": "ross.drury@hibob.io"
+          }
+        ],
+        "columnI": "Scarlett Scotland, Ross Drury"
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -1422,70 +1511,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
-      }
-    },
-    {
-      "id": "01474e3e-183e-49a8-9848-7faf3ff60c1a",
-      "name": "Noa test domains",
-      "segmentLabel": "Noa test domains",
-      "order": 3,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "@eagleray",
-        "@hibob.com",
-        "@hitest",
-        "@hitest.com",
-        "@hitest.io",
-        "@testtttttt.com",
-        "@tstmail.link",
-        "eagleray.co.il",
-        "hibob.co.il",
-        "hibob.io",
-        "ukr.net"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 8000,
-        "label": "20 – 8000"
-      },
-      "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199",
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "1c5e0e57-83bc-416f-9646-2c49a42025f6",
-        "name": "Noa test domains",
-        "chiliPiperTeamName": "Noa test domains",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "68d942488408bb380f4d20d4",
-            "name": "Website QA",
-            "email": "hibob-website-alerts@hibob.io"
-          }
-        ],
-        "columnI": "Website QA"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
       }
     },
     {
       "id": "83cb1788-fef7-4403-8454-bac3e5ea1e05",
       "name": "APJ | SMB : 50-199 (evaluating)",
       "segmentLabel": "APJ | SMB : 50-199",
-      "order": 4,
+      "order": 2,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -1568,14 +1604,76 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "01474e3e-183e-49a8-9848-7faf3ff60c1a",
+      "name": "Noa test domains",
+      "segmentLabel": "Noa test domains",
+      "order": 3,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "states": [
+        "@eagleray",
+        "@hibob.com",
+        "@hitest",
+        "@hitest.com",
+        "@hitest.io",
+        "@testtttttt.com",
+        "@tstmail.link",
+        "eagleray.co.il",
+        "hibob.co.il",
+        "hibob.io",
+        "ukr.net"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 8000,
+        "label": "20 – 8000"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199",
+        "200_499",
+        "500_8000"
+      ],
+      "team": {
+        "id": "1c5e0e57-83bc-416f-9646-2c49a42025f6",
+        "name": "Noa test domains",
+        "chiliPiperTeamName": "Noa test domains",
+        "nameMatchesSegment": true,
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "68d942488408bb380f4d20d4",
+            "name": "Website QA",
+            "email": "hibob-website-alerts@hibob.io"
+          }
+        ],
+        "columnI": "Website QA"
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
       }
     },
     {
       "id": "ba9b9935-ce8d-443f-a94a-766388737c88",
       "name": "APJ | MM : 200-649 (evaluating)",
       "segmentLabel": "APJ | MM : 200-649",
-      "order": 5,
+      "order": 3,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -1658,14 +1756,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "fe9d2213-e195-4ad4-8b5e-d87a8f4562e6",
       "name": "APJ | MM : 650-999 (evaluating)",
       "segmentLabel": "APJ | MM : 650-999",
-      "order": 6,
+      "order": 4,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -1762,14 +1863,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "e330597a-9cef-45a1-8616-a5e2aea7427e",
       "name": "APJ | ENT : 1000-8000 (evaluating)",
       "segmentLabel": "APJ | ENT : 1000-8000",
-      "order": 7,
+      "order": 5,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -1856,58 +1960,76 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
-      "id": "cc051f2a-7660-409f-b0c4-270c8ab29d1f",
-      "name": "DACH | Micro & SMB | Switzerland : 20-199 (evaluating)",
-      "segmentLabel": "DACH | Micro & SMB | Switzerland : 20-199",
-      "order": 8,
+      "id": "d5392704-9e65-4926-9aab-11c1e835793c",
+      "name": "DACH | Micro : 20-49 (evaluating)",
+      "segmentLabel": "DACH | Micro : 20-49",
+      "order": 6,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
-        "Switzerland"
+        "Austria",
+        "Germany"
       ],
-      "states": [],
+      "states": [
+        "Austria",
+        "Germany"
+      ],
       "employeeRange": {
         "min": 20,
-        "max": 199,
-        "label": "20 – 199"
+        "max": 49,
+        "label": "20 – 49"
       },
       "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199"
+        "20_49"
       ],
       "team": {
-        "id": "0395b59c-cdcd-4e4e-a956-08d25388feef",
-        "name": "DACH | Micro & SMB | Switzerland : 20-199",
-        "chiliPiperTeamName": "DACH | Micro & SMB | Switzerland : 20-199",
+        "id": "c3c39300-1b00-417d-ad0b-5688da42817b",
+        "name": "DACH | Micro : 20-49",
+        "chiliPiperTeamName": "DACH | Micro : 20-49",
         "nameMatchesSegment": true,
-        "memberCount": 1,
+        "memberCount": 3,
         "members": [
+          {
+            "id": "658bf969d867c424fa65f157",
+            "name": "Lisa-Marie Grunwald",
+            "email": "lisa-marie.grunwald@hibob.io"
+          },
           {
             "id": "69ea0901cc50f6c9cb581c88",
             "name": "Per Klocker",
             "email": "per.klocker@hibob.io"
+          },
+          {
+            "id": "69fc8e703af8999493408921",
+            "name": "Alexandros Grosnick",
+            "email": "alexandros.grosnick@hibob.io"
           }
         ],
-        "columnI": "Per Klocker"
+        "columnI": "Lisa-Marie Grunwald, Per Klocker, Alexandros Grosnick"
       },
       "flags": {
         "evaluating": true,
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
       "id": "098f58b0-5bd9-4496-9bf2-9a1b3d4a8e4d",
       "name": "DACH | SMB : 50-99 (evaluating)",
       "segmentLabel": "DACH | SMB : 50-99",
-      "order": 9,
+      "order": 7,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -1956,14 +2078,64 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "cc051f2a-7660-409f-b0c4-270c8ab29d1f",
+      "name": "DACH | Micro & SMB | Switzerland : 20-199 (evaluating)",
+      "segmentLabel": "DACH | Micro & SMB | Switzerland : 20-199",
+      "order": 8,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Switzerland"
+      ],
+      "states": [],
+      "employeeRange": {
+        "min": 20,
+        "max": 199,
+        "label": "20 – 199"
+      },
+      "sizeSegmentIds": [
+        "20_49",
+        "50_99",
+        "100_199"
+      ],
+      "team": {
+        "id": "0395b59c-cdcd-4e4e-a956-08d25388feef",
+        "name": "DACH | Micro & SMB | Switzerland : 20-199",
+        "chiliPiperTeamName": "DACH | Micro & SMB | Switzerland : 20-199",
+        "nameMatchesSegment": true,
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "69ea0901cc50f6c9cb581c88",
+            "name": "Per Klocker",
+            "email": "per.klocker@hibob.io"
+          }
+        ],
+        "columnI": "Per Klocker"
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "b8999684-13b5-493b-a16d-90ddf24a279d",
       "name": "DACH | SMB : 100-199 (evaluating)",
       "segmentLabel": "DACH | SMB : 100-199",
-      "order": 10,
+      "order": 8,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2012,14 +2184,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "7e38e62c-84b7-46e1-818c-5598d0fab70f",
       "name": "DACH | MM : 200-499 (evaluating)",
       "segmentLabel": "DACH | MM : 200-499",
-      "order": 11,
+      "order": 9,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2060,14 +2235,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "d095daa1-c0b5-4bc4-8214-e5d1067dd5f4",
       "name": "DACH | MM | Germany & Austria : 500-999 (evaluating)",
       "segmentLabel": "DACH | MM | Germany & Austria : 500-999",
-      "order": 12,
+      "order": 10,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2106,14 +2284,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "fbe3a325-3a7c-4754-8d07-ed00362a53ae",
       "name": "DACH | MM | Switzerland : 500-999 (evaluating)",
       "segmentLabel": "DACH | MM | Switzerland : 500-999",
-      "order": 13,
+      "order": 11,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2148,14 +2329,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "4a0b1e21-4dda-441c-aa73-526e553e5fc9",
       "name": "DACH | ENT | Germany & Austria : 1000-8000 (evaluating)",
       "segmentLabel": "DACH | ENT | Germany & Austria : 1000-8000",
-      "order": 14,
+      "order": 12,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2194,14 +2378,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "b9f9a171-83ff-4562-abe4-04ec3c4ce6ce",
       "name": "DACH | ENT | Switzerland : 1000-8000 (evaluating)",
       "segmentLabel": "DACH | ENT | Switzerland : 1000-8000",
-      "order": 15,
+      "order": 13,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2236,14 +2423,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "f092bfbb-58ef-46f5-af49-0cceb64acf4e",
       "name": "Iberia | Micro & SMB | Portugal: 20-199 (evaluating)",
       "segmentLabel": "Iberia | Micro & SMB | Portugal: 20-199",
-      "order": 16,
+      "order": 15,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2280,14 +2470,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "78c9ab3c-9b67-4322-a46a-8e8ed84543fa",
       "name": "Iberia | Micro & SMB | Spain ,Italy : 20-199 (evaluating)",
       "segmentLabel": "Iberia | Micro & SMB | Spain ,Italy : 20-199",
-      "order": 17,
+      "order": 16,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2333,14 +2526,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "7fecf588-57a3-489e-9b4d-dc318a34fba4",
       "name": "Iberia | MM & ENT : 200-8000 (evaluating)",
       "segmentLabel": "Iberia | MM & ENT : 200-8000",
-      "order": 18,
+      "order": 17,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2382,7 +2578,55 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "a3953226-9ee7-4751-986d-58c5ad6cb837",
+      "name": "Nordics | Micro | Sweden: 20-49 (evaluating)",
+      "segmentLabel": "Nordics | Micro | Sweden: 20-49",
+      "order": 18,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Sweden"
+      ],
+      "states": [],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "7221c18c-2c67-4755-b174-b3d44377ea98",
+        "name": "Nordics | Micro | Sweden: 20-49",
+        "chiliPiperTeamName": "Nordics | Micro | Sweden: 20-49",
+        "nameMatchesSegment": true,
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "68f6d49a71fdc418e4faf912",
+            "name": "Chloe Leygnac",
+            "email": "chloe.leygnac@hibob.io"
+          }
+        ],
+        "columnI": "Chloe Leygnac"
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -2425,7 +2669,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2468,7 +2715,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2504,7 +2754,44 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "0b3aa96c-305e-4e72-b3bf-26cf2bf3de45",
+      "name": "Nordics | Micro | Denmark, Finland, Norway, Iceland: 20-49",
+      "segmentLabel": "Nordics | Micro | Denmark, Finland, Norway, Iceland: 20-49",
+      "order": 21,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark",
+        "Finland",
+        "Iceland",
+        "Norway"
+      ],
+      "states": [],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": null,
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -2560,7 +2847,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2602,7 +2892,55 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "ad64371b-bef5-4649-adb6-5a4c7d6685b8",
+      "name": "Nordics | MM | Denmark: 200-499",
+      "segmentLabel": "Nordics | MM | Denmark: 200-499",
+      "order": 23,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Denmark"
+      ],
+      "states": [],
+      "employeeRange": {
+        "min": 200,
+        "max": 499,
+        "label": "200 – 499"
+      },
+      "sizeSegmentIds": [
+        "200_499"
+      ],
+      "team": {
+        "id": "8d4dacdd-db4d-489e-9c1f-661d00e88222",
+        "name": "Nordics | MM | Denmark: 200-499",
+        "chiliPiperTeamName": "Nordics | MM | Denmark: 200-499",
+        "nameMatchesSegment": true,
+        "memberCount": 1,
+        "members": [
+          {
+            "id": "67486abf915361241954d128",
+            "name": "Alexandra Sevillano Dahlqvist",
+            "email": "alexandra.sevillano@hibob.io"
+          }
+        ],
+        "columnI": "Alexandra Sevillano Dahlqvist"
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -2644,7 +2982,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2687,7 +3028,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2734,7 +3078,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2786,7 +3133,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2839,7 +3189,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2893,7 +3246,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -2937,14 +3293,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "4aea653c-f1e8-492c-8272-c89769f29d28",
       "name": "Benelux | MM : 200-499 (evaluating)",
       "segmentLabel": "Benelux | MM : 200-499",
-      "order": 31,
+      "order": 30,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -2992,14 +3351,17 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
       "id": "ac42499a-7d3a-40f1-a24c-80145014f8df",
       "name": "Benelux | MM : 500-999 (evaluating)",
       "segmentLabel": "Benelux | MM : 500-999",
-      "order": 32,
+      "order": 31,
       "product": "Distro",
       "ruleType": "NonOwnershipRule",
       "countries": [
@@ -3042,7 +3404,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -3092,7 +3457,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -3205,7 +3573,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -3312,7 +3683,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -3423,7 +3797,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -3741,7 +4118,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -4074,7 +4454,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -4397,7 +4780,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -4665,7 +5051,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -4908,7 +5297,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5161,7 +5553,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5284,7 +5679,69 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "5ff56b55-8f28-457a-b878-b322658fd478",
+      "name": "US | Micro : 20-49 (evaluating)",
+      "segmentLabel": "US | Micro : 20-49",
+      "order": 43,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [],
+      "states": [
+        "Connecticut",
+        "Maine",
+        "Massachusetts",
+        "New Hampshire",
+        "New Jersey",
+        "New York",
+        "Pennsylvania",
+        "Rhode Island",
+        "Vermont",
+        "Virginia"
+      ],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "530674d7-9ace-4021-a961-3b036406b2c8",
+        "name": "US | Micro : 20-49",
+        "chiliPiperTeamName": "US | Micro : 20-49",
+        "nameMatchesSegment": true,
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "672ab7347aed9922d8699cbb",
+            "name": "Thaila Morganstern",
+            "email": "thaila.morganstern@hibob.io"
+          },
+          {
+            "id": "6887ad3367dd973800f3a408",
+            "name": "Ebony Orozco",
+            "email": "ebony.orozco@hibob.io"
+          }
+        ],
+        "columnI": "Thaila Morganstern, Ebony Orozco"
+      },
+      "flags": {
+        "evaluating": true,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -5340,7 +5797,10 @@
         "updated": false,
         "ownership": false,
         "rad": true,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5396,7 +5856,10 @@
         "updated": false,
         "ownership": false,
         "rad": true,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": false,
+        "liveBooking": true
       }
     },
     {
@@ -5444,7 +5907,10 @@
         "updated": false,
         "ownership": false,
         "rad": true,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5502,7 +5968,10 @@
         "updated": false,
         "ownership": false,
         "rad": true,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5570,7 +6039,10 @@
         "updated": false,
         "ownership": false,
         "rad": true,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5626,7 +6098,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5682,7 +6157,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5730,7 +6208,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5788,7 +6269,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5856,7 +6340,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -5963,7 +6450,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -6065,7 +6555,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -6113,7 +6606,60 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
+      }
+    },
+    {
+      "id": "aaeee53d-9a1f-4a64-afc4-fa7f54792d87",
+      "name": "Canada | Micro : 20-49 ",
+      "segmentLabel": "Canada | Micro : 20-49",
+      "order": 56,
+      "product": "Distro",
+      "ruleType": "NonOwnershipRule",
+      "countries": [
+        "Canada"
+      ],
+      "states": [],
+      "employeeRange": {
+        "min": 20,
+        "max": 49,
+        "label": "20 – 49"
+      },
+      "sizeSegmentIds": [
+        "20_49"
+      ],
+      "team": {
+        "id": "39941594-257c-4651-8e42-b3d4f3ba4733",
+        "name": "Canada | Micro : 20-49",
+        "chiliPiperTeamName": "Canada | Micro : 20-49 ",
+        "nameMatchesSegment": true,
+        "memberCount": 2,
+        "members": [
+          {
+            "id": "6887ad3367dd973800f3a408",
+            "name": "Ebony Orozco",
+            "email": "ebony.orozco@hibob.io"
+          },
+          {
+            "id": "672ab7347aed9922d8699cbb",
+            "name": "Thaila Morganstern",
+            "email": "thaila.morganstern@hibob.io"
+          }
+        ],
+        "columnI": "Ebony Orozco, Thaila Morganstern"
+      },
+      "flags": {
+        "evaluating": false,
+        "updated": false,
+        "ownership": false,
+        "rad": false,
+        "onRouter": true,
+        "concierge": false,
+        "distro": true,
+        "liveBooking": false
       }
     },
     {
@@ -6161,7 +6707,10 @@
         "updated": true,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -6203,7 +6752,10 @@
         "updated": true,
         "ownership": false,
         "rad": false,
-        "onRouter": true
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     },
     {
@@ -6283,1630 +6835,10 @@
         "updated": false,
         "ownership": false,
         "rad": false,
-        "onRouter": true
-      }
-    },
-    {
-      "id": "5b4641f8-76f7-416e-8df4-cd97153eb5a8",
-      "name": "Benelux | MM : 200-999",
-      "segmentLabel": "Benelux | MM : 200-999",
-      "order": 60,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Belgium",
-        "France",
-        "Luxembourg",
-        "Netherlands"
-      ],
-      "states": [
-        "Belgium",
-        "France",
-        "Luxembourg",
-        "Netherlands"
-      ],
-      "employeeRange": {
-        "min": 200,
-        "max": 999,
-        "label": "200 – 999"
-      },
-      "sizeSegmentIds": [
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "170e78fd-7e8e-4e18-a008-c023c66d5270",
-        "name": "Benelux | MM : 200-999",
-        "chiliPiperTeamName": "Benelux | MM : 200-999",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "6806de75ddd62d68f0f3ac58",
-            "name": "Robert Luckmann",
-            "email": "robert.luckmann@hibob.io"
-          }
-        ],
-        "columnI": "Robert Luckmann"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "d2631a2b-33a5-4149-8d5d-1cd733d48b25",
-      "name": "LATAM | Micro & SMB | Rest of Latam : 20-199",
-      "segmentLabel": "LATAM | Micro & SMB | Rest of Latam : 20-199",
-      "order": 61,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Antigua and Barbuda",
-        "Barbados",
-        "Belize",
-        "Bermuda",
-        "British Virgin Islands",
-        "Chile",
-        "Colombia",
-        "Cook Islands",
-        "Costa Rica",
-        "Cuba",
-        "Dominica",
-        "Dominican Republic",
-        "Ecuador",
-        "El Salvador",
-        "Grenada",
-        "Guatemala",
-        "Guyana",
-        "Honduras",
-        "Jamaica",
-        "Mexico",
-        "Nicaragua",
-        "Panama",
-        "Paraguay",
-        "Peru",
-        "Saint Kitts and Nevis",
-        "Saint Lucia",
-        "Saint Vincent and the Grenadines",
-        "Suriname",
-        "The Bahamas",
-        "Trinidad and Tobago",
-        "Turks and Caicos Islands",
-        "Venezuela"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 199,
-        "label": "20 – 199"
-      },
-      "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199"
-      ],
-      "team": {
-        "id": "c994a962-821d-4ade-b190-17ac21e46fe0",
-        "name": "LATAM | Micro & SMB | Rest of Latam : 20-199",
-        "chiliPiperTeamName": "LATAM | Micro & SMB | Rest of Latam : 20-199",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "684b649d8638dd50c1f687aa",
-            "name": "Edgar Marquez",
-            "email": "edgar.marquez@hibob.io"
-          }
-        ],
-        "columnI": "Edgar Marquez"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "4c6798a6-1af6-4ffd-827e-4ae3fb35724f",
-      "name": "US | MM | Northeast 2 : 200-749",
-      "segmentLabel": "US | MM | Northeast 2 : 200-749",
-      "order": 62,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Florida",
-        "New Jersey",
-        "New York",
-        "Pennsylvania"
-      ],
-      "employeeRange": {
-        "min": 200,
-        "max": 748,
-        "label": "200 – 748"
-      },
-      "sizeSegmentIds": [
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "e119c90a-9ad2-4bb3-a82f-a10075de1425",
-        "name": "US | MM | Northeast 2 : 200-749",
-        "chiliPiperTeamName": "US | MM | Northeast 2 : 200-749",
-        "nameMatchesSegment": true,
-        "memberCount": 4,
-        "members": [
-          {
-            "id": "692612f7f2389b056c41dc19",
-            "name": "Charlotte Robins",
-            "email": "charlotte.robins@hibob.io"
-          },
-          {
-            "id": "69cf03fbf0547abcf760e9ce",
-            "name": "Ryan Krebs",
-            "email": "ryan.krebs@hibob.io"
-          },
-          {
-            "id": "66994226464d171cc01f195e",
-            "name": "Tyler Pullen",
-            "email": "tyler.pullen@hibob.io"
-          },
-          {
-            "id": "66847ae1f586db372fe68a2b",
-            "name": "Evelyn Paredes",
-            "email": "evelyn.paredes@hibob.io"
-          }
-        ],
-        "columnI": "Charlotte Robins, Ryan Krebs, Tyler Pullen, Evelyn Paredes"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "dfeec430-10a2-493f-8d38-133b8bc87747",
-      "name": "US | ENT | West: 1000-8000",
-      "segmentLabel": "US | ENT | West: 1000-8000",
-      "order": 63,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Alaska",
-        "Arizona",
-        "British Columbia",
-        "California",
-        "Hawaii",
-        "Idaho",
-        "Manitoba",
-        "Montana",
-        "Nevada",
-        "New Mexico",
-        "Oregon",
-        "Saskatchewan",
-        "Utah",
-        "Washington",
-        "Wyoming"
-      ],
-      "employeeRange": {
-        "min": 1000,
-        "max": 8000,
-        "label": "1000 – 8000"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "f8f5e177-0e0b-46e1-98de-6816b7b51095",
-        "name": "US | ENT | West: 1000-8000",
-        "chiliPiperTeamName": "US | ENT | West: 1000-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 3,
-        "members": [
-          {
-            "id": "67599e26e333db459b525118",
-            "name": "Christopher Devlin",
-            "email": "christopher.devlin@hibob.io"
-          },
-          {
-            "id": "65ba63b29c6241754605d1cc",
-            "name": "Dana Kurzner",
-            "email": "dana.kurzner@hibob.io"
-          },
-          {
-            "id": "65926e59d867c424fa660fb0",
-            "name": "Gunel Mammadova",
-            "email": "gunel.mammadova@hibob.io"
-          }
-        ],
-        "columnI": "Christopher Devlin, Dana Kurzner, Gunel Mammadova"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "05f13789-adee-4ae8-a73b-3856438f2f20",
-      "name": "US | ENT | Southeast: 1000-8000",
-      "segmentLabel": "US | ENT | Southeast: 1000-8000",
-      "order": 64,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Alabama",
-        "Delaware",
-        "District of Columbia",
-        "Florida",
-        "Georgia",
-        "Kentucky",
-        "Maryland",
-        "Mississippi",
-        "North Carolina",
-        "South Carolina",
-        "Tennessee",
-        "Virginia",
-        "West Virginia"
-      ],
-      "employeeRange": {
-        "min": 1000,
-        "max": 8000,
-        "label": "1000 – 8000"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "3d5addf9-2c90-4ad1-8546-c7d3c9645628",
-        "name": "US | ENT | Southeast: 1000-8000",
-        "chiliPiperTeamName": "US | ENT | Southeast: 1000-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 3,
-        "members": [
-          {
-            "id": "65926e59d867c424fa660fb0",
-            "name": "Gunel Mammadova",
-            "email": "gunel.mammadova@hibob.io"
-          },
-          {
-            "id": "67599e26e333db459b525118",
-            "name": "Christopher Devlin",
-            "email": "christopher.devlin@hibob.io"
-          },
-          {
-            "id": "65ba63b29c6241754605d1cc",
-            "name": "Dana Kurzner",
-            "email": "dana.kurzner@hibob.io"
-          }
-        ],
-        "columnI": "Gunel Mammadova, Christopher Devlin, Dana Kurzner"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "63266afa-2c3b-4ae9-bc9e-aa3f3cc0a50a",
-      "name": "US | ENT | Northeast: 1000-8000",
-      "segmentLabel": "US | ENT | Northeast: 1000-8000",
-      "order": 65,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Connecticut",
-        "Maine",
-        "Massachusetts",
-        "New Brunswick",
-        "New Hampshire",
-        "New Jersey",
-        "New York",
-        "Newfoundland and Labrador",
-        "Nova Scotia",
-        "Ontario",
-        "Pennsylvania",
-        "Quebec",
-        "Rhode Island",
-        "Vermont"
-      ],
-      "employeeRange": {
-        "min": 1000,
-        "max": 8000,
-        "label": "1000 – 8000"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "0f8d2d7e-f981-4d8c-8c8f-ddfbc58cbeda",
-        "name": "US | ENT | Northeast: 1000-8000",
-        "chiliPiperTeamName": "US | ENT | Northeast: 1000-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 3,
-        "members": [
-          {
-            "id": "65926e59d867c424fa660fb0",
-            "name": "Gunel Mammadova",
-            "email": "gunel.mammadova@hibob.io"
-          },
-          {
-            "id": "65ba63b29c6241754605d1cc",
-            "name": "Dana Kurzner",
-            "email": "dana.kurzner@hibob.io"
-          },
-          {
-            "id": "67599e26e333db459b525118",
-            "name": "Christopher Devlin",
-            "email": "christopher.devlin@hibob.io"
-          }
-        ],
-        "columnI": "Gunel Mammadova, Dana Kurzner, Christopher Devlin"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "e066ac48-2965-4c80-b295-b9cd56e2fee4",
-      "name": "US | MM | Northeast subregion 2: 200-999",
-      "segmentLabel": "US | MM | Northeast subregion 2: 200-999",
-      "order": 66,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Connecticut",
-        "Maine",
-        "Massachusetts",
-        "New Hampshire",
-        "Rhode Island",
-        "Vermont"
-      ],
-      "employeeRange": {
-        "min": 200,
-        "max": 999,
-        "label": "200 – 999"
-      },
-      "sizeSegmentIds": [
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "29eea537-7774-4341-b560-2a962baa377c",
-        "name": "US | MM | Northeast subregion 2: 200-999",
-        "chiliPiperTeamName": "US | MM | Northeast subregion 2: 200-999",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "692612f7f2389b056c41dc19",
-            "name": "Charlotte Robins",
-            "email": "charlotte.robins@hibob.io"
-          },
-          {
-            "id": "6887ad3367dd973800f3a408",
-            "name": "Ebony Orozco",
-            "email": "ebony.orozco@hibob.io"
-          }
-        ],
-        "columnI": "Charlotte Robins, Ebony Orozco"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "044058fc-0487-466e-b1f9-dd0b38e30c21",
-      "name": "Western Europe | ENT | France: 1000-8000",
-      "segmentLabel": "Western Europe | ENT | France: 1000-8000",
-      "order": 67,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "France"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 1000,
-        "max": 8000,
-        "label": "1000 – 8000"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "0866df51-881f-4eee-8170-47eb2a7c7aa9",
-        "name": "Western Europe | ENT | France: 1000-8000",
-        "chiliPiperTeamName": "Western Europe | ENT | France: 1000-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "6850bebe8638dd50c1f6983a",
-            "name": "Marco Koppen",
-            "email": "marco.koppen@hibob.io"
-          }
-        ],
-        "columnI": "Marco Koppen"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "a9185e18-7640-4a51-b7c4-c20062f3c2da",
-      "name": "Benelux | SMB Small | Non-Native: 50-99",
-      "segmentLabel": "Benelux | SMB Small | Non-Native: 50-99",
-      "order": 68,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Belgium",
-        "Denmark",
-        "Finland",
-        "France",
-        "Iceland",
-        "Italy",
-        "Luxembourg",
-        "Norway"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 50,
-        "max": 99,
-        "label": "50 – 99"
-      },
-      "sizeSegmentIds": [
-        "50_99"
-      ],
-      "team": {
-        "id": "2bad3728-3ade-4df3-957f-e1786776cabc",
-        "name": "Benelux | SMB Small | Non-Native: 50-99",
-        "chiliPiperTeamName": "Benelux | SMB Small | Non-Native: 50-99",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "61d40333dbd0ec38cb30c07f",
-            "name": "Antonella Ponso",
-            "email": "antonella.ponso@hibob.io"
-          },
-          {
-            "id": "64aca19e667cfa4529e016a7",
-            "name": "Tiago Fradeira",
-            "email": "tiago.fradeira@hibob.io"
-          }
-        ],
-        "columnI": "Antonella Ponso, Tiago Fradeira"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "856907ea-5589-41de-a399-5962dc2819d5",
-      "name": "Benelux | SMB Medium | Non-Native: 100-199",
-      "segmentLabel": "Benelux | SMB Medium | Non-Native: 100-199",
-      "order": 69,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Belgium",
-        "Denmark",
-        "Finland",
-        "France",
-        "Iceland",
-        "Italy",
-        "Luxembourg",
-        "Norway"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 100,
-        "max": 199,
-        "label": "100 – 199"
-      },
-      "sizeSegmentIds": [
-        "100_199"
-      ],
-      "team": {
-        "id": "5c92ffb7-fba2-4f3d-aae1-5ebff0c5b4ef",
-        "name": "Benelux | SMB Medium | Non-Native: 100-199",
-        "chiliPiperTeamName": "Benelux | SMB Medium | Non-Native: 100-199",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "61d40333dbd0ec38cb30c07f",
-            "name": "Antonella Ponso",
-            "email": "antonella.ponso@hibob.io"
-          },
-          {
-            "id": "64aca19e667cfa4529e016a7",
-            "name": "Tiago Fradeira",
-            "email": "tiago.fradeira@hibob.io"
-          }
-        ],
-        "columnI": "Antonella Ponso, Tiago Fradeira"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "abf29a3c-7c53-48b0-bda1-0858a5de5a2f",
-      "name": "Iberia | SMB | Portugal: 50-199",
-      "segmentLabel": "Iberia | SMB | Portugal: 50-199",
-      "order": 70,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Portugal"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 50,
-        "max": 199,
-        "label": "50 – 199"
-      },
-      "sizeSegmentIds": [
-        "50_99",
-        "100_199"
-      ],
-      "team": {
-        "id": "17bd8a42-9bfe-4414-be51-ca42344b389b",
-        "name": "Iberia | SMB | Portugal: 50-199",
-        "chiliPiperTeamName": "Iberia | SMB | Portugal: 50-199",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "64aca19e667cfa4529e016a7",
-            "name": "Tiago Fradeira",
-            "email": "tiago.fradeira@hibob.io"
-          },
-          {
-            "id": "61d40333dbd0ec38cb30c07f",
-            "name": "Antonella Ponso",
-            "email": "antonella.ponso@hibob.io"
-          }
-        ],
-        "columnI": "Tiago Fradeira, Antonella Ponso"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "92f9ca59-9b12-4585-b39a-59bc4bf520e5",
-      "name": "Iberia | SMB | Spain: 50-199",
-      "segmentLabel": "Iberia | SMB | Spain: 50-199",
-      "order": 71,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Spain"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 50,
-        "max": 199,
-        "label": "50 – 199"
-      },
-      "sizeSegmentIds": [
-        "50_99",
-        "100_199"
-      ],
-      "team": {
-        "id": "0ff67419-e625-4029-b592-6095cf92ce5e",
-        "name": "Iberia | SMB | Spain: 50-199",
-        "chiliPiperTeamName": "Iberia | SMB | Spain: 50-199",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "61d40333dbd0ec38cb30c07f",
-            "name": "Antonella Ponso",
-            "email": "antonella.ponso@hibob.io"
-          }
-        ],
-        "columnI": "Antonella Ponso"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "9652797c-7e0c-484c-850b-bba1000514ba",
-      "name": "LATAM | Micro & SMB & MM & ENT| Argentina+Uruguay : 20-8000",
-      "segmentLabel": "LATAM | Micro & SMB & MM & ENT| Argentina+Uruguay : 20-8000",
-      "order": 72,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Argentina",
-        "Uruguay"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 7999,
-        "label": "20 – 7999"
-      },
-      "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199",
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "7dc78a05-8497-4a4a-a61b-b77c5479cfd6",
-        "name": "LATAM | Micro & SMB & MM & ENT| Argentina+Uruguay : 20-8000",
-        "chiliPiperTeamName": "LATAM | Micro & SMB & MM & ENT| Argentina+Uruguay : 20-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "66847ae1f586db372fe68a2b",
-            "name": "Evelyn Paredes",
-            "email": "evelyn.paredes@hibob.io"
-          }
-        ],
-        "columnI": "Evelyn Paredes"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "37d22a82-1e1a-4927-af3b-5943bc704e23",
-      "name": "LATAM | Micro & SMB & MM | Brazil : 20-999",
-      "segmentLabel": "LATAM | Micro & SMB & MM | Brazil : 20-999",
-      "order": 73,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Brazil"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 999,
-        "label": "20 – 999"
-      },
-      "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199",
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "1653ce6b-0265-4761-be12-0204a817a693",
-        "name": "LATAM | Micro & SMB & MM | Brazil : 20-999",
-        "chiliPiperTeamName": "LATAM | Micro & SMB & MM | Brazil : 20-999",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "684b649d8638dd50c1f687aa",
-            "name": "Edgar Marquez",
-            "email": "edgar.marquez@hibob.io"
-          }
-        ],
-        "columnI": "Edgar Marquez"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "2d211a6d-a381-4b79-ab8d-7707a681ebdb",
-      "name": "LATAM | MM | Rest of Latam : 200-499",
-      "segmentLabel": "LATAM | MM | Rest of Latam : 200-499",
-      "order": 74,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Antigua and Barbuda",
-        "Barbados",
-        "Belize",
-        "Bermuda",
-        "British Virgin Islands",
-        "Chile",
-        "Colombia",
-        "Cook Islands",
-        "Costa Rica",
-        "Cuba",
-        "Dominica",
-        "Dominican Republic",
-        "Ecuador",
-        "El Salvador",
-        "Grenada",
-        "Guatemala",
-        "Guyana",
-        "Honduras",
-        "Jamaica",
-        "Mexico",
-        "Nicaragua",
-        "Panama",
-        "Paraguay",
-        "Peru",
-        "Saint Kitts and Nevis",
-        "Saint Lucia",
-        "Saint Vincent and the Grenadines",
-        "Suriname",
-        "The Bahamas",
-        "Trinidad and Tobago",
-        "Turks and Caicos Islands",
-        "Venezuela"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 200,
-        "max": 499,
-        "label": "200 – 499"
-      },
-      "sizeSegmentIds": [
-        "200_499"
-      ],
-      "team": {
-        "id": "44426314-8607-49de-9b33-fae5f36f3faa",
-        "name": "LATAM | MM | Rest of Latam : 200-499",
-        "chiliPiperTeamName": "LATAM | MM | Rest of Latam : 200-499",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "684b649d8638dd50c1f687aa",
-            "name": "Edgar Marquez",
-            "email": "edgar.marquez@hibob.io"
-          }
-        ],
-        "columnI": "Edgar Marquez"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "80eefb56-8b42-4a33-8267-2511598d850a",
-      "name": "LATAM | MM & ENT | Rest of Latam : 500-8000",
-      "segmentLabel": "LATAM | MM & ENT | Rest of Latam : 500-8000",
-      "order": 75,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Antigua and Barbuda",
-        "Barbados",
-        "Belize",
-        "Bermuda",
-        "British Virgin Islands",
-        "Chile",
-        "Colombia",
-        "Cook Islands",
-        "Costa Rica",
-        "Cuba",
-        "Dominica",
-        "Dominican Republic",
-        "Ecuador",
-        "El Salvador",
-        "Grenada",
-        "Guatemala",
-        "Guyana",
-        "Honduras",
-        "Jamaica",
-        "Mexico",
-        "Nicaragua",
-        "Panama",
-        "Paraguay",
-        "Peru",
-        "Saint Kitts and Nevis",
-        "Saint Lucia",
-        "Saint Vincent and the Grenadines",
-        "Suriname",
-        "The Bahamas",
-        "Trinidad and Tobago",
-        "Turks and Caicos Islands",
-        "Venezuela"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 500,
-        "max": 7999,
-        "label": "500 – 7999"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "12e98ecd-968e-4e10-8962-e2a9abb68db3",
-        "name": "LATAM | MM & ENT | Rest of Latam : 500-8000",
-        "chiliPiperTeamName": "LATAM | MM & ENT | Rest of Latam : 500-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "66847ae1f586db372fe68a2b",
-            "name": "Evelyn Paredes",
-            "email": "evelyn.paredes@hibob.io"
-          }
-        ],
-        "columnI": "Evelyn Paredes"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "6d99faaa-23cf-4e04-9907-97ec20ac34a0",
-      "name": "LATAM | ENT | Brazil : 1000-8000",
-      "segmentLabel": "LATAM | ENT | Brazil : 1000-8000",
-      "order": 76,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Brazil"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 1001,
-        "max": 7999,
-        "label": "1001 – 7999"
-      },
-      "sizeSegmentIds": [
-        "500_8000"
-      ],
-      "team": {
-        "id": "9d4acf6d-7092-4b0b-bcca-7f2a020bb833",
-        "name": "LATAM | ENT | Brazil : 1000-8000",
-        "chiliPiperTeamName": "LATAM | ENT | Brazil : 1000-8000",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "66847ae1f586db372fe68a2b",
-            "name": "Evelyn Paredes",
-            "email": "evelyn.paredes@hibob.io"
-          }
-        ],
-        "columnI": "Evelyn Paredes"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "7f1f525f-ae39-4b90-b3a6-e44d07cab6f5",
-      "name": "Nordics | Micro | Sweden: 20-49",
-      "segmentLabel": "Nordics | Micro | Sweden: 20-49",
-      "order": 77,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Sweden"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "7221c18c-2c67-4755-b174-b3d44377ea98",
-        "name": "Nordics | Micro | Sweden: 20-49",
-        "chiliPiperTeamName": "Nordics | Micro | Sweden: 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "68f6d49a71fdc418e4faf912",
-            "name": "Chloe Leygnac",
-            "email": "chloe.leygnac@hibob.io"
-          }
-        ],
-        "columnI": "Chloe Leygnac"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "6e737242-3f96-4ef9-823e-d2a6d38250f7",
-      "name": "Nordics | Micro & SMB | Sweden: 20-199",
-      "segmentLabel": "Nordics | Micro & SMB | Sweden: 20-199",
-      "order": 78,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Sweden"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 199,
-        "label": "20 – 199"
-      },
-      "sizeSegmentIds": [
-        "20_49",
-        "50_99",
-        "100_199"
-      ],
-      "team": {
-        "id": "45cb4256-c4de-4b08-844c-548272f562ef",
-        "name": "Nordics | Micro & SMB | Sweden: 20-199",
-        "chiliPiperTeamName": "Nordics | Micro & SMB | Sweden: 20-199",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "68f6d49a71fdc418e4faf912",
-            "name": "Chloe Leygnac",
-            "email": "chloe.leygnac@hibob.io"
-          }
-        ],
-        "columnI": "Chloe Leygnac"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "b4e39319-f959-4853-b162-7f85f6180ecd",
-      "name": "DACH | Micro : 20-49",
-      "segmentLabel": "DACH | Micro : 20-49",
-      "order": 79,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Austria",
-        "Germany"
-      ],
-      "states": [
-        "Austria",
-        "Germany"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "c3c39300-1b00-417d-ad0b-5688da42817b",
-        "name": "DACH | Micro : 20-49",
-        "chiliPiperTeamName": "DACH | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 3,
-        "members": [
-          {
-            "id": "658bf969d867c424fa65f157",
-            "name": "Lisa-Marie Grunwald",
-            "email": "lisa-marie.grunwald@hibob.io"
-          },
-          {
-            "id": "69ea0901cc50f6c9cb581c88",
-            "name": "Per Klocker",
-            "email": "per.klocker@hibob.io"
-          },
-          {
-            "id": "69fc8e703af8999493408921",
-            "name": "Alexandros Grosnick",
-            "email": "alexandros.grosnick@hibob.io"
-          }
-        ],
-        "columnI": "Lisa-Marie Grunwald, Per Klocker, Alexandros Grosnick"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "3064db80-647e-4970-adf5-b8cf267aa565",
-      "name": "APJ | Micro : 20-49",
-      "segmentLabel": "APJ | Micro : 20-49",
-      "order": 80,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Australia",
-        "Bangladesh",
-        "china",
-        "Fiji",
-        "Hong Kong",
-        "Indonesia",
-        "Japan",
-        "Korea",
-        "Malaysia",
-        "Mongolia",
-        "Myanmar",
-        "Nepal",
-        "New Zealand",
-        "Philippines",
-        "Singapore",
-        "South Korea",
-        "Sri Lanka",
-        "Taiwan",
-        "Thailand",
-        "Timor-Leste",
-        "Viet Nam"
-      ],
-      "states": [
-        "Australia",
-        "Bangladesh",
-        "china",
-        "Fiji",
-        "Hong Kong",
-        "Indonesia",
-        "Japan",
-        "Korea",
-        "Malaysia",
-        "Mongolia",
-        "Myanmar",
-        "Nepal",
-        "New Zealand",
-        "Philippines",
-        "Singapore",
-        "South Korea",
-        "Sri Lanka",
-        "Taiwan",
-        "Thailand",
-        "Timor-Leste",
-        "Viet Nam"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "09700f15-54a5-4c93-8432-7e195cfcd5e3",
-        "name": "APJ | Micro : 20-49",
-        "chiliPiperTeamName": "APJ | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "66169d11eca42444e0901351",
-            "name": "Scarlett Scotland",
-            "email": "scarlett.scotland@hibob.io"
-          },
-          {
-            "id": "689936c04bdc9a4c1c8626b1",
-            "name": "Ross Drury",
-            "email": "ross.drury@hibob.io"
-          }
-        ],
-        "columnI": "Scarlett Scotland, Ross Drury"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "15e6ec10-64c1-47c3-a212-a19084a36bbf",
-      "name": "US | Micro : 20-49",
-      "segmentLabel": "US | Micro : 20-49",
-      "order": 81,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "United States"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "530674d7-9ace-4021-a961-3b036406b2c8",
-        "name": "US | Micro : 20-49",
-        "chiliPiperTeamName": "US | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "672ab7347aed9922d8699cbb",
-            "name": "Thaila Morganstern",
-            "email": "thaila.morganstern@hibob.io"
-          },
-          {
-            "id": "6887ad3367dd973800f3a408",
-            "name": "Ebony Orozco",
-            "email": "ebony.orozco@hibob.io"
-          }
-        ],
-        "columnI": "Thaila Morganstern, Ebony Orozco"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "8bee95bb-a441-4c45-b5e3-004c708f3180",
-      "name": "US | MM | Northeast 1 : 200-749",
-      "segmentLabel": "US | MM | Northeast 1 : 200-749",
-      "order": 82,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Connecticut",
-        "Delaware",
-        "District of Columbia",
-        "Kentucky",
-        "Maine",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "New Hampshire",
-        "Rhode Island",
-        "Tennessee",
-        "Vermont",
-        "Virginia",
-        "West Virginia"
-      ],
-      "employeeRange": {
-        "min": 200,
-        "max": 749,
-        "label": "200 – 749"
-      },
-      "sizeSegmentIds": [
-        "200_499",
-        "500_8000"
-      ],
-      "team": {
-        "id": "565661ec-50bf-49d2-aee3-a69f9178e0e7",
-        "name": "US | MM | Northeast 1 : 200-749",
-        "chiliPiperTeamName": "US | MM | Northeast 1 : 200-749",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "69cdb888df80d38b76f38509",
-            "name": "Luke Elijah",
-            "email": "luke.elijah@hibob.io"
-          }
-        ],
-        "columnI": "Luke Elijah"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "f1149c33-c86b-42cc-90f7-94fed8439027",
-      "name": "Nordics | Micro | Sweden: 20-49",
-      "segmentLabel": "Nordics | Micro | Sweden: 20-49",
-      "order": 83,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Sweden"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "7221c18c-2c67-4755-b174-b3d44377ea98",
-        "name": "Nordics | Micro | Sweden: 20-49",
-        "chiliPiperTeamName": "Nordics | Micro | Sweden: 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "68f6d49a71fdc418e4faf912",
-            "name": "Chloe Leygnac",
-            "email": "chloe.leygnac@hibob.io"
-          }
-        ],
-        "columnI": "Chloe Leygnac"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "f36529ef-aedf-4bcd-94ec-f09517036f0d",
-      "name": "APJ | Micro : 20-49 (evaluating)",
-      "segmentLabel": "APJ | Micro : 20-49",
-      "order": 84,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Australia",
-        "Bangladesh",
-        "china",
-        "Fiji",
-        "Hong Kong",
-        "Indonesia",
-        "Japan",
-        "Korea",
-        "Malaysia",
-        "Mongolia",
-        "Myanmar",
-        "Nepal",
-        "New Zealand",
-        "Philippines",
-        "Singapore",
-        "South Korea",
-        "Sri Lanka",
-        "Taiwan",
-        "Thailand",
-        "Timor-Leste",
-        "Viet Nam"
-      ],
-      "states": [
-        "Australia",
-        "Bangladesh",
-        "china",
-        "Fiji",
-        "Hong Kong",
-        "Indonesia",
-        "Japan",
-        "Korea",
-        "Malaysia",
-        "Mongolia",
-        "Myanmar",
-        "Nepal",
-        "New Zealand",
-        "Philippines",
-        "Singapore",
-        "South Korea",
-        "Sri Lanka",
-        "Taiwan",
-        "Thailand",
-        "Timor-Leste",
-        "Viet Nam"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "09700f15-54a5-4c93-8432-7e195cfcd5e3",
-        "name": "APJ | Micro : 20-49",
-        "chiliPiperTeamName": "APJ | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "66169d11eca42444e0901351",
-            "name": "Scarlett Scotland",
-            "email": "scarlett.scotland@hibob.io"
-          },
-          {
-            "id": "689936c04bdc9a4c1c8626b1",
-            "name": "Ross Drury",
-            "email": "ross.drury@hibob.io"
-          }
-        ],
-        "columnI": "Scarlett Scotland, Ross Drury"
-      },
-      "flags": {
-        "evaluating": true,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "d5392704-9e65-4926-9aab-11c1e835793c",
-      "name": "DACH | Micro : 20-49 (evaluating)",
-      "segmentLabel": "DACH | Micro : 20-49",
-      "order": 85,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Austria",
-        "Germany"
-      ],
-      "states": [
-        "Austria",
-        "Germany"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "c3c39300-1b00-417d-ad0b-5688da42817b",
-        "name": "DACH | Micro : 20-49",
-        "chiliPiperTeamName": "DACH | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 3,
-        "members": [
-          {
-            "id": "658bf969d867c424fa65f157",
-            "name": "Lisa-Marie Grunwald",
-            "email": "lisa-marie.grunwald@hibob.io"
-          },
-          {
-            "id": "69ea0901cc50f6c9cb581c88",
-            "name": "Per Klocker",
-            "email": "per.klocker@hibob.io"
-          },
-          {
-            "id": "69fc8e703af8999493408921",
-            "name": "Alexandros Grosnick",
-            "email": "alexandros.grosnick@hibob.io"
-          }
-        ],
-        "columnI": "Lisa-Marie Grunwald, Per Klocker, Alexandros Grosnick"
-      },
-      "flags": {
-        "evaluating": true,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "a3953226-9ee7-4751-986d-58c5ad6cb837",
-      "name": "Nordics | Micro | Sweden: 20-49 (evaluating)",
-      "segmentLabel": "Nordics | Micro | Sweden: 20-49",
-      "order": 86,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Sweden"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "7221c18c-2c67-4755-b174-b3d44377ea98",
-        "name": "Nordics | Micro | Sweden: 20-49",
-        "chiliPiperTeamName": "Nordics | Micro | Sweden: 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 1,
-        "members": [
-          {
-            "id": "68f6d49a71fdc418e4faf912",
-            "name": "Chloe Leygnac",
-            "email": "chloe.leygnac@hibob.io"
-          }
-        ],
-        "columnI": "Chloe Leygnac"
-      },
-      "flags": {
-        "evaluating": true,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "5ff56b55-8f28-457a-b878-b322658fd478",
-      "name": "US | Micro : 20-49 (evaluating)",
-      "segmentLabel": "US | Micro : 20-49",
-      "order": 87,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [],
-      "states": [
-        "Connecticut",
-        "Maine",
-        "Massachusetts",
-        "New Hampshire",
-        "New Jersey",
-        "New York",
-        "Pennsylvania",
-        "Rhode Island",
-        "Vermont",
-        "Virginia"
-      ],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "530674d7-9ace-4021-a961-3b036406b2c8",
-        "name": "US | Micro : 20-49",
-        "chiliPiperTeamName": "US | Micro : 20-49",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "672ab7347aed9922d8699cbb",
-            "name": "Thaila Morganstern",
-            "email": "thaila.morganstern@hibob.io"
-          },
-          {
-            "id": "6887ad3367dd973800f3a408",
-            "name": "Ebony Orozco",
-            "email": "ebony.orozco@hibob.io"
-          }
-        ],
-        "columnI": "Thaila Morganstern, Ebony Orozco"
-      },
-      "flags": {
-        "evaluating": true,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
-      }
-    },
-    {
-      "id": "aaeee53d-9a1f-4a64-afc4-fa7f54792d87",
-      "name": "Canada | Micro : 20-49 ",
-      "segmentLabel": "Canada | Micro : 20-49",
-      "order": 88,
-      "product": "Distro",
-      "ruleType": "NonOwnershipRule",
-      "countries": [
-        "Canada"
-      ],
-      "states": [],
-      "employeeRange": {
-        "min": 20,
-        "max": 49,
-        "label": "20 – 49"
-      },
-      "sizeSegmentIds": [
-        "20_49"
-      ],
-      "team": {
-        "id": "39941594-257c-4651-8e42-b3d4f3ba4733",
-        "name": "Canada | Micro : 20-49",
-        "chiliPiperTeamName": "Canada | Micro : 20-49 ",
-        "nameMatchesSegment": true,
-        "memberCount": 2,
-        "members": [
-          {
-            "id": "6887ad3367dd973800f3a408",
-            "name": "Ebony Orozco",
-            "email": "ebony.orozco@hibob.io"
-          },
-          {
-            "id": "672ab7347aed9922d8699cbb",
-            "name": "Thaila Morganstern",
-            "email": "thaila.morganstern@hibob.io"
-          }
-        ],
-        "columnI": "Ebony Orozco, Thaila Morganstern"
-      },
-      "flags": {
-        "evaluating": false,
-        "updated": false,
-        "ownership": false,
-        "rad": false,
-        "onRouter": false
+        "onRouter": true,
+        "concierge": true,
+        "distro": true,
+        "liveBooking": true
       }
     }
   ]

@@ -11,7 +11,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 const WORKSPACE_ID = '5ffdc2c64c46df00017023a8';
-const ROUTER_ID = '7e9c794d-b6db-40ec-ae07-f363d77b5f36';
+const CONCIERGE_ROUTER_ID = '7e9c794d-b6db-40ec-ae07-f363d77b5f36';
+/** Account Assignment – Main Router (backend Distro, not live Concierge booking) */
+const DISTRO_ROUTER_ID = '7d0582ff-8455-4791-9b4d-05e691abad9d';
 
 const DEFAULT_CACHE = {
   teams:
@@ -265,10 +267,82 @@ function columnIMembersText(members) {
   return names.length ? names.join(', ') : null;
 }
 
+function readDistroRouters(filePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const jsonStart = raw.indexOf('[');
+  if (jsonStart < 0) throw new Error(`No JSON array in distro export: ${filePath}`);
+  return JSON.parse(raw.slice(jsonStart));
+}
+
+function buildRuleEntry(rule, teams, userMap, order, channel) {
+  const fromName = parseEmployeeRangeFromName(rule.name);
+  const fromConds = extractEmployeeRangeFromConditions(rule.conditions);
+  const employeeRange = mergeRanges(fromName, fromConds) || fromName || fromConds;
+  const segmentLabel = displaySegmentLabel(rule.name);
+  const team = resolveTeam(rule, teams);
+  const countries = extractCountries(rule.conditions);
+  const states = extractStates(rule.conditions);
+  const nameLower = rule.name.toLowerCase();
+  const members = team ? mapMembers(team.members, userMap) : [];
+  const teamNameExact = team && normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
+
+  return {
+    id: rule.id,
+    name: rule.name,
+    segmentLabel,
+    order,
+    product: rule.product || null,
+    ruleType: rule.type || null,
+    countries,
+    states,
+    employeeRange: employeeRange
+      ? {
+          min: employeeRange.min,
+          max: employeeRange.max === Infinity ? null : employeeRange.max,
+          label: rangeLabel(employeeRange),
+        }
+      : null,
+    sizeSegmentIds: segmentIdsForRange(employeeRange),
+    team: team
+      ? {
+          id: team.id || team.teamId,
+          name: segmentLabel,
+          chiliPiperTeamName: team.name,
+          nameMatchesSegment: teamNameExact,
+          memberCount: members.length,
+          members,
+          columnI: columnIMembersText(members),
+        }
+      : null,
+    flags: {
+      evaluating: nameLower.includes('(evaluating)'),
+      updated: nameLower.includes('(updated)'),
+      ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
+      rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
+      onRouter: true,
+      concierge: channel === 'concierge',
+      distro: channel === 'distro',
+      liveBooking: channel === 'concierge',
+    },
+  };
+}
+
+function mergeChannelEntry(existing, incoming) {
+  existing.flags.onRouter = true;
+  if (incoming.flags.concierge) existing.flags.concierge = true;
+  if (incoming.flags.distro) existing.flags.distro = true;
+  if (incoming.flags.liveBooking) existing.flags.liveBooking = true;
+  existing.order = Math.min(existing.order, incoming.order);
+  if (!existing.team && incoming.team) existing.team = incoming.team;
+  return existing;
+}
+
 function main() {
   const teamsPath = resolveInputPath('ROUTER_TEAMS_TEAMS_FILE', 'teams.json', DEFAULT_CACHE.teams);
   const rulesPath = resolveInputPath('ROUTER_TEAMS_RULES_FILE', 'rules.json', DEFAULT_CACHE.rules);
   const routerPath = resolveInputPath('ROUTER_TEAMS_ROUTER_FILE', 'router.json', DEFAULT_CACHE.router);
+  const distroPath =
+    process.env.ROUTER_TEAMS_DISTRO_FILE || path.join(RAW_DIR, 'distro-routers.json');
 
   const teamsPayload = readJson(teamsPath);
   const rulesPayload = readJson(rulesPath);
@@ -280,139 +354,48 @@ function main() {
   const ruleMap = new Map(rules.map((r) => [r.id, r]));
 
   const routerEntry = (routerPayload.routers || []).find(
-    (r) => r.router?.id === ROUTER_ID || r.id === ROUTER_ID
+    (r) => r.router?.id === CONCIERGE_ROUTER_ID || r.id === CONCIERGE_ROUTER_ID
   );
   if (!routerEntry?.router) {
-    throw new Error(`Router ${ROUTER_ID} not found in router export`);
+    throw new Error(`Concierge router ${CONCIERGE_ROUTER_ID} not found in router export`);
   }
-  const router = routerEntry.router;
-  const routingRules = router.routing?.rules || [];
+  const conciergeRouter = routerEntry.router;
+  const routingRules = conciergeRouter.routing?.rules || [];
 
-  const entries = [];
-  const onRouterIds = new Set();
-  const regionPrefixes = new Set();
+  let distroRouter = null;
+  if (fs.existsSync(distroPath)) {
+    const distroList = readDistroRouters(distroPath);
+    distroRouter = distroList.find((r) => r.id === DISTRO_ROUTER_ID) || null;
+  }
+
+  const entryById = new Map();
   let order = 0;
   for (const route of routingRules) {
     if (route.type !== 'RuleRoute' || !route.id) continue;
     const rule = ruleMap.get(route.id);
     if (!rule) continue;
     order += 1;
-
-    const fromName = parseEmployeeRangeFromName(rule.name);
-    const fromConds = extractEmployeeRangeFromConditions(rule.conditions);
-    const employeeRange = mergeRanges(fromName, fromConds) || fromName || fromConds;
-    const segmentLabel = displaySegmentLabel(rule.name);
-    const team = resolveTeam(rule, teams);
-    const countries = extractCountries(rule.conditions);
-    const states = extractStates(rule.conditions);
-    const nameLower = rule.name.toLowerCase();
-    const members = team ? mapMembers(team.members, userMap) : [];
-    const teamNameExact = team && normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
-
-    onRouterIds.add(rule.id);
-    const regionPrefix = segmentLabel.split('|')[0]?.trim();
-    if (regionPrefix) regionPrefixes.add(regionPrefix);
-
-    entries.push({
-      id: rule.id,
-      name: rule.name,
-      segmentLabel,
-      order,
-      product: rule.product || null,
-      ruleType: rule.type || null,
-      countries,
-      states,
-      employeeRange: employeeRange
-        ? {
-            min: employeeRange.min,
-            max: employeeRange.max === Infinity ? null : employeeRange.max,
-            label: rangeLabel(employeeRange),
-          }
-        : null,
-      sizeSegmentIds: segmentIdsForRange(employeeRange),
-      team: team
-        ? {
-            id: team.id || team.teamId,
-            name: segmentLabel,
-            chiliPiperTeamName: team.name,
-            nameMatchesSegment: teamNameExact,
-            memberCount: members.length,
-            members,
-            columnI: columnIMembersText(members),
-          }
-        : null,
-      flags: {
-        evaluating: nameLower.includes('(evaluating)'),
-        updated: nameLower.includes('(updated)'),
-        ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
-        rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
-        onRouter: true,
-      },
-    });
+    entryById.set(rule.id, buildRuleEntry(rule, teams, userMap, order, 'concierge'));
   }
 
-  const onRouterSegmentKeys = new Set(
-    entries.map((e) => normalizeRuleName(e.segmentLabel))
-  );
-
-  // Rules + teams in Chili Piper for an active region, not yet on the router flow
-  for (const rule of rules) {
-    if (onRouterIds.has(rule.id)) continue;
-    const segmentLabel = displaySegmentLabel(rule.name);
-    if (onRouterSegmentKeys.has(normalizeRuleName(segmentLabel))) continue;
-    const regionPrefix = segmentLabel.split('|')[0]?.trim();
-    if (!regionPrefix || !regionPrefixes.has(regionPrefix)) continue;
-    if (!segmentLabel.includes('|')) continue;
-
-    const team = resolveTeam(rule, teams);
-    if (!team) continue;
-    if (normalizeRuleName(team.name) !== normalizeRuleName(segmentLabel)) continue;
-
-    order += 1;
-    const fromName = parseEmployeeRangeFromName(rule.name);
-    const fromConds = extractEmployeeRangeFromConditions(rule.conditions);
-    const employeeRange = mergeRanges(fromName, fromConds) || fromName || fromConds;
-    const countries = extractCountries(rule.conditions);
-    const states = extractStates(rule.conditions);
-    const nameLower = rule.name.toLowerCase();
-    const members = mapMembers(team.members, userMap);
-    const teamNameExact = normalizeRuleName(team.name) === normalizeRuleName(segmentLabel);
-
-    entries.push({
-      id: rule.id,
-      name: rule.name,
-      segmentLabel,
-      order,
-      product: rule.product || null,
-      ruleType: rule.type || null,
-      countries,
-      states,
-      employeeRange: employeeRange
-        ? {
-            min: employeeRange.min,
-            max: employeeRange.max === Infinity ? null : employeeRange.max,
-            label: rangeLabel(employeeRange),
-          }
-        : null,
-      sizeSegmentIds: segmentIdsForRange(employeeRange),
-      team: {
-        id: team.id || team.teamId,
-        name: segmentLabel,
-        chiliPiperTeamName: team.name,
-        nameMatchesSegment: teamNameExact,
-        memberCount: members.length,
-        members,
-        columnI: columnIMembersText(members),
-      },
-      flags: {
-        evaluating: nameLower.includes('(evaluating)'),
-        updated: nameLower.includes('(updated)'),
-        ownership: rule.type === 'OwnershipRule' || nameLower === 'ownership',
-        rad: /\bRAD\b/i.test(rule.name) || /-\s*RAD\s*$/i.test(rule.name),
-        onRouter: false,
-      },
-    });
+  if (distroRouter?.flowRoutes?.routes) {
+    let distroOrder = 0;
+    for (const route of distroRouter.flowRoutes.routes) {
+      if (!route.ruleId) continue;
+      const rule = ruleMap.get(route.ruleId);
+      if (!rule) continue;
+      distroOrder += 1;
+      const incoming = buildRuleEntry(rule, teams, userMap, distroOrder, 'distro');
+      const existing = entryById.get(rule.id);
+      if (existing) {
+        mergeChannelEntry(existing, incoming);
+      } else {
+        entryById.set(rule.id, incoming);
+      }
+    }
   }
+
+  const entries = [...entryById.values()].sort((a, b) => a.order - b.order);
 
   const countrySet = new Set();
   const stateSet = new Set();
@@ -425,15 +408,18 @@ function main() {
     meta: {
       builtAt: new Date().toISOString(),
       workspaceId: WORKSPACE_ID,
-      routerId: ROUTER_ID,
-      routerName: router.name,
-      routerSlug: router.slug,
+      routerId: CONCIERGE_ROUTER_ID,
+      routerName: conciergeRouter.name,
+      routerSlug: conciergeRouter.slug,
+      distroRouterId: distroRouter?.id || DISTRO_ROUTER_ID,
+      distroRouterName: distroRouter?.name || 'Account Assignment – Main Router',
       ruleCount: entries.length,
       teamCount: teams.length,
       sources: {
         teams: sourceLabel(teamsPath),
         rules: sourceLabel(rulesPath),
         router: sourceLabel(routerPath),
+        distro: fs.existsSync(distroPath) ? sourceLabel(distroPath) : null,
         users: fs.existsSync(path.join(RAW_DIR, 'users-cache.json')) ? 'data/router_teams/raw/users-cache.json' : null,
       },
     },
@@ -464,7 +450,10 @@ function main() {
   const withTeam = entries.filter((e) => e.team).length;
   const withCountry = entries.filter((e) => e.countries.length).length;
   const withStates = entries.filter((e) => e.states.length).length;
-  console.log(`Wrote ${entries.length} rules (${withTeam} with team, ${withCountry} with countries, ${withStates} with states)`);
+  const distroOnly = entries.filter((e) => e.flags.distro && !e.flags.concierge).length;
+  console.log(
+    `Wrote ${entries.length} rules (${withTeam} with team, ${withCountry} with countries, ${withStates} with states, ${distroOnly} distro-only)`
+  );
   console.log(`  → ${OUT_FILE}`);
   console.log(`  → ${PUBLIC_OUT}`);
 }
