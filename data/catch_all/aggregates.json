@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-10T17:43:28.552Z",
+  "generatedAt": "2026-06-11T17:57:49.235Z",
   "dateRange": {
     "min": "2026-01-19T13:15:18.378579Z",
     "max": "2026-06-02T06:59:03.669550Z"
@@ -12,10 +12,10 @@
     "today": 0,
     "yesterday": 0,
     "thisWeek": 0,
-    "prevWeek": 208,
+    "prevWeek": 164,
     "wowChangePct": -100,
-    "avgDaily30": 30.5,
-    "avgWeekly30": 212.8
+    "avgDaily30": 28.6,
+    "avgWeekly30": 199.5
   },
   "daily": [
     {
@@ -1062,7 +1062,7 @@
       "type": "wow_volume",
       "category": "trend",
       "severity": "high",
-      "text": "Catch-All volume is down 100% vs prior week (0 vs 208)."
+      "text": "Catch-All volume is down 100% vs prior week (0 vs 164)."
     },
     {
       "type": "top_countries",
@@ -1121,8 +1121,8 @@
   ],
   "insights24h": {
     "windowHours": 24,
-    "windowStart": "2026-06-09T17:43:28.576Z",
-    "windowEnd": "2026-06-10T17:43:28.576Z",
+    "windowStart": "2026-06-10T17:57:49.259Z",
+    "windowEnd": "2026-06-11T17:57:49.259Z",
     "insights": [
       {
         "type": "doc_alignment",
