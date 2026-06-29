@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-28T08:37:29.721Z",
+  "generatedAt": "2026-06-29T10:16:30.013Z",
   "dateRange": {
     "min": "2026-01-19T13:15:18.378579Z",
     "max": "2026-06-02T06:59:03.669550Z"
@@ -14,8 +14,8 @@
     "thisWeek": 0,
     "prevWeek": 0,
     "wowChangePct": null,
-    "avgDaily30": 4.4,
-    "avgWeekly30": 30.9
+    "avgDaily30": 3.4,
+    "avgWeekly30": 23.5
   },
   "daily": [
     {
@@ -1115,8 +1115,8 @@
   ],
   "insights24h": {
     "windowHours": 24,
-    "windowStart": "2026-06-27T08:37:29.746Z",
-    "windowEnd": "2026-06-28T08:37:29.746Z",
+    "windowStart": "2026-06-28T10:16:30.036Z",
+    "windowEnd": "2026-06-29T10:16:30.036Z",
     "insights": [
       {
         "type": "doc_alignment",
