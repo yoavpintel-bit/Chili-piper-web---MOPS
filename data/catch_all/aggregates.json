@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T11:23:39.716Z",
+  "generatedAt": "2026-10-20T10:30:49.776Z",
   "dateRange": {
     "min": "2026-01-19T13:15:18.378579Z",
     "max": "2026-06-02T06:59:03.669550Z"
@@ -1115,8 +1115,8 @@
   ],
   "insights24h": {
     "windowHours": 24,
-    "windowStart": "2026-10-18T11:23:39.738Z",
-    "windowEnd": "2026-10-19T11:23:39.738Z",
+    "windowStart": "2026-10-19T10:30:49.789Z",
+    "windowEnd": "2026-10-20T10:30:49.789Z",
     "insights": [
       {
         "type": "doc_alignment",
